@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // "#app/*": ["app/*"],
+      // "#components/*": ["components/*"],
+      "#font/*": ["public/font/*"]
+      // "#image/*": ["public/image/*"],
+      // "#icon/*": ["public/icon/*"]
+    }
+  }
+}
+
+// {
+//   "compilerOptions": {
+//     "baseUrl": "app",
+//     "paths": {
+//       "#app/*": ["app/*"],
+//       "#components/*": ["components/*"],
+//       "#font/*": ["../public/font/*"],
+//       "#image/*": ["public/image/*"],
+//       "#icon/*": ["public/icon/*"]
+//     }
+//   }
+// }
