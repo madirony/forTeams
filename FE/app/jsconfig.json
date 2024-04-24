@@ -2,24 +2,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      // "#app/*": ["app/*"],
-      // "#components/*": ["components/*"],
-      "#font/*": ["public/font/*"]
-      // "#image/*": ["public/image/*"],
-      // "#icon/*": ["public/icon/*"]
+      "app/*": ["app/*"],
+      "styles/*": ["styles/*"],
+      "components/*": ["components/*"],
+      "font/*": ["public/font/*"],
+      "icon/*": ["public/icon/*"],
+      "image/*": ["public/image/*"],
+      "util/*": ["public/util/*"]
     }
   }
 }
-
-// {
-//   "compilerOptions": {
-//     "baseUrl": "app",
-//     "paths": {
-//       "#app/*": ["app/*"],
-//       "#components/*": ["components/*"],
-//       "#font/*": ["../public/font/*"],
-//       "#image/*": ["public/image/*"],
-//       "#icon/*": ["public/icon/*"]
-//     }
-//   }
-// }

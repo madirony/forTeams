@@ -1,11 +1,9 @@
-// import Test from "@components/test";
+import styles from "styles/main.module.css";
 
 export default function Main() {
   return (
-    <main>
-      {/* <Test></Test> */}
-      <h1>Main</h1>
-      <p>안녕하세요 이건 테스트하려고 쓰는 글</p>
-    </main>
+    <div className={styles.div}>
+      <p>Welcome to Main Page!!</p>
+    </div>
   );
 }
