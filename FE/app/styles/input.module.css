@@ -1,0 +1,14 @@
+/* .gap {
+  gap: 5rem;
+} */
+
+.title {
+  font-size: 17px;
+  font-family: "font4";
+}
+
+.input {
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: #d3d5fb;
+}
