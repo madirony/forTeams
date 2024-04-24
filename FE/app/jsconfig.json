@@ -4,7 +4,8 @@
     "paths": {
       "app/*": ["app/*"],
       "styles/*": ["styles/*"],
-      "components/*": ["components/*"],
+      "template/*": ["template/*"],
+      "component/*": ["component/*"],
       "font/*": ["public/font/*"],
       "icon/*": ["public/icon/*"],
       "image/*": ["public/image/*"],
