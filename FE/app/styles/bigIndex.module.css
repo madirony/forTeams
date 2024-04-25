@@ -1,11 +1,18 @@
 .wrapper {
   width: 100%;
-  min-width: 360px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.3rem;
+  background-color: teal;
+}
+
+.innerWrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 2%;
-  background-color: teal;
+  gap: 0.3rem;
 }
 
 .button {
