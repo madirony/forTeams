@@ -6,8 +6,8 @@ export default function Main() {
   return (
     <div className={styles.div}>
       {/* <p>Welcome to Main Page!!</p> */}
+      {/* <MenuBar /> */}
       <Input />
-      <MenuBar />
     </div>
   );
 }
