@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import styles from "styles/menuBar.module.css";
+import MyPageButton from "./myPageButton";
 
 export default function MenuBar() {
   const onClick = () => {
@@ -21,7 +22,8 @@ export default function MenuBar() {
       <div className={styles.gap}>
         <p className={styles.text}>철강영업팀</p>
         <p className={styles.text}>이수민님</p>
-        <p>마이페이지버튼</p>
+        {/* <p>마이페이지버튼</p> */}
+        <MyPageButton />
       </div>
     </div>
   );
