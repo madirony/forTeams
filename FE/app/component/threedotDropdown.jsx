@@ -14,21 +14,14 @@ import {
   DropdownItem,
 } from "@nextui-org/dropdown";
 
-export default function ThreedotDropdown({ reset, trash, share, save }) {
-  // 모달 오픈 여부를 저장할 변수
-  const [showModalShare, setShowModalShare] = useState(false);
-  const [showModalSave, setShowModalSave] = useState(false);
-
-  // 클릭시 모달 오픈 여부를 변경하는 함수
-  const openModalShare = () => {
-    setShowModalShare(!showModalShare);
-    console.log("공유 모달 열림", showModalShare);
-  };
-  const openModalSave = () => {
-    setShowModalSave(!showModalSave);
-    console.log("저장 모달 열림", showModalSave);
-  };
-
+export default function ThreedotDropdown({
+  reset,
+  trash,
+  share,
+  save,
+  openModalShare,
+  openModalSave,
+}) {
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -66,7 +59,7 @@ export default function ThreedotDropdown({ reset, trash, share, save }) {
             className={styles.dropdownItem}
             key="share"
             startContent={<ThreeShare />}
-            onClick={() => openModalShare()}
+            onClick={openModalShare}
           >
             공유하기
           </DropdownItem>
@@ -76,7 +69,7 @@ export default function ThreedotDropdown({ reset, trash, share, save }) {
             className={styles.dropdownItem}
             key="save"
             startContent={<ThreeSave width="13px" height="13px" />}
-            onClick={() => openModalSave()}
+            onClick={openModalSave}
           >
             저장하기
           </DropdownItem>
