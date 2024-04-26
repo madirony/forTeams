@@ -1,0 +1,23 @@
+.wrapper {
+  width: var(--wrapperWidth, 100%);
+  height: var(--wrapperHeight, 40px);
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+}
+
+.wrapper button {
+  text-align: center;
+  border-radius: 8px;
+  font-family: "font3";
+}
+
+.grayButton {
+  width: 100%;
+  background-image: linear-gradient(to right, #ececec 5%, #d6d6d6 100%);
+}
+
+.purpleButton {
+  width: 100%;
+  background-image: linear-gradient(to right, #d1d4ff 5%, #ada1f2 100%);
+}

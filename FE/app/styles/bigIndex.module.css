@@ -1,0 +1,30 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.innerWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.button {
+  cursor: pointer;
+  width: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "font3";
+  font-size: 11px;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
