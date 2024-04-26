@@ -36,7 +36,6 @@
 html {
   height: 100vh;
   color: rgb(var(--font-rgb));
-  /* background-color: rgb(var(--background-basic-rgb)); */
   font-family: "font2";
 }
 

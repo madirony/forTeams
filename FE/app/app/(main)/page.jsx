@@ -5,6 +5,8 @@ import styles from "styles/main.module.css";
 
 // import MenuBar from "component/menuBar";
 
+// import MenuBar from "component/menuBar";
+
 export default function Main() {
   // 모달창 띄우기 위한 state 함수
   const [showModalSave, setShowModalSave] = useState(false);
@@ -18,6 +20,7 @@ export default function Main() {
   return (
     <div className={styles.div}>
       <p>Welcome to Main Page!!</p>
+      {/* <MenuBar /> */}
       {/* <MenuBar /> */}
     </div>
   );
