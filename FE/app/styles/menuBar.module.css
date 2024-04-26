@@ -1,0 +1,14 @@
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gap {
+  display: flex;
+  gap: 1rem;
+}
+
+.text {
+  font-family: "font4";
+}
