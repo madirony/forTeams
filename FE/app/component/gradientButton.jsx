@@ -1,4 +1,4 @@
-import styles from "styles/gradientButton.module.css";
+import styles from "styles/component/gradientButton.module.css";
 
 export default function GradientButton({
   w,

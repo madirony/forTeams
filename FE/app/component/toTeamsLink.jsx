@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "styles/toTeamsLink.module.css";
+import styles from "styles/component/toTeamsLink.module.css";
 import Image from "next/image";
 
 export default function ToTeamsLink() {
