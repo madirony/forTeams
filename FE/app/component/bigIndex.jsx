@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "styles/bigIndex.module.css";
+import styles from "styles/component/bigIndex.module.css";
 import Image from "next/image";
 
 export default function BigIndex() {

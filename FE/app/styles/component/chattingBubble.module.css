@@ -1,0 +1,64 @@
+.wrapper {
+  padding: 0.8rem 0;
+}
+
+.peopleChatWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.myChatWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.peopleChat {
+  max-width: 80%;
+  /* margin-right: 0.5rem; */
+  padding: 0.5rem 1rem;
+  background-color: #ebecfd;
+  border-radius: 25px;
+  word-break: keep-all;
+  box-shadow: 5px 5px 10px rgba(74, 74, 74, 0.4);
+}
+
+.myChat {
+  max-width: 80%;
+  padding: 0.5rem 1rem;
+
+  background-color: #ffffff;
+  border-radius: 25px;
+  word-break: keep-all;
+  box-shadow: 5px 5px 10px rgba(74, 74, 74, 0.4);
+}
+
+.peopleName {
+  padding-left: 3px;
+  margin-bottom: 2px;
+  font-family: "font3";
+  font-size: 12px;
+}
+
+.myName {
+  padding-right: 3px;
+  margin-bottom: 2px;
+  font-family: "font3";
+  font-size: 12px;
+  text-align: end;
+  color: #6459f7;
+}
+
+.text {
+  font-family: "font3";
+  font-size: 12px;
+}
+
+.replyButton {
+  margin-bottom: 0.2rem;
+  cursor: pointer;
+}

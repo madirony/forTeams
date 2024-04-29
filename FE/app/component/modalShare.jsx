@@ -1,4 +1,4 @@
-import styles from "styles/modalShare.module.css";
+import styles from "styles/component/modalShare.module.css";
 import GradientButton from "./gradientButton";
 
 export default function ModalShare({ chatbotid, openModalShare }) {

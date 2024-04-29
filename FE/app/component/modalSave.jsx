@@ -1,4 +1,4 @@
-import styles from "styles/modalSave.module.css";
+import styles from "styles/component/modalSave.module.css";
 import GradientButton from "./gradientButton";
 
 export default function ModalSave({ chatbotid, openModalSave }) {

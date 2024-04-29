@@ -1,0 +1,67 @@
+.wrapper {
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #6459f7;
+}
+
+.innerWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.backButton {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: center;
+  gap: 0.3rem;
+  font-family: "font4";
+  font-size: 15px;
+  color: #8c74eb;
+}
+
+.backButton p {
+  white-space: nowrap;
+}
+
+.hiddenAtMobile {
+  display: block;
+}
+
+.title {
+  width: 100%;
+  margin-left: 0.6rem;
+  font-family: "font3";
+  color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date {
+  padding-right: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: hidden;
+  color: #bcbdbb;
+}
+
+@media (max-width: 770px) {
+  .hiddenAtMiddle {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .hiddenAtMobile {
+    display: none;
+  }
+}

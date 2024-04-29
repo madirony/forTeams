@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "styles/menuBar.module.css";
+import styles from "styles/component/menuBar.module.css";
 
 export default function MenuBar() {
   const onClick = () => {
