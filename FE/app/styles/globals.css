@@ -19,7 +19,7 @@
     font-size: 14px;
   }
   body {
-    padding: 20px;
+    /* padding: 20px; */
   }
 }
 
@@ -29,17 +29,18 @@
     font-size: 16px;
   }
   body {
-    padding: 40px;
+    /* padding: 40px; */
   }
 }
 
 html {
-  height: 100vh;
+  height: 100%;
   color: rgb(var(--font-rgb));
   font-family: "font2";
 }
 
 body {
+  height: 100%;
   background-image: url("../public/image/mainImage.jpg");
   background-position: center;
   background-size: cover;

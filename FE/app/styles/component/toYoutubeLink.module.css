@@ -1,0 +1,12 @@
+.wrapper {
+  cursor: pointer;
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.text {
+  color: #6459f7;
+  font-family: "font3";
+  font-size: 13px;
+}

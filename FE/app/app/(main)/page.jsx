@@ -1,9 +1,13 @@
-import styles from "styles/main.module.css";
+import styles from "styles/page/main.module.css";
+import MenuBar from "component/menuBar.jsx";
 
 export default function Main() {
   return (
-    <div className={styles.div}>
-      <p>Welcome to Main Page!!</p>
+    <div className={styles.root}>
+      <MenuBar />
+      <div className={styles.content}>
+        <p>Welcome to Main Page!!</p>
+      </div>
     </div>
   );
 }

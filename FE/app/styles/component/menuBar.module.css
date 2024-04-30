@@ -1,4 +1,5 @@
 .menu {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,4 +12,18 @@
 
 .text {
   font-family: "font4";
+}
+
+/* 반응형 웹-모바일 */
+@media (max-width: 360px) {
+  .menu {
+    padding: 0.5rem 0.2rem;
+  }
+}
+
+/* 반응형 웹-데스크탑 */
+@media (min-width: 361px) {
+  .menu {
+    padding: 0.5rem 1rem;
+  }
 }

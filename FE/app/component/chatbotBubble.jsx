@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "styles/component/chatbotBubble.module.css";
 
-export default function ChatbotBubble({ mode }) {
+export default function ChatBotBubble({ mode }) {
   switch (mode) {
     case "BOT":
       return (
