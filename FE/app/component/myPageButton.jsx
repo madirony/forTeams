@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 
-export default function MyPageButton() {
+export default function MypageButton() {
   const onClick = () => {
     // ★ 버튼이 클릭되었을 때 로직 작성★
     console.log("마이페이지 버튼 클릭");
@@ -11,8 +11,8 @@ export default function MyPageButton() {
     <div>
       <button onClick={onClick}>
         <Image
-          src="icon/myPageButton.svg"
-          alt="MyPageButton"
+          src="icon/mypageButton.svg"
+          alt="MypageButton"
           width={125}
           height={90}
         ></Image>
