@@ -1,4 +1,4 @@
-import styles from "styles/historyTitle.module.css";
+import styles from "styles/component/historyTitle.module.css";
 import BackArrow from "icon/backArrow.svg";
 
 export default function HistoryTitle({ title, createdAt }) {

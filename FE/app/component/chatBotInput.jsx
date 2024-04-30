@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import styles from "styles/chatBotInput.module.css";
+import styles from "styles/component/chatBotInput.module.css";
 import { useRef, useState } from "react";
 
 export default function ChatBotInput() {

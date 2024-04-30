@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "styles/chatbotBubble.module.css";
+import styles from "styles/component/chatbotBubble.module.css";
 
 export default function ChatbotBubble({ mode }) {
   switch (mode) {

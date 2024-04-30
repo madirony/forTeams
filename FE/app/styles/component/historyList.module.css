@@ -1,0 +1,21 @@
+.listContainer {
+  border-width: 2px;
+  border-color: #d3d5fb;
+  border-radius: 25px;
+  background-color: white;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.title {
+  font-family: "font3";
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.date {
+  font-family: "font2";
+  font-size: 16px;
+  color: #bcbdbb;
+}
