@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+.imgae {
+  cursor: pointer;
+}
+
 .gap {
   display: flex;
   gap: 1rem;
