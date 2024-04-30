@@ -3,7 +3,11 @@
 import { useState } from "react";
 import styles from "styles/component/input.module.css";
 
-export default function Input() {
+export default function Input({ title, placeholder, w }) {
+  // 필요시 input 사이즈를 지정, default 값은 100%
+  const inputSize = {
+    "--inputWidth": w,
+  };
   const [message, setMessage] = useState("");
 
   const onChange = (e) => {
@@ -11,12 +15,12 @@ export default function Input() {
   };
 
   return (
-    <div>
-      <p className={styles.title}>제목</p>
+    <div style={inputSize} className={styles.wrapper}>
+      <p className={styles.title}>{title}</p>
       {/* input 창 width prop으로 주기 */}
       <input
         className={styles.input}
-        placeholder="제목을 입력하세요"
+        placeholder={placeholder}
         value={message}
         onChange={onChange}
       ></input>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "styles/threedotDropdown.module.css";
+import styles from "styles/component/threedotDropdown.module.css";
 import Image from "next/image";
 import ThreeReset from "icon/threeReset.svg";
 import ThreeTrash from "icon/threeTrash.svg";

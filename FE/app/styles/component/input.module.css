@@ -1,3 +1,7 @@
+.wrapper {
+  width: var(--inputWidth, 100%);
+}
+
 .title {
   font-size: 17px;
   font-family: "font4";
