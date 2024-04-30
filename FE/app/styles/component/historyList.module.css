@@ -1,17 +1,16 @@
 .listContainer {
+  cursor: pointer;
+  padding: 1rem 2rem;
   border-width: 2px;
   border-color: #d3d5fb;
   border-radius: 25px;
   background-color: white;
-  padding-left: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 
 .title {
+  margin: 0.3rem 0;
   font-family: "font3";
   font-size: 16px;
-  margin-bottom: 1rem;
 }
 
 .date {
