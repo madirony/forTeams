@@ -1,49 +1,48 @@
-// "use client";
+"use client";
 
-// import {
-//   Dropdown,
-//   DropdownButton,
-//   DropdownDivider,
-//   DropdownItem,
-// } from "@nextui-org/react";
-// import { useState } from "react";
+import styles from "styles/component/dropdownInput.module.css";
+import Image from "next/image";
+import { useState } from "react";
 
-// export default function DropdownInput() {
-//   const [selectedOption, setSelectedOption] = useState(null);
-//   const dropdownStyle = {
-//     width: "200px", // 드롭다운의 너비
-//     padding: "8px", // 내부 여백
-//     border: "1px solid #ccc", // 테두리
-//     borderRadius: "4px", // 테두리의 둥글기
-//     boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // 그림자
-//   };
+export default function DropdownInput() {
+  const [options] = useState([
+    { id: 1, label: "Option 1" },
+    { id: 2, label: "Option 2" },
+    { id: 3, label: "Option 3" },
+  ]);
 
-//   const options = [
-//     { value: "option1", label: "Option 1" },
-//     { value: "option2", label: "Option 2" },
-//     { value: "option3", label: "Option 3" },
-//   ];
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-//   const handleOptionSelect = (option) => {
-//     setSelectedOption(option);
-//     console.log("Selected option:", option);
-//   };
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    setIsDropdownOpen(false); // 옵션을 선택한 후 드롭다운을 닫음
+  };
 
-//   return (
-//     <div style={dropdownStyle}>
-//       {/* <p>폴더</p> */}
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen); // 드롭다운 열림/닫힘 토글
+  };
 
-//       <Dropdown>
-//         <DropdownItem onClick={() => handleOptionSelect(options[0])}>
-//           {options[0].label}
-//         </DropdownItem>
-//         <DropdownItem onClick={() => handleOptionSelect(options[1])}>
-//           {options[1].label}
-//         </DropdownItem>
-//         <DropdownItem onClick={() => handleOptionSelect(options[2])}>
-//           {options[2].label}
-//         </DropdownItem>
-//       </Dropdown>
-//     </div>
-//   );
-// }
+  return (
+    <div className="dropdown">
+      <div className={styles.dropdownToggle} onClick={toggleDropdown}>
+        {selectedOption ? selectedOption.label : "폴더를 선택하세요"}
+        <Image
+          src="icon/dropdown.svg"
+          alt="Dropdown"
+          width={20}
+          height={20}
+        ></Image>
+      </div>
+      {isDropdownOpen && ( // 드롭다운이 열려 있을 때만 목록 표시
+        <ul className={styles.dropdownMenu}>
+          {options.map((option) => (
+            <li key={option.id} onClick={() => handleOptionSelect(option)}>
+              {option.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
