@@ -10,7 +10,7 @@ export default function MenuBar() {
   };
   return (
     <div className={styles.menu}>
-      <div onClick={onClick}>
+      <div className={styles.imgae} onClick={onClick}>
         <Image
           src="icon/forTeams.svg"
           alt="Logo"
