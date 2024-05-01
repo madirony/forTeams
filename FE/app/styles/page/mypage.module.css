@@ -12,6 +12,7 @@
   height: 100%;
   display: flex;
   flex-direction: row;
+  /* background-color: yellow; */
 }
 
 .sideWrapper {
@@ -24,10 +25,12 @@
   flex: 8;
   width: 100%;
   height: 100%;
+  overflow: auto;
   margin-left: 1rem;
   padding: 3rem;
   background-color: #ffffff;
   border-radius: 40px;
+  /* background-color: aqua; */
 }
 
 /* 반응형 웹-모바일 */

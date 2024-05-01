@@ -1,9 +1,10 @@
-import styles from "styles/template/mypageAllLogs.module.css";
+import styles from "styles/template/mypageMyLogs.module.css";
 import HistoryList from "component/historyList";
-import MypageAllLogsDetail from "./mypageAllLogsDetail";
+import MypageMyLogsDetail from "./mypageMyLogsDetail";
+import SmallIndex from "component/smallIndex";
 import { useEffect, useState } from "react";
 
-export default function MypageMyLogs({ openModalShare, openModalSave }) {
+export default function MypageAllLogs({ openModalShare, openModalSave }) {
   // const router = useRouter();
 
   // 상세 페이지 이동 위한 logId
@@ -12,7 +13,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
     setLogId();
   }, []);
 
-  // 챗봇 로그 전체 조회 API
+  // 마이 로그 전체 조회 API
   // 아래 예시는 API 호출 후 삭제
   const datas = [
     {
@@ -66,16 +67,19 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   return (
     <div className={styles.wrapper}>
       {logId ? (
-        <MypageAllLogsDetail
+        <MypageMyLogsDetail
           logId={logId}
           setLogId={setLogId}
           openModalShare={openModalShare}
           openModalSave={openModalSave}
         />
       ) : (
-        datas.map((data, idx) => {
-          return <HistoryList key={idx} data={data} setLogId={setLogId} />;
-        })
+        <>
+          <SmallIndex />
+          {datas.map((data, idx) => (
+            <HistoryList key={idx} data={data} setLogId={setLogId} />
+          ))}
+        </>
       )}
     </div>
   );
