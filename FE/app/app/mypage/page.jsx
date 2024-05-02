@@ -3,7 +3,8 @@
 import { useState } from "react";
 import styles from "styles/page/mypage.module.css";
 import MenuBar from "component/menuBar.jsx";
-import MypageHamburger from "component/mypageHamburger";
+import MypageHamburgerWeb from "component/mypageHamburgerWeb";
+import MypageHamburgerMobile from "component/mypageHamburgerMobile";
 import MypageInfo from "template/mypage/mypageInfo";
 import MypageAllLogs from "template/mypage/mypageAllLogs";
 import MypageMyLogs from "template/mypage/mypageMyLogs";
@@ -11,6 +12,11 @@ import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
 
 export default function Mypage() {
+  // Local에서 사용자 정보를 조회해오기
+  const userName = "이수민";
+  const userDept = "철강영업팀";
+  const userId = 66;
+
   // Hamburger Menu 선택을 위한 변수
   const [selectedPage, setSelectedPage] = useState("info");
 
@@ -28,15 +34,21 @@ export default function Mypage() {
 
   return (
     <div className={styles.root}>
-      <MenuBar />
+      <MenuBar userName={userName} userDept={userDept} userId={userId} />
       <div className={styles.content}>
-        <div className={styles.sideWrapper}>
-          <MypageHamburger
+        <div className={styles.hamburgerWeb}>
+          <MypageHamburgerWeb
             selectedPage={selectedPage}
             setSelectedPage={setSelectedPage}
           />
         </div>
         <div className={styles.mainWrapper}>
+          <div className={styles.hamburgerMobile}>
+            <MypageHamburgerMobile
+              selectedPage={selectedPage}
+              setSelectedPage={setSelectedPage}
+            />
+          </div>
           {showModalShare && (
             <ModalShare chatbotid={999999} openModalShare={openModalShare} />
           )}
@@ -50,7 +62,12 @@ export default function Mypage() {
               openModalSave={openModalSave}
             />
           )}
-          {selectedPage === "myLogs" && <MypageMyLogs />}
+          {selectedPage === "myLogs" && (
+            <MypageMyLogs
+              openModalShare={openModalShare}
+              openModalSave={openModalSave}
+            />
+          )}
         </div>
       </div>
     </div>

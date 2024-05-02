@@ -20,21 +20,23 @@ export default function MenuBar({ userName, userDept, userId }) {
   return (
     <div className={styles.menuBar}>
       <div className={styles.logo} onClick={logoOnClick}>
-        {/* <source media="(max-width: 360px)" src="icon/forTeams.svg" />
-        <source media="(min-width: 361px)" />
-        <Image src="icon/forTeams.svg" alt="Logo" width={125} height={90} /> */}
+        <div className={styles.bigLogo}>
+          <Image src="icon/forTeams.svg" alt="Logo" width={125} height={90} />
+        </div>
+        <div className={styles.smallLogo}>
+          <Image
+            src="icon/forTeamsLogoOnly.svg"
+            alt="Small Logo"
+            width={35}
+            height={50}
+          />
+        </div>
       </div>
       <div className={styles.userInfo}>
         <p>{userDept}</p>
         <p>{userName}님</p>
-        <div className={styles.mypageButton}>
-          <Image
-            onClick={mypageOnClick}
-            src="icon/myPageButton.svg"
-            alt="Mypage Button"
-            width={125}
-            height={90}
-          />
+        <div onClick={mypageOnClick} className={styles.mypageButton}>
+          마이페이지
         </div>
       </div>
     </div>

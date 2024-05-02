@@ -27,19 +27,18 @@
   width: 100%;
   overflow: auto;
   margin-left: 1rem;
-  /* padding: 3rem; */
+  padding: 3rem;
   background-color: lightgreen;
-  /* position: relative; */
 }
 
-/* 반응형 웹-모바일 */
+/* 반응형-모바일 */
 @media (max-width: 360px) {
   .content {
     padding: 50px 20px 20px;
   }
 }
 
-/* 반응형 웹-데스크탑 */
+/* 반응형-데스크탑 */
 @media (min-width: 361px) {
   .content {
     padding: 60px 30px 30px;

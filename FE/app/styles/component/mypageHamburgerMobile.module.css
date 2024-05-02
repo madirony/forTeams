@@ -1,0 +1,35 @@
+.wrapper {
+  display: flex;
+  margin: 1rem 0rem 1.5rem;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5%;
+  /* background-color: yellow; */
+}
+
+.selectedTag {
+  cursor: pointer;
+  padding: 5px 0px;
+  border-bottom: #6459f7 solid 1px;
+  font-size: 12px;
+  font-family: "font4";
+}
+
+.tag {
+  cursor: pointer;
+  padding: 5px 0px;
+  font-size: 12px;
+  font-family: "font4";
+  color: #d3d5fb;
+}
+
+/* 반응형-모바일 */
+@media (max-width: 360px) {
+  .wrapper {
+    gap: 3%;
+  }
+}
+
+/* 반응형-데스크탑 */
+@media (min-width: 1001px) {
+}
