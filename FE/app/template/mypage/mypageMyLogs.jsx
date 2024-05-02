@@ -15,10 +15,13 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
 
   // 마이 로그 전체 조회 API
   // 아래 예시는 API 호출 후 삭제
+  const indexList = ["영상회의", "회의", "사용자설정", "사용자 지정 폴더"];
+
   const datas = [
     {
       id: 1,
       title: "내 계정에서 조직도 확인하기",
+      category: "영상회의",
       updatedAt: "2024-04-25T15:36:24",
     },
     {
@@ -75,7 +78,7 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
         />
       ) : (
         <>
-          <SmallIndex />
+          <SmallIndex justifyTo={"flex-start"} indexList={indexList} />
           {datas.map((data, idx) => (
             <HistoryList key={idx} data={data} setLogId={setLogId} />
           ))}

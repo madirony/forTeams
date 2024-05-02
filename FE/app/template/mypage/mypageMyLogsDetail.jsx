@@ -6,7 +6,6 @@ export default function MypageAllLogsDetail({
   logId,
   setLogId,
   openModalShare,
-  openModalSave,
 }) {
   // 챗봇 로그 상세 조회 API
   // 아래 예시는 API 호출 후 삭제
@@ -17,13 +16,7 @@ export default function MypageAllLogsDetail({
     <div className={styles.wrapper}>
       <HistoryTitle title={title} updatedAt={updatedAt} setLogId={setLogId} />
       <div className={styles.dropdown}>
-        <ThreedotDropdown
-          trash
-          share
-          save
-          openModalShare={openModalShare}
-          openModalSave={openModalSave}
-        />
+        <ThreedotDropdown trash share openModalShare={openModalShare} />
       </div>
       <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
     </div>

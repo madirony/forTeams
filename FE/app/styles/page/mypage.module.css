@@ -17,13 +17,17 @@
   /* background-color: aqua; */
 }
 
-.sideWrapper {
+.hamburgerWeb {
+  display: block;
   flex: 2.5;
 }
 
+.hamburgerMobile {
+  display: none;
+}
+
 .mainWrapper {
-  /* min-width: 800px; */
-  flex: 7.58;
+  flex: 7.5;
   width: 100%;
   overflow: auto;
   margin-left: 1rem;
@@ -32,14 +36,29 @@
   border-radius: 40px;
 }
 
-/* 반응형 웹-모바일 */
+/* 반응형-모바일 */
 @media (max-width: 360px) {
   .content {
-    padding: 50px 20px 20px;
+    padding: 50px 10px 20px;
   }
 }
 
-/* 반응형 웹-데스크탑 */
+/* 반응형-중간 */
+@media (max-width: 1120px) {
+  .hamburgerWeb {
+    display: none;
+  }
+  .mainWrapper {
+    margin-left: 0px;
+    border-radius: 25px;
+    padding: 1rem;
+  }
+  .hamburgerMobile {
+    display: block;
+  }
+}
+
+/* 반응형-데스크탑 */
 @media (min-width: 361px) {
   .content {
     padding: 60px 30px 30px;

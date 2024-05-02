@@ -13,17 +13,17 @@
   --background-basic-rgb: 184, 216, 255;
 }
 
-/* 반응형 웹-모바일 */
+/* 반응형-모바일 */
 @media (max-width: 360px) {
   html {
-    font-size: 14px;
+    font-size: 12px;
   }
   body {
     /* padding: 20px; */
   }
 }
 
-/* 반응형 웹-데스크탑 */
+/* 반응형-데스크탑 */
 @media (min-width: 361px) {
   html {
     font-size: 16px;
