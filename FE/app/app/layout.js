@@ -14,15 +14,13 @@ const isLogined = true;
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <RecoilRootProvider>
-          {isLogined ? (
-            <body>{children}</body>
-          ) : (
-            <LoginMain>{children}</LoginMain>
-          )}
-        </RecoilRootProvider>
-      </body>
+      <RecoilRootProvider>
+        {isLogined ? (
+          <body>{children}</body>
+        ) : (
+          <LoginMain>{children}</LoginMain>
+        )}
+      </RecoilRootProvider>
     </html>
   );
 }
