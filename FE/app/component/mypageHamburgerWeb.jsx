@@ -1,9 +1,9 @@
 "use client";
 
-import styles from "styles/component/mypageHamburger.module.css";
+import styles from "styles/component/mypageHamburgerWeb.module.css";
 import HamburgerTitle from "./hamburgerTitle";
 
-export default function MypageHamburger({ selectedPage, setSelectedPage }) {
+export default function MypageHamburgerWeb({ selectedPage, setSelectedPage }) {
   // selected 여부를 결정하는 함수
   const getClassName = (currentPage) => {
     return `${styles.list} ${

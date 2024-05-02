@@ -28,3 +28,11 @@
 .selectedList {
   background-color: #ffffff;
 }
+
+/* 반응형-중간 */
+@media (max-width: 1000px) {
+}
+
+/* 반응형-데스크탑 */
+@media (min-width: 1001px) {
+}
