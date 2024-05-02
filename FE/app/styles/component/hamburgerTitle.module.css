@@ -1,7 +1,7 @@
 .titleWrapper {
-  min-width: 250px;
-  width: 80%;
-  height: 60px;
+  /* min-width: 250px; */
+  width: 90%;
+  height: 3.5rem;
   padding-left: 1rem;
   display: flex;
   flex-direction: row;
