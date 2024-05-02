@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Slf4j
-@RequestMapping("/auth-service")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     Environment env;
