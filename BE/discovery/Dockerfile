@@ -8,7 +8,8 @@ LABEL maintainer="qhdrnak@gmail.com"
 EXPOSE 8080
 
 # 애플리케이션 JAR 파일을 컨테이너 내부로 복사
-COPY build/libs/*.jar /usr/app/service-app.jar
+COPY build/libs/*.jar /usr/app/
+
 
 # 컨테이너의 작업 디렉토리 설정
 WORKDIR /usr/app
