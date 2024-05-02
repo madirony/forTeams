@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
     private static final String OPENCHAT_QUEUE_NAME = "openchat.queue";
     private static final String OPENCHAT_EXCHANGE_NAME = "openchat.exchange";
-    private static final String ROUTING_KEY = "openchat.#";
+    private static final String ROUTING_KEY = "chat";
 
     @Value("${spring.rabbitmq.username}")
     private String rabbitUser;

@@ -18,23 +18,19 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class OpenChatController {
     private final RabbitTemplate rabbitTemplate;
-//    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
     private final ObjectMapper objectMapper;
     private final OpenChatService openChatService;
 
-    private static final String OPENCHAT_QUEUE_NAME = "openchat.queue";
-    private static final String OPENCHAT_EXCHANGE_NAME = "openchat.exchange";
-
     @MessageMapping("openchat.message")
-    public void sendMessage(@Payload String rawMessage) throws JsonProcessingException {
-        OpenChatDto openChatDto = objectMapper.readValue(rawMessage, OpenChatDto.class);
-        openChatService.processReceivedMessage(openChatDto); // Redis에 저장 및 메시지 처리
-        rabbitTemplate.convertAndSend(OPENCHAT_EXCHANGE_NAME, "chat", openChatDto);
+    public void sendMessage(@Payload OpenChatDto openChatDto) throws JsonProcessingException {
+        //            OpenChatDto openChatDto = objectMapper.readValue(rawMessage, OpenChatDto.class);
+        openChatService.processReceivedMessage(openChatDto);
+        rabbitTemplate.convertAndSend("openchat.exchange", "chat", openChatDto);
     }
 
-    @RabbitListener(queues = OPENCHAT_QUEUE_NAME)
+    @RabbitListener(queues = "openchat.queue")
     public void receive(OpenChatDto openChatDto) {
-        log.info("Data received ::: " + openChatDto);
-//        openChatService.processReceivedMessage(openChatDto);
+        log.info("Data received ::: {}", openChatDto);
     }
 }

@@ -9,7 +9,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -19,7 +21,6 @@ public class OpenChatService {
     private final OpenChatRepository openChatRepository;
     private final RedisTemplate<String, Object> redisTemplate;
 
-    // DTO에서 엔티티로 변환
     private OpenChat convertToEntity(OpenChatDto dto) {
         return new OpenChat(
                 dto.getSenderUUID(),
@@ -27,28 +28,41 @@ public class OpenChatService {
                 dto.getMessageUUID(),
                 dto.getReplyMsgUUID(),
                 dto.getReplyTo(),
-                dto.getRemoveCheck()
+                dto.getRemoveCheck(),
+                dto.getCreatedAt(),
+                dto.getUpdatedAt()
         );
     }
 
-    // 메시지 처리 및 Redis에 저장
     public void processReceivedMessage(OpenChatDto dto) {
-        OpenChat chat = convertToEntity(dto);
-        openChatRepository.save(chat); // MongoDB에 즉시 저장
-        redisTemplate.opsForList().rightPush("chatMessages", chat); // Redis에 저장
+        LocalDateTime now = LocalDateTime.now();
+        dto.setCreatedAt(String.valueOf(now));
+        dto.setUpdatedAt(String.valueOf(now));
+        redisTemplate.opsForList().rightPush("chatMessages", dto);
     }
 
-    // 주기적으로 MongoDB에 저장
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 10000)
     public void saveMessagesToMongoDB() {
-        List<Object> messages = redisTemplate.opsForList().range("chatMessages", 0, -1);
-        List<OpenChat> chats = messages.stream()
-                .map(o -> convertToEntity((OpenChatDto) o))
+        List<?> rawMessages = redisTemplate.opsForList().range("chatMessages", 0, -1);
+        if (rawMessages == null) {
+            return;
+        }
+
+        List<OpenChatDto> dtos = rawMessages.stream()
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof OpenChatDto)
+                .map(o -> (OpenChatDto) o)
                 .collect(Collectors.toList());
+
+        List<OpenChat> chats = dtos.stream()
+                .map(this::convertToEntity)
+                .collect(Collectors.toList());
+
         if (!chats.isEmpty()) {
             openChatRepository.saveAll(chats);
-            redisTemplate.delete("chatMessages"); // Redis 데이터 삭제
+            redisTemplate.delete("chatMessages");
             log.info("Messages saved to MongoDB and cleared from Redis");
         }
     }
+
 }
