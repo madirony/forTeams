@@ -7,12 +7,11 @@ LABEL maintainer="qhdrnak@gmail.com"
 # 컨테이너가 리스닝할 포트 지정
 EXPOSE 8080
 
-# 애플리케이션 JAR 파일을 컨테이너 내부로 복사
-COPY build/libs/*.jar /usr/app/
-
-
-# 컨테이너의 작업 디렉토리 설정
+# 작업 디렉토리 설정
 WORKDIR /usr/app
+
+# JAR 파일을 /usr/app/ 아래로 복사하고 이름을 service-app.jar로 통일
+COPY build/libs/*.jar service-app.jar
 
 # 컨테이너 시작 시 실행될 Java 애플리케이션
 CMD ["java", "-jar", "service-app.jar"]
