@@ -12,3 +12,28 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.dropdownMenu {
+  margin-top: 0.2rem;
+  background-color: red;
+  border-width: 2px;
+  border-color: #d3d5fb;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.dropdownItem {
+  padding-top: 0.5rem;
+  padding-left: 0.5rem;
+  padding-bottom: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdownItem:hover {
+  background-color: rgba(211, 213, 251, 0.3);
+}
+
+.input {
+  margin-right: 3rem;
+}
