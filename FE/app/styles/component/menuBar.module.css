@@ -1,4 +1,4 @@
-.menu {
+.menuBar {
   position: absolute;
   z-index: 999;
   width: 100%;
@@ -7,29 +7,36 @@
   align-items: center;
 }
 
-.imgae {
+.logo {
   cursor: pointer;
+  width: 148px;
+  height: 46px;
+  background-image: url("../../public/icon/forTeams.svg");
+  background-color: aqua;
 }
 
-.gap {
+.userInfo {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 1rem;
+  font-family: "font4";
 }
 
-.text {
-  font-family: "font4";
+.mypageButton {
+  cursor: pointer;
 }
 
 /* 반응형 웹-모바일 */
 @media (max-width: 360px) {
-  .menu {
+  .menuBar {
     padding: 0.5rem 0.2rem;
   }
 }
 
 /* 반응형 웹-데스크탑 */
 @media (min-width: 361px) {
-  .menu {
+  .menuBar {
     padding: 0.5rem 1rem;
   }
 }
