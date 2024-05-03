@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -35,13 +36,19 @@ public class OpenChatService {
     }
 
     public void processReceivedMessage(OpenChatDto dto) {
+        dto.setRemoveCheck("false");
+
         LocalDateTime now = LocalDateTime.now();
         dto.setCreatedAt(String.valueOf(now));
         dto.setUpdatedAt(String.valueOf(now));
+
+        String uniqueMessageUUID = UUID.randomUUID().toString();
+        dto.setMessageUUID(uniqueMessageUUID);
+
         redisTemplate.opsForList().rightPush("chatMessages", dto);
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 3600000)
     public void saveMessagesToMongoDB() {
         List<?> rawMessages = redisTemplate.opsForList().range("chatMessages", 0, -1);
         if (rawMessages == null) {
