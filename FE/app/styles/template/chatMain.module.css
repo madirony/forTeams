@@ -5,3 +5,8 @@
   background-color: rgba(239, 239, 239, 0.7);
   border-radius: 40px;
 }
+
+.socket {
+  background-color: red;
+  padding: 1rem;
+}

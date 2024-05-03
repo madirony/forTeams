@@ -23,6 +23,7 @@
   align-items: center;
   font-family: "font3";
   font-size: 11px;
+  flex-wrap: wrap;
 }
 
 .button:hover {
