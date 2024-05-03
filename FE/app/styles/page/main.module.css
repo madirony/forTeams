@@ -1,46 +1,65 @@
 .root {
-  box-sizing: border-box;
   position: relative;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* background-color: lightcyan; */
+  /* background-color: pink; */
 }
 
-.content {
-  box-sizing: border-box;
+.largePage {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: row;
-  /* background-color: aqua; */
+  /* background-color: yellow; */
+}
+
+.swiperPage {
+  width: 100%;
+  height: 100%;
+  background-color: greenyellow;
 }
 
 .sideWrapper {
-  flex: 2.5;
-  background-color: lightcoral;
+  flex: 3;
+  /* background-color: lightcoral; */
 }
 
 .mainWrapper {
-  flex: 7.5;
+  flex: 7;
   width: 100%;
-  overflow: auto;
+  /* overflow: hidden; */
   margin-left: 1rem;
   /* padding: 3rem; */
-  background-color: lightgreen;
+  background-color: white;
+  border-radius: 40px;
 }
 
 /* 반응형-모바일 */
-@media (max-width: 360px) {
-  .content {
-    padding: 50px 20px 20px;
+/* @media (max-width: 360px) {
+  .largePage {
+    padding: 50px 10px 20px;
+  }
+} */
+
+/* 반응형-중간 */
+@media (max-width: 1100px) {
+  .largePage {
+    display: none;
+  }
+  .swiperPage {
+    display: block;
+    padding: 50px 10px 20px;
   }
 }
 
 /* 반응형-데스크탑 */
-@media (min-width: 361px) {
-  .content {
+@media (min-width: 1100px) {
+  .largePage {
     padding: 60px 30px 30px;
+  }
+  .swiperPage {
+    display: none;
   }
 }
