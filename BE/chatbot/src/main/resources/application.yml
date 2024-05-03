@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: chatbot
+  profiles:
+    include: secret
+  datasource:
+    url: ${database.dev.url}
+    username: ${database.dev.username}
+    password: ${database.dev.password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
