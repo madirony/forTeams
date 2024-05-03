@@ -6,6 +6,6 @@ import lombok.Getter;
 @Getter
 @Data
 public class FolderRegisterDto {
-
+    // for test
     String folderName;
 }
