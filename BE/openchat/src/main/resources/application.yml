@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: openchat
+
+  data:
+    mongodb:
+      uri: ENC(48GFXt4MqZ9+9EN1akLrVsgAib7eDzrWPHOCMvZjNUiU6En2psogiLCO1rwUSGk5bdQ5n+lJuj2jP8PSQ36nFEDtwjHlaPLWR1TsO1FmNnIfZ5Jm9zGdiA==)
+
+    redis:
+      host: ENC(r5G5fBs7eUDEyyWTGM7SUtFqqRgp/rtL)
+      port: 6379
+
+  rabbitmq:
+    host: ENC(r5G5fBs7eUDEyyWTGM7SUtFqqRgp/rtL)
+    port: 4885
+    virtual-host: /
+    username: ENC(6KNNGCEX5RW/lyZgNM/kWw==)
+    password: ENC(1XVadta2Ywz2Ba+4k+Y06s2PGebCMlmX)
