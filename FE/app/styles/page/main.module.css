@@ -27,7 +27,7 @@
   width: 100%;
   overflow: auto;
   margin-left: 1rem;
-  padding: 3rem;
+  /* padding: 3rem; */
   background-color: lightgreen;
 }
 
