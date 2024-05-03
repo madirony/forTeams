@@ -1,0 +1,17 @@
+.wrapper {
+  background-color: white;
+  overflow: auto;
+  /* height: 100%; */
+  width: 100%;
+  padding: 2rem;
+}
+
+.topContainer {
+  display: flex;
+}
+
+.container {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
