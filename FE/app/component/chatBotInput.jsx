@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "styles/component/chatBotInput.module.css";
 import { useRef, useState } from "react";
 
-export default function ChatBotInput() {
+export default function ChatBotInput({ placeholder }) {
   const textareaRef = useRef(null);
   const [message, setMessage] = useState("");
 
@@ -47,8 +47,7 @@ export default function ChatBotInput() {
       <textarea
         ref={textareaRef}
         className={styles.textarea}
-        // placeholder prop으로 주기
-        placeholder="채팅을 입력해보세요"
+        placeholder={placeholder ? placeholder : "채팅을 입력해보세요"}
         value={message}
         onChange={onChange}
         onKeyPress={onKeyPress}

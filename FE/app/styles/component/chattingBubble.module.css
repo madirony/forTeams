@@ -19,7 +19,6 @@
 
 .peopleChat {
   max-width: 80%;
-  /* margin-right: 0.5rem; */
   padding: 0.5rem 1rem;
   background-color: #ebecfd;
   border-radius: 25px;
@@ -30,7 +29,6 @@
 .myChat {
   max-width: 80%;
   padding: 0.5rem 1rem;
-
   background-color: #ffffff;
   border-radius: 25px;
   word-break: keep-all;

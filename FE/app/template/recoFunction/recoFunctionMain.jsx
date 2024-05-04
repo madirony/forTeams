@@ -26,24 +26,28 @@ export default function RecoFunctionMain() {
     "화상회의하기",
     "메모 작성하기",
     "화상회의 캐릭터 설정하기",
-    "외부인과 채팅하기",
+    "dddd",
   ];
+
   return (
     <div className={styles.wrapper}>
-      <HamburgerTitle icon={"reco.svg"} title={"추천 기능"} />
-      <h2 className={styles.h2}>사람들이 많이 찾는 기능!</h2>
-      <p className={styles.text}>사람들이 많이 찾는 기능이에요</p>
-      {/* 워드 클라우드 형식으로 5개 기능 넣기 */}
-      <div>
-        {functions.map((func, index) => (
-          <button
-            key={index}
-            className={styles.wordCloud}
-            onClick={() => onClickFunction(func)}
-          >
-            {func}
-          </button>
-        ))}
+      <HamburgerTitle icon={"reco.svg"} title={"많이 찾은 기능"} />
+      <div className={styles.innerWrapper}>
+        <div className={styles.text}>
+          <p>우리 본부/실 동료들이 많이 찾아본 Teams 기능이예요</p>
+          <p>클릭해서 바로 사용법을 알아보세요</p>
+        </div>
+        <div className={styles.wordClud}>
+          {functions.map((func, index) => (
+            <button
+              key={index}
+              className={styles.button}
+              onClick={() => onClickFunction(func)}
+            >
+              {func}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

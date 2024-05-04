@@ -7,8 +7,8 @@ export default function HamburgerTitle({ icon, title }) {
       <Image
         src={`icon/${icon}`}
         alt="hamburger title icon"
-        width={37}
-        height={37}
+        width={30}
+        height={30}
       />
       <p className={styles.text}>{title}</p>
     </div>
