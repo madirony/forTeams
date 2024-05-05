@@ -4,7 +4,7 @@ spring:
 
   data:
     mongodb:
-      uri: ENC(48GFXt4MqZ9+9EN1akLrVsgAib7eDzrWPHOCMvZjNUiU6En2psogiLCO1rwUSGk5bdQ5n+lJuj2jP8PSQ36nFEDtwjHlaPLWR1TsO1FmNnIfZ5Jm9zGdiA==)
+      uri: ENC(P5G3E6YLr2b2l83lNHJRcNll3EJVVHeO21nsjn4SNPBm6oM/L5nPixP4ORvpnzWOLC44oi3KfieZ2LF2t/UaN1KvBpCZVZ4yvCM3yG4YwIlD3x81fDw3uQ==)
 
     redis:
       host: ENC(r5G5fBs7eUDEyyWTGM7SUtFqqRgp/rtL)

@@ -25,13 +25,11 @@ public class ChatbotController {
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
+        chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
         rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
         switch(chatbotDto.getType()){
             case "recommend":
-                String response = callExternalAPI(chatbotDto.getMsg());
-                log.info("Response from external API: {}", response);
-                chatbotDto.setSender(false);
-                chatbotDto.setMsg(response);
+                chatbotDto = chatbotService.processRecommendMessage(chatbotDto, chatbotUUID);
                 rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 break;
             case "ask":
@@ -54,13 +52,6 @@ public class ChatbotController {
                     chatbotDto.setType("stream"); chatbotDto.setSender(false); chatbotDto.setMsg(data);
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 }, error -> log.error("Error while streaming data: {}", error.getMessage()));
-    }
-
-    private String callExternalAPI(String question) {
-        String url = "http://forteams.co.kr:8085/recommandation/question";
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
-                .queryParam("question", question);
-        return restTemplate.getForObject(builder.toUriString(), String.class);
     }
 
     @RabbitListener(queues = "chatbot.queue")
