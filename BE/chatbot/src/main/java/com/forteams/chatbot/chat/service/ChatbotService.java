@@ -34,6 +34,18 @@ public class ChatbotService {
         return dto;
     }
 
+    public void saveAskData(String chatUUID, String chatbotUUID, StringBuilder sb) {
+        ChatbotDto assistant = new ChatbotDto();
+        assistant.setChatUUID(chatUUID); assistant.setType("ask");
+        assistant.setSender(false); assistant.setMsg(String.valueOf(sb));
+
+        LocalDateTime now = LocalDateTime.now();
+        assistant.setCreatedAt(String.valueOf(now));
+        assistant.setUpdatedAt(String.valueOf(now));
+
+        addChatLog(chatbotUUID, assistant);
+    }
+
     public ChatbotDto processRecommendMessage(ChatbotDto dto, String chatbotUUID) {
         String response = callExternalAPI(dto.getMsg());
         log.info("Response from external API: {}", response);

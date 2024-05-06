@@ -34,24 +34,37 @@ public class ChatbotController {
                 break;
             case "ask":
                 // 스트리밍 데이터 처리 로직 추가
-                streamData(chatbotUUID);
+                StringBuilder sb = new StringBuilder();
+                streamData(chatbotDto.getChatUUID(), chatbotUUID, sb);
                 break;
         }
     }
 
-    private void streamData(String chatbotUUID) {
+    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb) {
         // WebClient를 사용하여 스트리밍 데이터 소스에 연결
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
         webClient.post()
                 .uri("/streamtest")  // 이 URI는 실제 스트리밍 데이터를 제공하는 URI로 변경해야 함
                 .retrieve()
                 .bodyToFlux(String.class)
-                .subscribe(data -> {
-                    // 받은 데이터를 RabbitMQ로 전송
+                .doOnNext(data -> {
+                    sb.append(data);
                     ChatbotDto chatbotDto = new ChatbotDto();
-                    chatbotDto.setType("stream"); chatbotDto.setSender(false); chatbotDto.setMsg(data);
+                    chatbotDto.setType("stream"); chatbotDto.setSender(false); chatbotDto.setChatUUID(chatbotUUID); chatbotDto.setMsg(data);
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
-                }, error -> log.error("Error while streaming data: {}", error.getMessage()));
+                })
+                .doOnComplete(() -> {
+                    chatbotService.saveAskData(chatUUID, chatbotUUID, sb);
+                    sb.setLength(0);
+
+                    ChatbotDto chatbotDto = new ChatbotDto();
+                    chatbotDto.setType("streamFin"); chatbotDto.setSender(false); chatbotDto.setChatUUID(chatbotUUID);
+                    rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
+                })
+                .subscribe(
+                    data -> {}, error -> log.error("Error while streaming data: {}", error.getMessage()),
+                    () -> log.info("Streaming Completed")
+                );
     }
 
     @RabbitListener(queues = "chatbot.queue")
