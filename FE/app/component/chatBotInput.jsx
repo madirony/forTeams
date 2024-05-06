@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "styles/component/chatBotInput.module.css";
 import { useRef, useState } from "react";
 
-export default function ChatBotInput({ placeholder }) {
+export default function ChatBotInput({ placeholder, sendMessage }) {
   const textareaRef = useRef(null);
   const [message, setMessage] = useState("");
 
@@ -25,6 +25,7 @@ export default function ChatBotInput({ placeholder }) {
 
   const onClick = () => {
     // ★메시지 전송 로직 작성하기★
+    sendMessage(message);
     console.log("전송된 메시지:", message);
     // 메시지 전송 후 상태 초기화
     setMessage("");
