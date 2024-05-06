@@ -1,7 +1,7 @@
 .titleWrapper {
   /* min-width: 250px; */
   width: 90%;
-  height: 3.5rem;
+  height: 3rem;
   padding-left: 1rem;
   display: flex;
   flex-direction: row;
@@ -18,7 +18,18 @@
 
 .text {
   font-family: "font4";
-  font-size: 20px;
+  font-size: 18px;
   color: #ffffff;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* 반응형-중간 */
+@media (max-width: 1100px) {
+  .titleWrapper {
+    width: 80%;
+    border-radius: 0px 10px 10px 0px;
+  }
+  .text {
+    font-size: 14px;
+  }
 }

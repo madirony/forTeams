@@ -7,61 +7,52 @@ export default function BigIndex() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.innerWrapper}>
-        <div className={styles.button} onClick={() => console.log("사내협업")}>
-          <Image
-            src="icon/bigIndexInternal.svg"
+        <div className={styles.button} onClick={() => console.log("준비하기")}> 
+          {/* <Image
+            src="icon/document.svg"
             alt="big index external"
             width={37}
             height={37}
-          />
-          사내협업
+          /> */}
+          준비하기
         </div>
-        <div className={styles.button} onClick={() => console.log("외부협업")}>
-          <Image
-            src="icon/bigIndexExternal.svg"
+        <div className={styles.button} onClick={() => console.log("시작하기")}>
+           {/* <Image
+            src="icon/play.svg"
             alt="big index external"
             width={37}
             height={37}
-          />
-          외부협업
+          /> */}
+          시작하기
         </div>
-        <div className={styles.button} onClick={() => console.log("일정관리")}>
-          <Image
-            src="icon/bigIndexCalander.svg"
+        <div className={styles.button} onClick={() => console.log("소통하기")}>
+          {/* <Image
+            src="icon/email.svg"
             alt="big index external"
             width={37}
             height={37}
-          />
-          일정관리
+          /> */}
+          소통하기
         </div>
       </div>
       <div className={styles.innerWrapper}>
-        <div className={styles.button} onClick={() => console.log("추가 앱")}>
-          <Image
-            src="icon/bigIndexApps.svg"
+        <div className={styles.button} onClick={() => console.log("업무하기")}>
+          {/* <Image
+            src="icon/folder.svg"
             alt="big index external"
             width={37}
             height={37}
-          />
-          추가 앱
+          /> */}
+          업무하기
         </div>
-        <div className={styles.button} onClick={() => console.log("검색")}>
-          <Image
-            src="icon/bigIndexSearch.svg"
+        <div className={styles.button} onClick={() => console.log("부가기능")}>
+          {/* <Image
+            src="icon/pluss.svg"
             alt="big index external"
             width={37}
             height={37}
-          />
-          검색
-        </div>
-        <div className={styles.button} onClick={() => console.log("유저설정")}>
-          <Image
-            src="icon/bigIndexSetting.svg"
-            alt="big index external"
-            width={37}
-            height={37}
-          />
-          유저설정
+          /> */}
+          부가기능
         </div>
       </div>
     </div>

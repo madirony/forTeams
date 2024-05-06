@@ -49,12 +49,16 @@ export default function Mypage() {
               setSelectedPage={setSelectedPage}
             />
           </div>
+
+          {/* 모달 띄우는 부분 */}
           {showModalShare && (
             <ModalShare chatbotid={999999} openModalShare={openModalShare} />
           )}
           {showModalSave && (
             <ModalSave chatbotid={123456} openModalSave={openModalSave} />
           )}
+
+          {/* 햄버거 메뉴 선택하는 부분 */}
           {selectedPage === "info" && <MypageInfo />}
           {selectedPage === "allLogs" && (
             <MypageAllLogs

@@ -1,7 +1,6 @@
 .div {
   display: flex;
   align-items: end;
-  /* align-items: center; */
   border-radius: 25px;
   border-width: 2px;
   border-color: #d3d5fb;
@@ -13,8 +12,8 @@
 }
 
 .textarea {
-  background: transparent;
   width: 100%;
+  background: transparent;
   height: 1.5rem;
 }
 
