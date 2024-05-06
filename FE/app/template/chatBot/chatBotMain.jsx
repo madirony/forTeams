@@ -8,8 +8,17 @@ import BigIndex from "component/bigIndex";
 import ChatBotInput from "component/chatBotInput";
 import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
+import RecoQuestions from "component/recoQuestions";
 
 export default function ChatBotMain() {
+  // 임의의 데이터 (title과 func를 포함한 객체 3개)
+  const data = [
+    { title: '기능1', func: '기능1 설명' },
+    { title: '기능2', func: '기능2 설명' },
+    { title: '기능3', func: '기능3 설명' }
+  ];
+
+
   // 챗봇 메인 - 웹소켓 연결
 
   // 모달 오픈 여부를 저장할 변수
@@ -57,6 +66,14 @@ export default function ChatBotMain() {
         <ChatBotBubble mode="USER" />
         <ChatBotBubble mode="BOT" />
         <ChatBotBubble mode="BOT" />
+
+        {/* ============3개 기능 추천 부분============== */}
+        <div>
+          {data.map((item, index) => (
+            <RecoQuestions key={index} title={item.title} func={[item.func]} />
+          ))}
+        </div>
+      {/* =========================================== */}
       </div>
 
       <div className={styles.input}>

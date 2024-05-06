@@ -5,6 +5,8 @@
 .title {
   font-family: "font4";
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .input {
