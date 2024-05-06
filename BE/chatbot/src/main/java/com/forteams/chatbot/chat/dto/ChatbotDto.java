@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class ChatbotDto extends ChatbotBaseEntity {
     String type; //recommend, ask, stream
-    boolean sender; //true (me), false(bot)
+    String sender; //true(or USER) (me), false(or BOT) (bot)
     String chatUUID; // ask id = reply id
     String msg;
 

@@ -37,7 +37,7 @@ public class ChatbotService {
     public void saveAskData(String chatUUID, String chatbotUUID, StringBuilder sb) {
         ChatbotDto assistant = new ChatbotDto();
         assistant.setChatUUID(chatUUID); assistant.setType("ask");
-        assistant.setSender(false); assistant.setMsg(String.valueOf(sb));
+        assistant.setSender("BOT"); assistant.setMsg(String.valueOf(sb));
 
         LocalDateTime now = LocalDateTime.now();
         assistant.setCreatedAt(String.valueOf(now));
@@ -54,7 +54,7 @@ public class ChatbotService {
         dto.setCreatedAt(String.valueOf(now));
         dto.setUpdatedAt(String.valueOf(now));
 
-        dto.setSender(false);
+        dto.setSender("BOT");
         dto.setMsg(response);
 
         addChatLog(chatbotUUID, dto);

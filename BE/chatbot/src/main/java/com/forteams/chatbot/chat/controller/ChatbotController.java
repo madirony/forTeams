@@ -50,7 +50,7 @@ public class ChatbotController {
                 .doOnNext(data -> {
                     sb.append(data);
                     ChatbotDto chatbotDto = new ChatbotDto();
-                    chatbotDto.setType("stream"); chatbotDto.setSender(false); chatbotDto.setChatUUID(chatbotUUID); chatbotDto.setMsg(data);
+                    chatbotDto.setType("stream"); chatbotDto.setSender("BOT"); chatbotDto.setChatUUID(chatUUID); chatbotDto.setMsg(data);
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 })
                 .doOnComplete(() -> {
@@ -58,7 +58,7 @@ public class ChatbotController {
                     sb.setLength(0);
 
                     ChatbotDto chatbotDto = new ChatbotDto();
-                    chatbotDto.setType("streamFin"); chatbotDto.setSender(false); chatbotDto.setChatUUID(chatbotUUID);
+                    chatbotDto.setType("streamFin"); chatbotDto.setSender("BOT"); chatbotDto.setChatUUID(chatUUID);
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 })
                 .subscribe(
