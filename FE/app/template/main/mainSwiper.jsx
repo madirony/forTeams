@@ -21,6 +21,7 @@ export default function MainSwiper() {
         spaceBetween={50}
         slidesPerView={1}
         pagination={{ clickable: true }}
+        initialSlide={1}
         // autoHeight={true}
         // navigation
         // scrollbar={{ draggable: true }}

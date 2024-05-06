@@ -16,7 +16,6 @@ export default function Main() {
 
   // 윈도우 가로길이를 가져오기
   const { width } = GetWindowSize();
-  console.log("위드:", width);
 
   return (
     <div className={styles.root}>
