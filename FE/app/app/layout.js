@@ -1,7 +1,7 @@
 import "styles/globals.css";
 import LocalStorage from "util/localStorage";
 import RecoilRootProvider from "util/recoilRootProvider";
-import LoginMain from "./login/loginMain";
+import LoginMain from "./login/page";
 
 export const metadata = {
   title: "forTeams",

@@ -1,4 +1,7 @@
+"use client";
+
 import styles from "styles/page/main.module.css";
+import GetWindowSize from "util/getWindowSize";
 import MenuBar from "component/menuBar.jsx";
 import MainSwiper from "template/main/mainSwiper";
 import ChatMain from "template/chat/chatMain";
@@ -11,25 +14,31 @@ export default function Main() {
   const userDept = "철강영업팀";
   const userId = 66;
 
+  // 윈도우 가로길이를 가져오기
+  const { width } = GetWindowSize();
+  console.log("위드:", width);
+
   return (
     <div className={styles.root}>
       <MenuBar userName={userName} userDept={userDept} userId={userId} />
 
-      {/* 반응형-데스크탑 */}
-      <div className={styles.largePage}>
-        <div className={styles.sideWrapper}>
-          <RecoFunctionMain />
-          <ChatMain />
+      {width <= 1000 ? (
+        // 반응형-중간
+        <div className={styles.swiperPage}>
+          <MainSwiper />
         </div>
-        <div className={styles.mainWrapper}>
-          <ChatBotMain />
+      ) : (
+        // 반응형-데스크탑
+        <div className={styles.largePage}>
+          <div className={styles.sideWrapper}>
+            <RecoFunctionMain />
+            <ChatMain />
+          </div>
+          <div className={styles.mainWrapper}>
+            <ChatBotMain />
+          </div>
         </div>
-      </div>
-
-      {/* 반응형-중간 */}
-      <div className={styles.swiperPage}>
-        <MainSwiper />
-      </div>
+      )}
     </div>
   );
 }
