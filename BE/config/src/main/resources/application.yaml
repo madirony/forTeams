@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: config
+  cloud:
+    server:
+      git:
+        uri: "https://lab.ssafy.com/s10-final/S10P31S204.git"
+        clone-on-start: true
+        search-paths: "config/{application}"
+        default-label: "BE-configuration"
+
+server:
+  port: 8888
+
