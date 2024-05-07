@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(("/api/chatbot/folder"))
+@RequestMapping( name = "/api/chatbot/folder")
 @AllArgsConstructor
 public class FolderController {
 
