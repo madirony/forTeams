@@ -83,7 +83,7 @@ public class ChatbotController {
                 })
                 .subscribe(
                     data -> {
-                        log.info(data + " 출력 출력 ");
+//                        log.info(data + " 출력 출력 ");
                     }, error -> log.error("Error while streaming data: {}", error.getMessage()),
                     () -> log.info("Streaming Completed")
                 );
