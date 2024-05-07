@@ -6,10 +6,12 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "folders")
 @NoArgsConstructor
+@Setter
 @Getter
 public class Folder extends BaseEntity {
     @Id

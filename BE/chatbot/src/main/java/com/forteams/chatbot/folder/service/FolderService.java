@@ -2,6 +2,7 @@ package com.forteams.chatbot.folder.service;
 
 import com.forteams.chatbot.folder.dto.FolderRegisterDto;
 import com.forteams.chatbot.folder.dto.FolderResponseDto;
+import com.forteams.chatbot.folder.dto.FolderUpdateDto;
 import com.forteams.chatbot.folder.entity.Folder;
 import com.forteams.chatbot.user.entity.User;
 import com.forteams.chatbot.folder.repository.FolderRepository;
@@ -34,5 +35,11 @@ public class FolderService {
     public void removeFolder(Long folderId) {
         Folder folder = folderRepository.findById(folderId).orElseThrow();
         folderRepository.delete(folder);
+    }
+
+    public void updateFolder(FolderUpdateDto folderUpdateDto) {
+        Folder folder = folderRepository.findById(folderUpdateDto.getFolderId()).orElseThrow();
+        folder.setName(folderUpdateDto.getFolderName());
+        folderRepository.save(folder);
     }
 }

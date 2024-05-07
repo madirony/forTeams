@@ -3,6 +3,7 @@ package com.forteams.chatbot.folder.controller;
 import com.forteams.chatbot.folder.dto.FolderListFetchDto;
 import com.forteams.chatbot.folder.dto.FolderRegisterDto;
 import com.forteams.chatbot.folder.dto.FolderResponseDto;
+import com.forteams.chatbot.folder.dto.FolderUpdateDto;
 import com.forteams.chatbot.folder.service.FolderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -49,6 +50,27 @@ public class FolderController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
 
+    @PutMapping("/")
+    public ResponseEntity<Void> updateFolder(@PathVariable Long folderId){
+        try{
+            folderService.removeFolder(folderId);
+            return ResponseEntity.ok(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto){
+        try{
+//            log.info(">>>"+scheduleUpdateDto.isActive()+","+scheduleUpdateDto.getScheduleId());
+//            System.out.println(scheduleUpdateDto.isActive());
+            folderService.updateFolder(folderUpdateDto);
+            return ResponseEntity.ok(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
