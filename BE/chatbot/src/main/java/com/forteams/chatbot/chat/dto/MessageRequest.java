@@ -2,13 +2,14 @@ package com.forteams.chatbot.chat.dto;
 
 import lombok.Data;
 
+import java.util.List;
 import java.util.Optional;
 
 @Data
 public class MessageRequest {
-    private Optional<Message[]> messages;
+    private Message[] messages;
 
-    public MessageRequest(Optional<Message[]> messages) {
+    public MessageRequest(Message[] messages) {
         this.messages = messages;
     }
 

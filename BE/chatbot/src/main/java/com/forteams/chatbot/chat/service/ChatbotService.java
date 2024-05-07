@@ -86,21 +86,25 @@ public class ChatbotService {
         }
     }
 
-    public Optional<Message[]> fetchRecentMessages(String chatbotUUID) {
+    public List<Message> fetchRecentMessages(String chatbotUUID) {
         return chatbotRepository.findById(chatbotUUID)
-                .map(chatbotLogSet -> {
-                    List<Message> messages = new java.util.ArrayList<>(chatbotLogSet.getChatLogs().stream()
-                            .sorted((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt())) // 최신 메시지 정렬
-                            .limit(7) // 최대 7개
-                            .map(dto -> new Message(
-                                    "USER".equals(dto.getSender()) ? "user" : "assistant",
-                                    dto.getMsg()))
-                            .toList());
-                    Collections.reverse(messages);
-                    for(int i = 0; i < messages.size(); i++){
-                        log.info(messages.get(i).toString());
-                    }
-                    return messages.toArray(new Message[0]);
-                });
+                .map(chatbotLogSet -> chatbotLogSet.getChatLogs().stream()
+                        .sorted((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()))
+                        .limit(7)
+                        .map(dto -> new Message("USER".equals(dto.getSender()) ? "user" : "assistant", dto.getMsg()))
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
     }
+
+    public List<Message> validateMessageRequest(List<Message> messages) {
+
+        List<Message> filteredMessages = messages.stream()
+                .filter(m -> m.getContent() != null && !m.getContent().isEmpty())
+                .collect(Collectors.toList());
+
+        Collections.reverse(filteredMessages);
+//        filteredMessages.forEach(m -> log.info("Reversed Message: {}", m.getContent()));
+        return filteredMessages;
+    }
+
 }

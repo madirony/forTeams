@@ -15,10 +15,11 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -33,27 +34,36 @@ public class ChatbotController {
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
         rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
         switch(chatbotDto.getType()){
+
             case "recommend":
 //                chatbotDto = chatbotService.processRecommendMessage(chatbotDto, chatbotUUID);
                 rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 break;
+
             case "ask":
-                // 스트리밍 데이터 처리 로직 추가
                 StringBuilder sb = new StringBuilder();
-                streamData(chatbotDto.getMsg(), chatbotDto.getChatUUID(), chatbotUUID, sb);
+                streamData(chatbotDto.getChatUUID(), chatbotUUID, sb);
                 break;
         }
     }
 
-    private void streamData(String msg, String chatUUID, String chatbotUUID, StringBuilder sb) {
-        // WebClient를 사용하여 스트리밍 데이터 소스에 연결
+    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb) {
+        List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
+
+        if (validMessages.isEmpty()) {
+            log.error("No valid messages available for streaming");
+            return;
+        }
+
+        MessageRequest messageRequest = new MessageRequest(validMessages.toArray(new Message[0]));
+
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
         webClient.post()
                 .uri("/ask")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromPublisher(
                         Mono.just(
-                                new MessageRequest(chatbotService.fetchRecentMessages(chatbotUUID))
+                                messageRequest
                         ), MessageRequest.class
                 ))
                 .retrieve()
