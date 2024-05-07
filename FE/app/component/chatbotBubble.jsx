@@ -15,24 +15,19 @@ export default function ChatBotBubble({ mode, message }) {
           <p>Point Chat Bot</p>
         </div>
         <div className={styles.bubbleBox}>
-          <div className={styles.chatbotBubble}>
-            {message}
-          </div>
+          <div className={styles.chatbotBubble}>{message}</div>
         </div>
       </div>
     );
   } else if (mode === "USER") {
     return (
       <div className={styles.bubbleBox}>
-        <div className={styles.userBubble}>
-          {message}
-        </div>
+        <div className={styles.userBubble}>{message}</div>
       </div>
     );
   }
   return null;
 }
-
 
 // import Image from "next/image";
 // import styles from "styles/component/chatBotBubble.module.css";
