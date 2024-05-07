@@ -48,7 +48,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // WebSocket 엔드포인트 등록
-        registry.addEndpoint("/api/ws")
+        registry.addEndpoint("/api/ws/openchat")
                 .setAllowedOriginPatterns("*"); // 모든 도메인 허용 (보안적인 측면에서 검토 필요)
 //                .withSockJS(); // SockJS 지원을 활성화
     }
