@@ -20,6 +20,10 @@ public class FolderController {
     private final FolderService folderService;
 
 
+    @GetMapping("/test")
+    public ResponseEntity<String> getTest(){
+        return ResponseEntity.ok("키키");
+    }
 
     @PostMapping("/")
     public ResponseEntity<Void> postFolder(@RequestBody FolderRegisterDto folderRegisterDto){
