@@ -1,6 +1,7 @@
 package com.forteams.chatbot.chat.service;
 
 import com.forteams.chatbot.chat.dto.ChatbotDto;
+import com.forteams.chatbot.chat.dto.Message;
 import com.forteams.chatbot.chat.entity.ChatbotLogSet;
 import com.forteams.chatbot.chat.repository.ChatbotRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -79,5 +84,23 @@ public class ChatbotService {
             logSet.addChatLogEntry(newLog);
             chatbotRepository.save(logSet);
         }
+    }
+
+    public Optional<Message[]> fetchRecentMessages(String chatbotUUID) {
+        return chatbotRepository.findById(chatbotUUID)
+                .map(chatbotLogSet -> {
+                    List<Message> messages = new java.util.ArrayList<>(chatbotLogSet.getChatLogs().stream()
+                            .sorted((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt())) // 최신 메시지 정렬
+                            .limit(7) // 최대 7개
+                            .map(dto -> new Message(
+                                    "USER".equals(dto.getSender()) ? "user" : "assistant",
+                                    dto.getMsg()))
+                            .toList());
+                    Collections.reverse(messages);
+                    for(int i = 0; i < messages.size(); i++){
+                        log.info(messages.get(i).toString());
+                    }
+                    return messages.toArray(new Message[0]);
+                });
     }
 }
