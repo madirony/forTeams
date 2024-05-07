@@ -20,10 +20,18 @@ spring:
             uri : lb://AUTH
             predicates:
               - Path=/api/auth/**
-          - id : chatbot
-            uri : lb://CHATBOT
+
+          - id: chatbot-http
+            uri: lb://CHATBOT
             predicates:
               - Path=/api/chatbot/**
+
+          - id: chatbot-websocket
+            uri: lb://CHATBOT
+            predicates:
+              - Path=/api/ws/**
+            filters:
+              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
 
   application:
     name: gateway
