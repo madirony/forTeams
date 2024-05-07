@@ -18,3 +18,7 @@
   padding-bottom: 0.35rem;
   width: 100%;
 }
+
+.input::placeholder {
+  color: #bcbdbb;
+}
