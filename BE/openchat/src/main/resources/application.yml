@@ -16,3 +16,12 @@ spring:
     virtual-host: /
     username: ENC(6KNNGCEX5RW/lyZgNM/kWw==)
     password: ENC(1XVadta2Ywz2Ba+4k+Y06s2PGebCMlmX)
+
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
