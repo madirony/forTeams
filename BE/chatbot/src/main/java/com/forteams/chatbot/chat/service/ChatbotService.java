@@ -1,6 +1,7 @@
 package com.forteams.chatbot.chat.service;
 
 import com.forteams.chatbot.chat.dto.ChatbotDto;
+import com.forteams.chatbot.chat.dto.Message;
 import com.forteams.chatbot.chat.entity.ChatbotLogSet;
 import com.forteams.chatbot.chat.repository.ChatbotRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +12,11 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -80,4 +85,26 @@ public class ChatbotService {
             chatbotRepository.save(logSet);
         }
     }
+
+    public List<Message> fetchRecentMessages(String chatbotUUID) {
+        return chatbotRepository.findById(chatbotUUID)
+                .map(chatbotLogSet -> chatbotLogSet.getChatLogs().stream()
+                        .sorted((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()))
+                        .limit(7)
+                        .map(dto -> new Message("USER".equals(dto.getSender()) ? "user" : "assistant", dto.getMsg()))
+                        .collect(Collectors.toList()))
+                .orElse(Collections.emptyList());
+    }
+
+    public List<Message> validateMessageRequest(List<Message> messages) {
+
+        List<Message> filteredMessages = messages.stream()
+                .filter(m -> m.getContent() != null && !m.getContent().isEmpty())
+                .collect(Collectors.toList());
+
+        Collections.reverse(filteredMessages);
+//        filteredMessages.forEach(m -> log.info("Reversed Message: {}", m.getContent()));
+        return filteredMessages;
+    }
+
 }
