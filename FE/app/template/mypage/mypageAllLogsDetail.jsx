@@ -15,16 +15,14 @@ export default function MypageMyLogsDetail({
 
   return (
     <div className={styles.wrapper}>
-      <HistoryTitle title={title} updatedAt={updatedAt} setLogId={setLogId} />
-      <div className={styles.dropdown}>
-        <ThreedotDropdown
-          trash
-          share
-          save
-          openModalShare={openModalShare}
-          openModalSave={openModalSave}
-        />
-      </div>
+      <HistoryTitle
+        title={title}
+        updatedAt={updatedAt}
+        setLogId={setLogId}
+        openModalShare={openModalShare}
+        openModalSave={openModalSave}
+      />
+
       <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
     </div>
   );

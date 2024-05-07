@@ -14,11 +14,10 @@ import RecoQuestions from "component/recoQuestions";
 export default function ChatBotMain() {
   // 임의의 데이터 (title과 func를 포함한 객체 3개)
   const data = [
-    { title: '기능1', func: '기능1 설명' },
-    { title: '기능2', func: '기능2 설명' },
-    { title: '기능3', func: '기능3 설명' }
+    { title: "기능1", func: "기능1 설명" },
+    { title: "기능2", func: "기능2 설명" },
+    { title: "기능3", func: "기능3 설명" },
   ];
-
 
   // 챗봇 메인 - 웹소켓 연결
 
@@ -38,19 +37,21 @@ export default function ChatBotMain() {
       onConnect: () => {
         console.log("Connected to the WebSocket");
 
-        stompClient.subscribe('/exchange/chatbot.exchange/chatbot.123', (message) => {
-          const receivedMsg = JSON.parse(message.body);
-          console.log("Received message : ", receivedMsg);
-          if(receivedMsg.type === "ask"){
-            setMessages(prev => [...prev, receivedMsg]);
-          }
-          else{
-            setMessages(prev => [...prev, receivedMsg]);
-          }
-        });
+        stompClient.subscribe(
+          "/exchange/chatbot.exchange/chatbot.123",
+          (message) => {
+            const receivedMsg = JSON.parse(message.body);
+            console.log("Received message : ", receivedMsg);
+            if (receivedMsg.type === "ask") {
+              setMessages((prev) => [...prev, receivedMsg]);
+            } else {
+              setMessages((prev) => [...prev, receivedMsg]);
+            }
+          },
+        );
       },
       onStompError: (error) => {
-        console.error('STOMP Error:', error);
+        console.error("STOMP Error:", error);
       },
     });
 
@@ -67,7 +68,7 @@ export default function ChatBotMain() {
       const message = {
         type: "ask",
         sender: "USER",
-        msg: msg
+        msg: msg,
       };
       client.publish({
         destination: "/pub/chatbot.message.123",
@@ -109,20 +110,13 @@ export default function ChatBotMain() {
       </div>
 
       <div className={styles.socket}>
-        {
-          messages.map((msg, index) => (
-            <ChatBotBubble key={index} mode={msg.sender === "USER" ? "USER" : "BOT"} message={msg.msg} />
-          ))
-        }
-        
-        {/* <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="USER" />
-        <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="USER" />
-        <ChatBotBubble mode="USER" />
-        <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="BOT" />
+        {messages.map((msg, index) => (
+          <ChatBotBubble
+            key={index}
+            mode={msg.sender === "USER" ? "USER" : "BOT"}
+            message={msg.msg}
+          />
+        ))}
 
         {/* ============3개 기능 추천 부분============== */}
         <div>
@@ -130,11 +124,14 @@ export default function ChatBotMain() {
             <RecoQuestions key={index} title={item.title} func={[item.func]} />
           ))}
         </div>
-      {/* =========================================== */}
+        {/* =========================================== */}
       </div>
 
       <div className={styles.input}>
-        <ChatBotInput placeholder={"궁금한 내용을 질문해보세요"} sendMessage={sendMessage} />
+        <ChatBotInput
+          placeholder={"궁금한 내용을 질문해보세요"}
+          sendMessage={sendMessage}
+        />
       </div>
     </div>
   );

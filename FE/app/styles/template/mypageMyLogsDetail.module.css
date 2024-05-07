@@ -3,12 +3,6 @@
   flex-direction: column;
 }
 
-.dropdown {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
 .logDetail {
   height: 100%;
   display: flex;
