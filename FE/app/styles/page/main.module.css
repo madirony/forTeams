@@ -40,9 +40,6 @@
 
 /* 반응형-중간 */
 @media (max-width: 1000px) {
-  .largePage {
-    /* display: none; */
-  }
   .swiperPage {
     display: block;
     padding: 50px 10px 20px;
@@ -53,8 +50,5 @@
 @media (min-width: 1000px) {
   .largePage {
     padding: 60px 30px 30px;
-  }
-  .swiperPage {
-    /* display: none; */
   }
 }

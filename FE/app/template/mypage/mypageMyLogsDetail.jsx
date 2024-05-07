@@ -14,10 +14,13 @@ export default function MypageAllLogsDetail({
 
   return (
     <div className={styles.wrapper}>
-      <HistoryTitle title={title} updatedAt={updatedAt} setLogId={setLogId} />
-      <div className={styles.dropdown}>
-        <ThreedotDropdown trash share openModalShare={openModalShare} />
-      </div>
+      <HistoryTitle
+        title={title}
+        updatedAt={updatedAt}
+        setLogId={setLogId}
+        openModalShare={openModalShare}
+      />
+
       <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
     </div>
   );
