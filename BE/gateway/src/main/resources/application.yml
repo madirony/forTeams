@@ -21,7 +21,7 @@ spring:
             predicates:
               - Path=/api/auth/**
           - id : chatbot
-            uri : lb//CHATBOT
+            uri : lb://CHATBOT
             predicates:
               - Path=/api/chatbot/**
 
