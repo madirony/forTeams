@@ -6,6 +6,8 @@ export default function GradientButton({
   mode,
   grayButtonText,
   purpleButtonText,
+  onGrayButtonClick,
+  onPurpleButtonClick
 }) {
   const wrapperSize = {
     "--wrapperWidth": w,
@@ -17,14 +19,16 @@ export default function GradientButton({
         <div style={wrapperSize} className={styles.wrapper}>
           <button
             className={styles.grayButton}
-            onClick={() => console.log("회색 버튼 컴포넌트")}
+            // onClick={() => console.log("회색 버튼 컴포넌트")}
+            onClick={onGrayButtonClick}
           >
             {grayButtonText ? grayButtonText : "취소"}
           </button>
 
           <button
             className={styles.purpleButton}
-            onClick={() => console.log("보라색 버튼 컴포넌트")}
+            // onClick={() => console.log("보라색 버튼 컴포넌트")}
+            onClick={onPurpleButtonClick}
           >
             {purpleButtonText ? purpleButtonText : "완료"}
           </button>
@@ -35,7 +39,8 @@ export default function GradientButton({
         <div style={wrapperSize} className={styles.wrapper}>
           <button
             className={styles.purpleButton}
-            onClick={() => console.log("보라색 버튼 컴포넌트")}
+            // onClick={() => console.log("보라색 버튼 컴포넌트")}
+            onClick={onPurpleButtonClick}
           >
             {purpleButtonText ? purpleButtonText : "완료"}
           </button>
