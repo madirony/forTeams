@@ -42,7 +42,16 @@ export default function DropdownInput() {
   return (
     <div className="dropdown">
       <div className={styles.dropdownToggle}>
-        {selectedOption ? selectedOption.label : "폴더를 선택하세요"}
+        <span
+          className={
+            selectedOption
+              ? styles.selectedOptionTextBlack
+              : styles.selectedOptionTextGrey
+          }
+        >
+          {selectedOption ? selectedOption.label : "폴더를 선택하세요"}
+        </span>
+        {/* {selectedOption ? selectedOption.label : "폴더를 선택하세요"} */}
         <Image
           src="icon/dropdown.svg"
           alt="Dropdown"
