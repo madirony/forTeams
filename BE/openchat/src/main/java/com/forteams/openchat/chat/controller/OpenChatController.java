@@ -21,7 +21,7 @@ public class OpenChatController {
     private final RedisTemplate<String, Object> redisTemplate;
     private final ObjectMapper objectMapper;
     private final OpenChatService openChatService;
-
+    //
     @MessageMapping("openchat.message")
     public void sendMessage(@Payload OpenChatDto openChatDto) throws JsonProcessingException {
         //            OpenChatDto openChatDto = objectMapper.readValue(rawMessage, OpenChatDto.class);
