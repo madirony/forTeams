@@ -38,17 +38,6 @@ spring:
           predicates:
             - Path=/api/ws/openchat
 
-          - id: chatbot-http
-            uri: lb://CHATBOT
-            predicates:
-              - Path=/api/chatbot/**
-
-          - id: chatbot-websocket
-            uri: lb://CHATBOT
-            predicates:
-              - Path=/api/ws/**
-#            filters:
-#              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
 
   application:
     name: gateway
