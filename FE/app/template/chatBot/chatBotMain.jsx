@@ -25,7 +25,7 @@ export default function ChatBotMain() {
 
   useEffect(() => {
     const stompClient = new Client({
-      brokerURL: "ws://localhost:8080/api/ws",
+      brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
       onConnect: () => {
         console.log("Connected to the WebSocket");
 
@@ -105,15 +105,7 @@ export default function ChatBotMain() {
             <ChatBotBubble key={index} mode={msg.sender === "USER" ? "USER" : "BOT"} message={msg.msg} />
           ))
         }
-        
-        {/* <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="USER" />
-        <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="USER" />
-        <ChatBotBubble mode="USER" />
-        <ChatBotBubble mode="BOT" />
-        <ChatBotBubble mode="BOT" /> */}
+
       </div>
 
       <div className={styles.input}>
