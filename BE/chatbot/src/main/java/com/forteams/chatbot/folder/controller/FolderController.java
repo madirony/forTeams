@@ -52,15 +52,7 @@ public class FolderController {
         }
     }
 
-    @PutMapping("/")
-    public ResponseEntity<Void> updateFolder(@PathVariable Long folderId){
-        try{
-            folderService.removeFolder(folderId);
-            return ResponseEntity.ok(null);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
+
 
     @PutMapping
     public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto){
