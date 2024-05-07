@@ -15,11 +15,28 @@ eureka:
 spring:
   cloud:
     gateway:
-        routes:
-          - id : auth
-            uri : lb://AUTH
-            predicates:
-              - Path=/api/auth/**
+      routes:
+        - id : auth
+          uri : lb://AUTH
+          predicates:
+            - Path=/api/auth/**
+
+        - id: chatbot-http
+          uri: lb://CHATBOT
+          predicates:
+            - Path=/api/chatbot/**
+
+        - id: chatbot-websocket
+          uri: lb://CHATBOT
+          predicates:
+            - Path=/api/ws/chatbot
+        #            filters:
+        #              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
+
+        - id: openchat-websocket
+          uri: lb://OPENCHAT
+          predicates:
+            - Path=/api/ws/openchat
 
   application:
     name: gateway
