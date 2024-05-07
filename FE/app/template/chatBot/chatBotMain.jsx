@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Client } from "@stomp/stompjs";
 import styles from "styles/template/chatBotMain.module.css";
 import ChatBotBubble from "component/chatBotBubble";
 import ThreedotDropdown from "component/threedotDropdown";
@@ -24,6 +25,56 @@ export default function ChatBotMain() {
   // 모달 오픈 여부를 저장할 변수
   const [showModalShare, setShowModalShare] = useState(false);
   const [showModalSave, setShowModalSave] = useState(false);
+
+  //websocket 관련
+  const [client, setClient] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+  const [streamId, setStreamId] = useState(null);
+
+  useEffect(() => {
+    const stompClient = new Client({
+      brokerURL: "ws://localhost:8080/api/ws",
+      onConnect: () => {
+        console.log("Connected to the WebSocket");
+
+        stompClient.subscribe('/exchange/chatbot.exchange/chatbot.123', (message) => {
+          const receivedMsg = JSON.parse(message.body);
+          console.log("Received message : ", receivedMsg);
+          if(receivedMsg.type === "ask"){
+            setMessages(prev => [...prev, receivedMsg]);
+          }
+          else{
+            setMessages(prev => [...prev, receivedMsg]);
+          }
+        });
+      },
+      onStompError: (error) => {
+        console.error('STOMP Error:', error);
+      },
+    });
+
+    stompClient.activate();
+    setClient(stompClient);
+
+    return () => {
+      stompClient.deactivate();
+    };
+  }, []);
+
+  const sendMessage = (msg) => {
+    if (client && client.connected) {
+      const message = {
+        type: "ask",
+        sender: "USER",
+        msg: msg
+      };
+      client.publish({
+        destination: "/pub/chatbot.message.123",
+        body: JSON.stringify(message),
+      });
+    }
+  };
 
   // 클릭시 모달 오픈 여부를 변경하는 함수
   const openModalShare = () => {
@@ -58,7 +109,13 @@ export default function ChatBotMain() {
       </div>
 
       <div className={styles.socket}>
-        <ChatBotBubble mode="BOT" />
+        {
+          messages.map((msg, index) => (
+            <ChatBotBubble key={index} mode={msg.sender === "USER" ? "USER" : "BOT"} message={msg.msg} />
+          ))
+        }
+        
+        {/* <ChatBotBubble mode="BOT" />
         <ChatBotBubble mode="USER" />
         <ChatBotBubble mode="BOT" />
         <ChatBotBubble mode="BOT" />
@@ -77,7 +134,7 @@ export default function ChatBotMain() {
       </div>
 
       <div className={styles.input}>
-        <ChatBotInput placeholder={"궁금한 내용을 질문해보세요"} />
+        <ChatBotInput placeholder={"궁금한 내용을 질문해보세요"} sendMessage={sendMessage} />
       </div>
     </div>
   );

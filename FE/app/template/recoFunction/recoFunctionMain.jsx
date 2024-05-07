@@ -31,23 +31,25 @@ export default function RecoFunctionMain() {
 
   return (
     <div className={styles.wrapper}>
-      <HamburgerTitle icon={"reco.svg"} title={"많이 찾은 기능"} />
-      <div className={styles.innerWrapper}>
-        <div className={styles.text}>
-          <p>우리 본부/실 동료들이 많이 찾아본 Teams 기능이예요</p>
-          <p>클릭해서 바로 사용법을 알아보세요</p>
-        </div>
-        <div className={styles.wordClud}>
-          {functions.map((func, index) => (
-            <button
-              key={index}
-              className={styles.button}
-              onClick={() => onClickFunction(func)}
-            >
-              {func}
-            </button>
-          ))}
-        </div>
+      <div className={styles.hamburgerTitle}>
+        <HamburgerTitle icon={"reco.svg"} title={"많이 찾은 기능"} />
+      </div>
+
+      <div className={styles.text}>
+        <p>우리 본부/실 동료들이 많이 찾아본 Teams 기능이예요</p>
+        <p>클릭해서 바로 사용법을 알아보세요</p>
+      </div>
+
+      <div className={styles.wordCloud}>
+        {functions.map((func, index) => (
+          <button
+            key={index}
+            className={styles.button}
+            onClick={() => onClickFunction(func)}
+          >
+            {func}
+          </button>
+        ))}
       </div>
     </div>
   );

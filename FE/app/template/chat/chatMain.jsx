@@ -13,6 +13,7 @@ export default function ChatMain() {
       <div className={styles.hamburgerTitle}>
         <HamburgerTitle icon={"chatting.svg"} title={"실시간 채팅"} />
       </div>
+
       <div className={styles.socket}>
         <ChattingBubble
           uuid={123} // 예시로 uuid, user, content, createAt 값을 전달
@@ -87,6 +88,7 @@ export default function ChatMain() {
           createAt="2024-05-02 16:30"
         />
       </div>
+
       <div className={styles.input}>
         <ChatBotInput />
       </div>

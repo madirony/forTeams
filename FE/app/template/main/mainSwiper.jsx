@@ -17,16 +17,14 @@ export default function MainSwiper() {
   return (
     <div className={styles.mainSwiper}>
       <Swiper
-        // install Swiper modules
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={50}
         slidesPerView={1}
-        autoHeight={true}
-        // navigation
         pagination={{ clickable: true }}
+        initialSlide={1}
+        // autoHeight={true}
+        // navigation
         // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
       >
         <SwiperSlide>
           <RecoFunctionMain />
