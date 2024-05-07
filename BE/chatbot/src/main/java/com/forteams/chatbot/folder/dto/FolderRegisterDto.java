@@ -1,4 +1,4 @@
-package com.forteams.chatbot.dto;
+package com.forteams.chatbot.folder.dto;
 
 import lombok.Data;
 import lombok.Getter;
@@ -8,4 +8,5 @@ import lombok.Getter;
 public class FolderRegisterDto {
     // for test
     String folderName;
+    String userId;
 }
