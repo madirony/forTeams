@@ -2,8 +2,8 @@
   border-width: 2px;
   border-color: #d3d5fb;
   background-color: white;
-  border-radius: 10px;
   width: 100%;
+  border-radius: 10px;
   padding-left: 0.7rem;
   padding-right: 0.7rem;
   padding-top: 0.35rem;
@@ -36,4 +36,12 @@
 
 .input {
   margin-right: 3rem;
+}
+
+.selectedOptionTextGrey {
+  color: #bcbdbb;
+}
+
+.selectedOptionTextBlack {
+  color: black;
 }
