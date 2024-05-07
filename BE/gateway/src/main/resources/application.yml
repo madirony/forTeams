@@ -30,8 +30,8 @@ spring:
             uri: lb://CHATBOT
             predicates:
               - Path=/api/ws/**
-            filters:
-              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
+#            filters:
+#              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
 
   application:
     name: gateway
