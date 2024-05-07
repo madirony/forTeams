@@ -61,8 +61,6 @@ public class FolderController {
     @PutMapping
     public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto){
         try{
-//            log.info(">>>"+scheduleUpdateDto.isActive()+","+scheduleUpdateDto.getScheduleId());
-//            System.out.println(scheduleUpdateDto.isActive());
             folderService.updateFolder(folderUpdateDto);
             return ResponseEntity.ok(null);
         }catch (Exception e){
