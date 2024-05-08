@@ -6,7 +6,7 @@ const getFolders = async (userId) => {
     const response = await axios({
       method: "get",
       url: "api/chatbot/folder",
-      data: {
+      params: {
         userId: userId,
       },
     });
