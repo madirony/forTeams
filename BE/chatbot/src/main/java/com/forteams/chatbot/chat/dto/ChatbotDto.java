@@ -16,6 +16,7 @@ public class ChatbotDto extends ChatbotBaseEntity {
     String sender; //true(or USER) (me), false(or BOT) (bot)
     String chatUUID; // ask id = reply id
     String msg;
+    private int sequence = 0;  // sequence number for stream
 
     @Override
     public String toString() {
