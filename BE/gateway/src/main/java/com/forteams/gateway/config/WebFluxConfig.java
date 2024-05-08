@@ -11,10 +11,10 @@ public class WebFluxConfig implements WebFluxConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
 //                .allowedOrigins("https://forteams.co.kr")
-                .allowedOrigins("*")
+                .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
-//                .allowCredentials(true) // allowedOrigins("*")와 함께 사용할 수 없음
+//                .allowCredentials(true) // allowedOriginPatterns("*") 와 함께 사용할 수 없음
                 .allowCredentials(false)
                 .maxAge(3600);
     }
