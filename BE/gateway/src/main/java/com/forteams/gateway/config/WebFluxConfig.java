@@ -14,7 +14,7 @@ public class WebFluxConfig implements WebFluxConfigurer {
                 .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
-                .allowCredentials(true)
+//                .allowCredentials(true) // allowedOrigins("*")와 함께 사용할 수 없음
                 .maxAge(3600);
     }
 }
