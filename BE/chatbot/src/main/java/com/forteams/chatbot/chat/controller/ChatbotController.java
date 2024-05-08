@@ -31,20 +31,56 @@ public class ChatbotController {
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
+        log.info("message Received");
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
-        rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
         switch(chatbotDto.getType()){
-
             case "recommend":
+                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID);
 //                chatbotDto = chatbotService.processRecommendMessage(chatbotDto, chatbotUUID);
-                rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
+//                rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 break;
 
             case "ask":
-                StringBuilder sb = new StringBuilder();
-                streamData(chatbotDto.getChatUUID(), chatbotUUID, sb);
+                rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
+                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder());
                 break;
         }
+    }
+
+    private void recommendResponse(String chatUUID, String chatbotUUID) {
+        List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
+
+        log.error("gd");
+        if (validMessages.isEmpty()) {
+            log.error("No valid messages available for recommendation");
+            return;
+        }
+
+        MessageRequest messageRequest = new MessageRequest(validMessages.toArray(new Message[0]));
+
+        WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
+        webClient.post()
+                .uri("/recommendation")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromPublisher(
+                        Mono.just(messageRequest), MessageRequest.class
+                ))
+                .retrieve()
+                .bodyToMono(String.class)  // 단일 객체 응답 처리
+                .doOnNext(data -> {
+                    ChatbotDto chatbotDto = new ChatbotDto("recommendRes", "BOT", chatUUID, data);
+                    log.info(String.valueOf(chatbotDto));
+                    rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
+                })
+                .doOnTerminate(() -> {
+                })
+                .subscribe(
+                        data -> {
+                            log.info("Recommendation completed with data: {}", data);
+                        }, error -> {
+                            log.error("Error while processing recommendation data: {}", error.getMessage());
+                        }
+                );
     }
 
     private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb) {
@@ -80,6 +116,9 @@ public class ChatbotController {
                     ChatbotDto chatbotDto = new ChatbotDto();
                     chatbotDto.setType("streamFin"); chatbotDto.setSender("BOT"); chatbotDto.setChatUUID(chatUUID);
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
+
+                    chatbotDto.setType("recommendFin");  // 스트림이 끝나면, 추천Fin 플래그
+                    rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 })
                 .subscribe(
                     data -> {
@@ -91,6 +130,8 @@ public class ChatbotController {
 
     @RabbitListener(queues = "chatbot.queue")
     public void receive(ChatbotDto chatbotDto) {
-        log.info("Data received ::: {}", chatbotDto);
+        if(chatbotDto.getType().equals("recommend")) {
+            log.info("Data received ::: {}", chatbotDto);
+        }
     }
 }
