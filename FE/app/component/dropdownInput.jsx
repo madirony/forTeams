@@ -79,12 +79,14 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
       <div className={styles.dropdownToggle}>
         <span
           className={
-            selectedOption
-              ? styles.selectedOptionTextBlack
-              : styles.selectedOptionTextGrey
+            Object.keys(selectedOption).length === 0
+              ? styles.selectedOptionTextGrey
+              : styles.selectedOptionTextBlack
           }
         >
-          {selectedOption ? selectedOption.name : "폴더를 선택하세요"}
+          {Object.keys(selectedOption).length === 0
+            ? "폴더를 선택하세요"
+            : selectedOption.name}
         </span>
 
         {isDropdownOpen ? (

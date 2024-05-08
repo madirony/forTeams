@@ -24,9 +24,9 @@ export default function ModalSave({ chatbotid, openModalSave }) {
   return (
     <div className={styles.modalBackground} onClick={openModalSave}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {`현재 제목은: ${title} /`}
+        {/* {`현재 제목은: ${title} /`} */}
 
-        {` 현재 폴더는: ${folder}`}
+        {/* {` 현재 폴더는: ${folder}`} */}
         <p className={styles.modalTitle}>답변 저장하기</p>
         <Input
           title={"제목"}
@@ -37,7 +37,7 @@ export default function ModalSave({ chatbotid, openModalSave }) {
         />
         <div className={styles.dropdownContainer}>
           <p className={styles.title}>폴더</p>
-          <span>폴더는 5개까지만 생성 가능해요</span>
+          {/* <span>폴더는 5개까지만 생성 가능해요</span> */}
           <DropdownInput
             selectedOption={selectedOption}
             setSelectedOption={setSelectedOption}
