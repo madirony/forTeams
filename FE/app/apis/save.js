@@ -13,7 +13,7 @@ const getFolders = async (userId) => {
     console.log("폴더 목록 불러오기 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더 목록 불러오기 중 에러 발생", error);
+    console.log("폴더 목록 불러오기 중 에러 발생!!!", error);
   }
 };
 
@@ -22,7 +22,6 @@ const createFolder = async (folderName, userId) => {
   try {
     const response = await axios({
       method: "post",
-      // 나중에 url마지막 / 지우기
       url: "api/chatbot/folder",
       data: {
         folderName: folderName,
