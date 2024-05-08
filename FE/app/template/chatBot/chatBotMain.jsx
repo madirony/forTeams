@@ -68,7 +68,7 @@ export default function ChatBotMain() {
 
   useEffect(() => {
     const stompClient = new Client({
-      brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
+      brokerURL: "ws://localhost:8080/api/ws/chatbot",
       onConnect: () => {
         console.log("Connected to the WebSocket");
 
@@ -193,7 +193,7 @@ export default function ChatBotMain() {
 
         <div>
         {recommendationsReady && Array.isArray(recommendations) && recommendations.map((item, index) => (
-          <RecoQuestions key={index} content={item} />
+          <RecoQuestions key={index} content={item} sendMessage={sendMessage} />
         ))}
         </div>
       </div>
