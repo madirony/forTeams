@@ -26,6 +26,7 @@ export default function ChatBotMain() {
 
   const [streamId, setStreamId] = useState(null);
 
+  const [streamArray, setStreamArray] = useState([]);
   const [currentStream, setCurrentStream] = useState(""); // 현재 스트림 메시지를 저장
 
   const chatContainerRef = useRef(null);
@@ -64,8 +65,17 @@ export default function ChatBotMain() {
         return newMessages;
       }
     });
+    setStreamArray([]); // 스트림 메시지 배열 초기화
     setCurrentStream(""); // 스트림 내용을 추가하고 초기화
   };
+
+  useEffect(() => {
+    const combinedStream = streamArray
+      .sort((a, b) => a.sequence - b.sequence) // 시퀀스 순서로 정렬
+      .map((msg) => msg.msg)
+      .join(""); // 문자열 합치기
+    setCurrentStream(combinedStream);
+  }, [streamArray]);
 
   useEffect(() => {
     const stompClient = new Client({
@@ -77,11 +87,11 @@ export default function ChatBotMain() {
           "/exchange/chatbot.exchange/chatbot.123",
           (message) => {
             const receivedMsg = JSON.parse(message.body);
-            // console.log("Received message : ", receivedMsg);
+            console.log("Received message : ", receivedMsg);
             if (receivedMsg.type === "ask") {
               setMessages((prev) => [...prev, receivedMsg]);
             } else if (receivedMsg.type === "stream") {
-              setCurrentStream((prev) => prev + receivedMsg.msg);
+              setStreamArray((prev) => [...prev, receivedMsg]);
             } else if (receivedMsg.type === "streamFin") {
               // handleStreamFinish();
             } else if (receivedMsg.type === "recommendRes") {
