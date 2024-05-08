@@ -23,6 +23,35 @@ export default function ChatBotMain() {
 
   const [streamId, setStreamId] = useState(null);
 
+  const [currentStream, setCurrentStream] = useState(""); // 현재 스트림 메시지를 저장
+
+
+  const handleStreamFinish = () => {
+    setMessages(prev => {
+      const newMessage = { msg: currentStream, sender: "BOT" };
+      if (prev.length === 0) {
+        console.log("0dlfEo");
+        console.log(newMessage);
+        return [newMessage];
+      } else if (prev.length === 1) {
+        console.log("1dlfEO");
+        console.log(newMessage);
+        return [...prev, newMessage];
+      } else {
+        console.log("2dlfEo");
+        // 마지막에서 두 번째 위치에 새 메시지 삽입
+        let newMessages = [...prev];
+        console.log(newMessages);
+        console.log("Gdgd");
+        // newMessages.pop();
+        newMessages.push(newMessage);
+        console.log(newMessages);
+        return newMessages;
+      }
+    });
+    setCurrentStream("");  // 스트림 내용을 추가하고 초기화
+  };
+
   useEffect(() => {
     const stompClient = new Client({
       brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
@@ -35,9 +64,15 @@ export default function ChatBotMain() {
           if(receivedMsg.type === "ask"){
             setMessages(prev => [...prev, receivedMsg]);
           }
-          else{
-            setMessages(prev => [...prev, receivedMsg]);
+          else if(receivedMsg.type === "stream") {
+            setCurrentStream(prev => prev + receivedMsg.msg);
           }
+          else if(receivedMsg.type === "streamFin"){
+            // handleStreamFinish();
+          }
+          // else{
+          //   setMessages(prev => [...prev, receivedMsg]);
+          // }
         });
       },
       onStompError: (error) => {
@@ -55,6 +90,11 @@ export default function ChatBotMain() {
 
   const sendMessage = (msg) => {
     if (client && client.connected) {
+      if (currentStream.length > 0){
+        console.log(currentStream);
+        console.log("gdgd");
+        handleStreamFinish();
+      }
       const message = {
         type: "ask",
         sender: "USER",
@@ -64,7 +104,21 @@ export default function ChatBotMain() {
         destination: "/pub/chatbot.message.123",
         body: JSON.stringify(message),
       });
+
+      // 추천 메시지 전송
+      const recommendMessage = {
+        type: "recommend",
+        sender: "USER",
+        msg: msg
+      };
+      client.publish({
+        destination: "/pub/chatbot.message.123",
+        body: JSON.stringify(recommendMessage),
+      });
+
     }
+
+    
   };
 
   // 클릭시 모달 오픈 여부를 변경하는 함수
@@ -104,6 +158,10 @@ export default function ChatBotMain() {
           messages.map((msg, index) => (
             <ChatBotBubble key={index} mode={msg.sender === "USER" ? "USER" : "BOT"} message={msg.msg} />
           ))
+        }
+
+        {
+          currentStream && <ChatBotBubble mode="BOT" message={currentStream} />
         }
 
       </div>
