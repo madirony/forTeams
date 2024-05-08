@@ -7,7 +7,7 @@ export default function GradientButton({
   grayButtonText,
   purpleButtonText,
   onGrayButtonClick,
-  onPurpleButtonClick
+  onPurpleButtonClick,
 }) {
   const wrapperSize = {
     "--wrapperWidth": w,
