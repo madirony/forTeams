@@ -18,7 +18,8 @@ const createFolder = async (folderName, userId) => {
   try {
     const response = await axios({
       method: "post",
-      url: "api/chatbot/folder",
+      // 나중에 url마지막 / 지우기
+      url: "api/chatbot/folder/",
       data: {
         folderName: folderName,
         userId: userId,
