@@ -23,10 +23,11 @@ public class WebFluxConfig implements WebFluxConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000")  // 로컬 개발 서버 주소 명시
+                .allowedOrigins("https://forteams.co.kr")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(false)  // 크리덴셜
-                .allowCredentials(true)  // 크리덴셜 허용 설정
+//                .allowCredentials(true)  // 크리덴셜 허용 설정
                 .maxAge(3600);
     }
 }
