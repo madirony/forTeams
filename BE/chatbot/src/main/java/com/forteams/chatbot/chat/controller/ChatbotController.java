@@ -21,6 +21,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,7 +29,7 @@ import java.util.List;
 public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;
     private final ChatbotService chatbotService;
-    private final RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
@@ -68,7 +69,7 @@ public class ChatbotController {
                 .retrieve()
                 .bodyToMono(String.class)  // 단일 객체 응답 처리
                 .doOnNext(data -> {
-                    ChatbotDto chatbotDto = new ChatbotDto("recommendRes", "BOT", chatUUID, data);
+                    ChatbotDto chatbotDto = new ChatbotDto("recommendRes", "BOT", chatUUID, data, -1);
                     log.info(String.valueOf(chatbotDto));
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 })
@@ -95,6 +96,8 @@ public class ChatbotController {
         MessageUser user = new MessageUser("게임의황제손준성", "123", "Keroro");
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
+        AtomicInteger sequence = new AtomicInteger(0);  // 시퀀스 번호 추가
+
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
         webClient.post()
                 .uri("/ask")
@@ -107,7 +110,9 @@ public class ChatbotController {
                 .retrieve()
                 .bodyToFlux(String.class)
                 .doOnNext(data -> {
-                    ChatbotDto chatbotDto = new ChatbotDto("stream", "BOT", chatUUID, data);
+                    ChatbotDto chatbotDto = new ChatbotDto("stream", "BOT", chatUUID, data, -1);
+                    chatbotDto.setSequence(sequence.getAndIncrement());  // 시퀀스 번호 설정
+                    log.info(String.valueOf(chatbotDto.getSequence()));
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                     sb.append(data);
                 })
