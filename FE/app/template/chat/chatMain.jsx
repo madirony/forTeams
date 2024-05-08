@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "styles/template/chatMain.module.css";
-import getDate from "util/getDate";
 import HamburgerTitle from "component/hamburgerTitle";
 import ChattingBubble from "component/chattingBubble";
 import ChatBotInput from "component/chatBotInput";

@@ -1,37 +1,51 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import styles from "styles/component/dropdownInput.module.css";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { getFolders } from "apis/save";
 
-export default function DropdownInput() {
-  //임의로 넣은 dropdown 옵션들
-  // ★ 수정필요
-  // const [options, setOptions] = useState([
-  //   { id: 1, name: "Option 1" },
-  //   { id: 2, name: "Option 2" },
-  //   { id: 3, name: "Option 3" },
-  // ]);
-  const [options, setOptions] = useState([]);
+// API import
+import { getFolders, createFolder } from "apis/save";
 
+export default function DropdownInput({ selectedOption, setSelectedOption }) {
+  // 유저 uuid 조회
+  const userId = "12345";
+
+  // 폴더 목록 조회 API
+  // const [options, setOptions] = useState([]);
   useEffect(() => {
-    const getUserId = async () => {
-      try {
-        // const userId = await AsyncStorage.getItem("userId");
-        const userId = "12345";
-        await getFolders(userId).then((response) => {
-          console.log("dropdownInput.jsx 컴포에서 api 호출", response);
-          // setOptions()
-        });
-      } catch (error) {
-        console.log("dropdownInput.jsx 컴포에서 에러 발생", error);
-      }
-    };
-    getUserId();
+    getFolders(userId).then((response) => {
+      console.log("데이터 출력", response);
+      // setFolders(response)
+    });
   }, []);
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  // 폴더 생성 API
+
+  const options = [
+    {
+      id: 4,
+      name: "폴더명",
+    },
+    {
+      id: 5,
+      name: "키키",
+    },
+    {
+      id: 7,
+      name: "키키",
+    },
+    {
+      id: 8,
+      name: "폴더명",
+    },
+    {
+      id: 9,
+      name: "폴더명",
+    },
+  ];
+
+  // const [selectedOption, setSelectedOption] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [customInput, setCustomInput] = useState("");
 
@@ -54,6 +68,9 @@ export default function DropdownInput() {
       const newOption = { id: options.length + 1, name: customInput };
       setSelectedOption(newOption);
       setIsDropdownOpen(false);
+
+      // 폴더 생성 API 보내기
+      createFolder(customInput, userId);
     }
   };
 
@@ -69,14 +86,26 @@ export default function DropdownInput() {
         >
           {selectedOption ? selectedOption.name : "폴더를 선택하세요"}
         </span>
-        <Image
-          src="icon/dropdown.svg"
-          alt="Dropdown"
-          width={20}
-          height={20}
-          onClick={toggleDropdown}
-        ></Image>
+
+        {isDropdownOpen ? (
+          <Image
+            src="icon/dropdownClose.svg"
+            alt="Dropdown"
+            width={20}
+            height={20}
+            onClick={toggleDropdown}
+          ></Image>
+        ) : (
+          <Image
+            src="icon/dropdown.svg"
+            alt="Dropdown"
+            width={20}
+            height={20}
+            onClick={toggleDropdown}
+          ></Image>
+        )}
       </div>
+
       {isDropdownOpen && ( // 드롭다운이 열려 있을 때만 목록 표시
         <ul className={styles.dropdownMenu}>
           {options.map((option) => (
@@ -88,14 +117,15 @@ export default function DropdownInput() {
               {option.name}
             </li>
           ))}
+
           {/* 사용자 직접 입력 */}
           <li className={styles.dropdownItem}>
             <input
+              className={styles.input}
               type="text"
               value={customInput}
               onChange={customInputChange}
               placeholder="폴더 생성"
-              className={styles.input}
             />
             <button onClick={onCustomInputChange}>
               <Image

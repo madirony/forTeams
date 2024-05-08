@@ -10,32 +10,15 @@
   background-color: rgba(208, 208, 208, 0.5);
 }
 
-/* 반응형 모달창-모바일 */
-@media (max-width: 360px) {
-  .modal {
-    width: 100vw;
-    /* height: 50vh; */
-    margin: 0 10%;
-  }
-}
-
-/* 반응형 모달창-데스크탑 */
-@media (min-width: 361px) {
-  .modal {
-    width: 50vw;
-    /* height: 70vh; */
-  }
-}
-
 .modal {
   background-color: #ffffff;
   border-radius: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  justify-items: center;
-  padding: 2rem 1.5rem;
+  gap: 2rem;
+  padding: 3rem;
 }
 
 .modalTitle {
@@ -52,4 +35,19 @@
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
+}
+
+/* 반응형 모달창-모바일 */
+@media (max-width: 360px) {
+  .modal {
+    width: 100vw;
+    padding: 3rem 1.5rem;
+  }
+}
+
+/* 반응형 모달창-데스크탑 */
+@media (min-width: 361px) {
+  .modal {
+    width: 50vw;
+  }
 }

@@ -19,14 +19,15 @@
   border-color: #d3d5fb;
   background-color: white;
   border-radius: 10px;
+  /* background-color: red; */
 }
 
 .dropdownItem {
-  padding-top: 0.5rem;
-  padding-left: 0.5rem;
-  padding-bottom: 0.5rem;
   display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: flex-start;
   align-items: center;
+  gap: 1rem;
 }
 
 .dropdownItem:hover {
@@ -34,13 +35,14 @@
 }
 
 .input {
-  margin-right: 3rem;
-}
-
-.selectedOptionTextGrey {
-  color: #bcbdbb;
+  width: 100%;
+  background-color: rgba(211, 213, 251, 0);
 }
 
 .selectedOptionTextBlack {
   color: black;
+}
+
+.selectedOptionTextGrey {
+  color: #bcbdbb;
 }
