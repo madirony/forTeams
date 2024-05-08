@@ -2,9 +2,13 @@ package com.forteams.chatbot.folder.dto;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
 @Data
+@NoArgsConstructor
+@Getter
+@Setter
 public class FolderRegisterDto {
     // for test
     String folderName;

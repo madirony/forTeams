@@ -3,6 +3,7 @@ package com.forteams.chatbot.chat.controller;
 import com.forteams.chatbot.chat.dto.ChatbotDto;
 import com.forteams.chatbot.chat.dto.Message;
 import com.forteams.chatbot.chat.dto.MessageRequest;
+import com.forteams.chatbot.chat.dto.MessageUser;
 import com.forteams.chatbot.chat.service.ChatbotService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,8 +37,6 @@ public class ChatbotController {
         switch(chatbotDto.getType()){
             case "recommend":
                 recommendResponse(chatbotDto.getChatUUID(), chatbotUUID);
-//                chatbotDto = chatbotService.processRecommendMessage(chatbotDto, chatbotUUID);
-//                rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 break;
 
             case "ask":
@@ -50,13 +49,14 @@ public class ChatbotController {
     private void recommendResponse(String chatUUID, String chatbotUUID) {
         List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
 
-        log.error("gd");
         if (validMessages.isEmpty()) {
             log.error("No valid messages available for recommendation");
             return;
         }
 
-        MessageRequest messageRequest = new MessageRequest(validMessages.toArray(new Message[0]));
+        //tmp User
+        MessageUser user = new MessageUser("게임의황제손준성", "123", "Keroro");
+        MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
         webClient.post()
@@ -91,7 +91,9 @@ public class ChatbotController {
             return;
         }
 
-        MessageRequest messageRequest = new MessageRequest(validMessages.toArray(new Message[0]));
+        //tmp User
+        MessageUser user = new MessageUser("게임의황제손준성", "123", "Keroro");
+        MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
         webClient.post()
