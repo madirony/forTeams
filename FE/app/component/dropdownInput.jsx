@@ -12,38 +12,40 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   const userId = "12345";
 
   // 폴더 목록 조회 API
-  // const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState([]);
   useEffect(() => {
     getFolders(userId).then((response) => {
-      console.log("데이터 출력", response);
-      // setFolders(response)
+      console.log("폴더 목록 출력", response);
+      // setOptions(response);
+      // const names = response.map((item) => item.name);
+      // setOptions(names);
     });
   }, []);
 
   // 폴더 생성 API
 
-  const options = [
-    {
-      id: 4,
-      name: "폴더명",
-    },
-    {
-      id: 5,
-      name: "키키",
-    },
-    {
-      id: 7,
-      name: "키키",
-    },
-    {
-      id: 8,
-      name: "폴더명",
-    },
-    {
-      id: 9,
-      name: "폴더명",
-    },
-  ];
+  // const options = [
+  //   {
+  //     id: 4,
+  //     name: "폴더명",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "키키",
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "키키",
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "폴더명",
+  //   },
+  //   {
+  //     id: 9,
+  //     name: "폴더명",
+  //   },
+  // ];
 
   // const [selectedOption, setSelectedOption] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

@@ -202,9 +202,15 @@ export default function ChatBotMain() {
         {currentStream && <ChatBotBubble mode="BOT" message={currentStream} />}
 
         <div>
-        {recommendationsReady && Array.isArray(recommendations) && recommendations.map((item, index) => (
-          <RecoQuestions key={index} content={item} sendMessage={sendMessage} />
-        ))}
+          {recommendationsReady &&
+            Array.isArray(recommendations) &&
+            recommendations.map((item, index) => (
+              <RecoQuestions
+                key={index}
+                content={item}
+                sendMessage={sendMessage}
+              />
+            ))}
         </div>
       </div>
 
