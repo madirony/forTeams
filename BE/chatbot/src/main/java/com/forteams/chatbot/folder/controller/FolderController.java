@@ -22,7 +22,7 @@ public class FolderController {
 
 
     @PostMapping
-    public ResponseEntity<Void> postFolder(@ModelAttribute FolderRegisterDto folderRegisterDto){
+    public ResponseEntity<Void> postFolder(@RequestBody FolderRegisterDto folderRegisterDto){
         try{
             folderService.createFolder(folderRegisterDto);
             return ResponseEntity.ok(null);
@@ -55,7 +55,7 @@ public class FolderController {
 
 
     @PutMapping
-    public ResponseEntity<Void> putFolder(@ModelAttribute FolderUpdateDto folderUpdateDto){
+    public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto){
         try{
             folderService.updateFolder(folderUpdateDto);
             return ResponseEntity.ok(null);

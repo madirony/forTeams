@@ -11,6 +11,6 @@ import lombok.Setter;
 @Setter
 public class FolderRegisterDto {
     // for test
-    String folderName;
-    String userId;
+    private String folderName;
+    private String userId;
 }
