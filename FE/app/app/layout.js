@@ -1,7 +1,7 @@
 import "styles/globals.css";
 import LocalStorage from "util/localStorage";
 import RecoilRootProvider from "util/recoilRootProvider";
-import LoginMain from "./login/loginMain";
+import LoginMain from "./login/page";
 
 export const metadata = {
   title: "forTeams",
@@ -14,15 +14,13 @@ const isLogined = true;
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <RecoilRootProvider>
-          {isLogined ? (
-            <body>{children}</body>
-          ) : (
-            <LoginMain>{children}</LoginMain>
-          )}
-        </RecoilRootProvider>
-      </body>
+      <RecoilRootProvider>
+        {isLogined ? (
+          <body>{children}</body>
+        ) : (
+          <LoginMain>{children}</LoginMain>
+        )}
+      </RecoilRootProvider>
     </html>
   );
 }

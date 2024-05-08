@@ -1,0 +1,22 @@
+.div {
+  display: flex;
+  align-items: end;
+  border-radius: 25px;
+  border-width: 2px;
+  border-color: #d3d5fb;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: white;
+}
+
+.textarea {
+  width: 100%;
+  background: transparent;
+  height: 1.5rem;
+}
+
+.imgContainer {
+  cursor: pointer;
+}

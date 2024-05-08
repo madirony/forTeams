@@ -1,0 +1,79 @@
+.menuBar {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+
+.bigLogo {
+  display: block;
+}
+
+.smallLogo {
+  display: block;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  font-family: "font4";
+}
+
+.mypageButton {
+  cursor: pointer;
+  text-align: center;
+  width: 130px;
+  padding: 0.5rem;
+  background-image: linear-gradient(
+    135deg,
+    #4aa3fd 10%,
+    #6781fe 45%,
+    #9a44ff 100%
+  );
+  border-radius: 10px;
+  font-family: "font4";
+  font-size: 14px;
+  color: white;
+  letter-spacing: 2px;
+}
+
+/* 반응형-모바일 */
+@media (max-width: 360px) {
+  .menuBar {
+    padding: 0.5rem 0.7rem;
+  }
+  .bigLogo {
+    display: none;
+  }
+  .userInfo {
+    gap: 0.5rem;
+  }
+  .userInfo p {
+    font-size: 12px;
+  }
+  .mypageButton {
+    width: 80px;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* 반응형-데스크탑 */
+@media (min-width: 361px) {
+  .menuBar {
+    padding: 0.5rem 1rem;
+  }
+  .smallLogo {
+    display: none;
+  }
+}

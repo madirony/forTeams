@@ -1,0 +1,57 @@
+.wrapper {
+  width: 100%;
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(239, 239, 239, 0.7);
+  border-radius: 40px;
+  gap: 0.5rem;
+}
+
+.hamburgerTitle {
+  width: 100%;
+}
+
+.text {
+  padding: 0 1rem;
+  word-break: keep-all;
+  word-break: keep-all;
+  font-family: "font3";
+  font-size: 13px;
+}
+
+.wordCloud {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.button {
+  border: 1px solid #d3d5fb;
+  border-radius: 20px;
+  background-color: white;
+  padding: 0.3rem 1rem;
+  font-size: 12px;
+}
+
+.button:hover {
+  background-color: rgba(211, 213, 251, 0.3);
+}
+
+/* 반응형-중간 */
+@media (max-width: 1000px) {
+  .wrapper {
+    background-color: rgba(239, 239, 239, 0);
+    padding: 2rem 0rem;
+    border-radius: 0px;
+    height: 90vh;
+  }
+  .text {
+    margin: 1.5rem 0rem;
+  }
+  .wordCloud {
+    gap: 0.8rem;
+  }
+}
