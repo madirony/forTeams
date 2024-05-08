@@ -1,7 +1,7 @@
 import styles from "styles/template/mypageMyLogs.module.css";
 import HistoryList from "component/historyList";
 import MypageMyLogsDetail from "./mypageMyLogsDetail";
-import SmallIndex from "component/smallIndex";
+import FolderIndex from "component/folderIndex";
 import { useEffect, useState } from "react";
 
 export default function MypageAllLogs({ openModalShare, openModalSave }) {
@@ -15,7 +15,7 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
 
   // 마이 로그 전체 조회 API
   // 아래 예시는 API 호출 후 삭제
-  const indexList = ["영상회의", "회의", "사용자설정", "사용자 지정 폴더"];
+  const folders = ["영상회의", "회의", "사용자설정", "사용자 지정 폴더"];
 
   const datas = [
     {
@@ -78,7 +78,7 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
         />
       ) : (
         <>
-          <SmallIndex justifyTo={"flex-start"} indexList={indexList} />
+          <FolderIndex indexes={folders} />
           {datas.map((data, idx) => (
             <HistoryList key={idx} data={data} setLogId={setLogId} />
           ))}

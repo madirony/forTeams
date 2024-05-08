@@ -6,19 +6,26 @@ import styles from "styles/template/chatBotMain.module.css";
 import ChatBotBubble from "component/chatbotBubble";
 import ThreedotDropdown from "component/threedotDropdown";
 import BigIndex from "component/bigIndex";
+import SmallIndex from "component/smallIndex";
 import ChatBotInput from "component/chatBotInput";
 import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
 import RecoQuestions from "component/recoQuestions";
 
 export default function ChatBotMain() {
-  // 챗봇 메인 - 웹소켓 연결
-
-  // 모달 오픈 여부를 저장할 변수
+  // 모달 오픈 여부를 저장할 변수 ================================
   const [showModalShare, setShowModalShare] = useState(false);
   const [showModalSave, setShowModalSave] = useState(false);
 
-  //websocket 관련
+  // 클릭시 모달 오픈 여부를 변경하는 함수 ========================
+  const openModalShare = () => {
+    setShowModalShare(!showModalShare);
+  };
+  const openModalSave = () => {
+    setShowModalSave(!showModalSave);
+  };
+
+  // websocket 연결 ============================================
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [recommendations, setRecommendations] = useState([]);
@@ -148,17 +155,24 @@ export default function ChatBotMain() {
     }
   };
 
-  // 클릭시 모달 오픈 여부를 변경하는 함수
-  const openModalShare = () => {
-    setShowModalShare(!showModalShare);
-  };
-  const openModalSave = () => {
-    setShowModalSave(!showModalSave);
+  // 분기별 index 출력하는 함수 =================================
+  const [indexes, setIndexes] = useState([]);
+
+  const getIndex = (childrenIndex) => {
+    // bigIndex에서 분기 가져오기
+    setIndexes(childrenIndex);
+    console.log("get index 받아옴", indexes);
+
+    // messages에 push하기
+    const saveIndexes = { sender: "INDEX", msg: childrenIndex };
+    setMessages((prev) => {
+      return [...prev, saveIndexes];
+    });
   };
 
   return (
     <div className={styles.wrapper}>
-      {/* 모달 띄우는 부분 */}
+      {/* >> 모달 띄우는 부분 */}
       {showModalShare && (
         <ModalShare chatbotid={999999} openModalShare={openModalShare} />
       )}
@@ -166,6 +180,7 @@ export default function ChatBotMain() {
         <ModalSave chatbotid={123456} openModalSave={openModalSave} />
       )}
 
+      {/* >> 상단 메뉴 띄우는 부분 */}
       <div className={styles.threeDot}>
         <ThreedotDropdown
           reset
@@ -175,29 +190,43 @@ export default function ChatBotMain() {
           openModalSave={openModalSave}
         />
       </div>
-
       <div className={styles.topNav}>
-        <BigIndex />
+        <BigIndex getIndex={getIndex} />
       </div>
 
+      {/* >> 챗봇 본문 띄우는 부분 */}
       <div className={styles.socket} ref={chatContainerRef}>
         {messages.map((msg, index) => (
           <ChatBotBubble
             key={index}
-            mode={msg.sender === "USER" ? "USER" : "BOT"}
+            mode={
+              msg.sender === "USER"
+                ? "USER"
+                : msg.sender === "BOT"
+                ? "BOT"
+                : "INDEX"
+            }
+            indexes={msg.msg}
             message={msg.msg}
           />
         ))}
-
         {currentStream && <ChatBotBubble mode="BOT" message={currentStream} />}
-
         <div>
-        {recommendationsReady && Array.isArray(recommendations) && recommendations.map((item, index) => (
-          <RecoQuestions key={index} content={item} sendMessage={sendMessage} />
-        ))}
+          {recommendationsReady &&
+            Array.isArray(recommendations) &&
+            recommendations.map((item, index) => (
+              <RecoQuestions
+                key={index}
+                content={item}
+                sendMessage={sendMessage}
+              />
+            ))}
         </div>
+        {/* 프론트 단에서 분기 띄우는 부분 */}
+        {/* <ChatBotBubble mode={"INDEX"} indexes={indexes} /> */}
       </div>
 
+      {/* >> 인풋 받는 부분 */}
       <div className={styles.input}>
         <ChatBotInput
           placeholder={"궁금한 내용을 질문해보세요"}

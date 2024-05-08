@@ -1,12 +1,10 @@
 .wrapper {
- display: flex;
- justify-content: flex-end; 
+  display: flex;
+  justify-content: flex-end;
 }
 
 .title {
   cursor: pointer;
   font-family: "font2";
-  font-size: 16px;
-  color: #0063D8;
+  color: #0063d8;
 }
-
