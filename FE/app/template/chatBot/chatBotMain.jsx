@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
 import styles from "styles/template/chatBotMain.module.css";
 import ChatBotBubble from "component/chatBotBubble";
@@ -9,6 +9,7 @@ import BigIndex from "component/bigIndex";
 import ChatBotInput from "component/chatBotInput";
 import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
+import RecoQuestions from "component/recoQuestions";
 
 export default function ChatBotMain() {
   // 챗봇 메인 - 웹소켓 연결
@@ -20,11 +21,24 @@ export default function ChatBotMain() {
   //websocket 관련
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [recommendations, setRecommendations] = useState([]);
+  const [recommendationsReady, setRecommendationsReady] = useState(false);
 
   const [streamId, setStreamId] = useState(null);
 
   const [currentStream, setCurrentStream] = useState(""); // 현재 스트림 메시지를 저장
 
+  const chatContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, recommendations, currentStream, recommendationsReady]); // 메시지 배열이 변경될 때마다 스크롤
 
   const handleStreamFinish = () => {
     setMessages(prev => {
@@ -54,13 +68,13 @@ export default function ChatBotMain() {
 
   useEffect(() => {
     const stompClient = new Client({
-      brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
+      brokerURL: "ws://localhost:8080/api/ws/chatbot",
       onConnect: () => {
         console.log("Connected to the WebSocket");
 
         stompClient.subscribe('/exchange/chatbot.exchange/chatbot.123', (message) => {
           const receivedMsg = JSON.parse(message.body);
-          console.log("Received message : ", receivedMsg);
+          // console.log("Received message : ", receivedMsg);
           if(receivedMsg.type === "ask"){
             setMessages(prev => [...prev, receivedMsg]);
           }
@@ -70,13 +84,24 @@ export default function ChatBotMain() {
           else if(receivedMsg.type === "streamFin"){
             // handleStreamFinish();
           }
+          else if (receivedMsg.type === "recommendRes") {
+            // 대괄호를 제거하고 결과 문자열을 쉼표로 분리하여 배열로 변환합니다.
+            const cleanedData = receivedMsg.msg.replace(/^\[|\]$/g, ''); // 대괄호 제거
+            const recommendationsArray = cleanedData.split(",").map(item => item.trim());
+            console.log("Formatted recommendations:", recommendationsArray);
+            setRecommendations(recommendationsArray);
+         }
+          else if(receivedMsg.type === "recommendFin"){
+            console.log(receivedMsg);
+            setRecommendationsReady(true);
+          }
           // else{
           //   setMessages(prev => [...prev, receivedMsg]);
           // }
         });
       },
       onStompError: (error) => {
-        console.error('STOMP Error:', error);
+        console.error("STOMP Error:", error);
       },
     });
 
@@ -90,6 +115,9 @@ export default function ChatBotMain() {
 
   const sendMessage = (msg) => {
     if (client && client.connected) {
+      setRecommendations([]);
+      setRecommendationsReady(false);
+      
       if (currentStream.length > 0){
         console.log(currentStream);
         console.log("gdgd");
@@ -98,7 +126,7 @@ export default function ChatBotMain() {
       const message = {
         type: "ask",
         sender: "USER",
-        msg: msg
+        msg: msg,
       };
       client.publish({
         destination: "/pub/chatbot.message.123",
@@ -118,7 +146,6 @@ export default function ChatBotMain() {
 
     }
 
-    
   };
 
   // 클릭시 모달 오픈 여부를 변경하는 함수
@@ -153,7 +180,7 @@ export default function ChatBotMain() {
         <BigIndex />
       </div>
 
-      <div className={styles.socket}>
+      <div className={styles.socket} ref={chatContainerRef}>
         {
           messages.map((msg, index) => (
             <ChatBotBubble key={index} mode={msg.sender === "USER" ? "USER" : "BOT"} message={msg.msg} />
@@ -164,10 +191,18 @@ export default function ChatBotMain() {
           currentStream && <ChatBotBubble mode="BOT" message={currentStream} />
         }
 
+        <div>
+        {recommendationsReady && Array.isArray(recommendations) && recommendations.map((item, index) => (
+          <RecoQuestions key={index} content={item} />
+        ))}
+        </div>
       </div>
 
       <div className={styles.input}>
-        <ChatBotInput placeholder={"궁금한 내용을 질문해보세요"} sendMessage={sendMessage} />
+        <ChatBotInput
+          placeholder={"궁금한 내용을 질문해보세요"}
+          sendMessage={sendMessage}
+        />
       </div>
     </div>
   );

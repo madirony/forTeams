@@ -4,14 +4,14 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-  gap: 0.3rem;
+  gap: 1rem;
 }
 
 .innerWrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 0.3rem;
+  gap: 1rem;
 }
 
 .button {
@@ -22,10 +22,23 @@
   justify-content: center;
   align-items: center;
   font-family: "font3";
-  font-size: 11px;
+  font-size: 12px;
   flex-wrap: wrap;
 }
 
 .button:hover {
   opacity: 0.7;
+}
+
+/* 반응형-모바일 */
+@media (max-width: 360px) {
+  .wrapper {
+    gap: 0.3rem;
+  }
+  .innerWrapper {
+    gap: 0.3rem;
+  }
+  .button {
+    font-size: 11px;
+  }
 }

@@ -4,7 +4,6 @@
   flex-direction: row;
   justify-content: center;
   gap: 5%;
-  /* background-color: yellow; */
 }
 
 .selectedTag {

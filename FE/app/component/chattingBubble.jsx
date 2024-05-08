@@ -1,15 +1,20 @@
 import styles from "styles/component/chattingBubble.module.css";
 import Image from "next/image";
+import getDate from "util/getDate";
 
-// ★ 나중에 부모 div의 크기에 맞춰 peopleChat, myChat의 width 조정하기
-export default function ChattingBubble({ uuid, user, content, createAt }) {
+export default function ChattingBubble({ uuid, user, content, createdAt }) {
+  // 채팅이 올라온 시간
+  let chatAt = getDate(createdAt);
+
+  // 로컬에서 현재 사용자 uuid 조회
   const userId = 666;
+
   if (userId === uuid) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.myName}>{user}</div>
         <div className={styles.myChatWrapper}>
-          <span className={styles.text}>{createAt}</span>
+          <span className={styles.text}>{chatAt}</span>
           <div className={`${styles.myChat} ${styles.text}`}>{content}</div>
         </div>
       </div>
@@ -20,7 +25,7 @@ export default function ChattingBubble({ uuid, user, content, createAt }) {
         <div className={styles.peopleName}>{user}</div>
         <div className={styles.peopleChatWrapper}>
           <div className={`${styles.peopleChat} ${styles.text}`}>{content}</div>
-          <span className={styles.text}>{createAt}</span>
+          <span className={styles.text}>{chatAt}</span>
           <Image
             className={styles.replyButton}
             onClick={() => {

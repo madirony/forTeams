@@ -59,19 +59,21 @@ export default function Mypage() {
           )}
 
           {/* 햄버거 메뉴 선택하는 부분 */}
-          {selectedPage === "info" && <MypageInfo />}
-          {selectedPage === "allLogs" && (
-            <MypageAllLogs
-              openModalShare={openModalShare}
-              openModalSave={openModalSave}
-            />
-          )}
-          {selectedPage === "myLogs" && (
-            <MypageMyLogs
-              openModalShare={openModalShare}
-              openModalSave={openModalSave}
-            />
-          )}
+          <div className={styles.hamburgerContent}>
+            {selectedPage === "info" && <MypageInfo />}
+            {selectedPage === "allLogs" && (
+              <MypageAllLogs
+                openModalShare={openModalShare}
+                openModalSave={openModalSave}
+              />
+            )}
+            {selectedPage === "myLogs" && (
+              <MypageMyLogs
+                openModalShare={openModalShare}
+                openModalSave={openModalSave}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
