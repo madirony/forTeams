@@ -26,7 +26,11 @@
   text-align: center;
 }
 
-.title {
+.dropdownTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
   font-family: "font4";
 }
 
