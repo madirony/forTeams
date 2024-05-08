@@ -19,6 +19,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
       // setOptions(response);
       // const names = response.map((item) => item.name);
       // setOptions(names);
+      // console.log(options);
     });
   }, []);
 
