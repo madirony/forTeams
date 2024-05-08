@@ -26,13 +26,15 @@ export default function ChatBotMain() {
 
   const [streamId, setStreamId] = useState(null);
 
+  const [streamArray, setStreamArray] = useState([]);
   const [currentStream, setCurrentStream] = useState(""); // 현재 스트림 메시지를 저장
 
   const chatContainerRef = useRef(null);
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   };
 
@@ -41,7 +43,7 @@ export default function ChatBotMain() {
   }, [messages, recommendations, currentStream, recommendationsReady]); // 메시지 배열이 변경될 때마다 스크롤
 
   const handleStreamFinish = () => {
-    setMessages(prev => {
+    setMessages((prev) => {
       const newMessage = { msg: currentStream, sender: "BOT" };
       if (prev.length === 0) {
         console.log("0dlfEo");
@@ -63,8 +65,17 @@ export default function ChatBotMain() {
         return newMessages;
       }
     });
-    setCurrentStream("");  // 스트림 내용을 추가하고 초기화
+    setStreamArray([]); // 스트림 메시지 배열 초기화
+    setCurrentStream(""); // 스트림 내용을 추가하고 초기화
   };
+
+  useEffect(() => {
+    const combinedStream = streamArray
+      .sort((a, b) => a.sequence - b.sequence) // 시퀀스 순서로 정렬
+      .map((msg) => msg.msg)
+      .join(""); // 문자열 합치기
+    setCurrentStream(combinedStream);
+  }, [streamArray]);
 
   useEffect(() => {
     const stompClient = new Client({
@@ -72,33 +83,34 @@ export default function ChatBotMain() {
       onConnect: () => {
         console.log("Connected to the WebSocket");
 
-        stompClient.subscribe('/exchange/chatbot.exchange/chatbot.123', (message) => {
-          const receivedMsg = JSON.parse(message.body);
-          // console.log("Received message : ", receivedMsg);
-          if(receivedMsg.type === "ask"){
-            setMessages(prev => [...prev, receivedMsg]);
-          }
-          else if(receivedMsg.type === "stream") {
-            setCurrentStream(prev => prev + receivedMsg.msg);
-          }
-          else if(receivedMsg.type === "streamFin"){
-            // handleStreamFinish();
-          }
-          else if (receivedMsg.type === "recommendRes") {
-            // 대괄호를 제거하고 결과 문자열을 쉼표로 분리하여 배열로 변환합니다.
-            const cleanedData = receivedMsg.msg.replace(/^\[|\]$/g, ''); // 대괄호 제거
-            const recommendationsArray = cleanedData.split(",").map(item => item.trim());
-            console.log("Formatted recommendations:", recommendationsArray);
-            setRecommendations(recommendationsArray);
-         }
-          else if(receivedMsg.type === "recommendFin"){
-            console.log(receivedMsg);
-            setRecommendationsReady(true);
-          }
-          // else{
-          //   setMessages(prev => [...prev, receivedMsg]);
-          // }
-        });
+        stompClient.subscribe(
+          "/exchange/chatbot.exchange/chatbot.123",
+          (message) => {
+            const receivedMsg = JSON.parse(message.body);
+            console.log("Received message : ", receivedMsg);
+            if (receivedMsg.type === "ask") {
+              setMessages((prev) => [...prev, receivedMsg]);
+            } else if (receivedMsg.type === "stream") {
+              setStreamArray((prev) => [...prev, receivedMsg]);
+            } else if (receivedMsg.type === "streamFin") {
+              // handleStreamFinish();
+            } else if (receivedMsg.type === "recommendRes") {
+              // 대괄호를 제거하고 결과 문자열을 쉼표로 분리하여 배열로 변환합니다.
+              const cleanedData = receivedMsg.msg.replace(/^\[|\]$/g, ""); // 대괄호 제거
+              const recommendationsArray = cleanedData
+                .split(",")
+                .map((item) => item.trim());
+              console.log("Formatted recommendations:", recommendationsArray);
+              setRecommendations(recommendationsArray);
+            } else if (receivedMsg.type === "recommendFin") {
+              console.log(receivedMsg);
+              setRecommendationsReady(true);
+            }
+            // else{
+            //   setMessages(prev => [...prev, receivedMsg]);
+            // }
+          },
+        );
       },
       onStompError: (error) => {
         console.error("STOMP Error:", error);
@@ -117,8 +129,8 @@ export default function ChatBotMain() {
     if (client && client.connected) {
       setRecommendations([]);
       setRecommendationsReady(false);
-      
-      if (currentStream.length > 0){
+
+      if (currentStream.length > 0) {
         console.log(currentStream);
         console.log("gdgd");
         handleStreamFinish();
@@ -137,15 +149,13 @@ export default function ChatBotMain() {
       const recommendMessage = {
         type: "recommend",
         sender: "USER",
-        msg: msg
+        msg: msg,
       };
       client.publish({
         destination: "/pub/chatbot.message.123",
         body: JSON.stringify(recommendMessage),
       });
-
     }
-
   };
 
   // 클릭시 모달 오픈 여부를 변경하는 함수
@@ -181,20 +191,26 @@ export default function ChatBotMain() {
       </div>
 
       <div className={styles.socket} ref={chatContainerRef}>
-        {
-          messages.map((msg, index) => (
-            <ChatBotBubble key={index} mode={msg.sender === "USER" ? "USER" : "BOT"} message={msg.msg} />
-          ))
-        }
+        {messages.map((msg, index) => (
+          <ChatBotBubble
+            key={index}
+            mode={msg.sender === "USER" ? "USER" : "BOT"}
+            message={msg.msg}
+          />
+        ))}
 
-        {
-          currentStream && <ChatBotBubble mode="BOT" message={currentStream} />
-        }
+        {currentStream && <ChatBotBubble mode="BOT" message={currentStream} />}
 
         <div>
-        {recommendationsReady && Array.isArray(recommendations) && recommendations.map((item, index) => (
-          <RecoQuestions key={index} content={item} />
-        ))}
+          {recommendationsReady &&
+            Array.isArray(recommendations) &&
+            recommendations.map((item, index) => (
+              <RecoQuestions
+                key={index}
+                content={item}
+                sendMessage={sendMessage}
+              />
+            ))}
         </div>
       </div>
 

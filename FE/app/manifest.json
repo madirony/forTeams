@@ -1,0 +1,35 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "forTeams",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "forTeams",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "id": "forTeams",
+  "description": "Business Productivity Tool for POSCO INTERNATIONAL",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "AppImages/android/android-launchericon-48-48.png",
+      "sizes": "48x48 64x64"
+    },
+    {
+      "src": "AppImages/android/android-launchericon-96-96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "AppImages/android/android-launchericon-192-192.png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "AppImages/android/android-launchericon-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
