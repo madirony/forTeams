@@ -20,13 +20,9 @@ public class FolderController {
     private final FolderService folderService;
 
 
-    @GetMapping("/test")
-    public ResponseEntity<String> getTest(){
-        return ResponseEntity.ok("키키");
-    }
 
-    @PostMapping("/")
-    public ResponseEntity<Void> postFolder(@RequestBody FolderRegisterDto folderRegisterDto){
+    @PostMapping
+    public ResponseEntity<Void> postFolder(@ModelAttribute FolderRegisterDto folderRegisterDto){
         try{
             folderService.createFolder(folderRegisterDto);
             return ResponseEntity.ok(null);
@@ -36,7 +32,7 @@ public class FolderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestBody FolderListFetchDto folderListFetchDto){
+    public ResponseEntity<List<FolderResponseDto>> getFolders(@ModelAttribute FolderListFetchDto folderListFetchDto){
         try{
             List<FolderResponseDto> list = folderService.getFolders(folderListFetchDto.getUserId());
             return ResponseEntity.ok(list);
@@ -59,7 +55,7 @@ public class FolderController {
 
 
     @PutMapping
-    public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto){
+    public ResponseEntity<Void> putFolder(@ModelAttribute FolderUpdateDto folderUpdateDto){
         try{
             folderService.updateFolder(folderUpdateDto);
             return ResponseEntity.ok(null);
