@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           = document.createElement('pwa-update'); document.body.appendChild(el);
         </script>
       </head> */}
-      <Head>
+      {/* <Head>
         <link rel="manifest" href="manifest.json" />
         <script
           type="module"
@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
         `,
           }}
         />
-      </Head>
+      </Head> */}
       <RecoilRootProvider>
         {isLogined ? (
           <body>{children}</body>
