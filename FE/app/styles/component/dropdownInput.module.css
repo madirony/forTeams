@@ -15,7 +15,6 @@
 
 .dropdownMenu {
   margin-top: 0.2rem;
-  background-color: red;
   border-width: 2px;
   border-color: #d3d5fb;
   background-color: white;
@@ -26,7 +25,7 @@
   padding-top: 0.5rem;
   padding-left: 0.5rem;
   padding-bottom: 0.5rem;
-  justify-content: center;
+  display: flex;
   align-items: center;
 }
 

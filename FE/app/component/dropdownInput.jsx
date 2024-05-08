@@ -2,16 +2,34 @@
 
 import styles from "styles/component/dropdownInput.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getFolders } from "apis/save";
 
 export default function DropdownInput() {
   //임의로 넣은 dropdown 옵션들
   // ★ 수정필요
-  const [options] = useState([
-    { id: 1, label: "Option 1" },
-    { id: 2, label: "Option 2" },
-    { id: 3, label: "Option 3" },
-  ]);
+  // const [options, setOptions] = useState([
+  //   { id: 1, name: "Option 1" },
+  //   { id: 2, name: "Option 2" },
+  //   { id: 3, name: "Option 3" },
+  // ]);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    const getUserId = async () => {
+      try {
+        // const userId = await AsyncStorage.getItem("userId");
+        const userId = "12345";
+        await getFolders(userId).then((response) => {
+          console.log("dropdownInput.jsx 컴포에서 api 호출", response);
+          // setOptions()
+        });
+      } catch (error) {
+        console.log("dropdownInput.jsx 컴포에서 에러 발생", error);
+      }
+    };
+    getUserId();
+  }, []);
 
   const [selectedOption, setSelectedOption] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -33,14 +51,14 @@ export default function DropdownInput() {
   const onCustomInputChange = () => {
     if (customInput.trim() !== "") {
       // 입력값이 비어있지 않으면 새로운 옵션으로 추가
-      const newOption = { id: options.length + 1, label: customInput };
+      const newOption = { id: options.length + 1, name: customInput };
       setSelectedOption(newOption);
       setIsDropdownOpen(false);
     }
   };
 
   return (
-    <div className="dropdown">
+    <div>
       <div className={styles.dropdownToggle}>
         <span
           className={
@@ -49,9 +67,8 @@ export default function DropdownInput() {
               : styles.selectedOptionTextGrey
           }
         >
-          {selectedOption ? selectedOption.label : "폴더를 선택하세요"}
+          {selectedOption ? selectedOption.name : "폴더를 선택하세요"}
         </span>
-        {/* {selectedOption ? selectedOption.label : "폴더를 선택하세요"} */}
         <Image
           src="icon/dropdown.svg"
           alt="Dropdown"
@@ -68,7 +85,7 @@ export default function DropdownInput() {
               onClick={() => handleOptionSelect(option)}
               className={styles.dropdownItem}
             >
-              {option.label}
+              {option.name}
             </li>
           ))}
           {/* 사용자 직접 입력 */}
