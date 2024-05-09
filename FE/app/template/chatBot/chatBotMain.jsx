@@ -87,6 +87,7 @@ export default function ChatBotMain() {
   useEffect(() => {
     const stompClient = new Client({
       brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
+      // brokerURL: "ws://localhost:8080/api/ws/chatbot",
       onConnect: () => {
         console.log("Connected to the WebSocket");
 
@@ -131,6 +132,28 @@ export default function ChatBotMain() {
       stompClient.deactivate();
     };
   }, []);
+
+  const sendIndexMessage = (msg) => {
+    if (client && client.connected) {
+      setRecommendations([]);
+      setRecommendationsReady(false);
+
+      if (currentStream.length > 0) {
+        console.log(currentStream);
+        console.log("gdgd");
+        handleStreamFinish();
+      }
+      const message = {
+        type: "ask",
+        sender: "USER",
+        msg: msg,
+      };
+      client.publish({
+        destination: "/pub/chatbot.message.123",
+        body: JSON.stringify(message),
+      });
+    }
+  };
 
   const sendMessage = (msg) => {
     if (client && client.connected) {
@@ -218,6 +241,8 @@ export default function ChatBotMain() {
             }
             indexes={msg.msg}
             message={msg.msg}
+            // ======sendIndexMessage추가======
+            sendIndexMessage={sendIndexMessage}
           />
         ))}
         {currentStream && <ChatBotBubble mode="BOT" message={currentStream} />}
