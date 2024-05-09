@@ -106,7 +106,7 @@ const findChildren = (list, targetValue) => {
 };
 
 // 재귀적 SmallIndex 컴포넌트
-export default function SmallIndex({ indexes, sendMessage }) {
+export default function SmallIndex({ indexes, sendIndexMessage }) {
   const [expandedIndexes, setExpandedIndexes] = useState({});
 
   // 인덱스를 확장/축소하는 함수
@@ -115,7 +115,7 @@ export default function SmallIndex({ indexes, sendMessage }) {
 
     if (children.length === 0) {
       // 자식이 없으면 메시지 전송
-      sendMessage(value);
+      sendIndexMessage(value);
     } else {
       // 자식이 있으면 확장 상태를 토글
       setExpandedIndexes((prev) => ({
@@ -144,7 +144,7 @@ export default function SmallIndex({ indexes, sendMessage }) {
               <div className={styles.subIndexContainer}>
                 <SmallIndex
                   indexes={findChildren(initialIndexes, index.value)}
-                  sendMessage={sendMessage}
+                  sendIndexMessage={sendIndexMessage}
                 />
               </div>
             )}
