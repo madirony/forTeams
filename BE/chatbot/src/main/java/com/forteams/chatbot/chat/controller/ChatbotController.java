@@ -14,6 +14,9 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 
@@ -26,10 +29,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
+@RequestMapping("/api/v1/chatbot")
 public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;
     private final ChatbotService chatbotService;
 //    private final RestTemplate restTemplate;
+
+    @PostMapping("/save/{userUUID}")
+    public void saveChats(@PathVariable String userUUID) {
+        chatbotService.saveToSavedChats(userUUID);
+    }
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {

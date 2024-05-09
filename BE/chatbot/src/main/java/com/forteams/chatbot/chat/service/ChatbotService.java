@@ -3,7 +3,9 @@ package com.forteams.chatbot.chat.service;
 import com.forteams.chatbot.chat.dto.ChatbotDto;
 import com.forteams.chatbot.chat.dto.Message;
 import com.forteams.chatbot.chat.entity.ChatbotLogSet;
+import com.forteams.chatbot.chat.entity.SavedChatLogSet;
 import com.forteams.chatbot.chat.repository.ChatbotRepository;
+import com.forteams.chatbot.chat.repository.SavedChatLogSetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 @Service
 public class ChatbotService {
     private final ChatbotRepository chatbotRepository;
+    private final SavedChatLogSetRepository savedChatLogSetRepository;
     private final RedisTemplate<String, Object> redisTemplate;
     private final RestTemplate restTemplate;
 
@@ -105,6 +108,23 @@ public class ChatbotService {
         Collections.reverse(filteredMessages);
 //        filteredMessages.forEach(m -> log.info("Reversed Message: {}", m.getContent()));
         return filteredMessages;
+    }
+
+    public void saveToSavedChats(String userUUID) {
+        Optional<ChatbotLogSet> optionalLogSet = chatbotRepository.findById(userUUID);
+        if (optionalLogSet.isPresent()) {
+            ChatbotLogSet logSet = optionalLogSet.get();
+
+            SavedChatLogSet savedLogSet = new SavedChatLogSet();
+            savedLogSet.setUserUUID(logSet.getUserUUID());
+            savedLogSet.setChatbotChatUUID(UUID.randomUUID().toString());
+            savedLogSet.setChatLogs(logSet.getChatLogs());
+
+            savedChatLogSetRepository.save(savedLogSet);
+
+            // 기존 로그 제거
+            chatbotRepository.deleteById(logSet.getUserUUID());
+        }
     }
 
 }

@@ -9,13 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
 @Getter
-@Document(collection = "chatLogs")
-public class ChatbotLogSet {
-    // Getters and Setters
-    @Id
+@Setter
+@Document(collection = "savedChats")
+public class SavedChatLogSet {
     private String userUUID;
+    @Id
     private String chatbotChatUUID;
     private List<ChatbotDto> chatLogs = new ArrayList<>();
 
@@ -23,4 +22,3 @@ public class ChatbotLogSet {
         this.chatLogs.add(entry);
     }
 }
-
