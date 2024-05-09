@@ -2,6 +2,7 @@ package com.forteams.chatbot.chat.service;
 
 import com.forteams.chatbot.chat.dto.ChatbotDto;
 import com.forteams.chatbot.chat.dto.Message;
+import com.forteams.chatbot.chat.dto.UserAllChatListDto;
 import com.forteams.chatbot.chat.entity.ChatbotLogSet;
 import com.forteams.chatbot.chat.entity.SavedChatLogSet;
 import com.forteams.chatbot.chat.repository.ChatbotRepository;
@@ -118,6 +119,13 @@ public class ChatbotService {
             SavedChatLogSet savedLogSet = new SavedChatLogSet();
             savedLogSet.setUserUUID(logSet.getUserUUID());
             savedLogSet.setChatbotChatUUID(UUID.randomUUID().toString());
+
+            if(!logSet.getChatLogs().isEmpty()) {
+                ChatbotDto tmpDto = logSet.getChatLogs().get(0);
+                savedLogSet.setChatTitle(tmpDto.getMsg());
+                savedLogSet.setCreatedAt(tmpDto.getCreatedAt());
+            }
+
             savedLogSet.setChatLogs(logSet.getChatLogs());
 
             savedChatLogSetRepository.save(savedLogSet);
@@ -125,6 +133,28 @@ public class ChatbotService {
             // 기존 로그 제거
             chatbotRepository.deleteById(logSet.getUserUUID());
         }
+    }
+
+    public List<UserAllChatListDto> getChatIDsByUserUUID(String userUUID) {
+        return savedChatLogSetRepository.findByUserUUID(userUUID)
+                .stream()
+                .map(savedChat -> {
+                    String chatTitle = savedChat.getChatLogs().stream()
+                            .filter(chat -> "ask".equalsIgnoreCase(chat.getType()))
+                            .findFirst()
+                            .map(chat -> chat.getMsg().length() > 100 ? chat.getMsg().substring(0, 100) + "..." : chat.getMsg())
+                            .orElse("No Title");
+                    String createdAt = savedChat.getChatLogs().stream()
+                            .findFirst()
+                            .map(chat -> chat.getCreatedAt())
+                            .orElse("N/A");
+                    return new UserAllChatListDto(savedChat.getChatbotChatUUID(), chatTitle, createdAt);
+                })
+                .collect(Collectors.toList());
+    }
+
+    public Optional<SavedChatLogSet> getChatLogByUUID(String chatbotChatUUID) {
+        return savedChatLogSetRepository.findById(chatbotChatUUID);
     }
 
 }
