@@ -28,10 +28,16 @@ export default function ChatMain() {
           createdAt="2024-04-25T15:36:24"
         />
         <ChattingBubble
-          uuid={666} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="철강영업팀 이수민"
-          content="저도 모르겠어요ㅠ"
-          createdAt="2024-05-07T09:01:24"
+          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
+          user="경영지원팀 OK준성"
+          content="forTeams에 한번 물어보세요!"
+          createdAt="2024-04-25T17:12:24"
+        />
+        <ChattingBubble
+          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
+          user="지나가던 연정흠"
+          content="와 이거 진짜 좋네요 한 번에 볼 수 있어서 편하고 여기저기 돌아다닐 필요도 없고"
+          createdAt="2024-04-25T17:12:24"
         />
       </div>
 
