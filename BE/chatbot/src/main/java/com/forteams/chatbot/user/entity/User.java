@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users2")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,6 +15,7 @@ public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(updatable = false)
     private String id;
 
 
