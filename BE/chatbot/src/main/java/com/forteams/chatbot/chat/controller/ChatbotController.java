@@ -1,22 +1,18 @@
 package com.forteams.chatbot.chat.controller;
 
-import com.forteams.chatbot.chat.dto.ChatbotDto;
-import com.forteams.chatbot.chat.dto.Message;
-import com.forteams.chatbot.chat.dto.MessageRequest;
-import com.forteams.chatbot.chat.dto.MessageUser;
+import com.forteams.chatbot.chat.dto.*;
+import com.forteams.chatbot.chat.entity.SavedChatLogSet;
 import com.forteams.chatbot.chat.service.ChatbotService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 
@@ -24,20 +20,39 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @RequiredArgsConstructor
-@Controller
+@RestController
 @RequestMapping("/api/v1/chatbot")
 public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;
     private final ChatbotService chatbotService;
 //    private final RestTemplate restTemplate;
 
-    @PostMapping("/save/{userUUID}")
-    public void saveChats(@PathVariable String userUUID) {
+    @GetMapping("/saved-chats/{userUUID}")
+    public ResponseEntity<List<UserAllChatListDto>> getSavedChatIDs(@PathVariable String userUUID) {
+        List<UserAllChatListDto> chatIDs = chatbotService.getChatIDsByUserUUID(userUUID);
+        if (chatIDs.isEmpty()) {
+            log.info("No saved chats found for userUUID: {}", userUUID);
+        }
+        return ResponseEntity.ok(chatIDs);
+    }
+
+    @GetMapping("/saved-chats/detail/{chatbotChatUUID}")
+    public ResponseEntity<SavedChatLogSet> getSavedChatDetails(@PathVariable String chatbotChatUUID) {
+        Optional<SavedChatLogSet> savedChatLogSet = chatbotService.getChatLogByUUID(chatbotChatUUID);
+        return savedChatLogSet
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<String> saveChats(@RequestBody String userUUID) {
         chatbotService.saveToSavedChats(userUUID);
+        return ResponseEntity.ok("Completed " + userUUID);
     }
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
