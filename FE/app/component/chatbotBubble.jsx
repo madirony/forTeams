@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "styles/component/chatBotBubble.module.css";
 import SmallIndex from "./smallIndex";
 
-export default function ChatBotBubble({ mode, message, indexes }) {
+export default function ChatBotBubble({ mode, message, indexes, sendMessage }) {
   if (mode === "BOT") {
     return (
       <div className={styles.wrapper}>
@@ -27,7 +27,7 @@ export default function ChatBotBubble({ mode, message, indexes }) {
       </div>
     );
   } else if (mode === "INDEX") {
-    return <SmallIndex indexes={indexes} />;
+    return <SmallIndex indexes={indexes} sendMessage={sendMessage} />;
   }
   return null;
 }

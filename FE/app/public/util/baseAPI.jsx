@@ -5,6 +5,7 @@ import axios from "axios";
 // baseURL은 서버의 기본 URL
 const instance = axios.create({
   baseURL: "https://forteams.co.kr/",
+  // baseURL: "http://localhost:8080/",
   withCredentials: true,
 });
 
