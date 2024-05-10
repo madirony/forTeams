@@ -1,7 +1,7 @@
 .container {
   display: flex; /* 요소를 수평으로 배치 */
   flex-wrap: wrap; /* 넘치는 요소는 아래줄로 넘김 */
-  justify-content: var(--justifyTo, flex-end); /* 요소를 오른쪽으로 정렬 */
+  justify-content: flex-end; /* 요소를 오른쪽으로 정렬 */
 }
 
 .bubble {
@@ -34,4 +34,7 @@
   padding-bottom: 0.25rem;
   font-family: "font3";
   display: inline-block;
+}
+.subIndexContainer {
+  /* background-color: red; */
 }

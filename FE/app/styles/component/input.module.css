@@ -5,6 +5,8 @@
 .title {
   font-family: "font4";
   margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .input {
@@ -15,4 +17,8 @@
   padding-top: 0.35rem;
   padding-bottom: 0.35rem;
   width: 100%;
+}
+
+.input::placeholder {
+  color: #bcbdbb;
 }

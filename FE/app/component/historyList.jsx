@@ -1,11 +1,12 @@
 "use client";
 
 import styles from "styles/component/historyList.module.css";
+import getDate from "util/getDate";
 import Link from "next/link";
 
 export default function HistoryList({ data, setLogId }) {
-  // date 객체 까는 로직 작성
-  // const date =
+  // datetime 객체 변환하기
+  const updateDate = getDate(data.updatedAt);
 
   // const handleClick = () => {
   //   if (router) {
@@ -22,7 +23,7 @@ export default function HistoryList({ data, setLogId }) {
   return (
     <div className={styles.listContainer} onClick={onClick}>
       <p className={styles.title}>{data.title}</p>
-      <p className={styles.date}>{data.updatedAt}</p>
+      <p className={styles.date}>{updateDate}</p>
     </div>
   );
 }
