@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/chatbot")
+@RequestMapping("/api/chatbot")
 public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;
     private final ChatbotService chatbotService;
