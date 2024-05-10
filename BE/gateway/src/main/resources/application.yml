@@ -24,7 +24,7 @@ spring:
         - id: chatbot-http
           uri: lb://CHATBOT
           predicates:
-            - Path=/api/chatbot/**
+            - Path=/api/v1/chatbot/**
 
         - id: chatbot-websocket
           uri: lb://CHATBOT
