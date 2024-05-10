@@ -1,6 +1,13 @@
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import styles from "styles/component/chatBotBubble.module.css";
 import SmallIndex from "./smallIndex";
+
+function cleanMarkdown(markdownText) {
+  // 영어, 한글 문자 뒤에 `.` 또는 `:`가 붙으면 개행 추가
+  return markdownText.replace(/([가-힣])([.:])(?!#)/g, "$1$2\n\n");
+}
 
 export default function ChatBotBubble({
   mode,
@@ -17,11 +24,16 @@ export default function ChatBotBubble({
             alt="smile icon"
             width={24}
             height={24}
-          ></Image>
+          />
           <p>Point Chat Bot</p>
         </div>
         <div className={styles.bubbleBox}>
-          <div className={styles.chatbotBubble}>{message}</div>
+          <ReactMarkdown
+            className={styles.chatbotBubble}
+            remarkPlugins={[remarkGfm]}
+          >
+            {cleanMarkdown(message)}
+          </ReactMarkdown>
         </div>
       </div>
     );
