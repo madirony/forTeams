@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: discovery
-
+#
 eureka:
   client:
     register-with-eureka: false
