@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/api/v1/openchat")
+@RequestMapping("/api/openchat")
 @CrossOrigin(origins = "http://localhost:3000")
 public class OpenChatController {
     private final RabbitTemplate rabbitTemplate;
