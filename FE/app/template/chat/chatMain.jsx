@@ -30,7 +30,8 @@ export default function ChatMain() {
 
   useEffect(() => {
     const stompClient = new Client({
-      brokerURL: "ws://localhost:8080/api/ws/openchat",
+      brokerURL: "wss://forteams.co.kr/api/ws/openchat",
+      // brokerURL: "ws://localhost:8080/api/ws/openchat",
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("openchat WebSocket에 연결되었습니다.");
@@ -53,7 +54,7 @@ export default function ChatMain() {
   }, []);
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/v1/openchat/today')
+    axios.get('https://forteams.co.kr/api/openchat/today')
       .then(response => {
         setMessages(response.data);
         scrollToBottom();
