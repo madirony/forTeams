@@ -26,12 +26,52 @@ ext {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-dependencies:3.2.5'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.20'
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	// H2 Database for local testing
+    runtimeOnly 'com.h2database:h2'
+
+	implementation 'org.postgresql:postgresql:42.5.4'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
+//	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Spring WebFlux 의존성 추가
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+	// ms
+	implementation 'com.microsoft.azure:msal4j:1.9.1' // 버전은 최신 정보에 따라 수정 필요
+	implementation group: 'com.microsoft.azure', name: 'msal4j', version: '1.0.0'
+
+	// 서블릿 의존성
+	implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+
+	implementation 'org.apache.commons:commons-lang3:3.12.0'
+
+	implementation 'org.json:json:20210307'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	// JUnit 5 (Jupiter)
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+	implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 }
 
 dependencyManagement {
