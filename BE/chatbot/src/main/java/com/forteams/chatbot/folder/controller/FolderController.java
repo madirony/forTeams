@@ -27,7 +27,7 @@ public class FolderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    // 흠
     @GetMapping
     public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestHeader("msUuid") String msUuid){
         try{
