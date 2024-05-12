@@ -1,6 +1,7 @@
 package com.forteams.openchat.chat.entity;
 
 import com.forteams.openchat.common.BaseEntity;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,6 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Document
+@Getter
 @NoArgsConstructor
 public class OpenChat implements Serializable {
     @Serial

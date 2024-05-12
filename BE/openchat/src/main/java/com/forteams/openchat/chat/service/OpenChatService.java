@@ -9,7 +9,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -21,6 +24,47 @@ import java.util.stream.Collectors;
 public class OpenChatService {
     private final OpenChatRepository openChatRepository;
     private final RedisTemplate<String, Object> redisTemplate;
+
+    public List<OpenChatDto> getAllChats() {
+        List<OpenChat> chatsFromDb = openChatRepository.findAll();
+        List<OpenChatDto> result = chatsFromDb.stream().map(this::convertToDto).collect(Collectors.toList());
+        result.addAll(getChatsFromRedis());
+        return result;
+    }
+
+    public List<OpenChatDto> getTodayChats() {
+        LocalDateTime startOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
+        LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
+        List<OpenChat> chatsFromDb = openChatRepository.findByCreatedAtBetween(String.valueOf(startOfDay), String.valueOf(endOfDay));
+        List<OpenChatDto> result = chatsFromDb.stream().map(this::convertToDto).collect(Collectors.toList());
+        result.addAll(getChatsFromRedis());
+        return result;
+    }
+
+    private List<OpenChatDto> getChatsFromRedis() {
+        List<?> rawMessages = redisTemplate.opsForList().range("chatMessages", 0, -1);
+        if (rawMessages == null) {
+            return new ArrayList<>();
+        }
+        return rawMessages.stream()
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof OpenChatDto)
+                .map(o -> (OpenChatDto) o)
+                .collect(Collectors.toList());
+    }
+
+    private OpenChatDto convertToDto(OpenChat chat) {
+        OpenChatDto dto = new OpenChatDto();
+        dto.setSenderUUID(chat.getSenderUUID());
+        dto.setMessage(chat.getMessage());
+        dto.setMessageUUID(chat.getMessageUUID());
+        dto.setReplyMsgUUID(chat.getReplyMsgUUID());
+        dto.setReplyTo(chat.getReplyTo());
+        dto.setRemoveCheck(chat.getRemoveCheck());
+        dto.setCreatedAt(chat.getCreatedAt());
+        dto.setUpdatedAt(chat.getUpdatedAt());
+        return dto;
+    }
 
     private OpenChat convertToEntity(OpenChatDto dto) {
         return new OpenChat(
@@ -48,7 +92,7 @@ public class OpenChatService {
         redisTemplate.opsForList().rightPush("chatMessages", dto);
     }
 
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 10000)
     public void saveMessagesToMongoDB() {
         List<?> rawMessages = redisTemplate.opsForList().range("chatMessages", 0, -1);
         if (rawMessages == null) {
