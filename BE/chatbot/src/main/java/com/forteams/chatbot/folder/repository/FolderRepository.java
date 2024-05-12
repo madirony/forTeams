@@ -12,6 +12,6 @@ public interface FolderRepository extends JpaRepository<Folder, Long> {
     @Query("select new com.forteams.chatbot.folder.dto.FolderResponseDto(" +
             "f.id, f.name) " +
             "from Folder f " +
-            "where f.user.id = :userId")
-    List<FolderResponseDto> findAllByUserId(@Param("userId") String userId);
+            "where f.msUuid = :userId")
+    List<FolderResponseDto> findAllByUserId(@Param("userId") String msUuid);
 }
