@@ -1,5 +1,6 @@
 
-
+jwt:
+  secret: my-secret-key
 
 server:
   port: 8000
@@ -16,20 +17,31 @@ spring:
   cloud:
     gateway:
       routes:
-        - id : auth
+        - id : ms-auth
           uri : lb://AUTH
           predicates:
-            - Path=/api/auth/**
+            - Path=/api/v1/auth/**
+
+        - id : user-auth
+          uri : lb://AUTH
+          predicates:
+            - Path=/api/v1/user/**
+          filters:
+            - jwtTokenFilter
 
         - id: chatbot-http
           uri: lb://CHATBOT
           predicates:
             - Path=/api/v1/chatbot/**
+          filters:
+            - jwtTokenFilter
 
         - id: chatbot-websocket
           uri: lb://CHATBOT
           predicates:
             - Path=/api/ws/chatbot
+          filters:
+            - jwtTokenFilter
         #            filters:
         #              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
 
@@ -37,6 +49,8 @@ spring:
           uri: lb://OPENCHAT
           predicates:
             - Path=/api/ws/openchat
+          filters:
+            - jwtTokenFilter
 
   application:
     name: gateway
