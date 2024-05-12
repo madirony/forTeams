@@ -7,7 +7,7 @@ export default function ChattingBubble({ uuid, user, content, createdAt }) {
   let chatAt = getDate(createdAt);
 
   // 로컬에서 현재 사용자 uuid 조회
-  const userId = 666;
+  const userId = "666";
 
   if (userId === uuid) {
     return (

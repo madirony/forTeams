@@ -1,12 +1,61 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
+import { Client } from "@stomp/stompjs";
 import styles from "styles/template/chatMain.module.css";
 import HamburgerTitle from "component/hamburgerTitle";
 import ChattingBubble from "component/chattingBubble";
 import ChatBotInput from "component/chatBotInput";
 
 export default function ChatMain() {
-  const userId = 666;
+  const userId = "666"; // 사용자 ID를 상수로 설정
+  const [messages, setMessages] = useState([]); // 메시지 목록을 관리할 상태
+  const [client, setClient] = useState(null); // WebSocket 클라이언트
+  const messageEndRef = useRef(null); // 메시지 리스트의 끝을 가리키는 ref
+
+  // WebSocket 연결 설정
+  useEffect(() => {
+    const stompClient = new Client({
+      brokerURL: "ws://localhost:8080/api/ws/openchat", // 서버의 WebSocket URL
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log("openchat WebSocket에 연결되었습니다.");
+        // 서버로부터 메시지를 수신하면 메시지 목록에 추가
+        stompClient.subscribe('/exchange/openchat.exchange/chat', (message) => {
+          const newMessage = JSON.parse(message.body);
+          setMessages(prev => [...prev, newMessage]);
+        });
+      },
+      onStompError: (error) => {
+        console.error("WebSocket 오류:", error);
+      },
+    });
+
+    stompClient.activate();
+    setClient(stompClient);
+
+    return () => {
+      stompClient.deactivate();
+    };
+  }, []);
+
+  // 메시지 전송 함수
+  const sendMessage = (content) => {
+    if (client && client.connected) {
+      const message = {
+        senderUUID: userId, // 메시지 전송자의 UUID
+        message: content, // 메시지 내용
+        messageUUID: "",
+        replyMsgUUID: "",
+        replyTo: "",
+        removeCheck: ""
+      };
+      client.publish({
+        destination: "/pub/openchat.message",
+        body: JSON.stringify(message),
+      });
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -15,34 +64,20 @@ export default function ChatMain() {
       </div>
 
       <div className={styles.socket}>
-        <ChattingBubble
-          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="에너지개발팀 노성은"
-          content="외부인 초대 어떻게 해요?"
-          createdAt="2024-04-25T15:36:24"
-        />
-        <ChattingBubble
-          uuid={666} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="철강영업팀 이수민"
-          content="저도 모르겠어요ㅠ"
-          createdAt="2024-04-25T15:36:24"
-        />
-        <ChattingBubble
-          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="경영지원팀 OK준성"
-          content="forTeams에 한번 물어보세요!"
-          createdAt="2024-04-25T17:12:24"
-        />
-        <ChattingBubble
-          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="지나가던 연정흠"
-          content="와 이거 진짜 좋네요 한 번에 볼 수 있어서 편하고 여기저기 돌아다닐 필요도 없고"
-          createdAt="2024-04-25T17:12:24"
-        />
+        {messages.map((msg, index) => (
+          <ChattingBubble
+            key={index}
+            uuid={msg.senderUUID}
+            // user={msg.user}
+            user="흑두루미"
+            content={msg.message}
+            createdAt={msg.createdAt}
+          />
+        ))}
       </div>
 
       <div className={styles.input}>
-        <ChatBotInput />
+        <ChatBotInput sendMessage={sendMessage} />
       </div>
     </div>
   );
