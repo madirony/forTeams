@@ -1,5 +1,6 @@
 
-
+jwt:
+  secret: ENC(tC3bBQmReVPbgqgBOSFJTAKBLV9BcGuFEYvtTKWb7BivPUev31eH/uaOWOMvxJ2fdnlDh3hRc/4=)
 
 server:
   port: 8000
@@ -16,20 +17,31 @@ spring:
   cloud:
     gateway:
       routes:
-        - id : auth
+        - id : ms-auth
           uri : lb://AUTH
           predicates:
-            - Path=/api/auth/**
+            - Path=/api/v1/auth/**
+
+        - id : user-auth
+          uri : lb://AUTH
+          predicates:
+            - Path=/api/v1/user/**
+          filters:
+            - JwtTokenFilter
 
         - id: chatbot-http
           uri: lb://CHATBOT
           predicates:
             - Path=/api/v1/chatbot/**
+          filters:
+            - JwtTokenFilter
 
         - id: chatbot-websocket
           uri: lb://CHATBOT
           predicates:
             - Path=/api/ws/chatbot
+          filters:
+            - JwtTokenFilter
         #            filters:
         #              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
 
@@ -37,6 +49,8 @@ spring:
           uri: lb://OPENCHAT
           predicates:
             - Path=/api/ws/openchat
+          filters:
+            - JwtTokenFilter
 
 
   application:

@@ -22,8 +22,9 @@ public class WebFluxConfig implements WebFluxConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")  // 로컬 개발 서버 주소 명시
-                .allowedOrigins("https://forteams.co.kr")
+//                .allowedOrigins("http://localhost:3000")  // 로컬 개발 서버 주소 명시
+//                .allowedOrigins("https://forteams.co.kr")
+                .allowedOriginPatterns("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(false)  // 크리덴셜
