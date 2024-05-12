@@ -2,25 +2,38 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
+import axios from 'axios';
 import styles from "styles/template/chatMain.module.css";
 import HamburgerTitle from "component/hamburgerTitle";
 import ChattingBubble from "component/chattingBubble";
 import ChatBotInput from "component/chatBotInput";
 
 export default function ChatMain() {
-  const userId = "666"; // 사용자 ID를 상수로 설정
-  const [messages, setMessages] = useState([]); // 메시지 목록을 관리할 상태
-  const [client, setClient] = useState(null); // WebSocket 클라이언트
-  const messageEndRef = useRef(null); // 메시지 리스트의 끝을 가리키는 ref
+  const userId = "666";
+  const [messages, setMessages] = useState([]);
+  const [client, setClient] = useState(null);
+  const [replyTo, setReplyTo] = useState(null);
+  const [replyMsgUUID, setReplyMsgUUID] = useState(null);
+  const [replyToName, setReplyToName] = useState("");
 
-  // WebSocket 연결 설정
+  const chatContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
   useEffect(() => {
     const stompClient = new Client({
-      brokerURL: "ws://localhost:8080/api/ws/openchat", // 서버의 WebSocket URL
+      brokerURL: "ws://localhost:8080/api/ws/openchat",
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("openchat WebSocket에 연결되었습니다.");
-        // 서버로부터 메시지를 수신하면 메시지 목록에 추가
         stompClient.subscribe('/exchange/openchat.exchange/chat', (message) => {
           const newMessage = JSON.parse(message.body);
           setMessages(prev => [...prev, newMessage]);
@@ -39,21 +52,44 @@ export default function ChatMain() {
     };
   }, []);
 
-  // 메시지 전송 함수
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/v1/openchat/today')
+      .then(response => {
+        setMessages(response.data);
+        scrollToBottom();
+      })
+      .catch(error => console.error('메시지 로드 실패:', error));
+  }, []);
+
+  useEffect(() => {
+    console.log(`Updated replyMsgUUID: ${replyMsgUUID}, replyTo: ${replyTo}`);
+  }, [replyMsgUUID, replyTo]);
+
+
+  const handleReply = (messageUUID, senderName) => {
+    setReplyMsgUUID(messageUUID);
+    setReplyTo(senderName);
+    setReplyToName(senderName);
+  };
+
   const sendMessage = (content) => {
     if (client && client.connected) {
       const message = {
-        senderUUID: userId, // 메시지 전송자의 UUID
-        message: content, // 메시지 내용
+        senderUUID: userId,
+        message: content,
         messageUUID: "",
-        replyMsgUUID: "",
-        replyTo: "",
+        replyMsgUUID: replyMsgUUID,
+        replyTo: replyTo,
         removeCheck: ""
       };
       client.publish({
         destination: "/pub/openchat.message",
         body: JSON.stringify(message),
       });
+      // Reset reply state after sending message
+      setReplyMsgUUID(null);
+      setReplyTo(null);
+      setReplyToName("");
     }
   };
 
@@ -63,20 +99,23 @@ export default function ChatMain() {
         <HamburgerTitle icon={"chatting.svg"} title={"실시간 채팅"} />
       </div>
 
-      <div className={styles.socket}>
+      <div className={styles.socket} ref={chatContainerRef}>
         {messages.map((msg, index) => (
           <ChattingBubble
             key={index}
             uuid={msg.senderUUID}
-            // user={msg.user}
+            msgUuid={msg.messageUUID}
             user="흑두루미"
             content={msg.message}
             createdAt={msg.createdAt}
+            handleReply={handleReply}
+            replyTo={msg.replyTo}
+            replyMsgUUID={msg.replyMsgUUID}
           />
         ))}
       </div>
-
       <div className={styles.input}>
+        {replyToName && <div className={styles.replyIndicator}>답장: {replyToName}</div>}
         <ChatBotInput sendMessage={sendMessage} />
       </div>
     </div>
