@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -25,15 +26,31 @@ public class OpenChatService {
     private final RedisTemplate<String, Object> redisTemplate;
 
     public List<OpenChatDto> getAllChats() {
-        List<OpenChat> chats = openChatRepository.findAll();
-        return chats.stream().map(this::convertToDto).collect(Collectors.toList());
+        List<OpenChat> chatsFromDb = openChatRepository.findAll();
+        List<OpenChatDto> result = chatsFromDb.stream().map(this::convertToDto).collect(Collectors.toList());
+        result.addAll(getChatsFromRedis());
+        return result;
     }
 
     public List<OpenChatDto> getTodayChats() {
         LocalDateTime startOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
         LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
-        List<OpenChat> chats = openChatRepository.findByCreatedAtBetween(String.valueOf(startOfDay), String.valueOf(endOfDay));
-        return chats.stream().map(this::convertToDto).collect(Collectors.toList());
+        List<OpenChat> chatsFromDb = openChatRepository.findByCreatedAtBetween(String.valueOf(startOfDay), String.valueOf(endOfDay));
+        List<OpenChatDto> result = chatsFromDb.stream().map(this::convertToDto).collect(Collectors.toList());
+        result.addAll(getChatsFromRedis());
+        return result;
+    }
+
+    private List<OpenChatDto> getChatsFromRedis() {
+        List<?> rawMessages = redisTemplate.opsForList().range("chatMessages", 0, -1);
+        if (rawMessages == null) {
+            return new ArrayList<>();
+        }
+        return rawMessages.stream()
+                .filter(Objects::nonNull)
+                .filter(o -> o instanceof OpenChatDto)
+                .map(o -> (OpenChatDto) o)
+                .collect(Collectors.toList());
     }
 
     private OpenChatDto convertToDto(OpenChat chat) {
