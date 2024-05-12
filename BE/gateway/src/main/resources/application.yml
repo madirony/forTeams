@@ -43,23 +43,21 @@ spring:
           predicates:
             - Path=/api/v1/chatbot/**
           filters:
-            - JwtTokenFilter
+#            - JwtTokenFilter
 
         - id: chatbot-websocket
           uri: lb://CHATBOT
           predicates:
             - Path=/api/ws/chatbot
           filters:
-            - JwtTokenFilter
-        #            filters:
-        #              - RewritePath=/api/ws/(?<segment>.*), /$\{segment}
+#            - JwtTokenFilter
 
         - id: openchat-websocket
           uri: lb://OPENCHAT
           predicates:
             - Path=/api/ws/openchat
           filters:
-            - JwtTokenFilter
+#            - JwtTokenFilter
 
   application:
     name: gateway
