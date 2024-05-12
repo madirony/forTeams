@@ -5,7 +5,7 @@ FROM openjdk:17-slim
 LABEL maintainer="qhdrnak@gmail.com"
 
 # 컨테이너가 리스닝할 포트 지정
-EXPOSE 8080
+EXPOSE 8443
 
 # 작업 디렉토리 설정
 WORKDIR /usr/app
