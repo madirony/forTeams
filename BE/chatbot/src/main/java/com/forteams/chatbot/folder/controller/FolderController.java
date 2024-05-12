@@ -27,13 +27,10 @@ public class FolderController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-    // 흠
     @GetMapping
-    public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestBody String userUUID){
-//        public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestHeader("msUuid") String msUuid){
+    public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestHeader("msUuid") String msUuid){
         try{
-//            List<FolderResponseDto> list = folderService.getFolders(msUuid);
-            List<FolderResponseDto> list = null;
+            List<FolderResponseDto> list = folderService.getFolders(msUuid);
             return ResponseEntity.ok(list);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
