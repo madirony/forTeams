@@ -24,7 +24,12 @@ spring:
         - id : ms-login
           uri : lb://AUTH
           predicates:
-            - Path=/oauth2/authorization/microsoft
+            - Path=/oauth2/authorization/microsoft/**
+
+        - id : ms-login2
+          uri : lb://AUTH
+          predicates:
+            - Path=/login/oauth2/code/microsoft/**
 
         - id : user-auth
           uri : lb://AUTH
