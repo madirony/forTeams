@@ -1,7 +1,5 @@
 package com.forteams.chatbot.folder.controller;
 
-import com.forteams.chatbot.folder.dto.FolderListFetchDto;
-import com.forteams.chatbot.folder.dto.FolderRegisterDto;
 import com.forteams.chatbot.folder.dto.FolderResponseDto;
 import com.forteams.chatbot.folder.dto.FolderUpdateDto;
 import com.forteams.chatbot.folder.service.FolderService;
@@ -20,11 +18,10 @@ public class FolderController {
     private final FolderService folderService;
 
 
-
     @PostMapping
-    public ResponseEntity<Void> postFolder(@RequestBody FolderRegisterDto folderRegisterDto){
+    public ResponseEntity<Void> postFolder(@RequestHeader("msUuid") String msUuid, @RequestBody String folderName){
         try{
-            folderService.createFolder(folderRegisterDto);
+            folderService.createFolder(msUuid,folderName);
             return ResponseEntity.ok(null);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -32,9 +29,9 @@ public class FolderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<FolderResponseDto>> getFolders(@ModelAttribute FolderListFetchDto folderListFetchDto){
+    public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestHeader("msUuid") String msUuid){
         try{
-            List<FolderResponseDto> list = folderService.getFolders(folderListFetchDto.getUserId());
+            List<FolderResponseDto> list = folderService.getFolders(msUuid);
             return ResponseEntity.ok(list);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -43,9 +40,9 @@ public class FolderController {
     }
 
     @DeleteMapping("/{folderId}")
-    public ResponseEntity<Void> deleteFolder(@PathVariable Long folderId){
+    public ResponseEntity<Void> deleteFolder(@PathVariable Long folderId, @RequestHeader("msUuid") String msUuid){
         try{
-            folderService.removeFolder(folderId);
+            folderService.removeFolder(folderId,msUuid);
             return ResponseEntity.ok(null);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -55,9 +52,9 @@ public class FolderController {
 
 
     @PutMapping
-    public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto){
+    public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto, @RequestHeader("msUuid") String msUuid){
         try{
-            folderService.updateFolder(folderUpdateDto);
+            folderService.updateFolder(folderUpdateDto, msUuid);
             return ResponseEntity.ok(null);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
