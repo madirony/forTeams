@@ -15,7 +15,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   const [options, setOptions] = useState([]);
   useEffect(() => {
     getFolders(userId).then((response) => {
-      console.log("폴더 목록 출력!", response);
+      console.log("폴더 목록 출력", response);
       setOptions(response);
     });
   }, []);
