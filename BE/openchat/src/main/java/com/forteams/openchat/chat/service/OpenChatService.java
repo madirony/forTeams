@@ -9,9 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.scheduling.annotation.Scheduled;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,9 +31,15 @@ public class OpenChatService {
     }
 
     public List<OpenChatDto> getTodayChats() {
-        LocalDateTime startOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
-        LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
-        List<OpenChat> chatsFromDb = openChatRepository.findByCreatedAtBetween(String.valueOf(startOfDay), String.valueOf(endOfDay));
+        ZoneId seoulZoneId = ZoneId.of("Asia/Seoul");
+        LocalDateTime startOfDay = LocalDate.now(seoulZoneId).atStartOfDay();
+        LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(seoulZoneId), LocalTime.MAX);
+
+        // 시간대를 고려하여 오늘의 시작과 끝을 UTC LocalDateTime으로 변환 (데이터베이스 시간대에 맞게 조정 가능)
+        LocalDateTime startOfTodayInUTC = startOfDay.atZone(seoulZoneId).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
+        LocalDateTime endOfTodayInUTC = endOfDay.atZone(seoulZoneId).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
+
+        List<OpenChat> chatsFromDb = openChatRepository.findByCreatedAtBetween(String.valueOf(startOfTodayInUTC), String.valueOf(endOfTodayInUTC));
         List<OpenChatDto> result = chatsFromDb.stream().map(this::convertToDto).collect(Collectors.toList());
         result.addAll(getChatsFromRedis());
         return result;
@@ -82,7 +86,7 @@ public class OpenChatService {
     public void processReceivedMessage(OpenChatDto dto) {
         dto.setRemoveCheck("false");
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         dto.setCreatedAt(String.valueOf(now));
         dto.setUpdatedAt(String.valueOf(now));
 
