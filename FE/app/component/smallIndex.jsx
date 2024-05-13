@@ -15,7 +15,7 @@ const initialIndexes = [
     value: "2.1 기본 설정하기",
     children: [
       { value: "2.1.1 자동 시작" },
-      { value: "2.1.2 채팅 및 활동 알림 삭제 " },
+      { value: "2.1.2 채팅 및 활동 알림 삭제" },
     ],
   },
   {

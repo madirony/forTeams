@@ -1,6 +1,11 @@
 import styles from "styles/template/mypageAllLogsDetail.module.css";
 import HistoryTitle from "component/historyTitle";
 import ThreedotDropdown from "component/threedotDropdown";
+import ChatBotBubble from "component/chatbotBubble";
+import RecoQuestions from "component/recoQuestions";
+import { useEffect, useState } from "react";
+
+import { getChatLogDetail } from "apis/allLog";
 
 export default function MypageMyLogsDetail({
   logId,
@@ -9,9 +14,20 @@ export default function MypageMyLogsDetail({
   openModalSave,
 }) {
   // 챗봇 로그 상세 조회 API
-  // 아래 예시는 API 호출 후 삭제
-  const title = "내 계정에서 조직도 확인하기";
-  const updatedAt = "2024-04-25T15:36:24";
+  const [title, setTitle] = useState("");
+  const [updatedAt, setUpdatedAt] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    getChatLogDetail(logId).then((response) => {
+      // console.log("mypageallLogs", response);
+      setTitle(response.chatTitle);
+      // console.log(response.chatLogs[0].createdAt);
+      setUpdatedAt(response.createdAt);
+      setMessages(response.chatLogs);
+    });
+  }, []);
+  console.log(messages);
 
   return (
     <div className={styles.wrapper}>
@@ -23,7 +39,24 @@ export default function MypageMyLogsDetail({
         openModalSave={openModalSave}
       />
 
-      <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
+      {/* ========================================================== */}
+      <div className={styles.socket}>
+        {messages.map((msg, index) => (
+          <ChatBotBubble
+            key={index}
+            mode={
+              msg.sender === "USER"
+                ? "USER"
+                : msg.sender === "BOT"
+                ? "BOT"
+                : "INDEX"
+            }
+            indexes={msg.msg}
+            message={msg.msg}
+          />
+        ))}
+      </div>
+      {/* =============================================================== */}
     </div>
   );
 }

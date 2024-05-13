@@ -5,7 +5,7 @@ const getFolders = async (userId) => {
   try {
     const response = await axios({
       method: "get",
-      url: "api/chatbot/folder",
+      url: `api/v1/chatbot/folder`,
       params: {
         userId: userId,
       },
@@ -13,7 +13,7 @@ const getFolders = async (userId) => {
     console.log("폴더 목록 불러오기 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더 목록 불러오기 중 에러 발생!!!", error);
+    console.log("폴더 목록 불러오기 중 에러 발생~~", error);
   }
 };
 
@@ -22,7 +22,7 @@ const createFolder = async (folderName, userId) => {
   try {
     const response = await axios({
       method: "post",
-      url: "api/chatbot/folder",
+      url: "api/v1/chatbot/folder",
       data: {
         folderName: folderName,
         userId: userId,
@@ -40,7 +40,7 @@ const changeFolderName = async (folderName, folderId) => {
   try {
     const response = await axios({
       method: "put",
-      url: "api/chatbot/folder",
+      url: "/api/chatbot/folder",
       data: {
         folderName: folderName,
         folderId: folderId,
@@ -58,7 +58,7 @@ const deleteFolder = async (folderId) => {
   try {
     const response = await axios({
       method: "delete",
-      url: `api/chatbot/folder/${folderId}`,
+      url: `/api/chatbot/folder/${folderId}`,
     });
     console.log("폴더 삭제 api요청", response.data);
     return response.data;
