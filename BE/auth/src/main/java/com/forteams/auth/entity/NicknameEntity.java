@@ -21,7 +21,7 @@ public class NicknameEntity {
     private String nickname;
 
     @Column(name = "is_assigned")
-    private boolean isAssigned;
+    private boolean isAssigned; //첫 생성 시 false로 고정
 
     public NicknameEntity (String nickname) {
         this.nickname = nickname;
