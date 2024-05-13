@@ -39,11 +39,10 @@ public class OpenChatService {
         LocalDateTime startOfTodayInUTC = startOfDay.atZone(seoulZoneId).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
         LocalDateTime endOfTodayInUTC = endOfDay.atZone(seoulZoneId).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
 
-
         log.info(String.valueOf(startOfTodayInUTC) + String.valueOf(endOfTodayInUTC));
 
         // 데이터베이스 조회
-        List<OpenChat> chatsFromDb = openChatRepository.findByCreatedAtBetween(startOfTodayInUTC, endOfTodayInUTC);
+        List<OpenChat> chatsFromDb = openChatRepository.findByCreatedAtBetween(String.valueOf(startOfTodayInUTC), String.valueOf(endOfTodayInUTC));
         List<OpenChatDto> result = chatsFromDb.stream().map(this::convertToDto).collect(Collectors.toList());
         result.addAll(getChatsFromRedis());
         return result;

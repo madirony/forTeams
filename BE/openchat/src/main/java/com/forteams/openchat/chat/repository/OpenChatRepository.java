@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface OpenChatRepository extends MongoRepository<OpenChat, String> {
     @Query("{'createdAt' : {$gte: ?0, $lte: ?1}}")
-    List<OpenChat> findByCreatedAtBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
+    List<OpenChat> findByCreatedAtBetween(String startOfDay, String endOfDay);
 }
