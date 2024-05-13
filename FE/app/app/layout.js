@@ -19,7 +19,9 @@ export default function RootLayout({ children }) {
         {isLogined ? (
           <body>{children}</body>
         ) : (
-          <LoginMain>{children}</LoginMain>
+          <body>
+            <LoginMain>{children}</LoginMain>
+          </body>
         )}
       </RecoilRootProvider>
     </html>

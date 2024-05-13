@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "styles/component/chatBotInput.module.css";
 import { useRef, useState } from "react";
 
-export default function ChatBotInput({ placeholder, sendMessage }) {
+export default function ChatBotInput({ mode, placeholder, sendMessage }) {
   const textareaRef = useRef(null);
   const [message, setMessage] = useState("");
 
@@ -23,8 +23,9 @@ export default function ChatBotInput({ placeholder, sendMessage }) {
     }
   };
 
-  const onClick = () => {
-    if (typeof sendMessage === 'function') {
+  // 엔터 버튼 클릭시 실행
+  const onClickEnter = () => {
+    if (typeof sendMessage === "function") {
       sendMessage(message);
       console.log("전송된 메시지:", message);
       setMessage("");
@@ -35,41 +36,78 @@ export default function ChatBotInput({ placeholder, sendMessage }) {
       console.error("sendMessage is not a function");
     }
   };
-  
-  // const onClick = () => {
-  //   // ★메시지 전송 로직 작성하기★
-  //   sendMessage(message);
-  //   console.log("전송된 메시지:", message);
-  //   // 메시지 전송 후 상태 초기화
-  //   setMessage("");
-  //   // textarea 높이 초기화(기본값 1.5rem)
-  //   if (textareaRef && textareaRef.current) {
-  //     textareaRef.current.style.height = "1.5rem";
-  //   }
-  // };
 
   // 입력 클릭했을 때와 동일한 기능(메시지 전송)
   const onKeyPress = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      onClick();
+      onClickEnter();
     }
   };
 
-  return (
-    <div className={styles.div}>
-      <textarea
-        ref={textareaRef}
-        className={styles.textarea}
-        placeholder={placeholder ? placeholder : "채팅을 입력해보세요"}
-        value={message}
-        onChange={onChange}
-        onKeyPress={onKeyPress}
-        style={{ minHeight: "1.5rem", maxHeight: "9rem", overflowY: "auto" }} // 최소(1줄) 및 최대 높이(6줄) 및 스크롤바 설정
-      ></textarea>
-      <div onClick={onClick} className={styles.imgContainer}>
-        <Image src="icon/enter.svg" alt="Enter" width={22} height={22}></Image>
-      </div>
-    </div>
-  );
+  // 중단 버튼 클릭시 실행
+  const onClickStop = () => {
+    console.log("스트림 중단 요청 API");
+  };
+
+  switch (mode) {
+    // mode가 stream이면 stop 버튼 출력
+    case "STREAM":
+      return (
+        <div className={styles.div}>
+          <textarea
+            ref={textareaRef}
+            className={styles.textarea}
+            placeholder={
+              placeholder ? placeholder : "중단하려면 버튼을 누르세요"
+            }
+            value={message}
+            onChange={onChange}
+            style={{
+              minHeight: "1.5rem",
+              maxHeight: "9rem",
+              overflowY: "auto",
+            }} // 최소(1줄) 및 최대 높이(6줄) 및 스크롤바 설정
+          ></textarea>
+          <div onClick={onClickStop} className={styles.imgContainer}>
+            <Image
+              src="icon/stop.svg"
+              alt="Stop"
+              width={22}
+              height={22}
+            ></Image>
+          </div>
+        </div>
+      );
+
+    // 그 외 일때는 엔터 버튼 출력
+    case "DEFAULT":
+      return (
+        <div className={styles.div}>
+          <textarea
+            ref={textareaRef}
+            className={styles.textarea}
+            placeholder={placeholder ? placeholder : "채팅을 입력해보세요"}
+            value={message}
+            onChange={onChange}
+            onKeyPress={onKeyPress}
+            style={{
+              minHeight: "1.5rem",
+              maxHeight: "9rem",
+              overflowY: "auto",
+            }} // 최소(1줄) 및 최대 높이(6줄) 및 스크롤바 설정
+          ></textarea>
+          <div onClick={onClickEnter} className={styles.imgContainer}>
+            <Image
+              src="icon/enter.svg"
+              alt="Enter"
+              width={22}
+              height={22}
+            ></Image>
+          </div>
+        </div>
+      );
+    default:
+      <></>;
+  }
 }

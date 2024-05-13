@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "styles/component/smallIndex.module.css";
 
 const initialIndexes = [
@@ -106,22 +106,31 @@ const findChildren = (list, targetValue) => {
 };
 
 // 재귀적 SmallIndex 컴포넌트
-export default function SmallIndex({ indexes, sendIndexMessage }) {
-  const [expandedIndexes, setExpandedIndexes] = useState({});
+export default function SmallIndex({
+  indexes,
+  sendIndexMessage,
+  pushToMessages,
+}) {
+  // indexes 길이만큼 state 변수 선언하기
+  const [selected, setSelected] = useState("");
 
-  // 인덱스를 확장/축소하는 함수
-  const toggleSelect = (value) => {
-    const children = findChildren(initialIndexes, value);
+  // 인덱스를 클릭했을 때 색 변경하고 재 요청 보내는 함수
+  const onClickIndex = (value) => {
+    // console.log("원래 밸류", value);
+
+    setSelected(value); // 클릭한 인덱스로 selected 변경
+    // console.log("selected 변경", selected, "끝");
+
+    const children = findChildren(initialIndexes, value); // selected의 children 검색
+    // console.log("children", children);
 
     if (children.length === 0) {
       // 자식이 없으면 메시지 전송
       sendIndexMessage(value);
+      // console.log("메시지 전송함", value);
     } else {
-      // 자식이 있으면 확장 상태를 토글
-      setExpandedIndexes((prev) => ({
-        ...prev,
-        [value]: !prev[value],
-      }));
+      // 자식이 있으면 getIndex 함수를 호출
+      pushToMessages(children);
     }
   };
 
@@ -129,25 +138,15 @@ export default function SmallIndex({ indexes, sendIndexMessage }) {
     <div className={styles.container}>
       {indexes.map((index, idx) => (
         <div key={idx}>
+          {/* SmallIndex를 띄우는 부분 */}
           <div
             className={
-              expandedIndexes[index.value]
-                ? styles.selectedBubble
-                : styles.bubble
+              index.value === selected ? styles.selectedBubble : styles.bubble
             }
-            onClick={() => toggleSelect(index.value)}
+            onClick={() => onClickIndex(index.value)}
           >
             {index.value}
           </div>
-          {expandedIndexes[index.value] &&
-            findChildren(initialIndexes, index.value).length > 0 && (
-              <div className={styles.subIndexContainer}>
-                <SmallIndex
-                  indexes={findChildren(initialIndexes, index.value)}
-                  sendIndexMessage={sendIndexMessage}
-                />
-              </div>
-            )}
         </div>
       ))}
     </div>
