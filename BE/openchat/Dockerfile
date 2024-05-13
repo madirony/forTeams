@@ -14,4 +14,4 @@ WORKDIR /usr/app
 COPY build/libs/openchat-0.0.1-SNAPSHOT.jar /usr/app/service-app.jar
 
 # 컨테이너 시작 시 실행될 Java 애플리케이션
-CMD ["java", "-jar", "service-app.jar"]
+CMD ["java","-Duser.timezone=Asia/Seoul", "-jar", "service-app.jar"]
