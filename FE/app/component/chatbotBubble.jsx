@@ -5,29 +5,27 @@ import styles from "styles/component/chatBotBubble.module.css";
 import SmallIndex from "./smallIndex";
 
 function cleanMarkdown(markdownText) {
-  return markdownText
-    // 한글 문자 뒤에 `.` 또는 `:`가 붙으면 개행 추가
-    .replace(/([가-힣])([.:])(?!#)/g, "$1$2\n\n")
-    // `#`, `##`, `###` 등의 헤더 앞에 무조건 개행 문자 추가
-    .replace(/(^|\n)?(#+\s)/g, "\n\n$2");
+  return (
+    markdownText
+      // 한글 문자 뒤에 `.` 또는 `:`가 붙으면 개행 추가
+      .replace(/([가-힣])([.:])(?!#)/g, "$1$2\n\n")
+      // `#`, `##`, `###` 등의 헤더 앞에 무조건 개행 문자 추가
+      .replace(/(^|\n)?(#+\s)/g, "\n\n$2")
+  );
 }
 
 export default function ChatBotBubble({
   mode,
-  message,
   indexes,
+  message,
   sendIndexMessage,
+  pushToMessages,
 }) {
   if (mode === "BOT") {
     return (
       <div className={styles.wrapper}>
         <div className={styles.nicknameBox}>
-          <Image
-            src="icon/smile.svg"
-            alt="smile icon"
-            width={24}
-            height={24}
-          />
+          <Image src="icon/smile.svg" alt="smile icon" width={24} height={24} />
           <p>Point Chat Bot</p>
         </div>
         <div className={styles.bubbleBox}>
@@ -47,7 +45,13 @@ export default function ChatBotBubble({
       </div>
     );
   } else if (mode === "INDEX") {
-    return <SmallIndex indexes={indexes} sendIndexMessage={sendIndexMessage} />;
+    return (
+      <SmallIndex
+        indexes={indexes}
+        sendIndexMessage={sendIndexMessage}
+        pushToMessages={pushToMessages}
+      />
+    );
   }
   return null;
 }

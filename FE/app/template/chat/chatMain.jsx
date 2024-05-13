@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
-import axios from 'axios';
+import axios from "axios";
 import styles from "styles/template/chatMain.module.css";
 import HamburgerTitle from "component/hamburgerTitle";
 import ChattingBubble from "component/chattingBubble";
@@ -20,7 +20,8 @@ export default function ChatMain() {
 
   const scrollToBottom = () => {
     if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
     }
   };
 
@@ -35,9 +36,9 @@ export default function ChatMain() {
       reconnectDelay: 5000,
       onConnect: () => {
         console.log("openchat WebSocket에 연결되었습니다.");
-        stompClient.subscribe('/exchange/openchat.exchange/chat', (message) => {
+        stompClient.subscribe("/exchange/openchat.exchange/chat", (message) => {
           const newMessage = JSON.parse(message.body);
-          setMessages(prev => [...prev, newMessage]);
+          setMessages((prev) => [...prev, newMessage]);
         });
       },
       onStompError: (error) => {
@@ -55,18 +56,18 @@ export default function ChatMain() {
 
   useEffect(() => {
     // axios.get('http://localhost:8080/api/openchat/today')
-    axios.get('https://forteams.co.kr/api/openchat/today')
-      .then(response => {
+    axios
+      .get("https://forteams.co.kr/api/openchat/today")
+      .then((response) => {
         setMessages(response.data);
         scrollToBottom();
       })
-      .catch(error => console.error('메시지 로드 실패:', error));
+      .catch((error) => console.error("메시지 로드 실패:", error));
   }, []);
 
   useEffect(() => {
     console.log(`Updated replyMsgUUID: ${replyMsgUUID}, replyTo: ${replyTo}`);
   }, [replyMsgUUID, replyTo]);
-
 
   const handleReply = (messageUUID, senderName) => {
     setReplyMsgUUID(messageUUID);
@@ -82,7 +83,7 @@ export default function ChatMain() {
         messageUUID: "",
         replyMsgUUID: replyMsgUUID,
         replyTo: replyTo,
-        removeCheck: ""
+        removeCheck: "",
       };
       client.publish({
         destination: "/pub/openchat.message",
@@ -117,8 +118,10 @@ export default function ChatMain() {
         ))}
       </div>
       <div className={styles.input}>
-        {replyToName && <div className={styles.replyIndicator}>답장: {replyToName}</div>}
-        <ChatBotInput sendMessage={sendMessage} />
+        {replyToName && (
+          <div className={styles.replyIndicator}>답장: {replyToName}</div>
+        )}
+        <ChatBotInput mode={"DEFAULT"} sendMessage={sendMessage} />
       </div>
     </div>
   );
