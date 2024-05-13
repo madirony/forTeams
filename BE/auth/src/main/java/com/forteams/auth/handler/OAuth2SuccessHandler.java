@@ -68,7 +68,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         log.debug("[OAuthLoginSuccessHandler] - LOGIN SUCCESS : {} FROM 마이크로솦", oAuth2User.getName());
 
 
-        response.sendRedirect("http://localhost:3000"); //프런트 페이지
+        response.sendRedirect("https://forteams.co.kr"); //프런트 페이지
         super.onAuthenticationSuccess(request, response, authentication);
 
     }
