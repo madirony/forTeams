@@ -44,7 +44,12 @@ spring:
             - Path=/api/v1/chatbot/**
           filters:
 #            - JwtTokenFilter
-
+        - id: openchat-http
+          uri: lb://OPENCHAT
+          predicates:
+            - Path=/api/v1/openchat/**
+          filters:
+            - JwtTokenFilter
         - id: chatbot-websocket
           uri: lb://CHATBOT
           predicates:
