@@ -49,29 +49,41 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
         String msUuid = oAuth2User.getMsUuid();
-        Map<String, String> tokens = getTokens(oAuth2User);
-        // msUuid+accessToken으로 jwt 만들기 -> cookie에 담을 예정 -----------------------------------------------
-        String accessJwt = jwtProvider.generateAccessToken(msUuid); //  =======> accessToken을 안 쓰는데 뭐냐악...
-        Cookie cookie = new Cookie("ACCESS_TOKEN", accessJwt); // 쿠키 생성
-        cookie.setHttpOnly(false); // 자바스크립트 접근 허용
-        cookie.setSecure(false); // HTTPS 통신에서만 쿠키 전송이 아니라 다 허용
-        cookie.setPath("/"); // 쿠키의 경로 설정
-        cookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 만료 시간 설정 (예: 1주일)
-        response.addCookie(cookie); // 응답에 쿠키 추가
+        if( userRepository.findByMsUserEntity_MsUuid(msUuid) != null ) {
+            Map<String, String> tokens = getTokens(oAuth2User);
+            // msUuid+accessToken으로 jwt 만들기 -> cookie에 담을 예정 -----------------------------------------------
+            String accessJwt = jwtProvider.generateAccessToken(msUuid); //  =======> accessToken을 안 쓰는데 뭐냐악...
+            Cookie cookie = new Cookie("ACCESS_TOKEN", accessJwt); // 쿠키 생성
+            cookie.setHttpOnly(false); // 자바스크립트 접근 허용
+            cookie.setSecure(false); // HTTPS 통신에서만 쿠키 전송이 아니라 다 허용
+            cookie.setPath("/"); // 쿠키의 경로 설정
+            cookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 만료 시간 설정 (예: 1주일)
+            response.addCookie(cookie); // 응답에 쿠키 추가
 
-        // <msUuid, refreshToken>로 map만들어서 redis에 넣기 -----------------------------------------------------
-        String refreshJwt = jwtProvider.generateRefreshToken(msUuid);
-        redisService.saveData(msUuid, refreshJwt, 14);
-        Map<String, Object> redisData = new HashMap<>();
+            // <msUuid, refreshToken>로 map만들어서 redis에 넣기 -----------------------------------------------------
+            String refreshJwt = jwtProvider.generateRefreshToken(msUuid);
+            redisService.saveData(msUuid, refreshJwt, 14);
+            Map<String, Object> redisData = new HashMap<>();
 //        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
-        redisData.put(msUuid, refreshJwt);
+            redisData.put(msUuid, refreshJwt);
 
-        // 로그인 성공
-        log.debug("[OAuthLoginSuccessHandler] - LOGIN SUCCESS : {} FROM 마이크로솦", oAuth2User.getName());
+            // 로그인 성공
+            log.debug("[OAuthLoginSuccessHandler] - LOGIN SUCCESS : {} FROM 마이크로솦", oAuth2User.getName());
 
-        // 추가 정보를 받을지(새로운 유저), 안 받을지(기존 유저) 분기
-        if( userRepository.findByMsUserEntity_MsUuid(msUuid) != null ) response.sendRedirect("https://forteams.co.kr"); // (기존 유저) 메인 페이지로
-        else response.sendRedirect("https://forteams.co.kr/info"); // (새로운 유저) 추가 정보 받으러 가는 페이지 (jwt들고 감)
+            // 추가 정보를 받을지(새로운 유저), 안 받을지(기존 유저) 분기
+            response.sendRedirect("https://forteams.co.kr"); // (기존 유저) 메인 페이지로
+        }
+        else {
+            Cookie cookie = new Cookie("TMP_ACCESS", msUuid);
+            cookie.setHttpOnly(false); // 자바스크립트 접근 허용
+            cookie.setSecure(false); // HTTPS 통신에서만 쿠키 전송이 아니라 다 허용
+            cookie.setPath("/"); // 쿠키의 경로 설정
+            cookie.setMaxAge(24 * 60 * 60); // 쿠키 만료 시간 설정 (예: 1일)
+            response.addCookie(cookie); // 응답에 쿠키 추가
+
+            response.sendRedirect("https://forteams.co.kr/info"); // (새로운 유저) 추가 정보 받으러 가는 페이지 (jwt들고 감)
+
+        }
 
         super.onAuthenticationSuccess(request, response, authentication);
 
