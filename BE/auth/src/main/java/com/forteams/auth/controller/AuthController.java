@@ -7,6 +7,7 @@ import com.forteams.auth.service.MsUserService;
 import com.forteams.auth.service.TokenServiceImpl;
 import com.forteams.auth.service.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -79,13 +80,13 @@ public class AuthController {
     // 정보 저장 버튼 클릭 시, 추가 정보 받기
     // 쿠키(jwt-> msUuid), 입력값: dept, redis: 닉네임 set에서 하나 가져오기
     @PostMapping("/info")
-    public ResponseEntity<String> submitAdditionalInfo(HttpServletRequest request, @RequestParam(name = "dept") String dept) {
+    public ResponseEntity<String> submitAdditionalInfo(HttpServletRequest request, HttpServletResponse response,  @RequestParam(name = "dept") String dept) {
         // 1. request -> jwt -> subject값 == msUuid 가져오기
-        String msUuid = tokenService.getMsUuidFromJwt(request);
+        String msUuid = tokenService.getMsUuidFromTmpACCESS(request);
         if (msUuid == null) return new ResponseEntity<>("JWT token not found!", HttpStatus.UNAUTHORIZED);
 
         // 2. Service로 msUuid와 dept 넘기기
-        msUserService.updateAdditionalInfo(msUuid, dept);
+        msUserService.updateAdditionalInfo(msUuid, dept, response);
         return ResponseEntity.ok("회원가입 완료 msUuid: " + msUuid + ", dept: " + dept);
         
     }
