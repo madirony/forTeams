@@ -24,16 +24,29 @@ export default function ChatBotInput({ placeholder, sendMessage }) {
   };
 
   const onClick = () => {
-    // ★메시지 전송 로직 작성하기★
-    sendMessage(message);
-    console.log("전송된 메시지:", message);
-    // 메시지 전송 후 상태 초기화
-    setMessage("");
-    // textarea 높이 초기화(기본값 1.5rem)
-    if (textareaRef && textareaRef.current) {
-      textareaRef.current.style.height = "1.5rem";
+    if (typeof sendMessage === 'function') {
+      sendMessage(message);
+      console.log("전송된 메시지:", message);
+      setMessage("");
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "1.5rem";
+      }
+    } else {
+      console.error("sendMessage is not a function");
     }
   };
+  
+  // const onClick = () => {
+  //   // ★메시지 전송 로직 작성하기★
+  //   sendMessage(message);
+  //   console.log("전송된 메시지:", message);
+  //   // 메시지 전송 후 상태 초기화
+  //   setMessage("");
+  //   // textarea 높이 초기화(기본값 1.5rem)
+  //   if (textareaRef && textareaRef.current) {
+  //     textareaRef.current.style.height = "1.5rem";
+  //   }
+  // };
 
   // 입력 클릭했을 때와 동일한 기능(메시지 전송)
   const onKeyPress = (e) => {
