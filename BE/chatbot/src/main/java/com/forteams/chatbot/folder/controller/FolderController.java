@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping( "/api/v1/chatbot/folder")
+@RequestMapping( "/api/chatbot/folder")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:3000")
 public class FolderController {
 
     private final FolderService folderService;
