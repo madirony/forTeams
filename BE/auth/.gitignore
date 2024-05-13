@@ -37,3 +37,4 @@ out/
 .vscode/
 
 **/src/test/**/JasyptConfigTest.java
+**/src/main/**/Unique_Nicknames.txt
