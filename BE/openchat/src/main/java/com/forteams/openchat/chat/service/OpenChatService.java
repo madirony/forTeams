@@ -35,6 +35,8 @@ public class OpenChatService {
         LocalDateTime startOfDay = LocalDate.now(seoulZoneId).atStartOfDay();
         LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(seoulZoneId), LocalTime.MAX);
 
+        log.info(String.valueOf(startOfDay) + String.valueOf(endOfDay));
+
         // 서울 시간대에서 UTC로 변환
         LocalDateTime startOfTodayInUTC = startOfDay.atZone(seoulZoneId).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
         LocalDateTime endOfTodayInUTC = endOfDay.atZone(seoulZoneId).withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime();
