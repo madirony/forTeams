@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/chatbot")
+@RequestMapping("/api/v1/chatbot")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;
