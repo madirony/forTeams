@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 // ★★★ 여기서 로그인 여부 확인해 분기 처리하기
-const isLogined = false;
+const isLogined = true;
 
 export default function RootLayout({ children }) {
   return (
