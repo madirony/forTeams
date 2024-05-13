@@ -54,6 +54,7 @@ export default function ChatMain() {
   }, []);
 
   useEffect(() => {
+    // axios.get('http://localhost:8080/api/openchat/today')
     axios.get('https://forteams.co.kr/api/openchat/today')
       .then(response => {
         setMessages(response.data);
