@@ -80,7 +80,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             cookie.setPath("/"); // 쿠키의 경로 설정
             cookie.setMaxAge(24 * 60 * 60); // 쿠키 만료 시간 설정 (예: 1일)
             response.addCookie(cookie); // 응답에 쿠키 추가
-
+            // test
             response.sendRedirect("https://forteams.co.kr/info"); // (새로운 유저) 추가 정보 받으러 가는 페이지 (jwt들고 감)
 
         }
