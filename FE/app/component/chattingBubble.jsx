@@ -2,12 +2,9 @@ import styles from "styles/component/chattingBubble.module.css";
 import Image from "next/image";
 import getDate from "util/getDate";
 
-export default function ChattingBubble({ uuid, user, content, createdAt }) {
-  // 채팅이 올라온 시간
+export default function ChattingBubble({ uuid, msgUuid, user, content, createdAt, handleReply, replyTo }) {
   let chatAt = getDate(createdAt);
-
-  // 로컬에서 현재 사용자 uuid 조회
-  const userId = 666;
+  const userId = "666";
 
   if (userId === uuid) {
     return (
@@ -15,7 +12,7 @@ export default function ChattingBubble({ uuid, user, content, createdAt }) {
         <div className={styles.myName}>{user}</div>
         <div className={styles.myChatWrapper}>
           <span className={styles.text}>{chatAt}</span>
-          <div className={`${styles.myChat} ${styles.text}`}>{content}</div>
+          <div className={`${styles.myChat} ${styles.text}`}>{replyTo && <div className={styles.text}>답장: {replyTo}</div>}{content}</div>
         </div>
       </div>
     );
@@ -24,13 +21,11 @@ export default function ChattingBubble({ uuid, user, content, createdAt }) {
       <div className={styles.wrapper}>
         <div className={styles.peopleName}>{user}</div>
         <div className={styles.peopleChatWrapper}>
-          <div className={`${styles.peopleChat} ${styles.text}`}>{content}</div>
+          <div className={`${styles.peopleChat} ${styles.text}`}>{replyTo && <div className={styles.text}>답장: {replyTo}</div>}{content}</div>
           <span className={styles.text}>{chatAt}</span>
           <Image
             className={styles.replyButton}
-            onClick={() => {
-              console.log("리플라이 버튼 클릭");
-            }}
+            onClick={() => handleReply(msgUuid, user)}
             src="icon/chattingReply.svg"
             alt="chatting reply icon"
             width={12}

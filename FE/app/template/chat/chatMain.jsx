@@ -1,12 +1,99 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
+import { Client } from "@stomp/stompjs";
+import axios from 'axios';
 import styles from "styles/template/chatMain.module.css";
 import HamburgerTitle from "component/hamburgerTitle";
 import ChattingBubble from "component/chattingBubble";
 import ChatBotInput from "component/chatBotInput";
 
 export default function ChatMain() {
-  const userId = 666;
+  const userId = "666";
+  const [messages, setMessages] = useState([]);
+  const [client, setClient] = useState(null);
+  const [replyTo, setReplyTo] = useState(null);
+  const [replyMsgUUID, setReplyMsgUUID] = useState(null);
+  const [replyToName, setReplyToName] = useState("");
+
+  const chatContainerRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    const stompClient = new Client({
+      brokerURL: "wss://forteams.co.kr/api/ws/openchat",
+      // brokerURL: "ws://localhost:8080/api/ws/openchat",
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log("openchat WebSocket에 연결되었습니다.");
+        stompClient.subscribe('/exchange/openchat.exchange/chat', (message) => {
+          const newMessage = JSON.parse(message.body);
+          setMessages(prev => [...prev, newMessage]);
+        });
+      },
+      onStompError: (error) => {
+        console.error("WebSocket 오류:", error);
+      },
+    });
+
+    stompClient.activate();
+    setClient(stompClient);
+
+    return () => {
+      stompClient.deactivate();
+    };
+  }, []);
+
+  useEffect(() => {
+    // axios.get('http://localhost:8080/api/openchat/today')
+    axios.get('https://forteams.co.kr/api/openchat/today')
+      .then(response => {
+        setMessages(response.data);
+        scrollToBottom();
+      })
+      .catch(error => console.error('메시지 로드 실패:', error));
+  }, []);
+
+  useEffect(() => {
+    console.log(`Updated replyMsgUUID: ${replyMsgUUID}, replyTo: ${replyTo}`);
+  }, [replyMsgUUID, replyTo]);
+
+
+  const handleReply = (messageUUID, senderName) => {
+    setReplyMsgUUID(messageUUID);
+    setReplyTo(senderName);
+    setReplyToName(senderName);
+  };
+
+  const sendMessage = (content) => {
+    if (client && client.connected) {
+      const message = {
+        senderUUID: userId,
+        message: content,
+        messageUUID: "",
+        replyMsgUUID: replyMsgUUID,
+        replyTo: replyTo,
+        removeCheck: ""
+      };
+      client.publish({
+        destination: "/pub/openchat.message",
+        body: JSON.stringify(message),
+      });
+      // Reset reply state after sending message
+      setReplyMsgUUID(null);
+      setReplyTo(null);
+      setReplyToName("");
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -14,35 +101,24 @@ export default function ChatMain() {
         <HamburgerTitle icon={"chatting.svg"} title={"실시간 채팅"} />
       </div>
 
-      <div className={styles.socket}>
-        <ChattingBubble
-          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="에너지개발팀 노성은"
-          content="외부인 초대 어떻게 해요?"
-          createdAt="2024-04-25T15:36:24"
-        />
-        <ChattingBubble
-          uuid={666} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="철강영업팀 이수민"
-          content="저도 모르겠어요ㅠ"
-          createdAt="2024-04-25T15:36:24"
-        />
-        <ChattingBubble
-          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="경영지원팀 OK준성"
-          content="forTeams에 한번 물어보세요!"
-          createdAt="2024-04-25T17:12:24"
-        />
-        <ChattingBubble
-          uuid={123} // 예시로 uuid, user, content, createdAt 값을 전달
-          user="지나가던 연정흠"
-          content="와 이거 진짜 좋네요 한 번에 볼 수 있어서 편하고 여기저기 돌아다닐 필요도 없고"
-          createdAt="2024-04-25T17:12:24"
-        />
+      <div className={styles.socket} ref={chatContainerRef}>
+        {messages.map((msg, index) => (
+          <ChattingBubble
+            key={index}
+            uuid={msg.senderUUID}
+            msgUuid={msg.messageUUID}
+            user="흑두루미"
+            content={msg.message}
+            createdAt={msg.createdAt}
+            handleReply={handleReply}
+            replyTo={msg.replyTo}
+            replyMsgUUID={msg.replyMsgUUID}
+          />
+        ))}
       </div>
-
       <div className={styles.input}>
-        <ChatBotInput />
+        {replyToName && <div className={styles.replyIndicator}>답장: {replyToName}</div>}
+        <ChatBotInput sendMessage={sendMessage} />
       </div>
     </div>
   );
