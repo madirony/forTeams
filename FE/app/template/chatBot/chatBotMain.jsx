@@ -86,8 +86,8 @@ export default function ChatBotMain() {
 
   useEffect(() => {
     const stompClient = new Client({
-      // brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
-      brokerURL: "ws://localhost:8080/api/ws/chatbot",
+      brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
+      // brokerURL: "ws://localhost:8080/api/ws/chatbot",
       onConnect: () => {
         console.log("Connected to the WebSocket");
 
