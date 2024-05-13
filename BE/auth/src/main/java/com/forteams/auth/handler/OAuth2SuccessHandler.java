@@ -4,6 +4,7 @@ import com.forteams.auth.entity.CustomOAuth2User;
 import com.forteams.auth.entity.MsUserEntity;
 import com.forteams.auth.entity.UserEntity;
 import com.forteams.auth.provider.JwtProvider;
+import com.forteams.auth.repository.UserRepository;
 import com.forteams.auth.service.CustomOAuth2UserServiceImpl;
 import com.forteams.auth.service.redis.RedisService;
 import jakarta.servlet.ServletException;
@@ -40,6 +41,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     // Redis에서 CustomOAuth2User를 저장하기 위한 service
     private final RedisService redisService;
     private final CustomOAuth2UserServiceImpl customOAuth2UserService;
+    private final UserRepository userRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -67,8 +69,10 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // 로그인 성공
         log.debug("[OAuthLoginSuccessHandler] - LOGIN SUCCESS : {} FROM 마이크로솦", oAuth2User.getName());
 
+        // 추가 정보를 받을지(새로운 유저), 안 받을지(기존 유저) 분기
+        if( userRepository.findByMsUserEntity_MsUuid(msUuid) != null ) response.sendRedirect("https://forteams.co.kr"); // (기존 유저) 메인 페이지로
+        else response.sendRedirect("https://forteams.co.kr/info"); // (새로운 유저) 추가 정보 받으러 가는 페이지 (jwt들고 감)
 
-        response.sendRedirect("https://forteams.co.kr"); //프런트 페이지
         super.onAuthenticationSuccess(request, response, authentication);
 
     }

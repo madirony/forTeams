@@ -45,10 +45,9 @@ public class MsUserServiceImpl implements MsUserService {
             newUserEntity.setMsUserEntity(msUserEntity);
             newUserEntity.setUserRole("ROLE_USER");
             newUserEntity.setUserDept(userDept);
-            newUserEntity.setUserNickname(nicknameService.assignNickname());
+            newUserEntity.setUserNickname(nicknameService.assignNickname()); //redis에서 꺼내오기
 
-            UserEntity savedUserEntity = userRepository.save(newUserEntity);
-            savedUserEntity.setMsUserEntity(msUserEntity);
+            userRepository.save(newUserEntity);
         }
     }
 }

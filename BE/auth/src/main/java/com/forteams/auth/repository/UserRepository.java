@@ -12,10 +12,4 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByMsUserEntity_MsUuid(String msUuid);
 
-//    UserEntity findByMsUuid(String msUuid);
-
-//    @Query("SELECT u " +
-//            "FROM UserEntity u" +
-//            " WHERE u.msUserEntity.msPk = :msPk")
-//    Optional<UserEntity> findByMsPk(@Param("msPk") Long msPk);
 }
