@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 // ★★★ 여기서 로그인 여부 확인해 분기 처리하기
-const isLogined = true;
+const isLogined = false;
 
 export default function RootLayout({ children }) {
   return (
@@ -39,7 +39,9 @@ export default function RootLayout({ children }) {
         {isLogined ? (
           <body>{children}</body>
         ) : (
-          <LoginMain>{children}</LoginMain>
+          <body>
+            <LoginMain>{children}</LoginMain>
+          </body>
         )}
       </RecoilRootProvider>
     </html>

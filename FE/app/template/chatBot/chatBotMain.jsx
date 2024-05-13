@@ -53,22 +53,22 @@ export default function ChatBotMain() {
     setMessages((prev) => {
       const newMessage = { msg: currentStream, sender: "BOT" };
       if (prev.length === 0) {
-        console.log("0dlfEo");
-        console.log(newMessage);
+        // console.log("0dlfEo");
+        // console.log(newMessage);
         return [newMessage];
       } else if (prev.length === 1) {
-        console.log("1dlfEO");
-        console.log(newMessage);
+        // console.log("1dlfEO");
+        // console.log(newMessage);
         return [...prev, newMessage];
       } else {
-        console.log("2dlfEo");
+        // console.log("2dlfEo");
         // 마지막에서 두 번째 위치에 새 메시지 삽입
         let newMessages = [...prev];
-        console.log(newMessages);
-        console.log("Gdgd");
+        // console.log(newMessages);
+        // console.log("Gdgd");
         // newMessages.pop();
         newMessages.push(newMessage);
-        console.log(newMessages);
+        // console.log(newMessages);
         return newMessages;
       }
     });
@@ -96,27 +96,31 @@ export default function ChatBotMain() {
           (message) => {
             const receivedMsg = JSON.parse(message.body);
             console.log("Received message : ", receivedMsg);
+
             if (receivedMsg.type === "ask") {
               setMessages((prev) => [...prev, receivedMsg]);
+              setInputMode("DEFAULT");
             } else if (receivedMsg.type === "stream") {
               setStreamArray((prev) => [...prev, receivedMsg]);
+              setInputMode("STREAM");
             } else if (receivedMsg.type === "streamFin") {
+              setInputMode("DEFAULT");
+
               // handleStreamFinish();
             } else if (receivedMsg.type === "recommendRes") {
-              // 대괄호를 제거하고 결과 문자열을 쉼표로 분리하여 배열로 변환합니다.
+              // 대괄호를 제거하고 결과 문자열을 쉼표로 분리하여 배열로 변환
               const cleanedData = receivedMsg.msg.replace(/^\[|\]$/g, ""); // 대괄호 제거
               const recommendationsArray = cleanedData
                 .split(",")
                 .map((item) => item.trim());
               console.log("Formatted recommendations:", recommendationsArray);
               setRecommendations(recommendationsArray);
+              setInputMode("DEFAULT");
             } else if (receivedMsg.type === "recommendFin") {
               console.log(receivedMsg);
               setRecommendationsReady(true);
+              setInputMode("DEFAULT");
             }
-            // else{
-            //   setMessages(prev => [...prev, receivedMsg]);
-            // }
           },
         );
       },
@@ -134,13 +138,13 @@ export default function ChatBotMain() {
   }, []);
 
   const sendIndexMessage = (msg) => {
+    // children이 없을 때 소켓으로 요청 보내는 함수
     if (client && client.connected) {
       setRecommendations([]);
       setRecommendationsReady(false);
 
       if (currentStream.length > 0) {
-        console.log(currentStream);
-        console.log("gdgd");
+        // console.log("chatBotMain: sendIndexMsg", currentStream);
         handleStreamFinish();
       }
       const message = {
@@ -161,8 +165,8 @@ export default function ChatBotMain() {
       setRecommendationsReady(false);
 
       if (currentStream.length > 0) {
-        console.log(currentStream);
-        console.log("gdgd");
+        // console.log(currentStream);
+        // console.log("gdgd");
         handleStreamFinish();
       }
       const message = {
@@ -188,13 +192,13 @@ export default function ChatBotMain() {
     }
   };
 
-  // 분기별 index 출력하는 함수 =================================
+  // children 받아와서 messages에 push하는 함수 ==================
   const [indexes, setIndexes] = useState([]);
 
-  const getIndex = (childrenIndex) => {
+  const pushToMessages = (childrenIndex) => {
     // bigIndex에서 분기 가져오기
     setIndexes(childrenIndex);
-    console.log("get index 받아옴", indexes);
+    // console.log("chatBotMain.jsx : get index 받아옴", indexes);
 
     // messages에 push하기
     const saveIndexes = { sender: "INDEX", msg: childrenIndex };
@@ -202,6 +206,9 @@ export default function ChatBotMain() {
       return [...prev, saveIndexes];
     });
   };
+
+  // 스트림 상태에 따라 mode를 변경하는 변수 ======================
+  const [inputMode, setInputMode] = useState("DEFAULT");
 
   return (
     <div className={styles.wrapper}>
@@ -212,7 +219,6 @@ export default function ChatBotMain() {
       {showModalSave && (
         <ModalSave chatbotid={123456} openModalSave={openModalSave} />
       )}
-
       {/* >> 상단 메뉴 띄우는 부분 */}
       <div className={styles.threeDot}>
         <ThreedotDropdown
@@ -224,9 +230,8 @@ export default function ChatBotMain() {
         />
       </div>
       <div className={styles.topNav}>
-        <BigIndex getIndex={getIndex} />
+        <BigIndex pushToMessages={pushToMessages} />
       </div>
-
       {/* >> 챗봇 본문 띄우는 부분 */}
       <div className={styles.socket} ref={chatContainerRef}>
         {messages.map((msg, index) => (
@@ -241,8 +246,9 @@ export default function ChatBotMain() {
             }
             indexes={msg.msg}
             message={msg.msg}
-            // ======sendIndexMessage추가======
+            // ==== sendIndexMessage, pushToMessages 추가 ====
             sendIndexMessage={sendIndexMessage}
+            pushToMessages={pushToMessages}
           />
         ))}
         {currentStream && <ChatBotBubble mode="BOT" message={currentStream} />}
@@ -257,14 +263,13 @@ export default function ChatBotMain() {
               />
             ))}
         </div>
-        {/* 프론트 단에서 분기 띄우는 부분 */}
-        {/* <ChatBotBubble mode={"INDEX"} indexes={indexes} /> */}
       </div>
-
       {/* >> 인풋 받는 부분 */}
+      {/* Received message type이 "stream" 이면 중지버튼 출력 */}
       <div className={styles.input}>
         <ChatBotInput
-          placeholder={"궁금한 내용을 질문해보세요"}
+          // mode={"STREAM"}
+          mode={inputMode}
           sendMessage={sendMessage}
         />
       </div>
