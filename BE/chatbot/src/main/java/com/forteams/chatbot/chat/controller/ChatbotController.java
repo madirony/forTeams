@@ -58,25 +58,30 @@ public class ChatbotController {
     }
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
-    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID,
-                            @RequestHeader("msUuid") String msUuid,
-                            @RequestHeader("userNickname") String userNickname,
-                            @RequestHeader("department") String department) {
+    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID
+//            ,
+//                            @RequestHeader("msUuid") String msUuid,
+//                            @RequestHeader("userNickname") String userNickname,
+//                            @RequestHeader("department") String department
+    ) {
         log.info("message Received");
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
         switch(chatbotDto.getType()){
             case "recommend":
-                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID, msUuid, userNickname, department);
+                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID);
+//                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID, msUuid, userNickname, department);
                 break;
 
             case "ask":
                 rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
-                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder(), msUuid, userNickname, department);
+                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder());
+//                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder(), msUuid, userNickname, department);
                 break;
         }
     }
 
-    private void recommendResponse(String chatUUID, String chatbotUUID, String msUuid, String userNickname, String department) {
+    private void recommendResponse(String chatUUID, String chatbotUUID) {
+//    private void recommendResponse(String chatUUID, String chatbotUUID, String msUuid, String userNickname, String department) {
         List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
 
         if (validMessages.isEmpty()) {
@@ -85,7 +90,8 @@ public class ChatbotController {
         }
 
         //tmp User
-        MessageUser user = new MessageUser(userNickname, msUuid, department);
+        MessageUser user = new MessageUser("손준성", "123", "A");
+//        MessageUser user = new MessageUser(userNickname, msUuid, department);
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
@@ -113,7 +119,8 @@ public class ChatbotController {
                 );
     }
 
-    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb, String msUuid, String userNickname, String department) {
+    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb) {
+//    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb, String msUuid, String userNickname, String department) {
         List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
 
         if (validMessages.isEmpty()) {
@@ -122,7 +129,8 @@ public class ChatbotController {
         }
 
         //tmp User
-        MessageUser user = new MessageUser(userNickname, msUuid, department);
+        MessageUser user = new MessageUser("손준성", "123", "A");
+//        MessageUser user = new MessageUser(userNickname, msUuid, department);
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         AtomicInteger sequence = new AtomicInteger(0);  // 시퀀스 번호 추가
