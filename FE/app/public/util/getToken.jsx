@@ -35,13 +35,13 @@ const getCookies = () => {
 // };
 
 const GetIsLogined = () => {
-  console.log("get is logined 들어오긴 함 :", isLogined);
   const [isLogined, setIsLogined] = useState(false);
 
   const cookieObj = getCookies();
   {
-    cookieObj.sub ? setIsLogined(true) : null;
+    cookieObj.ACCESS_TOKEN ? setIsLogined(true) : null;
   }
+  console.log("get is logined 들어오긴 함 :", isLogined);
   return isLogined;
 };
 
