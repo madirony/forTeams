@@ -1,5 +1,7 @@
 package com.forteams.chatbot.folder.controller;
 
+import com.forteams.chatbot.folder.dto.CategorizedChatbotRegisterDto;
+import com.forteams.chatbot.folder.dto.CategorizedChatbotResponseDto;
 import com.forteams.chatbot.folder.dto.FolderResponseDto;
 import com.forteams.chatbot.folder.dto.FolderUpdateDto;
 import com.forteams.chatbot.folder.service.FolderService;
@@ -17,7 +19,6 @@ import java.util.List;
 public class FolderController {
 
     private final FolderService folderService;
-
 
     @PostMapping
     public ResponseEntity<Void> postFolder(@RequestHeader("msUuid") String msUuid, @RequestBody String folderName){
@@ -59,5 +60,26 @@ public class FolderController {
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PostMapping("/categorized-chatbot")
+    public ResponseEntity<?> postChatbotInFolder(@RequestBody CategorizedChatbotRegisterDto registerDto){
+        try{
+            folderService.createCategorizedChatbot(registerDto);
+            return ResponseEntity.ok(null);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/categorized-catbot")
+    public ResponseEntity<List<CategorizedChatbotResponseDto>> getCategorizedChatbotsByFolderId(@RequestBody Long folderId){
+        try{
+            List<CategorizedChatbotResponseDto> list = folderService.getCategorizedChatbotsByFolderId(folderId);
+            return ResponseEntity.ok(list);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 }
