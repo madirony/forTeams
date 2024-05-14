@@ -2,10 +2,7 @@ package com.forteams.auth.controller;
 
 import com.forteams.auth.entity.MsUserEntity;
 import com.forteams.auth.entity.UserEntity;
-import com.forteams.auth.service.CustomOAuth2UserServiceImpl;
-import com.forteams.auth.service.MsUserService;
-import com.forteams.auth.service.TokenServiceImpl;
-import com.forteams.auth.service.UserServiceImpl;
+import com.forteams.auth.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
@@ -31,23 +28,7 @@ public class AuthController {
     private final MsUserService msUserService;
     private final UserServiceImpl userService;
     private final TokenServiceImpl tokenService;
-
-//    Environment env;
-//
-//    public AuthController(Environment env){
-//        this.env = env;
-//    }
-//
-//    @GetMapping("/login")
-//    public String getLoginPage(HttpServletRequest request){
-////        public ResponseEntity<String> getLoginPage(){
-//        System.out.println("히히");
-//        log.info("server port :{}",request.getServerPort());
-////        return ResponseEntity.ok("Login Page!");
-//
-//        // 할당되어진 정보 얻어오기
-//        return String.format("PORT : %s",env.getProperty("local.server.port"));
-//    }
+    private final AuthService authService;
 
     @GetMapping("/welcome")
     public ResponseEntity<?> welcomePage(OAuth2AuthenticationToken authentication) {
@@ -88,6 +69,14 @@ public class AuthController {
         // 2. Service로 msUuid와 dept 넘기기
         msUserService.updateAdditionalInfo(msUuid, dept, response);
         return ResponseEntity.ok("회원가입 완료 msUuid: " + msUuid + ", dept: " + dept);
-        
+    }
+
+    // 로그아웃 요청을 처리하는 메서드
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+        // 1. 쿠키에서 JWT 토큰 제거 + 2. 세션 무효화 서비스에서 처리
+        authService.logout(request, response);
+        // 3. 로그아웃 성공 메시지 반환
+        return ResponseEntity.ok("로그아웃 완료!!!");
     }
 }
