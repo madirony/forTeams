@@ -95,7 +95,7 @@ export default function ChatBotMain() {
           "/exchange/chatbot.exchange/chatbot.123",
           (message) => {
             const receivedMsg = JSON.parse(message.body);
-            console.log("Received message : ", receivedMsg);
+            // console.log("Received message : ", receivedMsg);
 
             if (receivedMsg.type === "ask") {
               setMessages((prev) => [...prev, receivedMsg]);
@@ -109,10 +109,7 @@ export default function ChatBotMain() {
               // handleStreamFinish();
             } else if (receivedMsg.type === "recommendRes") {
               // 대괄호를 제거하고 결과 문자열을 쉼표로 분리하여 배열로 변환
-              const cleanedData = receivedMsg.msg.replace(/^\[|\]$/g, ""); // 대괄호 제거
-              const recommendationsArray = cleanedData
-                .split(",")
-                .map((item) => item.trim());
+              const recommendationsArray = JSON.parse(receivedMsg.msg);
               console.log("Formatted recommendations:", recommendationsArray);
               setRecommendations(recommendationsArray);
               setInputMode("DEFAULT");
