@@ -38,7 +38,7 @@
 }
 
 /* 반응형-중간 */
-@media (max-width: 1000px) {
+@media (max-width: 500px) {
   .wrapper {
     padding-top: 1rem;
     padding-bottom: 2rem;

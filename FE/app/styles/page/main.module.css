@@ -39,7 +39,7 @@
 }
 
 /* 반응형-중간 */
-@media (max-width: 1000px) {
+@media (max-width: 500px) {
   .swiperPage {
     display: block;
     padding: 50px 10px 20px;
@@ -47,7 +47,7 @@
 }
 
 /* 반응형-데스크탑 */
-@media (min-width: 1000px) {
+@media (min-width: 500px) {
   .largePage {
     padding: 60px 30px 30px;
   }
