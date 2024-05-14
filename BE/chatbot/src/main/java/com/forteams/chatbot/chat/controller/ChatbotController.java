@@ -85,8 +85,17 @@ public class ChatbotController {
 //                            @RequestHeader("msUuid") String msUuid,
 //                            @RequestHeader("userNickname") String userNickname,
 //                            @RequestHeader("department") String department
+//            or                SimpMessageHeaderAccessor headerAccessor
     ) {
         log.info("message Received");
+
+        // 헤더 정보 액세스
+//        String msUuid = headerAccessor.getFirstNativeHeader("msUuid");
+//        String userNickname = headerAccessor.getFirstNativeHeader("userNickname");
+//        String department = headerAccessor.getFirstNativeHeader("department");
+//
+//        log.info("msUuid: {}, userNickname: {}, department: {}", msUuid, userNickname, department);
+
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
         switch(chatbotDto.getType()){
             case "recommend":
