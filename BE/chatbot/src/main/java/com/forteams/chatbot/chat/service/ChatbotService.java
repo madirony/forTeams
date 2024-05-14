@@ -1,9 +1,6 @@
 package com.forteams.chatbot.chat.service;
 
-import com.forteams.chatbot.chat.dto.ChatbotDto;
-import com.forteams.chatbot.chat.dto.ChatbotSaveResponseDto;
-import com.forteams.chatbot.chat.dto.Message;
-import com.forteams.chatbot.chat.dto.UserAllChatListDto;
+import com.forteams.chatbot.chat.dto.*;
 import com.forteams.chatbot.chat.entity.ChatbotLogSet;
 import com.forteams.chatbot.chat.entity.SavedChatLogSet;
 import com.forteams.chatbot.chat.repository.ChatbotLogSetRepository;
@@ -228,5 +225,13 @@ public class ChatbotService {
             log.error("Saved chat log with UUID {} not found", chatbotChatUUID);
             throw new IllegalArgumentException("Saved chat log not found");
         }
+    }
+
+    public ChatbotSessionUUIDDto getChatbotChatUUID(String chatbotUUID) {
+        ChatbotLogSet logSet = chatbotLogSetRepository.findById(chatbotUUID).orElse(null);
+        ChatbotSessionUUIDDto chatbotSessionUUIDDto = new ChatbotSessionUUIDDto();
+        assert logSet != null;
+        chatbotSessionUUIDDto.setChatbotChatUUID(logSet.getChatbotChatUUID());
+        return chatbotSessionUUIDDto;
     }
 }

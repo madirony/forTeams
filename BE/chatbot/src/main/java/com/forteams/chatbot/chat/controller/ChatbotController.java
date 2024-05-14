@@ -87,6 +87,12 @@ public class ChatbotController {
         return ResponseEntity.ok("Stream stopped for chatbotUUID: " + chatbotUUID);
     }
 
+    @GetMapping("/chattingUUID/{chatbotUUID}")
+    public ResponseEntity<ChatbotSessionUUIDDto> getChatUUID(@PathVariable String chatbotUUID){
+        ChatbotSessionUUIDDto chatbotSessionUUIDDto = chatbotService.getChatbotChatUUID(chatbotUUID);
+        return ResponseEntity.ok(chatbotSessionUUIDDto);
+    }
+
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
         log.info("message Received");
