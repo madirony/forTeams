@@ -25,12 +25,12 @@ public class JwtProvider {
     @Value("${app.secret-key}")
     private String secretKey;
     private final UserRepository userRepository;
-    private final RedisService redisService;
+//    private final RedisService redisService;
 
     @Autowired
     public JwtProvider(UserRepository userRepository, RedisService redisService ) {
         this.userRepository = userRepository;
-        this.redisService = redisService;
+//        this.redisService = redisService;
     }
 
     public String generateAccessToken(String msUuid) {
