@@ -59,9 +59,24 @@ public class ChatbotController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> saveChats(@RequestBody String userUUID) {
-        chatbotService.saveToSavedChats(userUUID);
-        return ResponseEntity.ok("Completed " + userUUID);
+    public ResponseEntity<ChatbotSaveResponseDto> saveChats(@RequestBody String userUUID) {
+        return ResponseEntity.ok(chatbotService.saveToSavedChats(userUUID));
+    }
+
+    @PostMapping("/func")
+    public ResponseEntity<String> getRecommendation(
+//                            @RequestHeader("msUuid") String msUuid,
+//                            @RequestHeader("userNickname") String userNickname,
+//                            @RequestHeader("department") String department
+    ) {
+        String department = "A";
+
+        if (department == null || department.isEmpty()) {
+            return ResponseEntity.badRequest().body("Department info is missing");
+        }
+
+        String recommendation = chatbotService.fetchRecommendation(department);
+        return ResponseEntity.ok(recommendation);
     }
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
