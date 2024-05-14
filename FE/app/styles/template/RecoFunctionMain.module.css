@@ -41,7 +41,7 @@
 }
 
 /* 반응형-중간 */
-@media (max-width: 1000px) {
+@media (max-width: 500px) {
   .wrapper {
     background-color: rgba(239, 239, 239, 0);
     padding: 2rem 0rem;

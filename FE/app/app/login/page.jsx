@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styles from "styles/page/login.module.css";
 import GradientButton from "component/gradientButton";
-import Link from "next/link";
 
 export default function LoginMain() {
   // MS 로그인 웹으로 넘어가는 함수

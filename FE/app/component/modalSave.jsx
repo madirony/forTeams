@@ -50,7 +50,7 @@ export default function ModalSave({ chatbotid, openModalSave }) {
           mode={"TWO_BUTTONS"}
           onGrayButtonClick={openModalSave}
           onPurpleButtonClick={() => {
-            console.log("저장 API 보내기");
+            // console.log("저장 API 보내기");
           }}
         />
       </div>

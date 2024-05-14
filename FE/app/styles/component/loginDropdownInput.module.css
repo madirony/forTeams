@@ -1,8 +1,12 @@
+.wrapper {
+  width: 100%;
+}
+
 .dropdownToggle {
+  width: 100%;
   border-width: 2px;
   border-color: #d3d5fb;
   background-color: white;
-  width: 100%;
   border-radius: 10px;
   padding-left: 0.7rem;
   padding-right: 0.7rem;
@@ -14,11 +18,12 @@
 }
 
 .dropdownMenu {
+  height: 50vh;
   margin-top: 0.2rem;
   border-width: 2px;
   border-color: #d3d5fb;
-  background-color: white;
   border-radius: 10px;
+  overflow: auto;
 }
 
 .dropdownItem {
@@ -27,15 +32,11 @@
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
+  font-size: 14px;
 }
 
 .dropdownItem:hover {
   background-color: rgba(211, 213, 251, 0.3);
-}
-
-.input {
-  width: 100%;
-  background-color: rgba(211, 213, 251, 0);
 }
 
 .selectedOptionTextBlack {

@@ -49,19 +49,21 @@
 }
 
 /* 반응형-중간 */
-@media (max-width: 1000px) {
-  .hamburgerWeb {
-    display: none;
-  }
+@media (max-width: 500px) {
   .mainWrapper {
     margin-left: 0px;
     border-radius: 25px;
     padding: 1rem;
   }
+}
+
+@media (max-width: 1000px) {
+  .hamburgerWeb {
+    display: none;
+  }
   .hamburgerMobile {
     display: block;
     flex: 0.5;
-    /* background-color: yellow; */
   }
 }
 
