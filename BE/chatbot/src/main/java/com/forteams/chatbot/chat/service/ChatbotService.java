@@ -1,6 +1,7 @@
 package com.forteams.chatbot.chat.service;
 
 import com.forteams.chatbot.chat.dto.ChatbotDto;
+import com.forteams.chatbot.chat.dto.ChatbotSaveResponseDto;
 import com.forteams.chatbot.chat.dto.Message;
 import com.forteams.chatbot.chat.dto.UserAllChatListDto;
 import com.forteams.chatbot.chat.entity.ChatbotLogSet;
@@ -10,15 +11,16 @@ import com.forteams.chatbot.chat.repository.SavedChatLogSetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -111,14 +113,16 @@ public class ChatbotService {
         return filteredMessages;
     }
 
-    public void saveToSavedChats(String userUUID) {
+    public ChatbotSaveResponseDto saveToSavedChats(String userUUID) {
         Optional<ChatbotLogSet> optionalLogSet = chatbotRepository.findById(userUUID);
+        ChatbotSaveResponseDto chatbotSaveResponseDto = new ChatbotSaveResponseDto();
         if (optionalLogSet.isPresent()) {
             ChatbotLogSet logSet = optionalLogSet.get();
 
             SavedChatLogSet savedLogSet = new SavedChatLogSet();
             savedLogSet.setUserUUID(logSet.getUserUUID());
             savedLogSet.setChatbotChatUUID(UUID.randomUUID().toString());
+            savedLogSet.setShareFlag("false");
 
             if(!logSet.getChatLogs().isEmpty()) {
                 ChatbotDto tmpDto = logSet.getChatLogs().get(0);
@@ -132,7 +136,11 @@ public class ChatbotService {
 
             // 기존 로그 제거
             chatbotRepository.deleteById(logSet.getUserUUID());
+
+            chatbotSaveResponseDto.setChatbotUuid(savedLogSet.getChatbotChatUUID());
+            chatbotSaveResponseDto.setChatbotTitle(savedLogSet.getChatTitle());
         }
+        return chatbotSaveResponseDto;
     }
 
     public List<UserAllChatListDto> getChatIDsByUserUUID(String userUUID) {
@@ -155,6 +163,36 @@ public class ChatbotService {
 
     public Optional<SavedChatLogSet> getChatLogByUUID(String chatbotChatUUID) {
         return savedChatLogSetRepository.findById(chatbotChatUUID);
+    }
+
+    public void updateShareFlag(String chatbotChatUUID) {
+        Optional<SavedChatLogSet> optionalSavedChatLogSet = savedChatLogSetRepository.findById(chatbotChatUUID);
+        if (optionalSavedChatLogSet.isPresent()) {
+            SavedChatLogSet savedChatLogSet = optionalSavedChatLogSet.get();
+            if(savedChatLogSet.getChatLogs().equals("false")) {
+                savedChatLogSet.setShareFlag("true");
+                savedChatLogSetRepository.save(savedChatLogSet);
+            }
+        } else {
+            log.error("Chat log with UUID {} not found", chatbotChatUUID);
+            throw new IllegalArgumentException("Chat log not found");
+        }
+    }
+
+    public String fetchRecommendation(String dept) {
+        String url = "http://forteams.co.kr:8085/recommend/function";
+        WebClient webClient = WebClient.create(url);
+
+        return webClient.post()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromPublisher(
+                        Mono.just(Collections.singletonMap("dept", dept)), Map.class
+                ))
+                .retrieve()
+                .bodyToMono(String.class)
+                .doOnNext(data -> log.info("Fetched recommendation: {}", data))
+                .doOnError(error -> log.error("Error while fetching recommendation: {}", error.getMessage()))
+                .block();  // 블록킹으로 결과를 기다림
     }
 
 }
