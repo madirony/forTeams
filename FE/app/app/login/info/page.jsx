@@ -30,15 +30,19 @@ export default function LoginInfo() {
     const userDept = selectedOption.name;
     console.log("제발 나와라", userDept);
     // 로그인 추가 정보 입력 API 요청 보내기
-    addLoginInfo(userDept).then((response) => {
-      console.log("완료 버튼 클릭!", response);
-      // 완료 버튼 클릭!
-      // 회원가입 완료 msUuid: c37afcd8-c1f4-42b7-9be8-ec2bf6d24622,
-      // dept: undefined
-    });
+    addLoginInfo(userDept)
+      .then((response) => {
+        console.log("완료 버튼 클릭!", response);
+        // 메인 페이지로 리다이렉트
+        router.push("/");
 
-    // 메인 페이지로 리다이렉트
-    router.push("/");
+        // 완료 버튼 클릭!
+        // 회원가입 완료 msUuid: c37afcd8-c1f4-42b7-9be8-ec2bf6d24622,
+        // dept: undefined
+      })
+      .catch((error) => {
+        console.log("login info 에서", error);
+      });
   };
 
   const handleGrayButtonClick = () => {
@@ -50,7 +54,7 @@ export default function LoginInfo() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보쉬바</p>
+      <p className={styles.modalTitle}>사용자 정보배고파</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input
