@@ -108,7 +108,7 @@ export default function ChatBotMain() {
 
               // handleStreamFinish();
             } else if (receivedMsg.type === "recommendRes") {
-              // 대괄호를 제거하고 결과 문자열을 쉼표로 분리하여 배열로 변환
+              // 질문 파싱
               const recommendationsArray = JSON.parse(receivedMsg.msg);
               console.log("Formatted recommendations:", recommendationsArray);
               setRecommendations(recommendationsArray);

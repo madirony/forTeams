@@ -8,9 +8,7 @@ function cleanMarkdown(markdownText) {
   return (
     markdownText
       // 한글 문자 뒤에 `.` 또는 `:`가 붙으면 개행 추가
-      .replace(/([가-힣])([.:])(?!#)/g, "$1$2\n\n")
-      // `#`, `##`, `###` 등의 헤더 앞에 무조건 개행 문자 추가
-      .replace(/(^|\n)?(#+\s)/g, "\n\n$2")
+      .replaceAll("<br />", "\n\n'")
   );
 }
 
