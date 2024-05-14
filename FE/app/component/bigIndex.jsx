@@ -3,15 +3,14 @@
 import styles from "styles/component/bigIndex.module.css";
 import Image from "next/image";
 
-export default function BigIndex({ getIndex }) {
+export default function BigIndex({ pushToMessages }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.innerWrapper}>
         <div
           className={styles.button}
-          // onClick={() => getIndex(["1.1", "1.2", "1.3"])}
           onClick={() =>
-            getIndex([
+            pushToMessages([
               { value: "1.1 설치하기" },
               { value: "1.2 로그인하기" },
               { value: "1.3 오류해결하기" },
@@ -28,9 +27,8 @@ export default function BigIndex({ getIndex }) {
         </div>
         <div
           className={styles.button}
-          // onClick={() => getIndex(["2.1", "2.2", "2.3", "2.4", "2.5", "2.6"])}
           onClick={() =>
-            getIndex([
+            pushToMessages([
               { value: "2.1 기본 설정하기" },
               { value: "2.2 Teams 화면 이해하기" },
               { value: "2.3 내 팀 만들기" },
@@ -49,9 +47,8 @@ export default function BigIndex({ getIndex }) {
         </div>
         <div
           className={styles.button}
-          // onClick={() => getIndex(["3.1", "3.2"])}
           onClick={() =>
-            getIndex([
+            pushToMessages([
               { value: "3.1 채팅하기" },
               { value: "3.2 회상회의 하기" },
             ])
@@ -69,9 +66,8 @@ export default function BigIndex({ getIndex }) {
       <div className={styles.innerWrapper}>
         <div
           className={styles.button}
-          // onClick={() => getIndex(["4.1", "4.2", "4.3", "4.4"])}
           onClick={() =>
-            getIndex([
+            pushToMessages([
               { value: "4.1 조직도" },
               { value: "4.2 Planner 사용하기" },
               { value: "4.3 Office 문서 공유 및 동시 편집하기" },
@@ -89,9 +85,8 @@ export default function BigIndex({ getIndex }) {
         </div>
         <div
           className={styles.button}
-          // onClick={() => getIndex(["5.1", "5.2", "5.3"])}
           onClick={() =>
-            getIndex([
+            pushToMessages([
               { value: "5.1 더 많은 App. 추가하기" },
               { value: "5.2 OneNote 활용하기" },
               { value: "5.3 Polls로 설문조사 만들기" },
