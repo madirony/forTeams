@@ -1,7 +1,7 @@
 package com.forteams.auth.controller;
 
 import com.forteams.auth.provider.JwtProvider;
-import com.forteams.auth.service.redis.RedisService;
+import com.forteams.auth.service.token.RedisService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jws;
@@ -17,6 +17,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+/**
+ * 토큰, 인증 관련 컨트롤러
+ */
 
 @RestController
 @Slf4j

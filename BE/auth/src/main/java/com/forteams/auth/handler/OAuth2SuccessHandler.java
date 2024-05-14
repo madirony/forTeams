@@ -1,12 +1,10 @@
 package com.forteams.auth.handler;
 
-import com.forteams.auth.entity.CustomOAuth2User;
-import com.forteams.auth.entity.MsUserEntity;
-import com.forteams.auth.entity.UserEntity;
+import com.forteams.auth.entity.CustomOidcUser;
 import com.forteams.auth.provider.JwtProvider;
 import com.forteams.auth.repository.UserRepository;
-import com.forteams.auth.service.CustomOAuth2UserServiceImpl;
-import com.forteams.auth.service.redis.RedisService;
+import com.forteams.auth.service.CustomOidcUserServiceImpl;
+import com.forteams.auth.service.token.RedisService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,16 +15,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,13 +34,13 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     private final OAuth2AuthorizedClientService authorizedClientService;
     // Redis에서 CustomOAuth2User를 저장하기 위한 service
     private final RedisService redisService;
-    private final CustomOAuth2UserServiceImpl customOAuth2UserService;
+    private final CustomOidcUserServiceImpl customOAuth2UserService;
     private final UserRepository userRepository;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
+        CustomOidcUser oAuth2User = (CustomOidcUser) authentication.getPrincipal();
 
         String msUuid = oAuth2User.getMsUuid();
         if( userRepository.findByMsUserEntity_MsUuid(msUuid) != null ) {

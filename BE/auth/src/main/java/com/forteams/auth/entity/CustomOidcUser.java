@@ -1,25 +1,22 @@
 package com.forteams.auth.entity;
 
-import com.forteams.auth.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
 
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 //@RequiredArgsConstructor
-public class CustomOAuth2User implements OidcUser {
+public class CustomOidcUser implements OidcUser {
 
     private OidcUser oidcUser;
+    @Getter
     private String msUuid;
 
     @Override
@@ -52,19 +49,8 @@ public class CustomOAuth2User implements OidcUser {
         return oidcUser.getName();
     }
 
-    public String getMsUuid() {
-        return msUuid;
-    }
-
-    public void setMsUuid(String msUuid) {
-        this.msUuid = msUuid;
-    }
-
     public UserEntity getOidcUser() {
         return (UserEntity) oidcUser;
     }
 
-    public void setOidcUser(OidcUser oidcUser) {
-        this.oidcUser = oidcUser;
-    }
 }

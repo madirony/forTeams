@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 return;
             }
 
-            String msUuid = jwtProvider.validate(token);
+            String msUuid = jwtProvider.findUuidFromJwt(token);
             if (msUuid == null) {
                 filterChain.doFilter(request, response);
                 return;

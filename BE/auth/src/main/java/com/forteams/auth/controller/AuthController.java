@@ -1,8 +1,8 @@
 package com.forteams.auth.controller;
 
 import com.forteams.auth.entity.MsUserEntity;
-import com.forteams.auth.entity.UserEntity;
 import com.forteams.auth.service.*;
+import com.forteams.auth.service.token.CustomTokenService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
@@ -24,10 +24,8 @@ import java.util.Map;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    private final CustomOAuth2UserServiceImpl customOAuth2UserServiceImpl;
-    private final MsUserService msUserService;
-    private final UserServiceImpl userService;
-    private final TokenServiceImpl tokenService;
+    private final CustomOidcUserServiceImpl customOidcUserServiceImpl;
+    private final CustomTokenService tokenService;
     private final AuthService authService;
 
     @GetMapping("/welcome")
@@ -52,7 +50,7 @@ public class AuthController {
 //                return new ResponseEntity<>(loginnedUser, HttpStatus.OK);
 //            }
 
-            MsUserEntity loginnedUser = msUserService.findOrCreateUser(email, name);
+            MsUserEntity loginnedUser = authService.findOrCreateUser(email, name);
             return new ResponseEntity<>(loginnedUser, HttpStatus.OK);
         }
         return new ResponseEntity<>("Authentication token not found!", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,7 +65,7 @@ public class AuthController {
         if (msUuid == null) return new ResponseEntity<>("JWT token not found!", HttpStatus.UNAUTHORIZED);
 
         // 2. Service로 msUuid와 dept 넘기기
-        msUserService.updateAdditionalInfo(msUuid, dept, response);
+        authService.updateAdditionalInfo(msUuid, dept, response);
         return ResponseEntity.ok("회원가입 완료 msUuid: " + msUuid + ", dept: " + dept);
     }
 
