@@ -19,14 +19,7 @@ export default function LoginInfo() {
 
   // 사용자 이름, 부서 정보 저장하기
   // const [name, setName] = useState("");
-  const [department, setDepartment] = useState("");
-
-  // const onNameChange = (e) => {
-  //   setName(e.target.value);
-  // };
-  const onDepartmentChange = (e) => {
-    setDepartment(e.target.value);
-  };
+  const [department, setDepartment] = useState({});
 
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = async () => {
@@ -51,11 +44,11 @@ export default function LoginInfo() {
 
   // 드롭다운 정의 ===========================================================
   const [selectedOption, setSelectedOption] = useState({});
-  // console.log("login/info 부서 선택 바뀜: ", selectedOption);
+  console.log("login/info 부서 선택 바뀜: ", selectedOption);
 
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보66</p>
+      <p className={styles.modalTitle}>사용자 정보6</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input
