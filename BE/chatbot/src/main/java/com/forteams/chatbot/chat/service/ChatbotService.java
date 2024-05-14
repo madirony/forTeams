@@ -27,11 +27,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class ChatbotService {
+
     private final ChatbotRepository chatbotRepository;
     private final SavedChatLogSetRepository savedChatLogSetRepository;
     private final RedisTemplate<String, Object> redisTemplate;
     private final RestTemplate restTemplate;
 
+    private final StreamStatusService streamStatusService;
     public ChatbotDto processReceivedMessage(ChatbotDto dto, String chatbotUUID) {
 
         LocalDateTime now = LocalDateTime.now();
