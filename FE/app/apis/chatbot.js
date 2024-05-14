@@ -17,4 +17,18 @@ const saveChatbot = async (userUUID) => {
   }
 };
 
-export { saveChatbot };
+// 챗봇 응답 중단
+const paushChatbot = async (userUUID) => {
+  try {
+    const response = await axios({
+      method: "post",
+      url: `/api/v1/chatbot/stop-stream/${userUUID}`,
+    });
+    console.log("챗봇 대화 중단 요청", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("챗봇 대화 중단 요청 중 에러 발생", error);
+  }
+};
+
+export { saveChatbot, paushChatbot };

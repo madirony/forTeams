@@ -3,6 +3,7 @@
 import Image from "next/image";
 import styles from "styles/component/chatBotInput.module.css";
 import { useRef, useState } from "react";
+import { saveChatbot, paushChatbot } from "apis/chatbot";
 
 export default function ChatBotInput({ mode, placeholder, sendMessage }) {
   const textareaRef = useRef(null);
@@ -46,8 +47,10 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
   };
 
   // 중단 버튼 클릭시 실행
-  const onClickStop = () => {
+  const onClickStop = (uuid) => {
     console.log("스트림 중단 요청 API");
+    console.log(uuid);
+    paushChatbot(uuid);
   };
 
   switch (mode) {
@@ -69,7 +72,10 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
               overflowY: "auto",
             }} // 최소(1줄) 및 최대 높이(6줄) 및 스크롤바 설정
           ></textarea>
-          <div onClick={onClickStop} className={styles.imgContainer}>
+          <div
+            onClick={() => onClickStop("123")}
+            className={styles.imgContainer}
+          >
             <Image
               src="icon/stop.svg"
               alt="Stop"
