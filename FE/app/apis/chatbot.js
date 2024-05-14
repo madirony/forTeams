@@ -6,9 +6,8 @@ const saveChatbot = async (userUUID) => {
     const response = await axios({
       method: "post",
       url: "api/v1/chatbot/save",
-      data: {
-        userUUID: userUUID,
-      },
+      data: userUUID,
+      headers: { "Content-Type": "text/plain" },
     });
     console.log("챗봇 세션 내역 저장 api요청", response.data);
     return response.data;
@@ -17,4 +16,4 @@ const saveChatbot = async (userUUID) => {
   }
 };
 
-export default { saveChatbot };
+export { saveChatbot };

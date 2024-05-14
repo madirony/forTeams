@@ -27,7 +27,7 @@ export default function MypageMyLogsDetail({
       setMessages(response.chatLogs);
     });
   }, []);
-  console.log(messages);
+  // console.log(messages);
 
   return (
     <div className={styles.wrapper}>
@@ -35,6 +35,7 @@ export default function MypageMyLogsDetail({
         title={title}
         updatedAt={updatedAt}
         setLogId={setLogId}
+        logId={logId}
         openModalShare={openModalShare}
         openModalSave={openModalSave}
       />

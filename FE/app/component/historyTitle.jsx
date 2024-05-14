@@ -8,6 +8,7 @@ export default function HistoryTitle({
   title,
   updatedAt,
   setLogId,
+  logId,
   openModalShare,
   openModalSave,
 }) {
@@ -22,6 +23,7 @@ export default function HistoryTitle({
     setLogId();
     // router.back();
   };
+  // console.log("??ddddd?", logId);
 
   return (
     <div className={styles.wrapper}>
@@ -40,9 +42,15 @@ export default function HistoryTitle({
           save
           openModalShare={openModalShare}
           openModalSave={openModalSave}
+          logId={logId}
         />
       ) : (
-        <ThreedotDropdown trash share openModalShare={openModalShare} />
+        <ThreedotDropdown
+          trash
+          share
+          openModalShare={openModalShare}
+          logId={logId}
+        />
       )}
     </div>
   );

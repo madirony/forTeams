@@ -21,7 +21,9 @@ export default function ThreedotDropdown({
   save,
   openModalShare,
   openModalSave,
+  logId,
 }) {
+  // console.log("??threedot에서???", logId);
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -59,7 +61,8 @@ export default function ThreedotDropdown({
             className={styles.dropdownItem}
             key="share"
             startContent={<ThreeShare />}
-            onClick={openModalShare}
+            // onClick={openModalShare}
+            onClick={() => openModalShare(logId)}
           >
             공유하기
           </DropdownItem>

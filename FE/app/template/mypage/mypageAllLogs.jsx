@@ -17,15 +17,15 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
     // ★userUUID 불러오기 수정 필요
     const userUUID = 123;
     getChatLogList(userUUID).then((response) => {
-      console.log(response);
+      // console.log(response);
       setDatas(response);
     });
   }, []);
 
-  // 상세 페이지 이동 위한 logId
-  const [logId, setLogId] = useState();
+  // 상세 페이지 이동 위한 logId(chatbotUUID)
+  const [logId, setLogId] = useState("");
   useEffect(() => {
-    setLogId();
+    setLogId("");
   }, []);
 
   return (
@@ -39,7 +39,14 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
         />
       ) : (
         datas.map((data, idx) => {
-          return <HistoryList key={idx} data={data} setLogId={setLogId} />;
+          return (
+            <HistoryList
+              key={idx}
+              data={data}
+              // setLogId={setLogId}
+              setLogId={() => setLogId(data.chatbotChatUUID)}
+            />
+          );
         })
       )}
     </div>

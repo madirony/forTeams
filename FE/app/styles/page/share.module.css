@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.socket {
+  /* background-color: teal; */
+  margin-left: 3%;
+  margin-right: 3%;
+}
