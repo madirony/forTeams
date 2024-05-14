@@ -27,8 +27,10 @@ export default function LoginInfo() {
 
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = async () => {
+    const userDept = selectedOption.name;
+    console.log("제발 나와라", userDept);
     // 로그인 추가 정보 입력 API 요청 보내기
-    await addLoginInfo(selectedOption.name).then((response) => {
+    await addLoginInfo(userDept).then((response) => {
       console.log("완료 버튼 클릭!", response);
       // 완료 버튼 클릭!
       // 회원가입 완료 msUuid: c37afcd8-c1f4-42b7-9be8-ec2bf6d24622,
@@ -48,7 +50,7 @@ export default function LoginInfo() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보1818</p>
+      <p className={styles.modalTitle}>사용자 정보181818</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input
