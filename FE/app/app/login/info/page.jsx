@@ -30,10 +30,10 @@ export default function LoginInfo() {
 
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = () => {
-    getCookies();
-    // addLoginInfo(department).then((response) => {
-    //   console.log("완료 버튼 클릭!", response);
-    // });
+    // getCookies();
+    addLoginInfo(department).then((response) => {
+      console.log("완료 버튼 클릭!", response);
+    });
   };
 
   const handleGrayButtonClick = () => {
