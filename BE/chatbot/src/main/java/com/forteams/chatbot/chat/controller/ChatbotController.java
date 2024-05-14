@@ -34,6 +34,13 @@ public class ChatbotController {
     private final ChatbotService chatbotService;
 //    private final RestTemplate restTemplate;
 
+    @PostMapping("/share/{chatbotChatUUID}")
+    public ResponseEntity<String> shareChat(@PathVariable String chatbotChatUUID) {
+        chatbotService.updateShareFlag(chatbotChatUUID);
+        String shareLink = "https://forteams.co.kr/share/" + chatbotChatUUID;
+        return ResponseEntity.ok(shareLink);
+    }
+
     @GetMapping("/saved-chats/{userUUID}")
     public ResponseEntity<List<UserAllChatListDto>> getSavedChatIDs(@PathVariable String userUUID) {
         List<UserAllChatListDto> chatIDs = chatbotService.getChatIDsByUserUUID(userUUID);

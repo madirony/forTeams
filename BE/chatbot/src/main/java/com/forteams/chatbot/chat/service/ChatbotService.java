@@ -119,6 +119,7 @@ public class ChatbotService {
             SavedChatLogSet savedLogSet = new SavedChatLogSet();
             savedLogSet.setUserUUID(logSet.getUserUUID());
             savedLogSet.setChatbotChatUUID(UUID.randomUUID().toString());
+            savedLogSet.setShareFlag("false");
 
             if(!logSet.getChatLogs().isEmpty()) {
                 ChatbotDto tmpDto = logSet.getChatLogs().get(0);
@@ -155,6 +156,20 @@ public class ChatbotService {
 
     public Optional<SavedChatLogSet> getChatLogByUUID(String chatbotChatUUID) {
         return savedChatLogSetRepository.findById(chatbotChatUUID);
+    }
+
+    public void updateShareFlag(String chatbotChatUUID) {
+        Optional<SavedChatLogSet> optionalSavedChatLogSet = savedChatLogSetRepository.findById(chatbotChatUUID);
+        if (optionalSavedChatLogSet.isPresent()) {
+            SavedChatLogSet savedChatLogSet = optionalSavedChatLogSet.get();
+            if(savedChatLogSet.getChatLogs().equals("false")) {
+                savedChatLogSet.setShareFlag("true");
+                savedChatLogSetRepository.save(savedChatLogSet);
+            }
+        } else {
+            log.error("Chat log with UUID {} not found", chatbotChatUUID);
+            throw new IllegalArgumentException("Chat log not found");
+        }
     }
 
 }

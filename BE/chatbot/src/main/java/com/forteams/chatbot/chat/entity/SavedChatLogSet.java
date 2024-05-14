@@ -18,6 +18,7 @@ public class SavedChatLogSet {
     private String chatbotChatUUID;
     private String chatTitle;
     private String createdAt;
+    private String shareFlag;
     private List<ChatbotDto> chatLogs = new ArrayList<>();
 
     public void addChatLogEntry(ChatbotDto entry) {
