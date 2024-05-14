@@ -17,6 +17,7 @@ public class FolderService {
 
     private final FolderRepository folderRepository;
     private final CategorizedChatbotRepository categorizedChatbotRepository;
+
     public void createFolder(String msUuid, String folderName){
         Folder folder = Folder.builder()
                 .name(folderName)
@@ -24,6 +25,7 @@ public class FolderService {
                 .build();
         folderRepository.save(folder);
     }
+
 
     public List<FolderResponseDto> getFolders(String msUuid) {
         return folderRepository.findAllByUserId(msUuid);
