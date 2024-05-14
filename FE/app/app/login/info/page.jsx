@@ -44,11 +44,11 @@ export default function LoginInfo() {
 
   // 드롭다운 정의 ===========================================================
   const [selectedOption, setSelectedOption] = useState({});
-  console.log("login/info 부서 선택 바뀜: ", selectedOption);
+  console.log("login/info 부서 선택 바뀜: ", selectedOption.name);
 
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보77</p>
+      <p className={styles.modalTitle}>사용자 정보18</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input
