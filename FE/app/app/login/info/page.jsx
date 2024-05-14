@@ -19,12 +19,12 @@ export default function LoginInfo() {
 
   // 사용자 이름, 부서 정보 저장하기
   // const [name, setName] = useState("");
-  const [department, setDepartment] = useState({});
+  // const [department, setDepartment] = useState({});
 
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = async () => {
     // 로그인 추가 정보 입력 API 요청 보내기
-    await addLoginInfo(department.name).then((response) => {
+    await addLoginInfo(selectedOption.name).then((response) => {
       console.log("완료 버튼 클릭!", response);
       // 완료 버튼 클릭!
       // 회원가입 완료 msUuid: c37afcd8-c1f4-42b7-9be8-ec2bf6d24622,
@@ -48,7 +48,7 @@ export default function LoginInfo() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보6</p>
+      <p className={styles.modalTitle}>사용자 정보77</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input
