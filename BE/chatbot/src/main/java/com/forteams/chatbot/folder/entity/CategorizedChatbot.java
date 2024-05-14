@@ -14,6 +14,8 @@ import lombok.Setter;
 public class CategorizedChatbot {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "categorized_chatbot_id")
     private Long id;
 
     @Column(name = "chatbot_uuid")

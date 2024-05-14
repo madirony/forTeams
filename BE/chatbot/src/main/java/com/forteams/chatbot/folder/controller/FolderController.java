@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping( "/api/chatbot/folder")
+@RequestMapping( "/api/v1/chatbot/folder")
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000")
 public class FolderController {
@@ -63,11 +63,12 @@ public class FolderController {
     }
 
     @PostMapping("/categorized-chatbot")
-    public ResponseEntity<?> postChatbotInFolder(@RequestBody CategorizedChatbotRegisterDto registerDto){
+        public ResponseEntity<Void> postChatbotInFolder(@RequestBody CategorizedChatbotRegisterDto registerDto){
         try{
             folderService.createCategorizedChatbot(registerDto);
             return ResponseEntity.ok(null);
         }catch (Exception e){
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
