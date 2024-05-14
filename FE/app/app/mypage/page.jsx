@@ -17,6 +17,9 @@ export default function Mypage() {
   const userDept = "철강영업팀";
   const userId = 66;
 
+  //
+  const [selectedChatbotId, setSelectedChatbotId] = useState(null);
+
   // Hamburger Menu 선택을 위한 변수
   const [selectedPage, setSelectedPage] = useState("info");
 
@@ -25,13 +28,16 @@ export default function Mypage() {
   const [showModalSave, setShowModalSave] = useState(false);
 
   // 클릭시 모달 오픈 여부를 변경하는 함수
-  const openModalShare = () => {
+  const openModalShare = (logId) => {
+    // console.log("챗봇아이아이ㅏㄹ이랑란ㅇ", logId);
+    setSelectedChatbotId(logId);
+    // console.log("1.selectedchatbot", selectedChatbotId);
     setShowModalShare(!showModalShare);
   };
   const openModalSave = () => {
     setShowModalSave(!showModalSave);
   };
-
+  // console.log("2.selectedchatbot", selectedChatbotId);
   return (
     <div className={styles.root}>
       <MenuBar userName={userName} userDept={userDept} userId={userId} />
@@ -52,7 +58,10 @@ export default function Mypage() {
 
           {/* 모달 띄우는 부분 */}
           {showModalShare && (
-            <ModalShare chatbotid={999999} openModalShare={openModalShare} />
+            <ModalShare
+              chatbotid={selectedChatbotId}
+              openModalShare={openModalShare}
+            />
           )}
           {showModalSave && (
             <ModalSave chatbotid={123456} openModalSave={openModalSave} />
