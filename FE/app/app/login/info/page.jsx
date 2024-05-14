@@ -54,7 +54,7 @@ export default function LoginInfo() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보쉬바</p>
+      <p className={styles.modalTitle}>사용자 정보배고파</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input
