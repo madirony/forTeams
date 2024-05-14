@@ -45,6 +45,9 @@
 .buttonContainer {
   width: 100%;
   height: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* 반응형 모달창-중간 */

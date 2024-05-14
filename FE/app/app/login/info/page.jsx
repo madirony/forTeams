@@ -30,10 +30,15 @@ export default function LoginInfo() {
 
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = () => {
-    // getCookies();
-    addLoginInfo(department).then((response) => {
+    // 로그인 추가 정보 입력 API 요청 보내기
+    addLoginInfo(department.name).then((response) => {
       console.log("완료 버튼 클릭!", response);
+      // 완료 버튼 클릭!
+      // 회원가입 완료 msUuid: c37afcd8-c1f4-42b7-9be8-ec2bf6d24622,
+      // dept: undefined
     });
+    // 메인 페이지로 리다이렉트
+    router.push("/");
   };
 
   const handleGrayButtonClick = () => {
@@ -45,7 +50,7 @@ export default function LoginInfo() {
 
   // 드롭다운 정의 ===========================================================
   const [selectedOption, setSelectedOption] = useState({});
-  console.log("부서 선택 바뀜: ", selectedOption);
+  // console.log("login/info 부서 선택 바뀜: ", selectedOption);
 
   return (
     <div className={styles.container}>
