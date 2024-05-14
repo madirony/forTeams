@@ -25,9 +25,6 @@ public class OAuth2Config {
     @Value("${spring.security.oauth2.client.registration.microsoft.clientSecret}")
     private String clientSecret;
 
-//    @Value("#{'${spring.security.oauth2.client.registration.aad.scope}'.split(',')}")
-//    private List<String> scopes;
-
     @Bean
     public ClientRegistrationRepository clientRegistrationRepository() {
         ClientRegistration microsoftClientRegistration = ClientRegistration.withRegistrationId("microsoft")
@@ -40,7 +37,6 @@ public class OAuth2Config {
                 .userInfoUri("https://graph.microsoft.com/oidc/userinfo")
                 .userNameAttributeName("sub")
                 .clientName("Microsoft")
-//                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
 //                .redirectUri("http://localhost:8443/login/oauth2/code/microsoft")
                 .redirectUri("https://forteams.co.kr/login/oauth2/code/microsoft")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)

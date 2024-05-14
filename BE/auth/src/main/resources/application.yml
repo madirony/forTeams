@@ -17,10 +17,10 @@ spring:
     username: ENC(CqqrsYzCwlydVzWxKK6Aourfkt+XW0Fe)
     password: ENC(xOlACC2Pto4t7hmf2kHl5w==)
     driver-class-name: org.postgresql.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
 #    properties:
 #      hibernate:
 #        jdbc:

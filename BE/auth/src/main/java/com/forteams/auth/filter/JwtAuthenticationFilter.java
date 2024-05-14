@@ -51,7 +51,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 return;
             }
 
-            String msUuid = jwtProvider.validate(token);
+            String msUuid = jwtProvider.findUuidFromJwt(token);
             if (msUuid == null) {
                 filterChain.doFilter(request, response);
                 return;
@@ -84,7 +84,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     }
 
-    // 리퀘스트에서 bearer Token 값 꺼내는 작업
+    /**
+     * 리퀘스트에서 bearer Token 값 꺼내는 작업
+     *
+     * @param request
+     * @return
+     */
     private String parseBearerToken(HttpServletRequest request) {
 
         String authorization = request.getHeader("Authorization");

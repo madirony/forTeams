@@ -3,7 +3,7 @@ package com.forteams.auth.config;
 import com.forteams.auth.filter.JwtAuthenticationFilter;
 import com.forteams.auth.handler.OAuth2FailureHandler;
 import com.forteams.auth.handler.OAuth2SuccessHandler;
-import com.forteams.auth.service.CustomOAuth2UserServiceImpl;
+import com.forteams.auth.service.CustomOidcUserServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,9 +34,7 @@ import java.io.IOException;
 public class WebSecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
-//    private final OAuth2UserService oAuth2UserService;
-//    private final DefaultOAuth2UserService oAuth2UserService;
-    private final CustomOAuth2UserServiceImpl customOAuthUserService;
+    private final CustomOidcUserServiceImpl customOAuthUserService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
     private final OAuth2FailureHandler oAuth2FailureHandler;
 

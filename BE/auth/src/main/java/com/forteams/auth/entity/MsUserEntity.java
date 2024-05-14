@@ -21,7 +21,7 @@ public class MsUserEntity {
     private Long msPk;
 
     @Column(name = "microsoft_id")
-    private String microsoftId; //email을 넣으면 될 듯.. -> 이걸 확인해서 없으면 테이블에 추가
+    private String microsoftId; //ms에 로그인하는 email -> 이걸 확인해서 없으면 회원가입 진행
 
     @Column(name = "ms_uuid", unique = true)
     private String msUuid = UUID.randomUUID().toString(); // UUID를 String으로 저장

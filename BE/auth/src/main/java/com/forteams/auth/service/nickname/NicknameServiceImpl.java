@@ -1,4 +1,4 @@
-package com.forteams.auth.service;
+package com.forteams.auth.service.nickname;
 
 import com.forteams.auth.entity.NicknameEntity;
 import com.forteams.auth.repository.NicknameRepository;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class NicknameServiceImpl {
+public class NicknameServiceImpl implements NicknameService {
     private final NicknameRepository nicknameRepository;
     private final StringRedisTemplate redisTemplate;
     private static final String NICKNAME_SET_KEY = "available_nicknames";
@@ -32,7 +32,7 @@ public class NicknameServiceImpl {
     }
 
     @Transactional
-    public String assignNickname() { //이걸 User어딘가에서 불러와야 함
+    public String assignNickname() {
         String nickname = redisTemplate.opsForSet().pop(NICKNAME_SET_KEY);
         if (nickname != null) {
             NicknameEntity nick = nicknameRepository.findById(nickname).orElseThrow();
