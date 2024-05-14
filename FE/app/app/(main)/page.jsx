@@ -22,7 +22,7 @@ export default function Main() {
     <div className={styles.root}>
       <MenuBar userName={userName} userDept={userDept} userId={userId} />
 
-      {width <= 1000 ? (
+      {width <= 500 ? (
         // 반응형-중간
         <div className={styles.swiperPage}>
           <MainSwiper />
