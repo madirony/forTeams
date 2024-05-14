@@ -21,6 +21,10 @@ export default function LoginInfo() {
   // const [name, setName] = useState("");
   // const [department, setDepartment] = useState({});
 
+  // 드롭다운 정의 ===========================================================
+  const [selectedOption, setSelectedOption] = useState({});
+  console.log("login/info 부서 선택 바뀜: ", selectedOption.name);
+
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = async () => {
     // 로그인 추가 정보 입력 API 요청 보내기
@@ -42,13 +46,9 @@ export default function LoginInfo() {
     // 로그인 페이지(이전 페이지)로 돌아가기
   };
 
-  // 드롭다운 정의 ===========================================================
-  const [selectedOption, setSelectedOption] = useState({});
-  console.log("login/info 부서 선택 바뀜: ", selectedOption.name);
-
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보18</p>
+      <p className={styles.modalTitle}>사용자 정보1818</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input

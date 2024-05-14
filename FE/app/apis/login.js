@@ -1,7 +1,7 @@
 import axios from "util/baseAPI";
 
 // 로그인 추가 정보 입력
-const addLoginInfo = async ({ userDept }) => {
+const addLoginInfo = async (userDept) => {
   try {
     const response = await axios({
       method: "post",
