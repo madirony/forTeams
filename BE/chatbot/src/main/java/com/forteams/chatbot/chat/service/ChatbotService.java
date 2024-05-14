@@ -6,7 +6,7 @@ import com.forteams.chatbot.chat.dto.Message;
 import com.forteams.chatbot.chat.dto.UserAllChatListDto;
 import com.forteams.chatbot.chat.entity.ChatbotLogSet;
 import com.forteams.chatbot.chat.entity.SavedChatLogSet;
-import com.forteams.chatbot.chat.repository.ChatbotRepository;
+import com.forteams.chatbot.chat.repository.ChatbotLogSetRepository;
 import com.forteams.chatbot.chat.repository.SavedChatLogSetRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,30 +27,28 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class ChatbotService {
-
-    private final ChatbotRepository chatbotRepository;
+    private final ChatbotLogSetRepository chatbotLogSetRepository;
     private final SavedChatLogSetRepository savedChatLogSetRepository;
     private final RedisTemplate<String, Object> redisTemplate;
     private final RestTemplate restTemplate;
-
     private final StreamStatusService streamStatusService;
-    public ChatbotDto processReceivedMessage(ChatbotDto dto, String chatbotUUID) {
 
+    public ChatbotDto processReceivedMessage(ChatbotDto dto, String chatbotUUID) {
         LocalDateTime now = LocalDateTime.now();
         dto.setCreatedAt(String.valueOf(now));
         dto.setUpdatedAt(String.valueOf(now));
-
         String messageUUID = UUID.randomUUID().toString();
         dto.setChatUUID(messageUUID);
-
         addChatLog(chatbotUUID, dto);
         return dto;
     }
 
     public void saveAskData(String chatUUID, String chatbotUUID, StringBuilder sb) {
         ChatbotDto assistant = new ChatbotDto();
-        assistant.setChatUUID(chatUUID); assistant.setType("ask");
-        assistant.setSender("BOT"); assistant.setMsg(String.valueOf(sb));
+        assistant.setChatUUID(chatUUID);
+        assistant.setType("ask");
+        assistant.setSender("BOT");
+        assistant.setMsg(String.valueOf(sb));
 
         LocalDateTime now = LocalDateTime.now();
         assistant.setCreatedAt(String.valueOf(now));
@@ -75,27 +73,28 @@ public class ChatbotService {
     }
 
     private String callExternalAPI(String question) {
-        String url = "http://forteams.co.kr:8085/recommandation/question";
+        String url = "http://forteams.co.kr:8085/recommendation/question";
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("question", question);
         return restTemplate.getForObject(builder.toUriString(), String.class);
     }
 
     private void addChatLog(String chatbotUUID, ChatbotDto newLog) {
-        ChatbotLogSet logSet = chatbotRepository.findById(chatbotUUID).orElse(null);
+        ChatbotLogSet logSet = chatbotLogSetRepository.findById(chatbotUUID).orElse(null);
         if (logSet != null) {
             logSet.addChatLogEntry(newLog);
-            chatbotRepository.save(logSet);
+            chatbotLogSetRepository.save(logSet);
         } else {
             logSet = new ChatbotLogSet();
             logSet.setUserUUID(chatbotUUID);
+            logSet.setChatbotChatUUID(UUID.randomUUID().toString());
             logSet.addChatLogEntry(newLog);
-            chatbotRepository.save(logSet);
+            chatbotLogSetRepository.save(logSet);
         }
     }
 
     public List<Message> fetchRecentMessages(String chatbotUUID) {
-        return chatbotRepository.findById(chatbotUUID)
+        return chatbotLogSetRepository.findById(chatbotUUID)
                 .map(chatbotLogSet -> chatbotLogSet.getChatLogs().stream()
                         .sorted((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()))
                         .limit(7)
@@ -105,28 +104,38 @@ public class ChatbotService {
     }
 
     public List<Message> validateMessageRequest(List<Message> messages) {
-
         List<Message> filteredMessages = messages.stream()
                 .filter(m -> m.getContent() != null && !m.getContent().isEmpty())
                 .collect(Collectors.toList());
 
         Collections.reverse(filteredMessages);
-//        filteredMessages.forEach(m -> log.info("Reversed Message: {}", m.getContent()));
         return filteredMessages;
     }
 
-    public ChatbotSaveResponseDto saveToSavedChats(String userUUID) {
-        Optional<ChatbotLogSet> optionalLogSet = chatbotRepository.findById(userUUID);
+    public ChatbotSaveResponseDto saveToSavedChats(String userUUID, String chatUUID) {
+        Optional<ChatbotLogSet> optionalLogSet;
+        if (chatUUID != null) {
+            optionalLogSet = chatbotLogSetRepository.findByChatbotChatUUID(chatUUID);
+        } else {
+            optionalLogSet = chatbotLogSetRepository.findById(userUUID);
+        }
+
         ChatbotSaveResponseDto chatbotSaveResponseDto = new ChatbotSaveResponseDto();
         if (optionalLogSet.isPresent()) {
             ChatbotLogSet logSet = optionalLogSet.get();
 
+            // 비어있는 채팅 로그는 저장하지 않음
+            if (logSet.getChatLogs().isEmpty()) {
+                log.info("Empty chat logs. Skipping save.");
+                return chatbotSaveResponseDto;
+            }
+
             SavedChatLogSet savedLogSet = new SavedChatLogSet();
             savedLogSet.setUserUUID(logSet.getUserUUID());
-            savedLogSet.setChatbotChatUUID(UUID.randomUUID().toString());
+            savedLogSet.setChatbotChatUUID(logSet.getChatbotChatUUID() != null ? logSet.getChatbotChatUUID() : UUID.randomUUID().toString());
             savedLogSet.setShareFlag("false");
 
-            if(!logSet.getChatLogs().isEmpty()) {
+            if (!logSet.getChatLogs().isEmpty()) {
                 ChatbotDto tmpDto = logSet.getChatLogs().get(0);
                 savedLogSet.setChatTitle(tmpDto.getMsg());
                 savedLogSet.setCreatedAt(tmpDto.getCreatedAt());
@@ -137,7 +146,7 @@ public class ChatbotService {
             savedChatLogSetRepository.save(savedLogSet);
 
             // 기존 로그 제거
-            chatbotRepository.deleteById(logSet.getUserUUID());
+            chatbotLogSetRepository.deleteById(logSet.getUserUUID());
 
             chatbotSaveResponseDto.setChatbotUuid(savedLogSet.getChatbotChatUUID());
             chatbotSaveResponseDto.setChatbotTitle(savedLogSet.getChatTitle());
@@ -171,7 +180,7 @@ public class ChatbotService {
         Optional<SavedChatLogSet> optionalSavedChatLogSet = savedChatLogSetRepository.findById(chatbotChatUUID);
         if (optionalSavedChatLogSet.isPresent()) {
             SavedChatLogSet savedChatLogSet = optionalSavedChatLogSet.get();
-            if(savedChatLogSet.getChatLogs().equals("false")) {
+            if ("false".equals(savedChatLogSet.getShareFlag())) {
                 savedChatLogSet.setShareFlag("true");
                 savedChatLogSetRepository.save(savedChatLogSet);
             }
@@ -182,7 +191,7 @@ public class ChatbotService {
     }
 
     public String fetchRecommendation(String dept) {
-        String url = "http://forteams.co.kr:8085/recommend/function";
+        String url = "http://forteams.co.kr:8085/recommendation/function";
         WebClient webClient = WebClient.create(url);
 
         return webClient.post()
@@ -197,4 +206,27 @@ public class ChatbotService {
                 .block();  // 블록킹으로 결과를 기다림
     }
 
+    public void loadChatLog(String chatbotChatUUID) {
+        Optional<SavedChatLogSet> optionalSavedChatLogSet = savedChatLogSetRepository.findById(chatbotChatUUID);
+        if (optionalSavedChatLogSet.isPresent()) {
+            SavedChatLogSet savedChatLogSet = optionalSavedChatLogSet.get();
+            String userUUID = savedChatLogSet.getUserUUID();
+            Optional<ChatbotLogSet> optionalChatbotLogSet = chatbotLogSetRepository.findById(userUUID);
+
+            ChatbotLogSet chatbotLogSet;
+            if (optionalChatbotLogSet.isPresent()) {
+                chatbotLogSet = optionalChatbotLogSet.get();
+            } else {
+                chatbotLogSet = new ChatbotLogSet();
+                chatbotLogSet.setUserUUID(userUUID);
+                chatbotLogSet.setChatbotChatUUID(chatbotChatUUID);
+            }
+
+            chatbotLogSet.setChatLogs(savedChatLogSet.getChatLogs());
+            chatbotLogSetRepository.save(chatbotLogSet);
+        } else {
+            log.error("Saved chat log with UUID {} not found", chatbotChatUUID);
+            throw new IllegalArgumentException("Saved chat log not found");
+        }
+    }
 }

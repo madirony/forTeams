@@ -59,8 +59,14 @@ public class ChatbotController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<ChatbotSaveResponseDto> saveChats(@RequestBody String userUUID) {
-        return ResponseEntity.ok(chatbotService.saveToSavedChats(userUUID));
+    public ResponseEntity<ChatbotSaveResponseDto> saveChats(@RequestBody SaveChatRequest request) {
+        return ResponseEntity.ok(chatbotService.saveToSavedChats(request.getUserUUID(), request.getChatUUID()));
+    }
+
+    @PostMapping("/load-chat/{chatbotChatUUID}")
+    public ResponseEntity<String> loadChatLog(@PathVariable String chatbotChatUUID) {
+        chatbotService.loadChatLog(chatbotChatUUID);
+        return ResponseEntity.ok("Chat log loaded for chatbotChatUUID: " + chatbotChatUUID);
     }
 
     @PostMapping("/func")
