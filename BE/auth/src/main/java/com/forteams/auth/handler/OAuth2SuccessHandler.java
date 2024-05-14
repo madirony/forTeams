@@ -65,7 +65,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             log.debug("[OAuthLoginSuccessHandler] - LOGIN SUCCESS : {} FROM 마이크로솦", oAuth2User.getName());
 
             // 추가 정보를 받을지(새로운 유저), 안 받을지(기존 유저) 분기
-            response.sendRedirect("https://forteams.co.kr"); // (기존 유저) 메인 페이지로
+            response.sendRedirect("http://localhost:3000"); // (기존 유저) 메인 페이지로
         }
         else {
             Cookie cookie = new Cookie("TMP_ACCESS", msUuid);
@@ -75,7 +75,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             cookie.setMaxAge(24 * 60 * 60); // 쿠키 만료 시간 설정 (예: 1일)
             response.addCookie(cookie); // 응답에 쿠키 추가
             // test
-            response.sendRedirect("https://forteams.co.kr/login/info"); // (새로운 유저) 추가 정보 받으러 가는 페이지 (jwt들고 감)
+            response.sendRedirect("http://localhost:3000/login/info"); // (새로운 유저) 추가 정보 받으러 가는 페이지 (jwt들고 감)
 
         }
 

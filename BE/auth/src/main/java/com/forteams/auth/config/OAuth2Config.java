@@ -37,8 +37,8 @@ public class OAuth2Config {
                 .userInfoUri("https://graph.microsoft.com/oidc/userinfo")
                 .userNameAttributeName("sub")
                 .clientName("Microsoft")
-//                .redirectUri("http://localhost:8443/login/oauth2/code/microsoft")
-                .redirectUri("https://forteams.co.kr/login/oauth2/code/microsoft")
+                .redirectUri("http://localhost:8443/login/oauth2/code/microsoft")
+//                .redirectUri("https://forteams.co.kr/login/oauth2/code/microsoft")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .build();
 

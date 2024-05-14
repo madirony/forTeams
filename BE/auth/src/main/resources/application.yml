@@ -1,11 +1,11 @@
-eureka:
-  instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://discovery:8761/eureka/
+#eureka:
+#  instance:
+#    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://discovery:8761/eureka/
 
 spring:
   jackson:
@@ -39,8 +39,8 @@ spring:
       client:
         registration:
           microsoft:
-            clientId: ENC(wk6h64Rllz1p50JB31IKbojBicKqCSJZe7Nt6GGHQaqKSW7ybI8DGyygDYcibW9l)
-            clientSecret: ENC(dq9nD7nFuPVzy12dYF3PYuQzTZUdprJycQFDS46wp5bpGytf22eE3vSmxsJA1MUF/DvV6G35OAg=)
+            clientId: ENC(GBnTMCWvvplw9Hm3qPKLKCD24VYU6bqWU+wfpRkBfEXqZJSoDaWSfCS5dXAfIpHZ)
+            clientSecret: ENC(a/wiqJFwsQ3DdKlLY2U+kxHvlLh0Id9bIhF6AOoH/uik+CxjjRqDt9anFe9HCrPOT2u2QQJZajg=)
             authorizationGrantType: authorization_code
             redirectUri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope:
