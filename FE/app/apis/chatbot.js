@@ -17,4 +17,4 @@ const saveChatbot = async (userUUID) => {
   }
 };
 
-export default { saveChatbot };
+export { saveChatbot };

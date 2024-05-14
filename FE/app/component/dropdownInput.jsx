@@ -8,6 +8,8 @@ import Image from "next/image";
 import { getFolders, createFolder } from "apis/save";
 
 export default function DropdownInput({ selectedOption, setSelectedOption }) {
+  // import 페이지에서 정의 : const [selectedOption, setSelectedOption] = useState({})
+
   // 유저 uuid 조회
   const userId = "12345";
 
@@ -20,7 +22,6 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
     });
   }, []);
 
-  // const [selectedOption, setSelectedOption] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [customInput, setCustomInput] = useState("");
 

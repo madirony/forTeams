@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import styles from "styles/component/input.module.css";
 
 export default function Input({
