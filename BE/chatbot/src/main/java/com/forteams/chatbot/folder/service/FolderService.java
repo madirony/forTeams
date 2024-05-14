@@ -1,9 +1,9 @@
 package com.forteams.chatbot.folder.service;
 
-import com.forteams.chatbot.folder.dto.FolderRegisterDto;
-import com.forteams.chatbot.folder.dto.FolderResponseDto;
-import com.forteams.chatbot.folder.dto.FolderUpdateDto;
+import com.forteams.chatbot.folder.dto.*;
+import com.forteams.chatbot.folder.entity.CategorizedChatbot;
 import com.forteams.chatbot.folder.entity.Folder;
+import com.forteams.chatbot.folder.repository.CategorizedChatbotRepository;
 import com.forteams.chatbot.folder.repository.FolderRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,8 @@ import java.util.List;
 public class FolderService {
 
     private final FolderRepository folderRepository;
-//    private final UserRepository userRepository;
+    private final CategorizedChatbotRepository categorizedChatbotRepository;
+
     public void createFolder(String msUuid, String folderName){
         Folder folder = Folder.builder()
                 .name(folderName)
@@ -24,6 +25,7 @@ public class FolderService {
                 .build();
         folderRepository.save(folder);
     }
+
 
     public List<FolderResponseDto> getFolders(String msUuid) {
         return folderRepository.findAllByUserId(msUuid);
@@ -53,5 +55,20 @@ public class FolderService {
         }
 
         return folder;
+    }
+
+    public void createCategorizedChatbot(CategorizedChatbotRegisterDto registerDto){
+        Folder folder = folderRepository.findById(registerDto.getFolderId()).orElseThrow();
+        CategorizedChatbot cate = CategorizedChatbot.builder()
+                .chatbotUuid(registerDto.getChatbotUuid())
+                .chatbotTitle(registerDto.getChatbotTitle())
+                .folder(folder)
+                .build();
+        categorizedChatbotRepository.save(cate);
+    }
+
+    public List<CategorizedChatbotResponseDto> getCategorizedChatbotsByFolderId(Long folderId) {
+        return categorizedChatbotRepository.findAllByFolderId(folderId);
+//        return folderRepository.findAll();
     }
 }
