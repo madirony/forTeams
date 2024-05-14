@@ -12,7 +12,7 @@ export const metadata = {
 
 // ★★★ 여기서 로그인 여부 확인해 분기 처리하기
 // local storage에서 사용자 토큰 확인하기
-const isLogined = false;
+const isLogined = true;
 // const test = GetIsLogined;
 // console.log("메인 페이지에서 isLogined 상태 :", test);
 
