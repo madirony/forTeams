@@ -36,13 +36,16 @@ public class JwtProvider {
     public String generateAccessToken(String msUuid) {
         long validity = 10800000; // 3 hours
         UserEntity user = userRepository.findByMsUserEntity_MsUuid(msUuid);
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)); // 키 생성
+
+
         return Jwts.builder()
                 .setSubject(msUuid)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + validity))
                 .claim("dept", user.getUserDept())
                 .claim("nickname", user.getUserNickname())
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
     }
 
