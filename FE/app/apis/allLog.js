@@ -24,4 +24,18 @@ const getChatLogDetail = async (chatbotChatUUID) => {
     console.log("챗봇 로그 상세 조회 중 에러 발생", error);
   }
 };
-export { getChatLogList, getChatLogDetail };
+
+//챗봇 데이터 삭제
+const deleteChatLog = async (chatbotChatUUID) => {
+  try {
+    const response = await axios({
+      method: "delete",
+      url: `api/v1/chatbot/delete-chat/${chatbotChatUUID}`,
+    });
+    console.log("챗봇 데이터 삭제 api 요청", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("챗봇 데이터 삭제 중 에러 발생", error);
+  }
+};
+export { getChatLogList, getChatLogDetail, deleteChatLog };

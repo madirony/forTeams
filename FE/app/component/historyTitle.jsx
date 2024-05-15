@@ -73,6 +73,7 @@ export default function HistoryTitle({
           openModalShare={openModalShare}
           openModalSave={openModalSave}
           logId={logId}
+          setLogId={setLogId}
         />
       ) : (
         <ThreedotDropdown
@@ -80,6 +81,7 @@ export default function HistoryTitle({
           share
           openModalShare={openModalShare}
           logId={logId}
+          setLogId={setLogId}
         />
       )}
     </div>
