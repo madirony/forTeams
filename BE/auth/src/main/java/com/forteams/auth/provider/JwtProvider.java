@@ -51,12 +51,14 @@ public class JwtProvider {
 
     public String generateRefreshToken(String msUuid) {
         long validity = 1209600000; // 14 days
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)); // 키 생성
+
         return Jwts.builder()
                 .setSubject(msUuid)
                 .setId(UUID.randomUUID().toString()) // Unique identifier for the token
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + validity))
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
     }
 
@@ -83,10 +85,11 @@ public class JwtProvider {
 //    }
 
     public boolean validateRefreshToken(String refreshToken) {
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)); // 키 생성
         try {
             // 여기서는 refreshToken의 유효성을 검증합니다.
             Jwts.parser()
-                    .setSigningKey(secretKey)
+                    .setSigningKey(key)
                     .parseClaimsJws(refreshToken);
             return true;
         } catch (JwtException e) { //만료되거나 잘못된 서명
