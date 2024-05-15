@@ -12,7 +12,27 @@ eureka:
     service-url:
       defaultZone: http://discovery:8761/eureka
 
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
 
+          gateway: DEBUG
+          reactive:
+            DispatcherHandler: TRACE
+          client:
+            RestTemplate: DEBUG
+    reactor:
+      netty:
+        http:
+          server: DEBUG
+    springframework:
+      web:
+        reactive:
+          function:
+            client:
+              WebClient: DEBUG
 spring:
   cloud:
     gateway:
