@@ -32,7 +32,7 @@ public class SecurityConfig {
         configuration.addAllowedOrigin("https://forteams.co.kr");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
-//        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
