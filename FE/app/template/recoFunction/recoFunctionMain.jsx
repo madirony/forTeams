@@ -4,6 +4,9 @@ import styles from "styles/template/RecoFunctionMain.module.css";
 import HamburgerTitle from "component/hamburgerTitle";
 import { useEffect, useState } from "react";
 
+// API import
+import { recoFunc } from "apis/recoFunc";
+
 export default function RecoFunctionMain() {
   const [selectedFunction, setSelectedFunction] = useState(null);
 
@@ -20,14 +23,14 @@ export default function RecoFunctionMain() {
   //   }
   // };
 
-  //기능 예시 데이터
-  const functions = [
-    "외부인 초대하기",
-    "화상회의하기",
-    "메모 작성하기",
-    "화상회의 캐릭터 설정하기",
-    "화상회의 캡션 설정하기",
-  ];
+  const [functions, setFunctions] = useState([]);
+  useEffect(() => {
+    recoFunc().then((response) => {
+      // console.log("본부 인기 차트", response);
+      setFunctions(response);
+    });
+  }, []);
+  // console.log("펑션", functions);
 
   return (
     <div className={styles.wrapper}>
@@ -40,11 +43,15 @@ export default function RecoFunctionMain() {
       </div>
 
       <div className={styles.ranking}>
-        {functions.map((func, index) => (
-          <button key={index} className={styles.button}>
-            {`${index + 1}.  ${func}`}
-          </button>
-        ))}
+        {functions.length > 0 ? (
+          functions.map((func, index) => (
+            <button key={index} className={styles.button}>
+              {`${index + 1}. ${func[0]}`}
+            </button>
+          ))
+        ) : (
+          <div>loading...</div> // 데이터가 없거나 로딩 중일 때의 대체 텍스트
+        )}
       </div>
     </div>
   );

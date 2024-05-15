@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "styles/component/chatBotInput.module.css";
 import { useRef, useState } from "react";
-import { saveChatbot, paushChatbot } from "apis/chatbot";
+import { saveChatbot, pauseChatbot } from "apis/chatbot";
 
 export default function ChatBotInput({ mode, placeholder, sendMessage }) {
   const textareaRef = useRef(null);
@@ -50,7 +50,7 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
   const onClickStop = (uuid) => {
     console.log("스트림 중단 요청 API");
     console.log(uuid);
-    paushChatbot(uuid);
+    pauseChatbot(uuid);
   };
 
   switch (mode) {
