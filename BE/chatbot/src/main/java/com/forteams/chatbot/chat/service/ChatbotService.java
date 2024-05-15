@@ -234,8 +234,8 @@ public class ChatbotService {
     public ChatbotSessionUUIDDto getChatbotChatUUID(String chatbotUUID) {
         ChatbotLogSet logSet = chatbotLogSetRepository.findById(chatbotUUID).orElse(null);
         ChatbotSessionUUIDDto chatbotSessionUUIDDto = new ChatbotSessionUUIDDto();
-        assert logSet != null;
-        chatbotSessionUUIDDto.setChatbotChatUUID(logSet.getChatbotChatUUID());
+        if(logSet != null)
+            chatbotSessionUUIDDto.setChatbotChatUUID(logSet.getChatbotChatUUID());
         return chatbotSessionUUIDDto;
     }
 
