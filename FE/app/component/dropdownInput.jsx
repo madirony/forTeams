@@ -46,7 +46,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
       setIsDropdownOpen(false);
 
       // 폴더 생성 API 보내기
-      createFolder(customInput, userId);
+      createFolder(customInput);
     }
   };
 
