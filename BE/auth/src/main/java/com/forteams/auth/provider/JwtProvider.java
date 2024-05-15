@@ -45,7 +45,7 @@ public class JwtProvider {
                 .setExpiration(new Date(System.currentTimeMillis() + validity))
                 .claim("dept", user.getUserDept())
                 .claim("nickname", user.getUserNickname())
-                .signWith(key,SignatureAlgorithm.HS256)
+                .signWith(key)
                 .compact();
     }
 
