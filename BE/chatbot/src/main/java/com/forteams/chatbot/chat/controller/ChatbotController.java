@@ -101,6 +101,16 @@ public class ChatbotController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @DeleteMapping("/delete-chat/{chatbotChatUUID}")
+    public ResponseEntity<String> deleteChatLog(@PathVariable String chatbotChatUUID) {
+        try {
+            chatbotService.deleteChatLog(chatbotChatUUID);
+            return ResponseEntity.ok("Deleted chat log with UUID: " + chatbotChatUUID);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
         log.info("message Received");

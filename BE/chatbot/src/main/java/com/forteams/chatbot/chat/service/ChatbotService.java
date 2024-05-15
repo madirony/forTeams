@@ -238,4 +238,15 @@ public class ChatbotService {
         chatbotSessionUUIDDto.setChatbotChatUUID(logSet.getChatbotChatUUID());
         return chatbotSessionUUIDDto;
     }
+
+    public void deleteChatLog(String chatbotChatUUID) {
+        Optional<SavedChatLogSet> optionalSavedChatLogSet = savedChatLogSetRepository.findById(chatbotChatUUID);
+        if (optionalSavedChatLogSet.isPresent()) {
+            savedChatLogSetRepository.deleteById(chatbotChatUUID);
+            log.info("Deleted chat log with UUID: {}", chatbotChatUUID);
+        } else {
+            log.error("Chat log with UUID {} not found", chatbotChatUUID);
+            throw new IllegalArgumentException("Chat log not found");
+        }
+    }
 }
