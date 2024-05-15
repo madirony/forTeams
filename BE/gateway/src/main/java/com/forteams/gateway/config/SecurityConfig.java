@@ -20,7 +20,7 @@ public class SecurityConfig {
         httpSecurity
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(CsrfConfigurer::disable)
-                .httpBasic(HttpBasicConfigurer::disable)
+//                .httpBasic(HttpBasicConfigurer::disable)
                 .authorizeHttpRequests(request -> request
 //                        .requestMatchers("/admin/**").hasRole("ADMIN")
 //                    .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")
