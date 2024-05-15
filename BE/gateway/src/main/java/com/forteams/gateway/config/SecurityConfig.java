@@ -28,7 +28,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOriginPattern("*");
+//        configuration.addAllowedOriginPattern("*");
+        configuration.addAllowedOrigin("https://forteams.co.kr");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
 //        configuration.setAllowCredentials(true);
