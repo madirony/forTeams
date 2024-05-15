@@ -1,16 +1,13 @@
 import axios from "util/baseAPI";
 
 //폴더 목록 불러오기
-const getFolders = async (userId) => {
+const getFolders = async () => {
   try {
     const response = await axios({
       method: "get",
-      url: `api/v1/chatbot/folder`,
-      params: {
-        userId: userId,
-      },
+      url: "api/v1/folder",
     });
-    console.log("폴더 목록 불러오기 api요청", response.data);
+    console.log("폴더 목록 불러오기 api요청", response);
     return response.data;
   } catch (error) {
     console.log("폴더 목록 불러오기 중 에러 발생", error);
@@ -22,7 +19,7 @@ const createFolder = async (folderName, userId) => {
   try {
     const response = await axios({
       method: "post",
-      url: "api/v1/chatbot/folder",
+      url: "api/v1/folder",
       data: {
         folderName: folderName,
         userId: userId,
@@ -64,6 +61,24 @@ const deleteFolder = async (folderId) => {
     return response.data;
   } catch (error) {
     console.log("폴더 삭제 중 에러 발생", error);
+  }
+};
+
+//폴더에 챗봇 내역 저장
+const saveMyChatbot = async () => {
+  try {
+    const response = await axios({
+      method: "post",
+      url: "api/v1/folder/categorized-chatbot",
+      // data: {
+      //   folderName: folderName,
+      //   userId: userId,
+      // },
+    });
+    console.log("폴더에 내 챗봇 내역 생성 api요청", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("폴더에 내 챗봇 내역 생성 중 에러 발생", error);
   }
 };
 
