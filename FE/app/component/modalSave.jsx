@@ -8,7 +8,7 @@ import { useState } from "react";
 
 export default function ModalSave({ chatbotid, openModalSave }) {
   // ★유저 uuid 조회
-  const userId = "12345";
+  // const userId = "12345";
 
   // 제목과 폴더 정보 추적하기
   const [title, setTitle] = useState("");
