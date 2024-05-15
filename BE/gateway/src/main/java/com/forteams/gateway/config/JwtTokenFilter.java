@@ -1,6 +1,7 @@
 package com.forteams.gateway.config;
 
 import com.forteams.gateway.service.TokenService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpCookie;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.Config> {
 
     public static class Config {
@@ -36,6 +38,7 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             String token = getTokenFromRequest(exchange.getRequest());
+            log.info(">>>>>>>>Token : "+token);
             if (token != null) {
                 return tokenService.validateTokenAndGetMsUuid(token)
                         .flatMap(msUuid -> {
