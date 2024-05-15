@@ -14,6 +14,8 @@ import {
   DropdownItem,
 } from "@nextui-org/dropdown";
 
+import { deleteChatLog } from "apis/allLog";
+
 export default function ThreedotDropdown({
   reset,
   trash,
@@ -22,8 +24,22 @@ export default function ThreedotDropdown({
   openModalShare,
   openModalSave,
   logId,
+  setLogId,
 }) {
   // console.log("??threedot에서???", logId);
+
+  const handleDelete = async () => {
+    try {
+      const response = await deleteChatLog(logId);
+      console.log("삭제 성공:", response);
+      // 전 페이지로 보내기
+      // setLogId("");
+      window.location.reload();
+    } catch (error) {
+      console.error("삭제 실패:", error);
+    }
+  };
+
   return (
     <Dropdown>
       <DropdownTrigger>
@@ -51,7 +67,7 @@ export default function ThreedotDropdown({
             className={styles.dropdownItem}
             key="trash"
             startContent={<ThreeTrash />}
-            onClick={() => console.log("삭제하기 버튼")}
+            onClick={() => handleDelete()}
           >
             삭제하기
           </DropdownItem>
