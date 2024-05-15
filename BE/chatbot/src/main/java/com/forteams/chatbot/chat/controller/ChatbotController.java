@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/chatbot")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000, https://forteams.co.kr")
 public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;
     private final ChatbotService chatbotService;
