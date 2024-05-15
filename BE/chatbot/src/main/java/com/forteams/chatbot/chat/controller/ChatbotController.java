@@ -1,6 +1,7 @@
 package com.forteams.chatbot.chat.controller;
 
 import com.forteams.chatbot.chat.dto.*;
+import com.forteams.chatbot.chat.entity.ChatbotLogSet;
 import com.forteams.chatbot.chat.entity.SavedChatLogSet;
 import com.forteams.chatbot.chat.service.ChatbotService;
 import com.forteams.chatbot.chat.service.StreamStatusService;
@@ -66,7 +67,7 @@ public class ChatbotController {
     @PostMapping("/load-chat/{chatbotChatUUID}")
     public ResponseEntity<String> loadChatLog(@PathVariable String chatbotChatUUID) {
         chatbotService.loadChatLog(chatbotChatUUID);
-        return ResponseEntity.ok("Chat log loaded for chatbotChatUUID: " + chatbotChatUUID);
+        return ResponseEntity.ok(chatbotChatUUID);
     }
 
     @PostMapping("/func")
@@ -91,6 +92,13 @@ public class ChatbotController {
     public ResponseEntity<ChatbotSessionUUIDDto> getChatUUID(@PathVariable String chatbotUUID){
         ChatbotSessionUUIDDto chatbotSessionUUIDDto = chatbotService.getChatbotChatUUID(chatbotUUID);
         return ResponseEntity.ok(chatbotSessionUUIDDto);
+    }
+
+    @GetMapping("/load-chatlogs/{chatbotChatUUID}")
+    public ResponseEntity<ChatbotLogSet> getChatLogs(@PathVariable String chatbotChatUUID) {
+        Optional<ChatbotLogSet> chatLogs = chatbotService.getChatLogsByUUID(chatbotChatUUID);
+        return chatLogs.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @MessageMapping("chatbot.message.{chatbotUUID}")

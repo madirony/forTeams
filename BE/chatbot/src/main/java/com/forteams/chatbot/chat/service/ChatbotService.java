@@ -173,6 +173,10 @@ public class ChatbotService {
         return savedChatLogSetRepository.findById(chatbotChatUUID);
     }
 
+    public Optional<ChatbotLogSet> getChatLogsByUUID(String chatbotChatUUID) {
+        return chatbotLogSetRepository.findByChatbotChatUUID(chatbotChatUUID);
+    }
+
     public void updateShareFlag(String chatbotChatUUID) {
         Optional<SavedChatLogSet> optionalSavedChatLogSet = savedChatLogSetRepository.findById(chatbotChatUUID);
         if (optionalSavedChatLogSet.isPresent()) {
