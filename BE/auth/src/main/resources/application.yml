@@ -110,7 +110,7 @@ server:
 
 # JWT Secret Key
 app:
-  secret-key: ENC(tC3bBQmReVPbgqgBOSFJTAKBLV9BcGuFEYvtTKWb7BivPUev31eH/uaOWOMvxJ2fdnlDh3hRc/4=)
+  secret-key: ENC(NqAJbCF2cJjys/fltEU6Xqn7RAQ+IyUkai+h4N69TICiqaAkELN0gJlG6EMH8Ejop2OIY8UK2iU=)
 
 logging:
   level:
