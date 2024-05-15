@@ -73,12 +73,15 @@ public class ChatbotController {
     @PostMapping("/func")
     public ResponseEntity<String> getRecommendation() {
         String department = "A";
-
+        log.info(">>> 여기에요! 1");
         if (department == null || department.isEmpty()) {
             return ResponseEntity.badRequest().body("Department info is missing");
         }
 
+        log.info(">>> 여기에요! 2");
         String recommendation = chatbotService.fetchRecommendation(department);
+
+        log.info(">>> 여기에요! 4");
         return ResponseEntity.ok(recommendation);
     }
 
