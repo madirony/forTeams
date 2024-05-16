@@ -5,9 +5,8 @@ import React, { useEffect } from "react";
 import { decodeToken } from "util/getToken";
 
 export default function LayoutContent({ children }) {
-  // 페이지가 로드될 때마다 사용자 정보를 로컬에 저장
+  // 페이지가 로드될 때마다 사용자 정보를 로컬에 저장하는 함수
   useEffect(() => {
-    console.log("사용자 정보를 로컬에 저장");
     decodeToken();
   }, []);
 

@@ -16,14 +16,6 @@ export default function Main() {
     const testuserId = LocalStorage.getItem("userId");
     const testuserNickname = LocalStorage.getItem("userNickname");
     const testuserDept = LocalStorage.getItem("userDept");
-    console.log(
-      "testuserId:",
-      testuserId,
-      "testuserNickname",
-      testuserNickname,
-      "testuserDept",
-      testuserDept,
-    );
   }, []);
 
   const userName = "이수민";
@@ -32,7 +24,6 @@ export default function Main() {
 
   // 윈도우 가로길이를 가져오기
   const { width } = GetWindowSize();
-  // console.log("width:", width);
 
   return (
     <div className={styles.root}>

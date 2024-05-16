@@ -42,7 +42,8 @@ const decodeToken = () => {
     console.log("[decodeToken] accessToken이 없습니다");
     return null;
   }
-  console.log("[decodeToken] accessToken :", accessToken);
+  console.log("[decodeToken] 성공");
+  // console.log("[decodeToken] 성공 :", accessToken);
 
   try {
     const decodedToken = jwtDecode(accessToken);
@@ -51,20 +52,17 @@ const decodeToken = () => {
     const userDept = decodedToken.dept;
 
     // 로컬에 userId, userName, userDept를 저장
+    console.log(
+      "사용자 정보를 로컬에 저장했습니다.",
+      userID,
+      userNickname,
+      userDept,
+    );
+
     LocalStorage.setItem("userId", userID);
     LocalStorage.setItem("userNickname", userNickname);
     LocalStorage.setItem("userDept", userDept);
 
-    console.log(
-      "userID 저장:",
-      userID,
-      "/",
-      "userNickname 저장:",
-      userNickname,
-      "/",
-      "userDept 저장:",
-      userDept,
-    );
     return { userID, userNickname, userDept };
   } catch (error) {
     console.log("[decodeToken] 토큰 가져오기 실패 :", error);

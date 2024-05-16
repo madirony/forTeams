@@ -14,6 +14,20 @@ import RecoQuestions from "component/recoQuestions";
 import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
 
 export default function ChatBotMain() {
+  // ★Local에서 사용자 정보를 조회해오기
+  const [userId, setUserId] = useState("");
+  const [userNickname, setUserNickname] = useState("");
+  const [userDept, setUserDept] = useState("");
+
+  useEffect(() => {
+    const tempUserId = LocalStorage.getItem("userId");
+    const tempUserNickname = LocalStorage.getItem("userNickname");
+    const tempUserDept = LocalStorage.getItem("userDept");
+    tempUserId && setUserId(tempUserId);
+    tempUserNickname && setUserNickname(tempUserNickname);
+    tempUserDept && setUserDeptUserId(tempUserDept);
+  }, []);
+
   // 모달 오픈 여부를 저장할 변수 ================================
   const [showModalShare, setShowModalShare] = useState(false);
   const [showModalSave, setShowModalSave] = useState(false);
@@ -93,7 +107,7 @@ export default function ChatBotMain() {
         console.log("Connected to the WebSocket");
 
         stompClient.subscribe(
-          "/exchange/chatbot.exchange/chatbot.123",
+          `/exchange/chatbot.exchange/chatbot.${userId}`,
           (message) => {
             const receivedMsg = JSON.parse(message.body);
             // console.log("Received message : ", receivedMsg);
@@ -137,7 +151,7 @@ export default function ChatBotMain() {
 
   // 현재 챗봇 uuid API조회 ========================================
   // ★ userUUID 수정필요
-  const userUUID = "123";
+  const userUUID = userId;
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   useEffect(() => {
     getCurrentChatUUID(userUUID).then((response) => {
@@ -181,7 +195,7 @@ export default function ChatBotMain() {
         msg: msg,
       };
       client.publish({
-        destination: "/pub/chatbot.message.123",
+        destination: `/pub/chatbot.message.${userId}`,
         body: JSON.stringify(message),
       });
     }
@@ -203,7 +217,7 @@ export default function ChatBotMain() {
         msg: msg,
       };
       client.publish({
-        destination: "/pub/chatbot.message.123",
+        destination: `/pub/chatbot.message.${userId}`,
         body: JSON.stringify(message),
       });
 
@@ -214,7 +228,7 @@ export default function ChatBotMain() {
         msg: msg,
       };
       client.publish({
-        destination: "/pub/chatbot.message.123",
+        destination: `/pub/chatbot.message.${userId}`,
         body: JSON.stringify(recommendMessage),
       });
     }
