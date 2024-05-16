@@ -7,12 +7,12 @@ export function middleware(request) {
   const authToken = cookies.get("ACCESS_TOKEN");
   console.log("미들웨어에서 authToken 확인", authToken);
 
-  // 인증 토큰이 없으면 로그인 페이지로 리다이렉트
-  //   if (!authToken) {
-  //     return NextResponse.redirect(new URL("/login", request.url));
-  //   }
+  //   인증 토큰이 없으면 로그인 페이지로 리다이렉트
+  if (!authToken) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
-  // 인증된 사용자는 요청을 계속 처리
+  //   인증된 사용자는 요청을 계속 처리
   //   return NextResponse.next();
   return NextResponse.redirect(new URL("/main", request.url));
 }
