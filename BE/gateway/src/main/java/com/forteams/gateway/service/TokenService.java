@@ -2,6 +2,7 @@ package com.forteams.gateway.service;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 
 @Service
+@Slf4j
 public class TokenService {
 
     @Value("${jwt.secret}")
@@ -23,29 +25,26 @@ public class TokenService {
 
 
     public Mono<String> validateTokenAndGetMsUuid(String jwt) {
-        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-
         try {
+            Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+
             String subject = Jwts.parserBuilder()
                     .setSigningKey(key)
-
                     .build()
                     .parseClaimsJws(jwt)
                     .getBody()
                     .getSubject();
 
-
+            log.debug("Parsed subject (msUuid): {}", subject);
             return Mono.just(subject);
         } catch (ExpiredJwtException e) {
-            System.out.println("Token expired");
+            log.warn("Token expired: {}", e.getMessage());
             return renewToken(jwt);
         } catch (JwtException e) {
-            System.out.println("Token validation error");
-            e.printStackTrace();
-            return Mono.error(new RuntimeException("Invalid token!!!!!!!!!!!!!!"));
+            log.error("Token validation error: ", e);
+            return Mono.error(new RuntimeException("Invalid token"));
         } catch (Exception e) {
-            System.out.println("Token processing error");
-            e.printStackTrace();
+            log.error("Token processing error: ", e);
             return Mono.error(new RuntimeException("Token processing error"));
         }
     }
