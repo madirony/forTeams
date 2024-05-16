@@ -10,6 +10,7 @@ import MypageAllLogs from "template/mypage/mypageAllLogs";
 import MypageMyLogs from "template/mypage/mypageMyLogs";
 import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
+import LocalStorage from "util/localStorage";
 
 export default function Mypage() {
   // ★Local에서 사용자 정보를 조회 =================================
