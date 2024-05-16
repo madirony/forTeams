@@ -17,12 +17,11 @@ logging:
     org:
       springframework:
         cloud:
-
           gateway: DEBUG
-          reactive:
-            DispatcherHandler: TRACE
-          client:
-            RestTemplate: DEBUG
+        reactive:
+          DispatcherHandler: TRACE
+        client:
+          RestTemplate: DEBUG
     reactor:
       netty:
         http:
