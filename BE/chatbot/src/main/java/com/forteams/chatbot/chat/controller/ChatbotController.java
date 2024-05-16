@@ -12,7 +12,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.bind.annotation.*;
@@ -72,11 +71,14 @@ public class ChatbotController {
     }
 
     @PostMapping("/func")
-    public ResponseEntity<String> getRecommendation(@RequestHeader("userDept") String userDept) {
-        if (userDept == null || userDept.isEmpty()) {
+    public ResponseEntity<String> getRecommendation() {
+        String department = "A";
+
+        if (department == null || department.isEmpty()) {
             return ResponseEntity.badRequest().body("Department info is missing");
         }
-        String recommendation = chatbotService.fetchRecommendation(userDept);
+
+        String recommendation = chatbotService.fetchRecommendation(department);
 
         return ResponseEntity.ok(recommendation);
     }
@@ -111,26 +113,21 @@ public class ChatbotController {
     }
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
-    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID,
-                            @Header("userId") String userId, @Header("userNickname") String userNickname,
-                            @Header("userDept") String userDept) {
+    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
 
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
-
-        MessageUser user = new MessageUser(userNickname, userId, userDept);
-
         switch (chatbotDto.getType()) {
             case "recommend":
-                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID, user);
+                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID);
                 break;
             case "ask":
                 rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
-                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder(), user);
+                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder());
                 break;
         }
     }
 
-    private void recommendResponse(String chatUUID, String chatbotUUID, MessageUser user) {
+    private void recommendResponse(String chatUUID, String chatbotUUID) {
         List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
 
         if (validMessages.isEmpty()) {
@@ -138,6 +135,7 @@ public class ChatbotController {
             return;
         }
 
+        MessageUser user = new MessageUser("손준성", "123", "A");
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
@@ -161,7 +159,7 @@ public class ChatbotController {
                 );
     }
 
-    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb, MessageUser user) {
+    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb) {
         List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
 
         if (validMessages.isEmpty()) {
@@ -169,6 +167,7 @@ public class ChatbotController {
             return;
         }
 
+        MessageUser user = new MessageUser("손준성", "123", "A");
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         AtomicInteger sequence = new AtomicInteger(0);
