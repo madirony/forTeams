@@ -1,6 +1,7 @@
 import styles from "styles/template/mypageInfo.module.css";
 import Input from "component/input";
 import GradientButton from "component/gradientButton";
+import LocalStorage from "util/localStorage";
 
 export default function MypageInfo() {
   // ★Local에서 사용자 정보를 조회 =================================
