@@ -4,7 +4,7 @@ import styles from "styles/page/layoutContent.module.css";
 import React, { useEffect, useState } from "react";
 import Main from "app/main/page";
 import LoginMain from "app/login/page";
-import { getIsLogined } from "util/getToken";
+import { getToken, decodeToken } from "util/getToken";
 
 export default function LayoutContent({ children }) {
   // 로그인 여부를 판단할 변수 선언
@@ -13,8 +13,8 @@ export default function LayoutContent({ children }) {
 
   // 페이지가 로드될 때마다 isLogined를 검사
   useEffect(() => {
-    console.log("furcating 페이지에서 getIsLogined");
-    getIsLogined();
+    console.log("furcating 페이지에서 토큰 까기");
+    decodeToken();
   }, []);
 
   // 리다이렉트 함수 사용하기

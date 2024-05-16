@@ -6,20 +6,6 @@
 //   console.log("모든 쿠키 :", cookieStore);
 // };
 
-// jwt 라이브러리로 읽어온 토큰을 파싱하는 함수
-// const decodeToken = () => {
-//   try {
-//     const decodedToken = jwtDecode(accessToken);
-//     const userID = decodedToken.sub;
-//     const userName = decodedToken.nickname;
-//     const userDept = decodedToken.dept;
-//     return { userID, userName, userDept };
-//   } catch (error) {
-//     console.log("토큰 가져오기 실패 :", error);
-//     return null;
-//   }
-// };
-
 import { useState } from "react";
 
 // CSR 쿠키에서 전체 쿠키를 읽어오는 함수
@@ -37,15 +23,39 @@ const getCookies = () => {
 };
 
 // 읽어온 쿠키에서 ACCESS TOKEN을 분리하는 함수
-const getIsLogined = () => {
+const getToken = () => {
   const cookieObj = getCookies();
-  const token = cookieObj.ACCESS_TOKEN;
-  const tokenSub = cookieObj.ACCESS_TOKEN.sub;
-  console.log("token :", token);
-  console.log("token sub :", tokenSub);
-  return tokenAvailable ? true : false;
+  const accessToken = cookieObj.ACCESS_TOKEN;
+  console.log("token :", accessToken);
+  return accessToken;
   // console.log("getIsLogined 실행", prev);
   // return !prev;
 };
 
-export { getCookies, getIsLogined };
+// jwt 라이브러리로 읽어온 ACCESS TOKEN을 파싱하는 함수
+const decodeToken = () => {
+  const accessToken = getToken();
+
+  try {
+    const decodedToken = jwtDecode(accessToken);
+    const userID = decodedToken.sub;
+    const userName = decodedToken.nickname;
+    const userDept = decodedToken.dept;
+    console.log(
+      "userID :",
+      userID,
+      "/",
+      "userName :",
+      userName,
+      "/",
+      "userDept :",
+      userDept,
+    );
+    return { userID, userName, userDept };
+  } catch (error) {
+    console.log("토큰 가져오기 실패 :", error);
+    return null;
+  }
+};
+
+export { getCookies, getToken, decodeToken };
