@@ -46,7 +46,7 @@ export default function ModalSave({ chatbotid, openModalSave }) {
   return (
     <div className={styles.modalBackground} onClick={openModalSave}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {/* {`현재 제목은: ${title} /`} */}
+        {`현재 제목은: ${title}`}
         {` 현재 폴더는: ${folder}`}
         {` 현재 폴더 id: ${folderId}`}
         <p className={styles.modalTitle}>답변 저장하기</p>
