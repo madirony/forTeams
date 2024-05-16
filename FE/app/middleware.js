@@ -19,5 +19,6 @@ export function middleware(request) {
 
 // 미들웨어가 적용될 경로 설정
 export const config = {
-  matcher: "/:path*",
+  //   matcher: "/:path*",
+  matcher: "/",
 };
