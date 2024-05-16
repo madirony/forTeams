@@ -19,7 +19,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   const [folders, setFolders] = useState([]);
   useEffect(() => {
     getFolders().then((response) => {
-      console.log("폴더 목록 출력 아자아자", response);
+      console.log("폴더 목록 출력 아자아자!", response);
       const folderNames = response.map((item) => item.name);
       setFolders(folderNames);
     });
