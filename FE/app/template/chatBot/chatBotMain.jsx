@@ -17,7 +17,7 @@ import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
 export default function ChatBotMain() {
   // ★Local에서 사용자 정보를 조회해오기
   const [userId, setUserId] = useState("");
-  const [userNickname, setUserNickname] = useState("");
+  const [userNickname, setUserNickname] = useState("사용자");
   const [userDept, setUserDept] = useState("");
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function ChatBotMain() {
     const tempUserDept = LocalStorage.getItem("userDept");
     tempUserId && setUserId(tempUserId);
     tempUserNickname && setUserNickname(tempUserNickname);
-    tempUserDept && setUserDeptUserId(tempUserDept);
+    tempUserDept && setUserDept(tempUserDept);
   }, []);
 
   // 모달 오픈 여부를 저장할 변수 ================================
