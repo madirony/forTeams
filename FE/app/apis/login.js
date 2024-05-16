@@ -14,4 +14,18 @@ const addLoginInfo = async (userDept) => {
   }
 };
 
-export { addLoginInfo };
+// 로그아웃
+const logout = async () => {
+  try {
+    const response = await axios({
+      method: "post",
+      url: `api/v1/auth/logout`,
+    });
+    console.log("로그아웃 요청 성공:", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("로그아웃 요청 에러:", error);
+  }
+};
+
+export { addLoginInfo, logout };

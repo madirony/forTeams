@@ -34,15 +34,14 @@ const getCookies = () => {
 //   }
 // };
 
-const GetIsLogined = () => {
-  const [isLogined, setIsLogined] = useState(false);
-
+// ACCESS_TOKEN이 있으면 true, 없으면 false를 return
+const getIsLogined = () => {
   const cookieObj = getCookies();
-  {
-    cookieObj.ACCESS_TOKEN ? setIsLogined(true) : null;
-  }
-  console.log("get is logined 들어오긴 함 :", isLogined);
-  return isLogined;
+  const tokenAvailable = cookieObj.ACCESS_TOKEN;
+  console.log("get is logined 함수에 들어오긴 함 :", tokenAvailable);
+  return tokenAvailable ? true : false;
+  // console.log("getIsLogined 실행", prev);
+  // return !prev;
 };
 
-export { getCookies, GetIsLogined };
+export { getCookies, getIsLogined };
