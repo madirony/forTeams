@@ -17,12 +17,12 @@ import java.util.List;
 public class TokenTestController {
 
     @GetMapping
-    public ResponseEntity<String> getMsUuid(@RequestHeader("msUuid") String msUuid){
+    public ResponseEntity<Void> getMsUuid(@RequestHeader("msUuid") String msUuid){
         try{
             log.info("***************************\tgetMsUuid 도착\t***************************");
             log.info(msUuid);
 
-            return ResponseEntity.ok(msUuid);
+            return ResponseEntity.ok(null);
         }catch (Exception e){
             log.info(">>>>>"+e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
