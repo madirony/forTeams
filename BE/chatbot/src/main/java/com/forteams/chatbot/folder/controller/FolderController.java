@@ -22,8 +22,9 @@ public class FolderController {
     private final FolderService folderService;
 
     @PostMapping
-    public ResponseEntity<Void> postFolder(@RequestHeader("msUuid") String msUuid, @RequestBody String folderName){
+    public ResponseEntity<Void> postFolder(/*@RequestHeader("msUuid") String msUuid,*/ @RequestBody String folderName){
         try{
+            String msUuid = "1d0e5fae-f3de-4f5d-93f5-2f5d6e5da1b7";
             folderService.createFolder(msUuid,folderName);
             return ResponseEntity.ok(null);
         }catch (Exception e){
@@ -31,9 +32,10 @@ public class FolderController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestHeader("msUuid") String msUuid){
+    public ResponseEntity<List<FolderResponseDto>> getFolders(/*@RequestHeader("msUuid") String msUuid*/){
         try{
             log.info("getFolders 도착");
+            String msUuid = "1d0e5fae-f3de-4f5d-93f5-2f5d6e5da1b7";
             List<FolderResponseDto> list = folderService.getFolders(msUuid);
             return ResponseEntity.ok(list);
         }catch (Exception e){
@@ -44,8 +46,9 @@ public class FolderController {
     }
 
     @DeleteMapping("/{folderId}")
-    public ResponseEntity<Void> deleteFolder(@PathVariable Long folderId, @RequestHeader("msUuid") String msUuid){
+    public ResponseEntity<Void> deleteFolder(@PathVariable Long folderId/*, @RequestHeader("msUuid") String msUuid*/){
         try{
+            String msUuid = "1d0e5fae-f3de-4f5d-93f5-2f5d6e5da1b7";
             folderService.removeFolder(folderId,msUuid);
             return ResponseEntity.ok(null);
         }catch (Exception e){
@@ -56,8 +59,9 @@ public class FolderController {
 
 
     @PutMapping
-    public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto, @RequestHeader("msUuid") String msUuid){
+    public ResponseEntity<Void> putFolder(@RequestBody FolderUpdateDto folderUpdateDto/*, @RequestHeader("msUuid") String msUuid*/){
         try{
+            String msUuid = "1d0e5fae-f3de-4f5d-93f5-2f5d6e5da1b7";
             folderService.updateFolder(folderUpdateDto, msUuid);
             return ResponseEntity.ok(null);
         }catch (Exception e){
