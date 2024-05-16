@@ -99,7 +99,7 @@ spring:
             - Path=/api/ws/openchat
           filters:
 #            - JwtTokenFilter
-
-
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
   application:
     name: gateway
