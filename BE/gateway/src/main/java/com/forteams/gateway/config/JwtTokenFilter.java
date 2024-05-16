@@ -38,7 +38,7 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             String token = getTokenFromRequest(exchange.getRequest());
-            log.info(">>>>>>>>Token : "+token);
+            log.info(">>>>>>>>>>>>>>>>>>>>           Token : "+token+"            >>>>>>>>>>>>>");
             if (token != null) {
                 return tokenService.validateTokenAndGetMsUuid(token)
                         .flatMap(msUuid -> {
