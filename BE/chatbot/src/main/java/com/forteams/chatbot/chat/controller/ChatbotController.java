@@ -73,15 +73,13 @@ public class ChatbotController {
     @PostMapping("/func")
     public ResponseEntity<String> getRecommendation() {
         String department = "A";
-        log.info(">>> 여기에요! 1");
+
         if (department == null || department.isEmpty()) {
             return ResponseEntity.badRequest().body("Department info is missing");
         }
 
-        log.info(">>> 여기에요! 2");
         String recommendation = chatbotService.fetchRecommendation(department);
 
-        log.info(">>> 여기에요! 4");
         return ResponseEntity.ok(recommendation);
     }
 
@@ -116,7 +114,6 @@ public class ChatbotController {
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
-        log.info("message Received");
 
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
         switch (chatbotDto.getType()) {
@@ -152,7 +149,7 @@ public class ChatbotController {
                 .bodyToMono(String.class)
                 .doOnNext(data -> {
                     ChatbotDto chatbotDto = new ChatbotDto("recommendRes", "BOT", chatUUID, data, -1);
-                    log.info("recommendResponse data: {}", data);
+
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                 })
                 .doOnTerminate(() -> log.info("Recommendation request completed"))
@@ -189,7 +186,6 @@ public class ChatbotController {
                 .doOnNext(data -> {
                     ChatbotDto chatbotDto = new ChatbotDto("stream", "BOT", chatUUID, data, -1);
                     chatbotDto.setSequence(sequence.getAndIncrement());
-                    log.info("Streaming data sequence: {}", chatbotDto.getSequence());
                     rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
                     sb.append(data);
                 })
@@ -221,7 +217,7 @@ public class ChatbotController {
     @RabbitListener(queues = "chatbot.queue")
     public void receive(ChatbotDto chatbotDto) {
         if (chatbotDto.getType().equals("recommend")) {
-            log.info("Data received ::: {}", chatbotDto);
+//            log.info("Data received ::: {}", chatbotDto);
         }
     }
 }
