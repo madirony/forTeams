@@ -50,8 +50,13 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                         .switchIfEmpty(Mono.defer(() -> {
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
-                        }));
-                log.info("************************   "+String.valueOf(msUuid1));
+                        }))
+                        .onErrorResume(e -> {
+                            log.error("Token validation error:           ", e);
+                            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                            return exchange.getResponse().setComplete();
+                        });
+                log.info("************************   "+msUuid1);
                 return msUuid1;
             } else {
                 log.info(">ASDASDAS<DASDAS<DAS>DASD>AS<DASDASDK#UR*$*********************************");
