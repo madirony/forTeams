@@ -32,7 +32,7 @@ public class JwtInCookieRedis {
     public void putAccessJwtInCookie(String accessJwt, int maxAge, HttpServletResponse response) {
         Cookie cookie = new Cookie("ACCESS_TOKEN", accessJwt); // 쿠키 생성
         cookie.setHttpOnly(false); // 자바스크립트 접근 허용
-        cookie.setSecure(false); // HTTPS 통신에서만 쿠키 전송이 아니라 다 허용
+        cookie.setSecure(true); // HTTPS 통신에서만 쿠키 전송이 아니라 다 허용
         cookie.setPath("/"); // 쿠키의 경로 설정
         cookie.setMaxAge(maxAge); // 쿠키 만료 시간 설정 (예: 1주일)
         response.addCookie(cookie); // 응답에 쿠키 추가
@@ -57,7 +57,7 @@ public class JwtInCookieRedis {
     public void removeJwtFromCookie(HttpServletResponse response) {
         Cookie jwtCookie = new Cookie("ACCESS_TOKEN", null);
         jwtCookie.setHttpOnly(false);
-        jwtCookie.setSecure(false); // HTTPS를 사용하는 경우 true로 설정
+        jwtCookie.setSecure(true); // HTTPS를 사용하는 경우 true로 설정
         jwtCookie.setMaxAge(0);
         jwtCookie.setPath("/");
         response.addCookie(jwtCookie);
