@@ -1,4 +1,4 @@
-package com.forteams.chatbot.config;  // Use your actual package name
+package com.forteams.chatbot.common.config;  // Use your actual package name
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
