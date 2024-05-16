@@ -4,10 +4,10 @@ import axios from "util/baseAPI";
 const getChatLogList = async (userUUID) => {
   try {
     const response = await axios.get(`api/v1/chatbot/saved-chats/${userUUID}`);
-    console.log("서버 응답 옴?", response.data);
+    console.log("getChatLogList API 응답", response.data);
     return response.data;
   } catch (error) {
-    console.error("챗봇 로그 UUID 목록 조회 실패", error);
+    console.error("getChatLogList 요청 실패", error);
   }
 };
 
@@ -38,4 +38,5 @@ const deleteChatLog = async (chatbotChatUUID) => {
     console.log("챗봇 데이터 삭제 중 에러 발생", error);
   }
 };
+
 export { getChatLogList, getChatLogDetail, deleteChatLog };
