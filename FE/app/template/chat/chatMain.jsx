@@ -9,7 +9,6 @@ import ChattingBubble from "component/chattingBubble";
 import ChatBotInput from "component/chatBotInput";
 
 export default function ChatMain() {
-  const userId = "666";
   const [messages, setMessages] = useState([]);
   const [client, setClient] = useState(null);
   const [replyTo, setReplyTo] = useState(null);
@@ -66,17 +65,23 @@ export default function ChatMain() {
       .catch((error) => console.error("메시지 로드 실패:", error));
   }, []);
 
-  useEffect(() => {
-    axios;
-    // .get("http://localhost:8080/api/v1/openchat/today")
-    axios
-      .get("https://forteams.co.kr/api/v1/openchat/today")
-      .then((response) => {
-        setMessages(response.data);
-        scrollToBottom();
-      })
-      .catch((error) => console.error("메시지 로드 실패:", error));
-  }, []);
+    // ★Local에서 사용자 정보를 조회 =================================
+    const [isInitialized, setIsInitialized] = useState(false);
+    const [userId, setUserId] = useState("");
+    const [userNickname, setUserNickname] = useState("사용자");
+    // const [userDept, setUserDept] = useState("");
+  
+    useEffect(() => {
+      const tempUserId = LocalStorage.getItem("userId");
+      const tempUserNickname = LocalStorage.getItem("userNickname");
+      // const tempUserDept = LocalStorage.getItem("userDept");
+  
+      tempUserId && setUserId(tempUserId);
+      tempUserNickname && setUserNickname(tempUserNickname);
+      // tempUserDept && setUserDept(tempUserDept);
+  
+      setIsInitialized(true);
+    }, []);
 
   useEffect(() => {
     console.log(`Updated replyMsgUUID: ${replyMsgUUID}, replyTo: ${replyTo}`);
@@ -94,7 +99,7 @@ export default function ChatMain() {
         senderUUID: userId,
         message: content,
         messageUUID: "",
-        nickname: "{헤더에서 유저의 닉네임을 여기에 담아야 함}",
+        nickname: userNickname,
         replyMsgUUID: replyMsgUUID,
         replyTo: replyTo,
         removeCheck: "",
@@ -120,9 +125,10 @@ export default function ChatMain() {
         {messages.map((msg, index) => (
           <ChattingBubble
             key={index}
+            currentUuid={userId}
             uuid={msg.senderUUID}
             msgUuid={msg.messageUUID}
-            user="{헤더에서 유저의 닉네임을 여기에 담아야 함}"
+            user={userNickname}
             content={msg.message}
             createdAt={msg.createdAt}
             handleReply={handleReply}

@@ -2,11 +2,10 @@ import styles from "styles/component/chattingBubble.module.css";
 import Image from "next/image";
 import getDate from "util/getDate";
 
-export default function ChattingBubble({ uuid, msgUuid, user, content, createdAt, handleReply, replyTo }) {
+export default function ChattingBubble({ currentUuid, uuid, msgUuid, user, content, createdAt, handleReply, replyTo }) {
   let chatAt = getDate(createdAt);
-  const userId = "{헤더에서 유저의 uuid를 여기에 담아야 함}";
 
-  if (userId === uuid) {
+  if (currentUuid === uuid) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.myName}>{user}</div>
