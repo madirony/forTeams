@@ -1,12 +1,8 @@
 "use client";
 
-// SSR 쿠키에서 토큰을 읽어오는 함수
-// const getCookies = () => {
-//   const cookieStore = cookies().getAll();
-//   console.log("모든 쿠키 :", cookieStore);
-// };
-
 import { useState } from "react";
+import { NextResponse, NextRequest } from "next/server";
+import { jwtDecode } from "jwt-decode";
 
 // CSR 쿠키에서 전체 쿠키를 읽어오는 함수
 const getCookies = () => {
@@ -23,18 +19,30 @@ const getCookies = () => {
 };
 
 // 읽어온 쿠키에서 ACCESS TOKEN을 분리하는 함수
-const getToken = () => {
-  const cookieObj = getCookies();
-  const accessToken = cookieObj.ACCESS_TOKEN;
-  console.log("token :", accessToken);
+// const getToken = () => {
+//   const cookieObj = getCookies();
+//   const accessToken = cookieObj.ACCESS_TOKEN;
+//   console.log("accessToken :", accessToken);
+//   return accessToken;
+// };
+
+// 미들웨어에서 읽어온 쿠키에서 ACCESS TOKEN을 분리하는 함수
+
+const getToken = (request) => {
+  const cookies = request.cookies;
+  const accessToken = cookies.get("ACCESS_TOKEN");
+  console.log("accessToken:", accessToken);
   return accessToken;
-  // console.log("getIsLogined 실행", prev);
-  // return !prev;
 };
 
 // jwt 라이브러리로 읽어온 ACCESS TOKEN을 파싱하는 함수
-const decodeToken = () => {
-  const accessToken = getToken();
+const decodeToken = (request) => {
+  const accessToken = getToken(request);
+  if (!accessToken) {
+    console.log("accessToken이 없습니다");
+    return null;
+  }
+  console.log("받아온 accessToken :", accessToken);
 
   try {
     const decodedToken = jwtDecode(accessToken);
