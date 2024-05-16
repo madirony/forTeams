@@ -8,7 +8,7 @@ function cleanMarkdown(markdownText) {
   return (
     markdownText
       // 한글 문자 뒤에 `.` 또는 `:`가 붙으면 개행 추가
-      .replaceAll("<br />", "\n\n'")
+      .replaceAll("<br />", "\n\nㅤ")
   );
 }
 
