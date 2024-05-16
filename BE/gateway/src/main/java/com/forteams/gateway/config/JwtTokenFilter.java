@@ -5,9 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 import org.springframework.http.HttpCookie;
@@ -50,6 +52,8 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                         })
                         .switchIfEmpty(Mono.defer(() -> {
                             log.warn("Token is invalid or expired");
+                            RestTemplate restTemplate = new RestTemplate();
+                            restTemplate.execute("https://forteams.co.kr/api/v2/1", HttpMethod.GET,null,null,new Object());
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
                         }))
