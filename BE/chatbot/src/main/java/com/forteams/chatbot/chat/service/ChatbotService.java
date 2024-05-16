@@ -156,7 +156,7 @@ public class ChatbotService {
                 .stream()
                 .map(savedChat -> {
                     String chatTitle = savedChat.getChatLogs().stream()
-                            .filter(chat -> "ask".equalsIgnoreCase(chat.getType()))
+                            .filter(chat -> "USER".equalsIgnoreCase(chat.getSender()))
                             .findFirst()
                             .map(chat -> chat.getMsg().length() > 100 ? chat.getMsg().substring(0, 100) + "..." : chat.getMsg())
                             .orElse("No Title");
