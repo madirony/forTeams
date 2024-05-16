@@ -23,11 +23,11 @@ public class TokenService {
 
 
     public Mono<String> validateTokenAndGetMsUuid(String jwt) {
-        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+//        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
         try {
             String subject = Jwts.parserBuilder()
-                    .setSigningKey(key)
+                    .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
                     .build()
                     .parseClaimsJws(jwt)
                     .getBody()
