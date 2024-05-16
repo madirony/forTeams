@@ -5,12 +5,17 @@ import com.forteams.auth.provider.JwtProvider;
 import com.forteams.auth.provider.JwtInCookieRedis;
 import com.forteams.auth.repository.UserRepository;
 import com.forteams.auth.service.token.RedisService;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -19,8 +24,11 @@ import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +45,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     private final UserRepository userRepository;
     private final JwtInCookieRedis jwtInCookieRedis;
 
+    @Value("${app.secret-key}")
+    private String secretKey;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -47,6 +57,30 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             Map<String, String> tokens = getTokens(oAuth2User);
             // msUuid+accessToken으로 jwt 만들기 -> cookie에 담을 예정 -----------------------------------------------
             String accessJwt = jwtProvider.generateAccessToken(msUuid); //  =======> accessToken을 안 쓰는데 뭐냐악...
+
+            Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+
+            try {
+                String subject = Jwts.parserBuilder()
+                        .setSigningKey(key)
+
+                        .build()
+                        .parseClaimsJws(accessJwt)
+                        .getBody()
+                        .getSubject();
+                System.out.println(">>>>      "+subject);
+
+
+            } catch (ExpiredJwtException e) {
+                System.out.println("Token expired           !!!!!!!!!");
+            } catch (JwtException e) {
+                System.out.println("Token validation error       !!!!!!!!!!");
+//                e.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("Token processing error          !!!!!!!!!!" );
+//                e.printStackTrace();
+            }
+
             jwtInCookieRedis.putAccessJwtInCookie(accessJwt, 7 * 24 * 60 * 60, response);
 //            Cookie cookie = new Cookie("ACCESS_TOKEN", accessJwt); // 쿠키 생성
 //            cookie.setHttpOnly(false); // 자바스크립트 접근 허용
