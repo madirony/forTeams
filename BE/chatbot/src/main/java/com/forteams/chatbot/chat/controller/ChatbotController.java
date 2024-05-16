@@ -112,7 +112,7 @@ public class ChatbotController {
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID,
-                            @Header("userId") String userId, @Header("userNickname") String userNickname,
+                            @Header("msUuid") String userId, @Header("userNickname") String userNickname,
                             @Header("userDept") String userDept) {
 
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
