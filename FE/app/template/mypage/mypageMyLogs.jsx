@@ -4,6 +4,8 @@ import MypageMyLogsDetail from "./mypageMyLogsDetail";
 import FolderIndex from "component/folderIndex";
 import { useEffect, useState } from "react";
 
+import { getFolders } from "apis/save";
+
 export default function MypageAllLogs({ openModalShare, openModalSave }) {
   // const router = useRouter();
 
@@ -15,8 +17,18 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
 
   // 마이 로그 전체 조회 API
   // 아래 예시는 API 호출 후 삭제
-  const folders = ["영상회의", "회의", "사용자설정", "사용자 지정 폴더"];
+  // const folders = ["영상회의", "회의", "사용자설정", "사용자 지정 폴더"];
 
+  const [folders, setFolders] = useState([]);
+  // 폴더 목록 조회 API
+  useEffect(() => {
+    getFolders().then((response) => {
+      console.log("폴더 목록 출력 아자아자", response);
+      const folderNames = response.map((item) => item.name);
+      setFolders(folderNames);
+      console.log("gfgfgfd", folders);
+    });
+  }, []);
   const datas = [
     {
       id: 1,
