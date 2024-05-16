@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { NextResponse, NextRequest } from "next/server";
 import { jwtDecode } from "jwt-decode";
+import LocalStorage from "./localStorage";
 
 // CSR 쿠키에서 전체 쿠키를 읽어오는 함수
 const getCookies = () => {
@@ -47,16 +48,22 @@ const decodeToken = () => {
   try {
     const decodedToken = jwtDecode(accessToken);
     const userID = decodedToken.sub;
-    const userName = decodedToken.nickname;
+    const userNickname = decodedToken.nickname;
     const userDept = decodedToken.dept;
+
+    // 로컬에 userId, userName, userDept를 저장
+    LocalStorage.setItem("userId", userID);
+    LocalStorage.setItem("userNickname", userNickname);
+    LocalStorage.setItem("userDept", userDept);
+
     console.log(
-      "userID :",
+      "userID 저장:",
       userID,
       "/",
-      "userName :",
+      "userName 저장:",
       userName,
       "/",
-      "userDept :",
+      "userDept 저장:",
       userDept,
     );
     return { userID, userName, userDept };

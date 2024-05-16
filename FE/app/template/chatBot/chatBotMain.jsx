@@ -6,7 +6,6 @@ import styles from "styles/template/chatBotMain.module.css";
 import ChatBotBubble from "component/chatbotBubble";
 import ThreedotDropdown from "component/threedotDropdown";
 import BigIndex from "component/bigIndex";
-import SmallIndex from "component/smallIndex";
 import ChatBotInput from "component/chatBotInput";
 import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
