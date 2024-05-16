@@ -53,6 +53,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         CustomOidcUser oAuth2User = (CustomOidcUser) authentication.getPrincipal();
         log.info("흠.........1");
         String msUuid = oAuth2User.getMsUuid();
+        log.info("흠....1.5 "+ msUuid);
         if( userRepository.findByMsUserEntity_MsUuid(msUuid) != null ) {
             log.info("흠.........2");
             Map<String, String> tokens = getTokens(oAuth2User);
