@@ -36,9 +36,6 @@ export default function ThreedotDropdown({
   const userNickname = LocalStorage.getItem("userNickname");
   const userDept = LocalStorage.getItem("userDept");
 
-  // ★userUUID 불러오기 수정 필요
-  // const userUUID = 123;
-
   // 현재 챗봇 uuid 가져오기
   const [chatUUID, setChatUUID] = useState("");
   useEffect(() => {
