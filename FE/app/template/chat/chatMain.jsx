@@ -121,7 +121,7 @@ export default function ChatMain() {
             key={index}
             uuid={msg.senderUUID}
             msgUuid={msg.messageUUID}
-            user="흑두루미"
+            user="{헤더에서 유저의 닉네임을 여기에 담아야 함}"
             content={msg.message}
             createdAt={msg.createdAt}
             handleReply={handleReply}

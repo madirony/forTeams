@@ -4,7 +4,7 @@ import getDate from "util/getDate";
 
 export default function ChattingBubble({ uuid, msgUuid, user, content, createdAt, handleReply, replyTo }) {
   let chatAt = getDate(createdAt);
-  const userId = "666";
+  const userId = "{헤더에서 유저의 uuid를 여기에 담아야 함}";
 
   if (userId === uuid) {
     return (
