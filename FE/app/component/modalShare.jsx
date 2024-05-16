@@ -9,19 +9,19 @@ export default function ModalShare({ chatbotid, openModalShare }) {
   // console.log("모달쉐어에서", chatbotid);
 
   // ★ 추후에 이걸로 바꾸기
-  // useEffect(() => {
-  //   // console.log("현재 chatbotid!!!!:", chatbotid);
-  //   shareLink(chatbotid).then((response) => {
-  //     console.log("modalshare에서 공유하기 링크 출력 뽑기", response);
-  //     setLink(response);
-  //   });
-  // }, [chatbotid]);
-
   useEffect(() => {
-    // 동적 URL 생성
-    const dynamicLink = `http://localhost:3000/share/${chatbotid}`;
-    setLink(dynamicLink);
+    // console.log("현재 chatbotid!!!!:", chatbotid);
+    shareLink(chatbotid).then((response) => {
+      // console.log("modalshare에서 공유하기 링크 출력 뽑기", response);
+      setLink(response);
+    });
   }, [chatbotid]);
+
+  // useEffect(() => {
+  //   // 동적 URL 생성
+  //   const dynamicLink = `http://localhost:3000/share/${chatbotid}`;
+  //   setLink(dynamicLink);
+  // }, [chatbotid]);
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text).then(

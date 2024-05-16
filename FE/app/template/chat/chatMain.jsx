@@ -55,19 +55,23 @@ export default function ChatMain() {
   }, []);
 
   useEffect(() => {
-    // axios.get('http://localhost:8080/api/v1/openchat/today')
-    axios.get('https://forteams.co.kr/api/v1/openchat/today')
-      .then(response => {
+    axios;
+    // .get("http://localhost:8080/api/v1/openchat/today")
+    axios
+      .get("https://forteams.co.kr/api/v1/openchat/today")
+      .then((response) => {
         setMessages(response.data);
         scrollToBottom();
       })
-      .catch(error => console.error('메시지 로드 실패:', error));
+      .catch((error) => console.error("메시지 로드 실패:", error));
   }, []);
 
   useEffect(() => {
-    // axios.get('http://localhost:8080/api/v1/openchat/today')
-    axios.get('https://forteams.co.kr/api/v1/openchat/today')
-      .then(response => {
+    axios;
+    // .get("http://localhost:8080/api/v1/openchat/today")
+    axios
+      .get("https://forteams.co.kr/api/v1/openchat/today")
+      .then((response) => {
         setMessages(response.data);
         scrollToBottom();
       })

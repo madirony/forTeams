@@ -15,27 +15,16 @@ const getCurrentChatUUID = async (chatbotUUID) => {
   }
 };
 
-// ===========================
-//  const [chatUUID, setChatUUID] = useState("");
-//   useEffect(() => {
-//     // ★userUUID 불러오기 수정 필요
-//     const userUUID = 123;
-//     getCurrentChatUUID(userUUID).then((response) => {
-//       // console.log("하나둘셋얍", response.chatbotChatUUID);
-//       setChatUUID(response.chatbotChatUUID);
-//     });
-//   }, []);
-//   // console.log(chatUUID);
-//   =====================
-
 // 챗봇 세션 내역 저장
-const saveChatbot = async (userUUID) => {
+const saveChatbot = async (userUUID, chatUUID) => {
   try {
     const response = await axios({
       method: "post",
       url: "api/v1/chatbot/save",
-      data: userUUID,
-      headers: { "Content-Type": "text/plain" },
+      data: {
+        userUUID: userUUID,
+        chatUUID: chatUUID,
+      },
     });
     console.log("챗봇 세션 내역 저장 api요청", response.data);
     return response.data;
@@ -72,4 +61,27 @@ const chatReload = async (chatbotChatUUID) => {
   }
 };
 
-export { getCurrentChatUUID, saveChatbot, pauseChatbot, chatReload };
+// 현재 채팅 세션의 채팅 데이터를 불러오기
+const loadChatLogs = async (chatbotChatUUID) => {
+  try {
+    const response = await axios({
+      method: "get",
+      url: `api/v1/chatbot/load-chatlogs/${chatbotChatUUID}`,
+    });
+    console.log(
+      "현재 채팅 세션의 채팅 데이터를 불러오기 api 요청",
+      response.data,
+    );
+    return response.data;
+  } catch (error) {
+    console.log("현재 채팅 세션의 채팅 데이터를 불러오기 중 에러 발생", error);
+  }
+};
+
+export {
+  getCurrentChatUUID,
+  saveChatbot,
+  pauseChatbot,
+  chatReload,
+  loadChatLogs,
+};
