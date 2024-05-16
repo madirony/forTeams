@@ -59,7 +59,7 @@ public class JwtProvider {
                 .setId(UUID.randomUUID().toString()) // Unique identifier for the token
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + validity))
-                .signWith(SignatureAlgorithm.HS256, key)
+                .signWith(key)
                 .compact();
     }
 
