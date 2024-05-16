@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,7 +34,6 @@ public class OpenChatService {
 
         log.info(String.valueOf(startOfDay) + String.valueOf(endOfDay));
 
-        // 데이터베이스 조회
         List<OpenChat> chatsFromDb = openChatRepository.findByCreatedAtBetween(String.valueOf(startOfDay), String.valueOf(endOfDay));
         List<OpenChatDto> result = chatsFromDb.stream().map(this::convertToDto).collect(Collectors.toList());
         result.addAll(getChatsFromRedis());
@@ -61,6 +57,7 @@ public class OpenChatService {
         dto.setSenderUUID(chat.getSenderUUID());
         dto.setMessage(chat.getMessage());
         dto.setMessageUUID(chat.getMessageUUID());
+        dto.setNickname(chat.getNickname());  // 닉네임 설정
         dto.setReplyMsgUUID(chat.getReplyMsgUUID());
         dto.setReplyTo(chat.getReplyTo());
         dto.setRemoveCheck(chat.getRemoveCheck());
@@ -74,6 +71,7 @@ public class OpenChatService {
                 dto.getSenderUUID(),
                 dto.getMessage(),
                 dto.getMessageUUID(),
+                dto.getNickname(),  // 닉네임 설정
                 dto.getReplyMsgUUID(),
                 dto.getReplyTo(),
                 dto.getRemoveCheck(),
@@ -95,7 +93,7 @@ public class OpenChatService {
         redisTemplate.opsForList().rightPush("chatMessages", dto);
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 3600000)
     public void saveMessagesToMongoDB() {
         List<?> rawMessages = redisTemplate.opsForList().range("chatMessages", 0, -1);
         if (rawMessages == null) {
@@ -118,5 +116,4 @@ public class OpenChatService {
             log.info("Messages saved to MongoDB and cleared from Redis");
         }
     }
-
 }
