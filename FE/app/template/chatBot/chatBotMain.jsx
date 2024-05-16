@@ -138,25 +138,25 @@ export default function ChatBotMain() {
 
   // ★Local에서 사용자 정보를 조회 =================================
   // const [isInitialized, setIsInitialized] = useState(false);
-  // const [userIddd, setUserId] = useState("");
-  // const [userNickname, setUserNickname] = useState("사용자");
-  // const [userDept, setUserDept] = useState("");
+  const [userIddd, setUserId] = useState("");
+  const [userNickname, setUserNickname] = useState("사용자");
+  const [userDept, setUserDept] = useState("");
 
   useEffect(() => {
     const tempUserId = LocalStorage.getItem("userId");
     const tempUserNickname = LocalStorage.getItem("userNickname");
     const tempUserDept = LocalStorage.getItem("userDept");
 
-    // tempUserId && setUserId(tempUserId);
-    // tempUserNickname && setUserNickname(tempUserNickname);
-    // tempUserDept && setUserDept(tempUserDept);
+    tempUserId && setUserId(tempUserId);
+    tempUserNickname && setUserNickname(tempUserNickname);
+    tempUserDept && setUserDept(tempUserDept);
 
     // setIsInitialized(true);
   }, []);
 
-  console.log(tempUserId);
-  console.log(tempUserNickname);
-  console.log(tempUserDept);
+  console.log(userIddd);
+  console.log(userNickname);
+  console.log(userDept);
 
   // userId가 변경되었음을 알려주는 flag
   // useEffect(() => {
