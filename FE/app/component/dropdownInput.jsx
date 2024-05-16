@@ -9,6 +9,8 @@ import { getFolders, createFolder } from "apis/save";
 
 export default function DropdownInput({ selectedOption, setSelectedOption }) {
   // import 페이지에서 정의 : const [selectedOption, setSelectedOption] = useState({})
+  console.log("selectedOption 뽑뽑", selectedOption);
+  console.log("setSelectedOption 뽑뽑", setSelectedOption);
 
   // 유저 uuid 조회
   // const userId = "12345";

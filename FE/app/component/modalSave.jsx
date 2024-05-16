@@ -6,6 +6,7 @@ import { useState } from "react";
 
 // API import
 import { saveMyChatbot } from "apis/save";
+import { getFolders } from "apis/save";
 
 export default function ModalSave({ chatbotid, openModalSave }) {
   // ★유저 uuid 조회
@@ -19,6 +20,15 @@ export default function ModalSave({ chatbotid, openModalSave }) {
   const handleInputTitle = (event) => {
     setTitle(event.target.value);
   };
+
+  // // 폴더 목록 조회 API
+  // const [, setOptions] = useState([]);
+  // useEffect(() => {
+  //   getFolders().then((response) => {
+  //     // console.log("폴더 목록 출력!!", response);
+  //     setOptions(response);
+  //   });
+  // }, []);
 
   // 마이 챗봇 내역 저장 API 호출 함수
   // const handleSave = () => {
