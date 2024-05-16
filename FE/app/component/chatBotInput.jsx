@@ -27,6 +27,15 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
   // 엔터 버튼 클릭시 실행
   const onClickEnter = () => {
     if (typeof sendMessage === "function") {
+      if (message == null) {
+        return;
+      }
+      if (message == "") {
+        return;
+      }
+      if (message.replaceAll(" ", "") == "") {
+        return;
+      }
       sendMessage(message);
       console.log("전송된 메시지:", message);
       setMessage("");
