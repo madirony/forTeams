@@ -166,6 +166,7 @@ public class ChatbotService {
                             .orElse("N/A");
                     return new UserAllChatListDto(savedChat.getChatbotChatUUID(), chatTitle, createdAt);
                 })
+                .sorted(Comparator.comparing(UserAllChatListDto::getCreatedAt).reversed())
                 .collect(Collectors.toList());
     }
 
