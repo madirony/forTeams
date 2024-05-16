@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "styles/component/threedotDropdown.module.css";
 import Image from "next/image";
 import ThreeReset from "icon/threeReset.svg";
@@ -15,6 +15,7 @@ import {
 } from "@nextui-org/dropdown";
 
 import { deleteChatLog } from "apis/allLog";
+import { getCurrentChatUUID, saveChatbot } from "apis/chatbot";
 
 export default function ThreedotDropdown({
   reset,
@@ -28,6 +29,33 @@ export default function ThreedotDropdown({
 }) {
   // console.log("??threedot에서???", logId);
 
+  // ★userUUID 불러오기 수정 필요
+  const userUUID = 123;
+
+  // 현재 챗봇 uuid 가져오기
+  const [chatUUID, setChatUUID] = useState("");
+  useEffect(() => {
+    getCurrentChatUUID(userUUID).then((response) => {
+      // console.log("하나둘셋얍", response.chatbotChatUUID);
+      setChatUUID(response.chatbotChatUUID);
+    });
+  }, []);
+  // console.log("11111", chatUUID);
+  // console.log("2222", userUUID);
+
+  // 화면 초기화
+  const handleRefresh = async () => {
+    try {
+      const response = await saveChatbot(userUUID, chatUUID);
+      console.log("초기화 중 저장 성공:", response);
+      // 화면 새로고침
+      window.location.reload();
+    } catch (error) {
+      console.error("초기화 중 저장 실패:", error);
+    }
+  };
+
+  // 삭제하기
   const handleDelete = async () => {
     try {
       const response = await deleteChatLog(logId);
@@ -57,7 +85,7 @@ export default function ThreedotDropdown({
             className={styles.dropdownItem}
             key="reset"
             startContent={<ThreeReset />}
-            onClick={() => console.log("화면초기화 버튼")}
+            onClick={() => handleRefresh()}
           >
             화면초기화
           </DropdownItem>

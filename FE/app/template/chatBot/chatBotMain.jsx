@@ -12,6 +12,8 @@ import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
 import RecoQuestions from "component/recoQuestions";
 
+import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
+
 export default function ChatBotMain() {
   // 모달 오픈 여부를 저장할 변수 ================================
   const [showModalShare, setShowModalShare] = useState(false);
@@ -133,6 +135,36 @@ export default function ChatBotMain() {
       stompClient.deactivate();
     };
   }, []);
+
+  // 현재 챗봇 uuid API조회 ========================================
+  // ★ userUUID 수정필요
+  const userUUID = "123";
+  const [chatbotChatUUID, setChatbotChatUUID] = useState("");
+  useEffect(() => {
+    getCurrentChatUUID(userUUID).then((response) => {
+      console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
+      setChatbotChatUUID(response.chatbotChatUUID);
+    });
+  }, [userUUID]);
+  // console.log("?????????", chatbotChatUUID);
+
+  // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
+  useEffect(() => {
+    if (chatbotChatUUID) {
+      console.log("chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
+      loadChatLogs(chatbotChatUUID)
+        .then((response) => {
+          console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
+          setMessages(response.chatLogs);
+        })
+        .catch((error) => {
+          console.error("채팅 로그를 불러오는 중 오류 발생:", error); // 에러 로그 추가
+        });
+    } else {
+      console.log("chatbotChatUUID is not set yet.");
+    }
+  }, [chatbotChatUUID]);
+  // console.log('',)
 
   const sendIndexMessage = (msg) => {
     // children이 없을 때 소켓으로 요청 보내는 함수
