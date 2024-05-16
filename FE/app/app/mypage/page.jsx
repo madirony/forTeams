@@ -12,10 +12,10 @@ import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
 
 export default function Mypage() {
-  // Local에서 사용자 정보를 조회해오기
-  const userName = "이수민";
-  const userDept = "철강영업팀";
-  const userId = 66;
+  // ★Local에서 사용자 정보를 조회 =================================
+  const userId = LocalStorage.getItem("userId");
+  const userNickname = LocalStorage.getItem("userNickname");
+  const userDept = LocalStorage.getItem("userDept");
 
   //
   const [selectedChatbotId, setSelectedChatbotId] = useState(null);
@@ -40,7 +40,11 @@ export default function Mypage() {
   // console.log("2.selectedchatbot", selectedChatbotId);
   return (
     <div className={styles.root}>
-      <MenuBar userName={userName} userDept={userDept} userId={userId} />
+      <MenuBar
+        userNickname={userNickname}
+        userDept={userDept}
+        userId={userId}
+      />
       <div className={styles.content}>
         <div className={styles.hamburgerWeb}>
           <MypageHamburgerWeb
