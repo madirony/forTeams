@@ -1,5 +1,6 @@
 "use client";
 
+import styles from "styles/page/layoutContent.module.css";
 import React, { useEffect, useState } from "react";
 import Main from "app/main/page";
 import LoginMain from "app/login/page";
@@ -17,10 +18,13 @@ export default function LayoutContent({ children }) {
   }, []);
 
   // 리다이렉트 함수 사용하기
+  // if
 
   return (
-    <div>
-      {isLogined ? <Main>{children}</Main> : <LoginMain>{children}</LoginMain>}
+    <div className={styles.container}>
+      {children}
+      {/* {isLogined ? <Main>{children}</Main> : <LoginMain>{children}</LoginMain>} */}
     </div>
   );
 }
+4;

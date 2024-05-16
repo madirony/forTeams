@@ -1,11 +1,12 @@
-import axios from "util/baseAPI";
+// import axios from "util/baseAPI";
+import axios from "axios";
 
 // 로그인 추가 정보 입력
 const addLoginInfo = async (userDept) => {
   try {
     const response = await axios({
       method: "post",
-      url: `/api/v1/auth/info?dept=${userDept}`,
+      url: `http://localhost:8443/api/v1/auth/info?dept=${userDept}`,
     });
     console.log("로그인 추가 정보 입력 성공:", response.data);
     return response.data;

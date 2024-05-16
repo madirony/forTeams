@@ -7,7 +7,7 @@ import MainSwiper from "template/main/mainSwiper";
 import ChatMain from "template/chat/chatMain";
 import RecoFunctionMain from "template/recoFunction/recoFunctionMain";
 import ChatBotMain from "template/chatBot/chatBotMain";
-import { useNavigate, useLocation } from "react-router-dom";
+// import { useNavigate, useLocation } from "react-router-dom";
 
 import { saveChatbot } from "apis/chatbot";
 

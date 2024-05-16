@@ -1,3 +1,5 @@
+// LoginMain은 MS 로그인 웹으로 넘어가는 역할만 수행
+
 "use client";
 
 import React from "react";
@@ -8,7 +10,8 @@ import { getIsLogined } from "util/getToken";
 export default function LoginMain() {
   // MS 로그인 웹으로 넘어가는 함수
   const handlePurpleButtonClick = () => {
-    window.location.href = `https://forteams.co.kr/oauth2/authorization/microsoft`;
+    // window.location.href = `https://forteams.co.kr/oauth2/authorization/microsoft`;
+    window.location.href = `http://localhost:8443/oauth2/authorization/microsoft`;
   };
 
   // (임시) getIsLogined 실행하는 함수

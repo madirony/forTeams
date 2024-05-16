@@ -4,6 +4,9 @@ import Image from "next/image";
 import styles from "styles/component/menuBar.module.css";
 import { useRouter } from "next/navigation";
 
+// 로그아웃 API
+import { logout } from "apis/login";
+
 export default function MenuBar({ userName, userDept, userId }) {
   const router = useRouter();
 
@@ -15,6 +18,17 @@ export default function MenuBar({ userName, userDept, userId }) {
   // 마이페이지 버튼 클릭 이벤트
   const mypageOnClick = () => {
     router.push("/mypage");
+  };
+
+  // 로그아웃 버튼 클릭 이벤트
+  const logtoutOnClick = () => {
+    logout()
+      .then((response) => {
+        console.log("로그아웃 성공:", response);
+      })
+      .catch((error) => {
+        console.log("로그아웃 에러:", eorror);
+      });
   };
 
   return (
@@ -38,9 +52,9 @@ export default function MenuBar({ userName, userDept, userId }) {
         <div onClick={mypageOnClick} className={styles.mypageButton}>
           마이페이지
         </div>
-        <div onClick={mypageOnClick} className={styles.mypageButton}>
-          마이페이지
-        </div>
+        <p className={styles.logoutButton} onClick={logtoutOnClick}>
+          로그아웃
+        </p>
       </div>
     </div>
   );
