@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { getChatLogDetail } from "apis/allLog";
 
-export default function MypageMyLogsDetail({
+export default function MypageAllLogsDetail({
   logId,
   setLogId,
   openModalShare,

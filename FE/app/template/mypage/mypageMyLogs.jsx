@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import { getFolders, getMyChatbotList } from "apis/save";
 
-export default function MypageAllLogs({ openModalShare, openModalSave }) {
+export default function MypageMyLogs({ openModalShare, openModalSave }) {
   // const router = useRouter();
 
   // 상세 페이지 이동 위한 logId

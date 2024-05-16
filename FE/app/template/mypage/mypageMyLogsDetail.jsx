@@ -2,7 +2,7 @@ import styles from "styles/template/mypageMyLogsDetail.module.css";
 import HistoryTitle from "component/historyTitle";
 import ThreedotDropdown from "component/threedotDropdown";
 
-export default function MypageAllLogsDetail({
+export default function MypageMyLogsDetail({
   logId,
   setLogId,
   openModalShare,
