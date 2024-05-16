@@ -93,7 +93,7 @@ public class OpenChatService {
         redisTemplate.opsForList().rightPush("chatMessages", dto);
     }
 
-    @Scheduled(fixedRate = 3600000)
+    @Scheduled(fixedRate = 1000)
     public void saveMessagesToMongoDB() {
         List<?> rawMessages = redisTemplate.opsForList().range("chatMessages", 0, -1);
         if (rawMessages == null) {
