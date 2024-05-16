@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 // 로그아웃 API
 import { logout } from "apis/login";
 
-export default function MenuBar({ userName, userDept, userId }) {
+export default function MenuBar({ userNickname, userDept, userId }) {
   const router = useRouter();
 
   // 로고 클릭 이벤트
@@ -46,7 +46,7 @@ export default function MenuBar({ userName, userDept, userId }) {
       </div>
       <div className={styles.userInfo}>
         <p>{userDept}</p>
-        <p>{userName}님</p>
+        <p>{userNickname}님</p>
         <div onClick={mypageOnClick} className={styles.mypageButton}>
           마이페이지
         </div>

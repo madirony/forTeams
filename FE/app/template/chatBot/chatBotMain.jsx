@@ -141,72 +141,31 @@ export default function ChatBotMain() {
   const userNickname = LocalStorage.getItem("userNickname");
   const userDept = LocalStorage.getItem("userDept");
 
-  // const [isInitialized, setIsInitialized] = useState(false);
-  // const [userId, setUserId] = useState("");
-  // const [userNickname, setUserNickname] = useState("사용자");
-  // const [userDept, setUserDept] = useState("");
-
-  // useEffect(() => {
-  //   const tempUserId = LocalStorage.getItem("userId");
-  //   const tempUserNickname = LocalStorage.getItem("userNickname");
-  //   const tempUserDept = LocalStorage.getItem("userDept");
-
-  //   tempUserId && setUserId(tempUserId);
-  //   tempUserNickname && setUserNickname(tempUserNickname);
-  //   tempUserDept && setUserDept(tempUserDept);
-
-  //   // setIsInitialized(true);
-  // }, []);
-
-  console.log("1. 로컬에서 정보 가져오기:", userId, userNickname, userDept);
-
-  // userId가 변경되었음을 알려주는 flag
-  // useEffect(() => {
-  //   if (userId.length > 2) {
-  //     setIsInitialized(true);
-  //   }
-  // }, [userId]);
-
-  // 현재 챗봇 UUID API조회 ========================================
-  // const userId = "123";
+  console.log(
+    "[ChatBotMain] 1. 로컬에서 정보 가져오기:",
+    userId,
+    userNickname,
+    userDept,
+  );
 
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   useEffect(() => {
     if (userId) {
       getCurrentChatUUID(userId).then((response) => {
-        console.log("2. 현재 챗봇 id 가져오기 성공!", response.chatbotChatUUID);
+        console.log(
+          "[ChatBotMain] 2. 현재 챗봇 id 가져오기 성공!",
+          response.chatbotChatUUID,
+        );
         setChatbotChatUUID(response.chatbotChatUUID);
       });
     }
     // }, [isInitialized]);
   }, [userId]);
 
-  // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-  // ★ userUUID 수정필요
-  // const userUUID = "123";
-  // const [chatbotChatUUID, setChatbotChatUUID] = useState("");
-  // useEffect(() => {
-  //   getCurrentChatUUID(userUUID).then((response) => {
-  //     console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
-  //     setChatbotChatUUID(response.chatbotChatUUID);
-  //   });
-  // }, [userUUID]);
-  // console.log("?????????", chatbotChatUUID);
-  // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
-
-  // const [chatbotChatUUID, setChatbotChatUUID] = useState("");
-  // useEffect(() => {
-  //   console.log("userId===============", userId);
-  //   getCurrentChatUUID(userId).then((response) => {
-  //     console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
-  //     setChatbotChatUUID(response.chatbotChatUUID);
-  //   });
-  // }, [userId]);
-
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {
     if (chatbotChatUUID) {
-      console.log("chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
+      console.log("[ChatBotMain] chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
       loadChatLogs(chatbotChatUUID)
         .then((response) => {
           console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
@@ -220,26 +179,6 @@ export default function ChatBotMain() {
     }
   }, [chatbotChatUUID]);
   // console.log("-----------", messages);
-
-  // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-  // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
-  // useEffect(() => {
-  //   if (chatbotChatUUID) {
-  //     console.log("chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
-  //     loadChatLogs(chatbotChatUUID)
-  //       .then((response) => {
-  //         // console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
-  //         setMessages(response.chatLogs);
-  //       })
-  //       .catch((error) => {
-  //         console.error("채팅 로그를 불러오는 중 오류 발생:", error); // 에러 로그 추가
-  //       });
-  //   } else {
-  //     console.log("chatbotChatUUID is not set yet.");
-  //   }
-  // }, [chatbotChatUUID]);
-  // console.log("-----------", messages);
-  // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
   const sendIndexMessage = (msg) => {
     // children이 없을 때 소켓으로 요청 보내는 함수
