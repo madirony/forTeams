@@ -7,6 +7,8 @@ import ThreeReset from "icon/threeReset.svg";
 import ThreeTrash from "icon/threeTrash.svg";
 import ThreeShare from "icon/threeShare.svg";
 import ThreeSave from "icon/threeSave.svg";
+import LocalStorage from "util/localStorage";
+
 import {
   Dropdown,
   DropdownTrigger,
@@ -29,24 +31,29 @@ export default function ThreedotDropdown({
 }) {
   // console.log("??threedot에서???", logId);
 
+  // ★Local에서 사용자 정보를 조회 =================================
+  const userId = LocalStorage.getItem("userId");
+  const userNickname = LocalStorage.getItem("userNickname");
+  const userDept = LocalStorage.getItem("userDept");
+
   // ★userUUID 불러오기 수정 필요
-  const userUUID = 123;
+  // const userUUID = 123;
 
   // 현재 챗봇 uuid 가져오기
   const [chatUUID, setChatUUID] = useState("");
   useEffect(() => {
-    getCurrentChatUUID(userUUID).then((response) => {
+    getCurrentChatUUID(userId).then((response) => {
       // console.log("하나둘셋얍", response.chatbotChatUUID);
       setChatUUID(response.chatbotChatUUID);
     });
   }, []);
   // console.log("11111", chatUUID);
-  // console.log("2222", userUUID);
+  // console.log("2222", userId);
 
   // 화면 초기화
   const handleRefresh = async () => {
     try {
-      const response = await saveChatbot(userUUID, chatUUID);
+      const response = await saveChatbot(userId, chatUUID);
       console.log("초기화 중 저장 성공:", response);
       // 화면 새로고침
       window.location.reload();
