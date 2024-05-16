@@ -25,9 +25,8 @@ public class TokenService {
 
 
     public Mono<String> validateTokenAndGetMsUuid(String jwt) {
+        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         try {
-            Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-            log.info("><><><><><"+key.getAlgorithm());
             String subject = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
@@ -38,7 +37,7 @@ public class TokenService {
             log.debug("Parsed subject (msUuid): {}", subject);
             return Mono.just(subject);
         } catch (ExpiredJwtException e) {
-            log.warn("Token expired: {}", e.getMessage());
+            log.warn("Token expired: ", e);
             return renewToken(jwt);
         } catch (JwtException e) {
             log.error("Token validation error: ", e);
