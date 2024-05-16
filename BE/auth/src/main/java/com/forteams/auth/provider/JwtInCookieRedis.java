@@ -62,4 +62,17 @@ public class JwtInCookieRedis {
         jwtCookie.setPath("/");
         response.addCookie(jwtCookie);
     }
+
+    /**
+     * 회원가입 완료하고 로그인 시, TMP_ACCESS토큰 없애기
+     * @param response
+     */
+    public void removeTmpTokenFromCookie(HttpServletResponse response) {
+        Cookie tmpCookie = new Cookie("TMP_ACCESS", null);
+        tmpCookie.setHttpOnly(false);
+        tmpCookie.setSecure(true); // HTTPS를 사용하는 경우 true로 설정
+        tmpCookie.setMaxAge(0);
+        tmpCookie.setPath("/");
+        response.addCookie(tmpCookie);
+    }
 }

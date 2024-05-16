@@ -116,24 +116,22 @@ public class JwtProvider {
 
     //jwt토큰 검증
     public String findUuidFromJwt(String jwt) {
-        String subject = null;
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
         try {
 
-            subject = Jwts.parserBuilder()
+            String subject = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(jwt)
                     .getBody()
                     .getSubject();
 
+            return subject;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
-        return subject;
     }
 
 }

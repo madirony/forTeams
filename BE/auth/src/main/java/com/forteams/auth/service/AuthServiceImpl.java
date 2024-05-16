@@ -51,6 +51,9 @@ public class AuthServiceImpl implements AuthService {
             String accessJwt = jwtProvider.generateAccessToken(msUuid); //  =======> accessToken을 안 쓰는데 뭐냐악...
             jwtInCookieRedis.putAccessJwtInCookie(accessJwt, 7 * 24 * 60 * 60, response);
 
+            //기존 토큰(TMP_ACCESS) null값으로 변경
+            jwtInCookieRedis.removeTmpTokenFromCookie(response);
+
             // <msUuid, refreshToken>로 map만들어서 redis에 넣기 -----------------------------------------------------
             String refreshJwt = jwtProvider.generateRefreshToken(msUuid);
             jwtInCookieRedis.putRefreshJwtInRedis(msUuid, refreshJwt);
@@ -72,12 +75,6 @@ public class AuthServiceImpl implements AuthService {
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         // 1. 쿠키에서 JWT 토큰 제거
         jwtInCookieRedis.removeJwtFromCookie(response);
-//        Cookie jwtCookie = new Cookie("ACCESS_TOKEN", null);
-//        jwtCookie.setHttpOnly(false);
-//        jwtCookie.setSecure(false); // HTTPS를 사용하는 경우 true로 설정
-//        jwtCookie.setMaxAge(0);
-//        jwtCookie.setPath("/");
-//        response.addCookie(jwtCookie);
 
         // 2. 세션 무효화
         HttpSession session = request.getSession(false);
