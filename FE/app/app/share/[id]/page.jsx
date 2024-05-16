@@ -8,8 +8,9 @@ import { getChatLogDetail } from "apis/allLog";
 
 export default function ShareMain() {
   const pathname = usePathname();
-  //   console.log(pathname);
+  // console.log("pathname...", pathname);
   const id = pathname.match(/\/share\/([^/]+)/)?.[1] || ""; // 정규식을 사용하여 ID 추출
+  // console.log("id뽑", id);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
