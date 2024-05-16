@@ -22,8 +22,8 @@ export default function LayoutContent({ children }) {
 
   return (
     <div className={styles.container}>
-      {children}
-      {/* {isLogined ? <Main>{children}</Main> : <LoginMain>{children}</LoginMain>} */}
+      {/* {children} */}
+      {isLogined ? <Main>{children}</Main> : <LoginMain>{children}</LoginMain>}
     </div>
   );
 }
