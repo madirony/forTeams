@@ -52,7 +52,7 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
               );
             })
           ) : (
-            <>ddd</>
+            <p>챗봇에게 새로운 질문을 해 보세요!</p>
           )}
         </>
       )}
