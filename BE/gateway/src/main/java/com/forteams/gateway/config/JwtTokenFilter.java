@@ -42,24 +42,26 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
             if (token != null) {
                 Mono<Void> msUuid1 = tokenService.validateTokenAndGetMsUuid(token)
                         .flatMap(msUuid -> {
+                            log.info("msUuid from token: {}", msUuid);
                             ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
                                     .header("msUuid", msUuid)
                                     .build();
                             return chain.filter(exchange.mutate().request(mutatedRequest).build());
                         })
                         .switchIfEmpty(Mono.defer(() -> {
+                            log.warn("Token is invalid or expired");
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
                         }))
                         .onErrorResume(e -> {
-                            log.info("Token validation error:           ", e);
+                            log.error("Token validation error: ", e);
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
                         });
                 log.info("************************   "+msUuid1);
                 return msUuid1;
             } else {
-                log.info(">ASDASDAS<DASDAS<DAS>DASD>AS<DASDASDK#UR*$*********************************");
+                log.warn("No ACCESS_TOKEN cookie found");
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                 return exchange.getResponse().setComplete();
             }
