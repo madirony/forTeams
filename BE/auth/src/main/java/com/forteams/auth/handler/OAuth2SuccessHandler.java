@@ -88,20 +88,10 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             }
             log.info("흠.........6");
             jwtInCookieRedis.putAccessJwtInCookie(accessJwt, 7 * 24 * 60 * 60, response);
-//            Cookie cookie = new Cookie("ACCESS_TOKEN", accessJwt); // 쿠키 생성
-//            cookie.setHttpOnly(false); // 자바스크립트 접근 허용
-//            cookie.setSecure(false); // HTTPS 통신에서만 쿠키 전송이 아니라 다 허용
-//            cookie.setPath("/"); // 쿠키의 경로 설정
-//            cookie.setMaxAge(7 * 24 * 60 * 60); // 쿠키 만료 시간 설정 (예: 1주일)
-//            response.addCookie(cookie); // 응답에 쿠키 추가
 
             // <msUuid, refreshToken>로 map만들어서 redis에 넣기 -----------------------------------------------------
             String refreshJwt = jwtProvider.generateRefreshToken(msUuid);
             jwtInCookieRedis.putRefreshJwtInRedis(msUuid, refreshJwt);
-//            redisService.saveData(msUuid, refreshJwt, 14);
-//            Map<String, Object> redisData = new HashMap<>();
-////        OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
-//            redisData.put(msUuid, refreshJwt);
 
             // 로그인 성공
             log.debug("[OAuthLoginSuccessHandler] - LOGIN SUCCESS : {} FROM 마이크로솦", oAuth2User.getName());
@@ -144,7 +134,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         tokens.put("accessToken", accessToken.getTokenValue());
         tokens.put("refreshToken", refreshToken);
 
-//        System.out.println("도레미파: "+ accessToken.getTokenValue() + " 걍: " +refreshToken);
         return tokens;
     }
 
