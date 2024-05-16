@@ -20,7 +20,7 @@ public class TokenTestController {
     public ResponseEntity<String> getMsUuid(@RequestHeader("msUuid") String msUuid){
         try{
             log.info("***************************\tgetMsUuid 도착\t***************************");
-
+            log.info(msUuid);
 
             return ResponseEntity.ok(msUuid);
         }catch (Exception e){
