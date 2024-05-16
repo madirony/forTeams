@@ -17,10 +17,11 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   const [options, setOptions] = useState([]);
   useEffect(() => {
     getFolders().then((response) => {
-      console.log("폴더 목록 출력", response);
+      console.log("폴더 목록 출력!!", response);
       setOptions(response);
     });
   }, []);
+  console.log("폴더목록조회 되니?!", options);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [customInput, setCustomInput] = useState("");
