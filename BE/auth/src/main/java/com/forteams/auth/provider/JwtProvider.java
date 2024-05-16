@@ -5,6 +5,7 @@ import com.forteams.auth.repository.UserRepository;
 import com.forteams.auth.service.token.RedisService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ import java.util.UUID;
  */
 
 @Component
+@Slf4j
 public class JwtProvider {
 
     @Value("${app.secret-key}")
@@ -37,7 +39,7 @@ public class JwtProvider {
         long validity = 10800000; // 3 hours
         UserEntity user = userRepository.findByMsUserEntity_MsUuid(msUuid);
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)); // 키 생성
-
+        log.info("><><><><><"+key.getAlgorithm());
 
         return Jwts.builder()
                 .setSubject(msUuid)
@@ -53,7 +55,7 @@ public class JwtProvider {
     public String generateRefreshToken(String msUuid) {
         long validity = 1209600000; // 14 days
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)); // 키 생성
-
+        log.info("><><><><><"+key.getAlgorithm());
         return Jwts.builder()
                 .setSubject(msUuid)
                 .setId(UUID.randomUUID().toString()) // Unique identifier for the token
