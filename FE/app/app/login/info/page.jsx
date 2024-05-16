@@ -33,8 +33,10 @@ export default function LoginInfo() {
     // 로그인 추가 정보 입력 API 요청 보내기
     addLoginInfo(userDept).then((response) => {
       console.log("2. 부서 이름 보내서 토큰 생성", response);
+
       // 메인 페이지로 리다이렉트
-      // router.push("/login/info");
+      console.log("3. 메인 페이지로 리다이렉트");
+      router.push("/");
 
       // 완료 버튼 클릭!
       // 회원가입 완료 msUuid: c37afcd8-c1f4-42b7-9be8-ec2bf6d24622,
