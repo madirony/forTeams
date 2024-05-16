@@ -23,8 +23,8 @@ public class TokenTestController {
         try{
             log.info("***************************\tgetMsUuid 도착\t***************************");
             log.info(msUuid);
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.execute("https://forteams.co.kr/api/v2/2", HttpMethod.GET,null,null,new Object());
+//            RestTemplate restTemplate = new RestTemplate();
+//            restTemplate.execute("https://forteams.co.kr/api/v2/2", HttpMethod.GET,null,null,new Object());
 
             return ResponseEntity.ok("임시값");
         }catch (Exception e){
