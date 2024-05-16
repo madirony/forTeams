@@ -1,5 +1,6 @@
 package com.forteams.gateway.service;
 
+import com.forteams.gateway.HeaderDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
@@ -24,18 +25,20 @@ public class TokenService {
     // http://auth:8443/api/v1/user/**
 
 
-    public Mono<String> validateTokenAndGetMsUuid(String jwt) {
+    public Mono<HeaderDto> validateTokenAndGetMsUuid(String jwt) {
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         try {
-            String subject = Jwts.parserBuilder()
+            JwtParser parser = Jwts.parserBuilder()
                     .setSigningKey(key)
-                    .build()
-                    .parseClaimsJws(jwt)
-                    .getBody()
-                    .getSubject();
-
+                    .build();
+            Claims claims = parser.parseClaimsJws(jwt)
+                    .getBody();
+            String subject = claims.getSubject();
+            String userNickname = (String) claims.get("nickname");
+            String dept = (String) claims.get("dept");
+            HeaderDto headerDto = new HeaderDto(subject,userNickname,dept);
             log.debug("Parsed subject (msUuid): {}", subject);
-            return Mono.just(subject);
+            return Mono.just(headerDto);
         } catch (ExpiredJwtException e) {
             log.warn("Token expired: ", e);
             return renewToken(jwt);
@@ -48,7 +51,7 @@ public class TokenService {
         }
     }
 
-    private Mono<String> renewToken(String jwt) {
+    private Mono<HeaderDto> renewToken(String jwt) {
         return WebClient.create("http://auth:8443")
                 .post()
                 .uri("/api/v1/user/refresh-token")
@@ -56,11 +59,22 @@ public class TokenService {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, response -> Mono.error(new RuntimeException("Failed to renew token")))
                 .bodyToMono(String.class)
-                .map(response -> {
-                    // 토큰 갱신 로직 추가
-                    return response;
+                .flatMap(newJwt -> {
+                    Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+                    JwtParser parser = Jwts.parserBuilder()
+                            .setSigningKey(key)
+                            .build();
+                    Claims claims = parser.parseClaimsJws(newJwt)
+                            .getBody();
+                    String subject = claims.getSubject();
+                    String userNickname = (String) claims.get("nickname");
+                    String dept = (String) claims.get("dept");
+                    HeaderDto headerDto = new HeaderDto(subject, userNickname, dept);
+                    log.debug("Renewed and parsed subject (msUuid): {}", subject);
+                    return Mono.just(headerDto);
                 });
     }
+
 
 //    public String validateTokenAndGetMsUuid(String jwt) {
 //        String subject = null;

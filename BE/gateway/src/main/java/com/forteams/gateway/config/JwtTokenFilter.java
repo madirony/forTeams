@@ -43,10 +43,12 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
             log.info(">>>>>>>>>>>>>>>>>>>>           Token : "+token+"            >>>>>>>>>>>>>");
             if (token != null) {
                 return tokenService.validateTokenAndGetMsUuid(token)
-                        .flatMap(msUuid -> {
-                            log.info("msUuid from token: {}", msUuid);
+                        .flatMap(headerDto -> {
+                            log.info("msUuid from token: {}", headerDto.getMsUuid());
                             ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
-                                    .header("msUuid", msUuid)
+                                    .header("msUuid", headerDto.getMsUuid())
+                                    .header("nickname",headerDto.getUserNickname())
+                                    .header("dept",headerDto.getDept())
                                     .build();
                             return chain.filter(exchange.mutate().request(mutatedRequest).build());
                         })
