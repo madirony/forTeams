@@ -40,7 +40,7 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
           openModalSave={openModalSave}
         />
       ) : (
-        <>
+        <div style={{ width: "100%", height: "100%" }}>
           {datas ? (
             datas.map((data, idx) => {
               return (
@@ -56,7 +56,7 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
               <p>챗봇에게 새로운 질문을 해 보세요!</p>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );
