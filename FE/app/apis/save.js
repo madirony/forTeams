@@ -68,10 +68,15 @@ const saveMyChatbot = async (folderId, chatbotUuid, chatbotTitle) => {
     const response = await axios({
       method: "post",
       url: "api/v1/folder/categorized-chatbot",
-      data: folderId,
-      chatbotUuid,
-      chatbotTitle,
-      headers: { "Content-Type": "text/plain" },
+      // data: folderId,
+      // chatbotUuid,
+      // chatbotTitle,
+      // headers: { "Content-Type": "text/plain" },
+      data: {
+        folderId: folderId,
+        chatbotUuid: chatbotUuid,
+        chatbotTitle: chatbotTitle,
+      },
     });
     console.log("폴더에 내 챗봇 내역 생성 api요청", response.data);
     return response.data;
