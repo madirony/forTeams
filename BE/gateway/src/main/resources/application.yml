@@ -1,7 +1,7 @@
 
 jwt:
-  secret: ENC(NqAJbCF2cJjys/fltEU6Xqn7RAQ+IyUkai+h4N69TICiqaAkELN0gJlG6EMH8Ejop2OIY8UK2iU=)
-
+#  secret: ENC(NqAJbCF2cJjys/fltEU6Xqn7RAQ+IyUkai+h4N69TICiqaAkELN0gJlG6EMH8Ejop2OIY8UK2iU=)
+  secret: 12341324154321646543432474vccc38xg4bfjagbf3g2r123wdascgry5465fegfjteyrrg
 server:
   port: 8000
 
