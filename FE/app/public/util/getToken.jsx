@@ -65,7 +65,7 @@ const decodeToken = () => {
       "userDept 저장:",
       userDept,
     );
-    return { userID, userName, userDept };
+    return { userID, userNickname, userDept };
   } catch (error) {
     console.log("[decodeToken] 토큰 가져오기 실패 :", error);
     return null;
