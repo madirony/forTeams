@@ -36,7 +36,7 @@ export default function Main() {
 
   return (
     <div className={styles.root}>
-      <MenuBar userName={userNickname} userDept={userDept} userId={userName} />
+      <MenuBar userName={userName} userDept={userDept} userId={userId} />
 
       {width <= 500 ? (
         // 반응형-중간
