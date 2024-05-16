@@ -26,9 +26,11 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
       console.log("폴더 목록 출력 아자아자", response);
       const folderNames = response.map((item) => item.name);
       setFolders(folderNames);
-      console.log("gfgfgfd", folders);
+      console.log("ffdfdf", folderNames);
     });
   }, []);
+  console.log("gfgfgfd", folders);
+
   const datas = [
     {
       id: 1,
