@@ -52,7 +52,7 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                             return exchange.getResponse().setComplete();
                         }))
                         .onErrorResume(e -> {
-                            log.error("Token validation error:           ", e);
+                            log.info("Token validation error:           ", e);
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
                         });
