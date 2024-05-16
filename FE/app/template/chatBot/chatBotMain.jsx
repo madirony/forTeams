@@ -10,6 +10,7 @@ import ChatBotInput from "component/chatBotInput";
 import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
 import RecoQuestions from "component/recoQuestions";
+import LocalStorage from "util/localStorage";
 
 import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
 
