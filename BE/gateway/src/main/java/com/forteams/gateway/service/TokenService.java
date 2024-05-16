@@ -59,21 +59,27 @@ public class TokenService {
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, response -> Mono.error(new RuntimeException("Failed to renew token")))
                 .bodyToMono(String.class)
-                .flatMap(newJwt -> {
-                    Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-                    JwtParser parser = Jwts.parserBuilder()
-                            .setSigningKey(key)
-                            .build();
-                    Claims claims = parser.parseClaimsJws(newJwt)
-                            .getBody();
-                    String subject = claims.getSubject();
-                    String userNickname = (String) claims.get("nickname");
-                    String dept = (String) claims.get("dept");
-                    HeaderDto headerDto = new HeaderDto(subject, userNickname, dept);
-                    log.debug("Renewed and parsed subject (msUuid): {}", subject);
-                    return Mono.just(headerDto);
+                .flatMap(newToken -> {
+                    try {
+                        Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+                        JwtParser parser = Jwts.parserBuilder()
+                                .setSigningKey(key)
+                                .build();
+                        Claims claims = parser.parseClaimsJws(newToken)
+                                .getBody();
+                        String subject = claims.getSubject();
+                        String userNickname = (String) claims.get("nickname");
+                        String dept = (String) claims.get("dept");
+                        HeaderDto headerDto = new HeaderDto(subject, userNickname, dept);
+                        log.debug("Renewed and parsed subject (msUuid): {}", subject);
+                        return Mono.just(headerDto);
+                    } catch (Exception e) {
+                        log.error("Token processing error: ", e);
+                        return Mono.error(new RuntimeException("Token processing error"));
+                    }
                 });
     }
+
 
 
 //    public String validateTokenAndGetMsUuid(String jwt) {
