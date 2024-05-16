@@ -72,7 +72,7 @@ public class ChatbotController {
     }
 
     @PostMapping("/func")
-    public ResponseEntity<String> getRecommendation(@RequestHeader("userDept") String userDept) {
+    public ResponseEntity<String> getRecommendation(@RequestHeader("dept") String userDept) {
         if (userDept == null || userDept.isEmpty()) {
             return ResponseEntity.badRequest().body("Department info is missing");
         }
@@ -112,8 +112,8 @@ public class ChatbotController {
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
     public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID,
-                            @Header("userId") String userId, @Header("userNickname") String userNickname,
-                            @Header("userDept") String userDept) {
+                            @Header("msUuid") String userId, @Header("nickname") String userNickname,
+                            @Header("dept") String userDept) {
 
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
 
