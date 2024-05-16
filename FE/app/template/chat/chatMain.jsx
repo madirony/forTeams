@@ -7,6 +7,7 @@ import styles from "styles/template/chatMain.module.css";
 import HamburgerTitle from "component/hamburgerTitle";
 import ChattingBubble from "component/chattingBubble";
 import ChatBotInput from "component/chatBotInput";
+import LocalStorage from "util/localStorage";
 
 export default function ChatMain() {
   const [messages, setMessages] = useState([]);
