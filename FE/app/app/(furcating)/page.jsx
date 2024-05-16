@@ -8,7 +8,7 @@ import { getIsLogined } from "util/getToken";
 export default function LayoutContent({ children }) {
   // 로그인 여부를 판단할 변수 선언
   //   const [isLogined, setIsLogined] = useState(false);
-  let isLogined = false;
+  let isLogined = true;
 
   // 페이지가 로드될 때마다 isLogined를 검사
   useEffect(() => {
