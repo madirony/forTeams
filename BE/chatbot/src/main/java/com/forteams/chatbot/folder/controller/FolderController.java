@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping( "/api/v1/folder")
 @AllArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000, https://forteams.co.kr")
 public class FolderController {
 
     private final FolderService folderService;
