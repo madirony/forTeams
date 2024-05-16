@@ -68,13 +68,10 @@ const loadChatLogs = async (chatbotChatUUID) => {
       method: "get",
       url: `api/v1/chatbot/load-chatlogs/${chatbotChatUUID}`,
     });
-    console.log(
-      "현재 채팅 세션의 채팅 데이터를 불러오기 api 요청",
-      response.data,
-    );
+    console.log("loadChatLogs 요청 성공", response.data);
     return response.data;
   } catch (error) {
-    console.log("현재 채팅 세션의 채팅 데이터를 불러오기 중 에러 발생", error);
+    console.log("loadChatLogs 에러 발생", error);
   }
 };
 
