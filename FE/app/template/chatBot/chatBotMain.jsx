@@ -16,6 +16,7 @@ import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
 
 export default function ChatBotMain() {
   // ★Local에서 사용자 정보를 조회해오기
+  const [isInitialized, setIsInitialized] = useState(false);
   const [userId, setUserId] = useState("");
   const [userNickname, setUserNickname] = useState("사용자");
   const [userDept, setUserDept] = useState("");
@@ -24,7 +25,9 @@ export default function ChatBotMain() {
     const tempUserId = LocalStorage.getItem("userId");
     const tempUserNickname = LocalStorage.getItem("userNickname");
     const tempUserDept = LocalStorage.getItem("userDept");
+
     tempUserId && setUserId(tempUserId);
+    tempUserId && setIsInitialized(true); // userId가 변경되었음을 알려주는 flag
     tempUserNickname && setUserNickname(tempUserNickname);
     tempUserDept && setUserDept(tempUserDept);
   }, []);
@@ -151,16 +154,25 @@ export default function ChatBotMain() {
   }, []);
 
   // 현재 챗봇 uuid API조회 ========================================
-  // ★ userUUID 수정필요
-  // const userUUID = userId;
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   useEffect(() => {
-    getCurrentChatUUID(userId).then((response) => {
-      console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
-      setChatbotChatUUID(response.chatbotChatUUID);
-    });
-  }, [userId]);
-  // console.log("?????????", chatbotChatUUID);
+    console.log("userId===============", userId);
+    if (isInitialized && userId) {
+      getCurrentChatUUID(userId).then((response) => {
+        console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
+        setChatbotChatUUID(response.chatbotChatUUID);
+      });
+    }
+  }, [isInitialized, userId]);
+
+  // const [chatbotChatUUID, setChatbotChatUUID] = useState("");
+  // useEffect(() => {
+  //   console.log("userId===============", userId);
+  //   getCurrentChatUUID(userId).then((response) => {
+  //     console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
+  //     setChatbotChatUUID(response.chatbotChatUUID);
+  //   });
+  // }, [userId]);
 
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {
