@@ -37,7 +37,7 @@ export default function HistoryTitle({
         .then((response) => {
           console.log("채팅 다시쓰기", response);
           // 메인페이지로 이동
-          router.push("/");
+          router.push("/main");
           //
         })
         .catch((error) => {

@@ -154,7 +154,7 @@ export default function ChatBotMain() {
       console.log("chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
       loadChatLogs(chatbotChatUUID)
         .then((response) => {
-          console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
+          // console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
           setMessages(response.chatLogs);
         })
         .catch((error) => {
@@ -164,7 +164,7 @@ export default function ChatBotMain() {
       console.log("chatbotChatUUID is not set yet.");
     }
   }, [chatbotChatUUID]);
-  // console.log('',)
+  // console.log("-----------", messages);
 
   const sendIndexMessage = (msg) => {
     // children이 없을 때 소켓으로 요청 보내는 함수
@@ -252,7 +252,7 @@ export default function ChatBotMain() {
       <div className={styles.threeDot}>
         <ThreedotDropdown
           reset
-          share
+          // share
           save
           openModalShare={openModalShare}
           openModalSave={openModalSave}
