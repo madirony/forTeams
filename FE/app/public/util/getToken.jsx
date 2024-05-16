@@ -19,25 +19,25 @@ const getCookies = () => {
 };
 
 // 읽어온 쿠키에서 ACCESS TOKEN을 분리하는 함수
-// const getToken = () => {
-//   const cookieObj = getCookies();
-//   const accessToken = cookieObj.ACCESS_TOKEN;
-//   console.log("accessToken :", accessToken);
-//   return accessToken;
-// };
-
-// 미들웨어에서 읽어온 쿠키에서 ACCESS TOKEN을 분리하는 함수
-
-const getToken = (request) => {
-  const cookies = request.cookies;
-  const accessToken = cookies.get("ACCESS_TOKEN");
-  console.log("accessToken:", accessToken);
+const getToken = () => {
+  const cookieObj = getCookies();
+  const accessToken = cookieObj.ACCESS_TOKEN;
+  console.log("accessToken :", accessToken);
   return accessToken;
 };
 
+// 미들웨어에서 읽어온 쿠키에서 ACCESS TOKEN을 분리하는 함수
+
+// const getToken = (request) => {
+//   const cookies = request.cookies;
+//   const accessToken = cookies.get("ACCESS_TOKEN");
+//   console.log("accessToken:", accessToken);
+//   return accessToken;
+// };
+
 // jwt 라이브러리로 읽어온 ACCESS TOKEN을 파싱하는 함수
-const decodeToken = (request) => {
-  const accessToken = getToken(request);
+const decodeToken = () => {
+  const accessToken = getToken();
   if (!accessToken) {
     console.log("accessToken이 없습니다");
     return null;
