@@ -6,12 +6,13 @@ import com.forteams.chatbot.folder.dto.FolderResponseDto;
 import com.forteams.chatbot.folder.dto.FolderUpdateDto;
 import com.forteams.chatbot.folder.service.FolderService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping( "/api/v1/folder")
 @AllArgsConstructor
@@ -32,9 +33,11 @@ public class FolderController {
     @GetMapping
     public ResponseEntity<List<FolderResponseDto>> getFolders(@RequestHeader("msUuid") String msUuid){
         try{
+            log.info("getFolders 도착");
             List<FolderResponseDto> list = folderService.getFolders(msUuid);
             return ResponseEntity.ok(list);
         }catch (Exception e){
+            log.info(">>>>>"+e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 
