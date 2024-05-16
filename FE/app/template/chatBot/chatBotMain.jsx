@@ -138,7 +138,7 @@ export default function ChatBotMain() {
 
   // ★Local에서 사용자 정보를 조회 =================================
   // const [isInitialized, setIsInitialized] = useState(false);
-  const [userIddd, setUserId] = useState("");
+  const [userId, setUserId] = useState("");
   const [userNickname, setUserNickname] = useState("사용자");
   const [userDept, setUserDept] = useState("");
 
@@ -154,9 +154,7 @@ export default function ChatBotMain() {
     // setIsInitialized(true);
   }, []);
 
-  console.log(userIddd);
-  console.log(userNickname);
-  console.log(userDept);
+  console.log("1. 로컬에서 정보 가져오기:", userId, userNickname, userDept);
 
   // userId가 변경되었음을 알려주는 flag
   // useEffect(() => {
@@ -166,14 +164,16 @@ export default function ChatBotMain() {
   // }, [userId]);
 
   // 현재 챗봇 UUID API조회 ========================================
-  const userId = "123";
+  // const userId = "123";
 
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   useEffect(() => {
-    getCurrentChatUUID(userId).then((response) => {
-      console.log("현재 챗봇 id 가져오기 성공!", response.chatbotChatUUID);
-      setChatbotChatUUID(response.chatbotChatUUID);
-    });
+    if (userId) {
+      getCurrentChatUUID(userId).then((response) => {
+        console.log("2. 현재 챗봇 id 가져오기 성공!", response.chatbotChatUUID);
+        setChatbotChatUUID(response.chatbotChatUUID);
+      });
+    }
     // }, [isInitialized]);
   }, [userId]);
 
