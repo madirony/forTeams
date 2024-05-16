@@ -13,8 +13,8 @@ export default function LayoutContent({ children }) {
 
   // 페이지가 로드될 때마다 isLogined를 검사
   useEffect(() => {
-    let isLogined = getIsLogined();
-    console.log("isLogined", isLogined);
+    console.log("furcating 페이지에서 getIsLogined");
+    getIsLogined();
   }, []);
 
   // 리다이렉트 함수 사용하기
