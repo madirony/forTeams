@@ -183,7 +183,7 @@ export default function ChatBotMain() {
 
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {
-    if (chatbotChatUUID) {
+    if (chatbotChatUUID.length > 2) {
       console.log("chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
       loadChatLogs(chatbotChatUUID)
         .then((response) => {
