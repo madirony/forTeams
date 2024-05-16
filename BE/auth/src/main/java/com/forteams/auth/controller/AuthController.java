@@ -37,6 +37,7 @@ public class AuthController {
      */
     @GetMapping("/welcome")
     public ResponseEntity<?> welcomePage(OAuth2AuthenticationToken authentication) {
+        log.info("/welcome 도착 *************************************");
         if (authentication != null) {
             // 사용자 이름 가져오기.Principal의 이름은 기본적으로 "sub" 클레임에 매핑됨.
 //            String username = authentication.getPrincipal().getName(); //uid?
@@ -45,7 +46,8 @@ public class AuthController {
             Map<String, Object> userAttributes = authentication.getPrincipal().getAttributes();
             String email = (String) userAttributes.get("email"); //내 이메일
             String name = (String) userAttributes.get("name"); //내 이름
-
+            log.info(">>>>>>>>          "+email);
+            log.info(">>>>>>>>          "+name);
             MsUserEntity loginnedUser = authService.findOrCreateUser(email, name);
             return new ResponseEntity<>(loginnedUser, HttpStatus.OK);
         }
