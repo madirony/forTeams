@@ -38,6 +38,9 @@ export default function MenuBar({ userName, userDept, userId }) {
         <div onClick={mypageOnClick} className={styles.mypageButton}>
           마이페이지
         </div>
+        <div onClick={mypageOnClick} className={styles.mypageButton}>
+          마이페이지
+        </div>
       </div>
     </div>
   );

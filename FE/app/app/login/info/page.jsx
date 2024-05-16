@@ -28,13 +28,13 @@ export default function LoginInfo() {
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = () => {
     const userDept = selectedOption.name;
-    console.log("제발 나와라", userDept);
+    console.log("1. 유저가 선택한 부서 이름 알기", userDept);
     // 로그인 추가 정보 입력 API 요청 보내기
     addLoginInfo(userDept)
       .then((response) => {
-        console.log("완료 버튼 클릭!", response);
+        console.log("2. 부서 이름 ", response);
         // 메인 페이지로 리다이렉트
-        router.push("/");
+        // router.push("/login/info");
 
         // 완료 버튼 클릭!
         // 회원가입 완료 msUuid: c37afcd8-c1f4-42b7-9be8-ec2bf6d24622,
@@ -54,7 +54,7 @@ export default function LoginInfo() {
 
   return (
     <div className={styles.container}>
-      <p className={styles.modalTitle}>사용자 정보배고파</p>
+      <p className={styles.modalTitle}>사용자 정보 0953</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
         <input
