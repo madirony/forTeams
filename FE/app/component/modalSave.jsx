@@ -36,7 +36,7 @@ export default function ModalSave({ chatbotid, openModalSave }) {
     saveMyChatbot(folderId, chatbotid, title)
       .then((response) => {
         console.log("저장 성공:", response);
-        // openModalSave(); // 모달 닫기
+        openModalSave(); // 모달 닫기
       })
       .catch((error) => {
         console.error("저장 실패:", error);
@@ -46,9 +46,9 @@ export default function ModalSave({ chatbotid, openModalSave }) {
   return (
     <div className={styles.modalBackground} onClick={openModalSave}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {`현재 제목은: ${title}`}
+        {/* {`현재 제목은: ${title}`}
         {` 현재 폴더는: ${folder}`}
-        {` 현재 폴더 id: ${folderId}`}
+        {` 현재 폴더 id: ${folderId}`} */}
         <p className={styles.modalTitle}>답변 저장하기</p>
         <Input
           title={"제목"}
