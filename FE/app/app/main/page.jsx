@@ -16,13 +16,6 @@ export default function Main() {
   const userNickname = LocalStorage.getItem("userNickname");
   const userDept = LocalStorage.getItem("userDept");
 
-  console.log(
-    "[Main] 1. 로컬에서 정보 가져오기:",
-    userId,
-    userNickname,
-    userDept,
-  );
-
   // 윈도우 가로길이를 가져오기
   const { width } = GetWindowSize();
 
