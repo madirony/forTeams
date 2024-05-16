@@ -24,10 +24,11 @@ export default function MenuBar({ userName, userDept, userId }) {
   const logtoutOnClick = () => {
     logout()
       .then((response) => {
+        router.push("/");
         console.log("로그아웃 성공:", response);
       })
       .catch((error) => {
-        console.log("로그아웃 에러:", eorror);
+        console.log("로그아웃 에러:", error);
       });
   };
 
