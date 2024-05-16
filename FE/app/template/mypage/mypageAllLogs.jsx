@@ -3,6 +3,7 @@ import HistoryList from "component/historyList";
 import MypageAllLogsDetail from "./mypageAllLogsDetail";
 import { useEffect, useState } from "react";
 import LocalStorage from "util/localStorage";
+import Image from "next/image";
 
 // API import
 import { getChatLogList } from "apis/allLog";
@@ -39,15 +40,21 @@ export default function MypageAllLogs({ openModalShare, openModalSave }) {
           openModalSave={openModalSave}
         />
       ) : (
-        datas.map((data, idx) => {
-          return (
-            <HistoryList
-              key={idx}
-              data={data}
-              setLogId={() => setLogId(data.chatbotChatUUID)}
-            />
-          );
-        })
+        <>
+          {datas ? (
+            datas.map((data, idx) => {
+              return (
+                <HistoryList
+                  key={idx}
+                  data={data}
+                  setLogId={() => setLogId(data.chatbotChatUUID)}
+                />
+              );
+            })
+          ) : (
+            <>ddd</>
+          )}
+        </>
       )}
     </div>
   );
