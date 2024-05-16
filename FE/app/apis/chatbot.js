@@ -8,10 +8,10 @@ const getCurrentChatUUID = async (chatbotUUID) => {
       method: "get",
       url: `api/v1/chatbot/chattingUUID/${chatbotUUID}`,
     });
-    console.log("현재 채팅의 UUID를 조회 api요청", response.data);
+    console.log("getCurrentChatUUID 요청 성공", response.data);
     return response.data;
   } catch (error) {
-    console.log("현재 채팅의 UUID를 조회 중 에러 발생", error);
+    console.log("getCurrentChatUUID 에러 발생", error);
   }
 };
 

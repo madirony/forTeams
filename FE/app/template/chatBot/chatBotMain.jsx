@@ -15,23 +15,6 @@ import LocalStorage from "util/localStorage";
 import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
 
 export default function ChatBotMain() {
-  // ★Local에서 사용자 정보를 조회해오기
-  const [isInitialized, setIsInitialized] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [userNickname, setUserNickname] = useState("사용자");
-  const [userDept, setUserDept] = useState("");
-
-  useEffect(() => {
-    const tempUserId = LocalStorage.getItem("userId");
-    const tempUserNickname = LocalStorage.getItem("userNickname");
-    const tempUserDept = LocalStorage.getItem("userDept");
-
-    tempUserId && setUserId(tempUserId);
-    tempUserId && setIsInitialized(true); // userId가 변경되었음을 알려주는 flag
-    tempUserNickname && setUserNickname(tempUserNickname);
-    tempUserDept && setUserDept(tempUserDept);
-  }, []);
-
   // 모달 오픈 여부를 저장할 변수 ================================
   const [showModalShare, setShowModalShare] = useState(false);
   const [showModalSave, setShowModalSave] = useState(false);
@@ -153,17 +136,41 @@ export default function ChatBotMain() {
     };
   }, []);
 
-  // 현재 챗봇 uuid API조회 ========================================
+  // ★Local에서 사용자 정보를 조회 =================================
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [userNickname, setUserNickname] = useState("사용자");
+  const [userDept, setUserDept] = useState("");
+
+  useEffect(() => {
+    const tempUserId = LocalStorage.getItem("userId");
+    const tempUserNickname = LocalStorage.getItem("userNickname");
+    const tempUserDept = LocalStorage.getItem("userDept");
+
+    tempUserId && setUserId(tempUserId);
+    tempUserNickname && setUserNickname(tempUserNickname);
+    tempUserDept && setUserDept(tempUserDept);
+
+    setIsInitialized(true);
+  }, []);
+
+  // userId가 변경되었음을 알려주는 flag
+  // useEffect(() => {
+  //   if (userId.length > 2) {
+  //     setIsInitialized(true);
+  //   }
+  // }, [userId]);
+
+  // 현재 챗봇 UUID API조회 ========================================
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   useEffect(() => {
-    console.log("userId===============", userId);
-    if (isInitialized && userId) {
+    if (isInitialized) {
       getCurrentChatUUID(userId).then((response) => {
-        console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
+        console.log("현재 챗봇 id 가져오기 성공!", response.chatbotChatUUID);
         setChatbotChatUUID(response.chatbotChatUUID);
       });
     }
-  }, [isInitialized, userId]);
+  }, [isInitialized]);
 
   // const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   // useEffect(() => {
@@ -180,7 +187,7 @@ export default function ChatBotMain() {
       console.log("chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
       loadChatLogs(chatbotChatUUID)
         .then((response) => {
-          // console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
+          console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
           setMessages(response.chatLogs);
         })
         .catch((error) => {
