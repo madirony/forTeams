@@ -52,6 +52,7 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                             return exchange.getResponse().setComplete();
                         }));
             } else {
+                log.info(">ASDASDAS<DASDAS<DAS>DASD>AS<DASDASDK#UR*$*********************************");
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                 return exchange.getResponse().setComplete();
             }
