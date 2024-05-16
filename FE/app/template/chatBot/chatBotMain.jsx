@@ -137,22 +137,26 @@ export default function ChatBotMain() {
   }, []);
 
   // ★Local에서 사용자 정보를 조회 =================================
+  const userId = LocalStorage.getItem("userId");
+  const userNickname = LocalStorage.getItem("userNickname");
+  const userDept = LocalStorage.getItem("userDept");
+
   // const [isInitialized, setIsInitialized] = useState(false);
-  const [userId, setUserId] = useState("");
-  const [userNickname, setUserNickname] = useState("사용자");
-  const [userDept, setUserDept] = useState("");
+  // const [userId, setUserId] = useState("");
+  // const [userNickname, setUserNickname] = useState("사용자");
+  // const [userDept, setUserDept] = useState("");
 
-  useEffect(() => {
-    const tempUserId = LocalStorage.getItem("userId");
-    const tempUserNickname = LocalStorage.getItem("userNickname");
-    const tempUserDept = LocalStorage.getItem("userDept");
+  // useEffect(() => {
+  //   const tempUserId = LocalStorage.getItem("userId");
+  //   const tempUserNickname = LocalStorage.getItem("userNickname");
+  //   const tempUserDept = LocalStorage.getItem("userDept");
 
-    tempUserId && setUserId(tempUserId);
-    tempUserNickname && setUserNickname(tempUserNickname);
-    tempUserDept && setUserDept(tempUserDept);
+  //   tempUserId && setUserId(tempUserId);
+  //   tempUserNickname && setUserNickname(tempUserNickname);
+  //   tempUserDept && setUserDept(tempUserDept);
 
-    // setIsInitialized(true);
-  }, []);
+  //   // setIsInitialized(true);
+  // }, []);
 
   console.log("1. 로컬에서 정보 가져오기:", userId, userNickname, userDept);
 
