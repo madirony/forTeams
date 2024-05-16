@@ -5,11 +5,29 @@ import styles from "styles/component/chatBotBubble.module.css";
 import SmallIndex from "./smallIndex";
 
 function cleanMarkdown(markdownText) {
-  return (
-    markdownText
+  console.log(markdownText);
+
+  if (
+    markdownText.indexOf("<img>") != -1 &&
+    markdownText.indexOf("</img>") != -1
+  ) {
+    const url = markdownText.split("<img>")[1].split("</img>")[0];
+    markdownText = markdownText.split("<img>")[0];
+    markdownText += "\n\nㅤ아래 영상을 따라해보세요!";
+    return {
+      text: markdownText
+        // 한글 문자 뒤에 `.` 또는 `:`가 붙으면 개행 추가
+        .replaceAll("<br />", "\n\nㅤ"),
+      imageUrl: url,
+    };
+  }
+
+  return {
+    text: markdownText
       // 한글 문자 뒤에 `.` 또는 `:`가 붙으면 개행 추가
-      .replaceAll("<br />", "\n\nㅤ")
-  );
+      .replaceAll("<br />", "\n\nㅤ"),
+    imageUrl: null,
+  };
 }
 
 export default function ChatBotBubble({
@@ -20,6 +38,7 @@ export default function ChatBotBubble({
   pushToMessages,
 }) {
   if (mode === "BOT") {
+    const { text, imageUrl } = cleanMarkdown(message);
     return (
       <div className={styles.wrapper}>
         <div className={styles.nicknameBox}>
@@ -27,12 +46,25 @@ export default function ChatBotBubble({
           <p>Point Chat Bot</p>
         </div>
         <div className={styles.bubbleBox}>
-          <ReactMarkdown
-            className={styles.chatbotBubble}
-            remarkPlugins={[remarkGfm]}
-          >
-            {cleanMarkdown(message)}
-          </ReactMarkdown>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <ReactMarkdown
+              className={styles.chatbotBubble}
+              remarkPlugins={[remarkGfm]}
+            >
+              {text}
+            </ReactMarkdown>
+            {imageUrl && (
+              <div className={styles.imageWrapper}>
+                <Image
+                  style={{ marginTop: "10px;" }}
+                  src={imageUrl}
+                  alt="Image"
+                  width={700}
+                  height={300}
+                />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     );

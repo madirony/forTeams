@@ -54,6 +54,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ["forteams-bucket.s3.ap-northeast-2.amazonaws.com"],
+  },
 };
 
 module.exports = withPWA(nextConfig);
