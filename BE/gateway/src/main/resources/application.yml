@@ -69,7 +69,7 @@ spring:
           predicates:
             - Path=/api/v1/folder/**
           filters:
-#            - JwtTokenFilter
+            - JwtTokenFilter
 
         - id: token-test-http
           uri: lb://CHATBOT
