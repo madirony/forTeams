@@ -67,7 +67,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             log.debug("[OAuthLoginSuccessHandler] - LOGIN SUCCESS : {} FROM 마이크로솦", oAuth2User.getName());
 
             // 추가 정보를 받을지(새로운 유저), 안 받을지(기존 유저) 분기
-            response.sendRedirect("https://forteams.co.kr"); // (기존 유저) 메인 페이지로
+            response.sendRedirect("https://forteams.co.kr/main"); // (기존 유저) 메인 페이지로
         }
         else {
             Cookie cookie = new Cookie("TMP_ACCESS", msUuid);
