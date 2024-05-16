@@ -152,14 +152,14 @@ export default function ChatBotMain() {
 
   // 현재 챗봇 uuid API조회 ========================================
   // ★ userUUID 수정필요
-  const userUUID = userId;
+  // const userUUID = userId;
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   useEffect(() => {
-    getCurrentChatUUID(userUUID).then((response) => {
+    getCurrentChatUUID(userId).then((response) => {
       console.log("현재 챗봇 id 가져오기~", response.chatbotChatUUID);
       setChatbotChatUUID(response.chatbotChatUUID);
     });
-  }, [userUUID]);
+  }, [userId]);
   // console.log("?????????", chatbotChatUUID);
 
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
