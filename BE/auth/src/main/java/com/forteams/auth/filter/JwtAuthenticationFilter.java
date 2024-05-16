@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         try {
-
+            System.out.println("하 이게 말이돼");
             String token = parseBearerToken(request);
             if(token == null) {
                 filterChain.doFilter(request, response); //다음 필터로 넘김

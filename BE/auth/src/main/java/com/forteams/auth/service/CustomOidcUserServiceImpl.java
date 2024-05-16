@@ -38,7 +38,7 @@ public class CustomOidcUserServiceImpl extends OidcUserService {
                     return newUser;
                 });
         String loginnedUuid = msUserEntity.getMsUuid();
-
+        log.info(loginnedUuid);
         return new CustomOidcUser(oidcUser, loginnedUuid);
     }
 }
