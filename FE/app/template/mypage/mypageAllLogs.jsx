@@ -7,7 +7,7 @@ import LocalStorage from "util/localStorage";
 // API import
 import { getChatLogList } from "apis/allLog";
 
-export default function MypageMyLogs({ openModalShare, openModalSave }) {
+export default function MypageAllLogs({ openModalShare, openModalSave }) {
   // ★Local에서 사용자 정보를 조회 =================================
   const userId = LocalStorage.getItem("userId");
   const userNickname = LocalStorage.getItem("userNickname");
