@@ -27,7 +27,7 @@ public class TokenService {
     public Mono<String> validateTokenAndGetMsUuid(String jwt) {
         try {
             Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-
+            log.info("><><><><><"+key.getAlgorithm());
             String subject = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
