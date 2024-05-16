@@ -156,7 +156,7 @@ public class ChatbotService {
                 .stream()
                 .map(savedChat -> {
                     String chatTitle = savedChat.getChatLogs().stream()
-                            .filter(chat -> "ask".equalsIgnoreCase(chat.getType()))
+                            .filter(chat -> "USER".equalsIgnoreCase(chat.getSender()))
                             .findFirst()
                             .map(chat -> chat.getMsg().length() > 100 ? chat.getMsg().substring(0, 100) + "..." : chat.getMsg())
                             .orElse("No Title");
@@ -166,7 +166,6 @@ public class ChatbotService {
                             .orElse("N/A");
                     return new UserAllChatListDto(savedChat.getChatbotChatUUID(), chatTitle, createdAt);
                 })
-                .sorted(Comparator.comparing(UserAllChatListDto::getCreatedAt).reversed())
                 .collect(Collectors.toList());
     }
 

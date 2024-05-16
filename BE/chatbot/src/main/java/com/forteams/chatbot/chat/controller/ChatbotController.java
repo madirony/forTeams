@@ -21,6 +21,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.Disposable;
 import reactor.core.publisher.Mono;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -47,6 +48,9 @@ public class ChatbotController {
         List<UserAllChatListDto> chatIDs = chatbotService.getChatIDsByUserUUID(userUUID);
         if (chatIDs.isEmpty()) {
             log.info("No saved chats found for userUUID: {}", userUUID);
+        }
+        else{
+            Collections.reverse(chatIDs);
         }
         return ResponseEntity.ok(chatIDs);
     }
