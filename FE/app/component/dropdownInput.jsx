@@ -12,6 +12,8 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   console.log("selectedOption 뽑뽑", selectedOption);
   console.log("setSelectedOption 뽑뽑", setSelectedOption);
 
+  // const [selectedId, setSelectedId] = useState("");
+
   // 유저 uuid 조회
   // const userId = "12345";
 
@@ -29,6 +31,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    // setSelectedId(option.id); // selectedId를 selectedOption.id로 설정
     setIsDropdownOpen(false); // 옵션을 선택한 후 드롭다운을 닫음
   };
 
