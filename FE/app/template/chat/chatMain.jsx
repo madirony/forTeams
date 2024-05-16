@@ -94,6 +94,7 @@ export default function ChatMain() {
         senderUUID: userId,
         message: content,
         messageUUID: "",
+        nickname: "{헤더에서 유저의 닉네임을 여기에 담아야 함}",
         replyMsgUUID: replyMsgUUID,
         replyTo: replyTo,
         removeCheck: "",
