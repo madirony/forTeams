@@ -194,7 +194,7 @@ public class ChatbotController {
                     streamStatusService.removeStream(chatbotUUID);
                 })
                 .subscribe(
-                        data -> log.info("Streaming data: {}", data),
+                        data -> System.out.print(""),
                         error -> log.error("Error while streaming data: {}", error.getMessage()),
                         () -> log.info("Streaming Completed")
                 );
