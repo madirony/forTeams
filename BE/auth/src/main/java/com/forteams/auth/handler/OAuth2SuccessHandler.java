@@ -51,9 +51,10 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         CustomOidcUser oAuth2User = (CustomOidcUser) authentication.getPrincipal();
-
+        log.info("흠.........1");
         String msUuid = oAuth2User.getMsUuid();
         if( userRepository.findByMsUserEntity_MsUuid(msUuid) != null ) {
+            log.info("흠.........2");
             Map<String, String> tokens = getTokens(oAuth2User);
             // msUuid+accessToken으로 jwt 만들기 -> cookie에 담을 예정 -----------------------------------------------
             String accessJwt = jwtProvider.generateAccessToken(msUuid); //  =======> accessToken을 안 쓰는데 뭐냐악...
@@ -72,15 +73,18 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
 
             } catch (ExpiredJwtException e) {
+                log.info("흠.........3");
                 System.out.println("Token expired           !!!!!!!!!");
             } catch (JwtException e) {
+                log.info("흠.........4");
                 System.out.println("Token validation error       !!!!!!!!!!");
 //                e.printStackTrace();
             } catch (Exception e) {
+                log.info("흠.........5");
                 System.out.println("Token processing error          !!!!!!!!!!" );
 //                e.printStackTrace();
             }
-
+            log.info("흠.........6");
             jwtInCookieRedis.putAccessJwtInCookie(accessJwt, 7 * 24 * 60 * 60, response);
 //            Cookie cookie = new Cookie("ACCESS_TOKEN", accessJwt); // 쿠키 생성
 //            cookie.setHttpOnly(false); // 자바스크립트 접근 허용
