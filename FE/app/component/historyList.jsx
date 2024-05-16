@@ -8,6 +8,8 @@ export default function HistoryList({ data, setLogId }) {
   // datetime 객체 변환하기
   const updateDate = getDate(data.createdAt);
 
+  console.log("data뽑기~~~", data);
+
   // const handleClick = () => {
   //   if (router) {
   //     router.push("/another-page");
