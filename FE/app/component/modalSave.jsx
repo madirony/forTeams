@@ -9,8 +9,6 @@ import { saveMyChatbot } from "apis/save";
 import { getFolders } from "apis/save";
 
 export default function ModalSave({ chatbotid, openModalSave }) {
-  console.log("selectedOption 뽑", selectedOption);
-  console.log("setSelectedOption 뽑", setSelectedOption);
   // ★유저 uuid 조회
   // const userId = "12345";
 
