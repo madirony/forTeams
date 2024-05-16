@@ -50,14 +50,13 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                                     .build();
                             return chain.filter(exchange.mutate().request(mutatedRequest).build());
                         })
-
-//                        .switchIfEmpty(Mono.defer(() -> {
-//                            log.warn("Token is invalid or expired");
-//                            RestTemplate restTemplate = new RestTemplate();
-//                            restTemplate.execute("https://forteams.co.kr/api/v2/1", HttpMethod.GET,null,null,new Object());
-//                            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-//                            return exchange.getResponse().setComplete();
-//                        }))
+                        .switchIfEmpty(Mono.defer(() -> {
+                            log.warn("Token is invalid or expired");
+                            RestTemplate restTemplate = new RestTemplate();
+                            restTemplate.execute("https://forteams.co.kr/api/v2/1", HttpMethod.GET,null,null,new Object());
+                            exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+                            return exchange.getResponse().setComplete();
+                        }))
                         .onErrorResume(e -> {
                             log.error("Token validation error: ", e);
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
