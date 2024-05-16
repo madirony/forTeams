@@ -32,6 +32,8 @@ public class TokenService {
                     .parseClaimsJws(jwt)
                     .getBody()
                     .getSubject();
+
+
             return Mono.just(subject);
         } catch (ExpiredJwtException e) {
             System.out.println("Token expired");
@@ -39,7 +41,7 @@ public class TokenService {
         } catch (JwtException e) {
             System.out.println("Token validation error");
             e.printStackTrace();
-            return Mono.error(new RuntimeException("Invalid token"));
+            return Mono.error(new RuntimeException("Invalid token!!!!!!!!!!!!!!"));
         } catch (Exception e) {
             System.out.println("Token processing error");
             e.printStackTrace();
