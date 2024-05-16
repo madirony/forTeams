@@ -11,8 +11,8 @@ export default function MypageInfo() {
 
   return (
     <div className={styles.wrapper}>
-      <Input title={"닉네임"} value={userNickname} readonly />
-      <Input title={"부서"} value={userDept} readonly />
+      <Input title={"닉네임"} message={userNickname} readonly />
+      <Input title={"부서"} message={userDept} readonly />
 
       {/* 수정 버튼은 일단 삭제 */}
       {/* <div className={styles.button}>
