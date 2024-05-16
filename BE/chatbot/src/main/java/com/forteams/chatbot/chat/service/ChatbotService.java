@@ -70,7 +70,7 @@ public class ChatbotService {
     }
 
     private String callExternalAPI(String question) {
-        String url = "https://forteams.co.kr:8085/recommendation/question";
+        String url = "http://forteams.co.kr:8085/recommendation/question";
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(url)
                 .queryParam("question", question);
         return restTemplate.getForObject(builder.toUriString(), String.class);
@@ -192,7 +192,7 @@ public class ChatbotService {
     }
 
     public String fetchRecommendation(String dept) {
-        String url = "https://forteams.co.kr:8085/recommend/function";
+        String url = "http://forteams.co.kr:8085/recommend/function";
         WebClient webClient = WebClient.create(url);
 
         log.info(">>> 여기에요! 3");
