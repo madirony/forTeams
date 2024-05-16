@@ -62,6 +62,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
             try {
+                log.info("try들어옴.........!!!");
                 String subject = Jwts.parserBuilder()
                         .setSigningKey(key)
 
