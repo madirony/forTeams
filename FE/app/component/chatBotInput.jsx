@@ -4,8 +4,14 @@ import Image from "next/image";
 import styles from "styles/component/chatBotInput.module.css";
 import { useRef, useState } from "react";
 import { saveChatbot, pauseChatbot } from "apis/chatbot";
+import LocalStorage from "util/localStorage";
 
 export default function ChatBotInput({ mode, placeholder, sendMessage }) {
+  // ★Local에서 사용자 정보를 조회 =================================
+  const userId = LocalStorage.getItem("userId");
+  // const userNickname = LocalStorage.getItem("userNickname");
+  // const userDept = LocalStorage.getItem("userDept");
+
   const textareaRef = useRef(null);
   const [message, setMessage] = useState("");
 
@@ -56,10 +62,10 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
   };
 
   // 중단 버튼 클릭시 실행
-  const onClickStop = (uuid) => {
+  const onClickStop = (userId) => {
     console.log("스트림 중단 요청 API");
-    console.log(uuid);
-    pauseChatbot(uuid);
+    console.log("내가 uuid를 뽑아볼게 하나둘셋", userId);
+    pauseChatbot(userId);
   };
 
   switch (mode) {
@@ -82,7 +88,7 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
             }} // 최소(1줄) 및 최대 높이(6줄) 및 스크롤바 설정
           ></textarea>
           <div
-            onClick={() => onClickStop("123")}
+            onClick={() => onClickStop(userId)}
             className={styles.imgContainer}
           >
             <Image
