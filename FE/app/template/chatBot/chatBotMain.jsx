@@ -116,10 +116,7 @@ export default function ChatBotMain() {
               setRecommendations(recommendationsArray);
               setInputMode("DEFAULT");
             } else if (receivedMsg.type === "recommendFin") {
-              console.log(
-                "이건가ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ",
-                receivedMsg,
-              );
+              console.log(receivedMsg);
               setRecommendationsReady(true);
               setInputMode("DEFAULT");
             }

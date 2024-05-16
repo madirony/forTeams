@@ -5,8 +5,6 @@ import styles from "styles/component/chatBotBubble.module.css";
 import SmallIndex from "./smallIndex";
 
 function cleanMarkdown(markdownText) {
-  console.log(markdownText);
-
   if (
     markdownText.indexOf("<img>") != -1 &&
     markdownText.indexOf("</img>") != -1
