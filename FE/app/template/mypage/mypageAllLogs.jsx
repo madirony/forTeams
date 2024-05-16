@@ -2,6 +2,7 @@ import styles from "styles/template/mypageAllLogs.module.css";
 import HistoryList from "component/historyList";
 import MypageAllLogsDetail from "./mypageAllLogsDetail";
 import { useEffect, useState } from "react";
+import LocalStorage from "util/localStorage";
 
 // API import
 import { getChatLogList } from "apis/allLog";
