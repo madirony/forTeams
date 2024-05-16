@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * 토큰, 인증 관련 컨트롤러
  */
@@ -43,7 +45,7 @@ public class UserController {
 
         try{
             Jws<Claims> claims = Jwts.parserBuilder()
-                    .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+                    .setSigningKey(secretKey.getBytes(StandardCharsets.UTF_8))
                     .build()
                     .parseClaimsJws(expiredToken);
             subject = claims.getBody().getSubject(); //accessToken의 uuid
@@ -64,4 +66,6 @@ public class UserController {
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + newAccessToken).build();
 
     }
+
+//    @GetMapping
 }
