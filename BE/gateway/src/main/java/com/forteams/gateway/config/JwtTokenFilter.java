@@ -42,7 +42,7 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
             String token = getTokenFromRequest(exchange.getRequest());
             log.info(">>>>>>>>>>>>>>>>>>>>           Token : "+token+"            >>>>>>>>>>>>>");
             if (token != null) {
-                Mono<Void> msUuid1 = tokenService.validateTokenAndGetMsUuid(token)
+                return tokenService.validateTokenAndGetMsUuid(token)
                         .flatMap(msUuid -> {
                             log.info("msUuid from token: {}", msUuid);
                             ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
@@ -52,8 +52,8 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                         })
                         .switchIfEmpty(Mono.defer(() -> {
                             log.warn("Token is invalid or expired");
-                            RestTemplate restTemplate = new RestTemplate();
-                            restTemplate.execute("https://forteams.co.kr/api/v2/1", HttpMethod.GET,null,null,new Object());
+//                            RestTemplate restTemplate = new RestTemplate();
+//                            restTemplate.execute("https://forteams.co.kr/api/v2/1", HttpMethod.GET,null,null,new Object());
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
                         }))
@@ -62,8 +62,8 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
                         });
-                log.info("************************   "+msUuid1);
-                return msUuid1;
+//                log.info("************************   "+msUuid1);
+//                return msUuid1;
             } else {
                 log.warn("No ACCESS_TOKEN cookie found");
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
