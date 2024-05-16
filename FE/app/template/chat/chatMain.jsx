@@ -129,7 +129,7 @@ export default function ChatMain() {
             currentUuid={userId}
             uuid={msg.senderUUID}
             msgUuid={msg.messageUUID}
-            user={userNickname}
+            user={msg.nickname}
             content={msg.message}
             createdAt={msg.createdAt}
             handleReply={handleReply}
