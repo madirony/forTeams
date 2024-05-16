@@ -15,14 +15,15 @@ export default function ModalSave({ chatbotid, openModalSave }) {
   // 제목과 폴더 정보 추적하기
   const [title, setTitle] = useState("");
   const [selectedOption, setSelectedOption] = useState({});
-  // const folder = selectedOption.name;
+  const folder = selectedOption.name;
+  const iddd = selectedOption.id;
 
   const handleInputTitle = (event) => {
     setTitle(event.target.value);
   };
 
   // // 폴더 목록 조회 API
-  // const [, setOptions] = useState([]);
+  // const [options, setOptions] = useState([]);
   // useEffect(() => {
   //   getFolders().then((response) => {
   //     // console.log("폴더 목록 출력!!", response);
@@ -46,7 +47,8 @@ export default function ModalSave({ chatbotid, openModalSave }) {
     <div className={styles.modalBackground} onClick={openModalSave}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         {/* {`현재 제목은: ${title} /`} */}
-        {/* {` 현재 폴더는: ${folder}`} */}
+        {` 현재 폴더는: ${folder}`}
+        {` 현재 폴더 iddd: ${iddd}`}
         <p className={styles.modalTitle}>답변 저장하기</p>
         <Input
           title={"제목"}
