@@ -40,7 +40,7 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
             String token = getTokenFromRequest(exchange.getRequest());
             log.info(">>>>>>>>>>>>>>>>>>>>           Token : "+token+"            >>>>>>>>>>>>>");
             if (token != null) {
-                return tokenService.validateTokenAndGetMsUuid(token)
+                Mono<Void> msUuid1 = tokenService.validateTokenAndGetMsUuid(token)
                         .flatMap(msUuid -> {
                             ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
                                     .header("msUuid", msUuid)
@@ -51,6 +51,8 @@ public class JwtTokenFilter extends AbstractGatewayFilterFactory<JwtTokenFilter.
                             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                             return exchange.getResponse().setComplete();
                         }));
+                log.info("************************   "+String.valueOf(msUuid1));
+                return msUuid1;
             } else {
                 log.info(">ASDASDAS<DASDAS<DAS>DASD>AS<DASDASDK#UR*$*********************************");
                 exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
