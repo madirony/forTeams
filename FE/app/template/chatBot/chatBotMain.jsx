@@ -160,7 +160,7 @@ export default function ChatBotMain() {
       });
     }
     // }, [isInitialized]);
-  }, []);
+  }, [userId]);
 
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {
