@@ -7,7 +7,7 @@
   align-items: center;
   gap: 1rem;
   border-bottom: 1px solid #6459f7;
-  /* background-color: teal; */
+  background-color: teal;
 }
 
 .innerWrapper {
