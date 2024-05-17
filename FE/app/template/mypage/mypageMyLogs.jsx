@@ -45,7 +45,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
 
   return (
     <div className={styles.wrapper}>
-      {/* {logId ? (
+      {logId ? (
         <MypageMyLogsDetail
           logId={logId}
           setLogId={setLogId}
@@ -54,17 +54,27 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
         />
       ) : datas.length > 0 ? (
         <>
-          <FolderIndex indexes={folders} />
+          <FolderIndex
+            indexes={folders}
+            onFolderSelect={handleFolderSelect}
+            selectedFolder={selectedFolder}
+          />
           {datas.map((data, idx) => (
-            <HistoryList key={idx} data={data} setLogId={setLogId} />
+            <HistoryList
+              key={idx}
+              data={data}
+              setLogId={() => setLogId(data.chatbotChatUUID)}
+            />
           ))}
         </>
       ) : (
         <div className={styles.textWrapper}>
           <p>새로운 질문을 저장해 보세요!</p>
         </div>
-      )} */}
-      {logId ? (
+      )}
+
+      {/* ================================= */}
+      {/* {logId ? (
         <MypageMyLogsDetail
           logId={logId}
           setLogId={setLogId}
@@ -86,7 +96,8 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
             />
           ))}
         </>
-      )}
+      )} */}
+      {/* =================================== */}
     </div>
   );
 }
