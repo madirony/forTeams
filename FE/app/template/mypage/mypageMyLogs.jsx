@@ -29,12 +29,12 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
 
   // 마이 로그 전체 조회 API
   const [datas, setDatas] = useState([]);
-  useEffect(() => {
-    getMyChatbotList(3).then((response) => {
-      console.log("폴더 저장 마이 로그 리스트 출력!", response);
-      // setDatas(response)
-    });
-  }, []);
+  // useEffect(() => {
+  //   getMyChatbotList(3).then((response) => {
+  //     console.log("폴더 저장 마이 로그 리스트 출력!", response);
+  //     // setDatas(response)
+  //   });
+  // }, []);
 
   const handleFolderSelect = (folderId) => {
     setSelectedFolder(folderId);
