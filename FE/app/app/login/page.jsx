@@ -24,12 +24,12 @@ export default function LoginMain() {
         <source src="image/background.mp4" type="video/mp4" />
       </video>
       <div className={styles.content}>
-        {/* <Image
-          src="icon/dropdownClose.svg"
+        <Image
+          src="login/icon/dropdownClose.svg"
           alt="DropdownClose"
           width={20}
           height={20}
-        /> */}
+        />
 
         <LoginDropdownInput
           selectedOption={selectedOption}
