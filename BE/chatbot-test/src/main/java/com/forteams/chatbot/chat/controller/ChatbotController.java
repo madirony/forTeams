@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/chatbot")
+@RequestMapping("/api/v2/chatbot")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;

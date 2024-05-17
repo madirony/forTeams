@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @Slf4j
 @RestController
-@RequestMapping( "/api/v1/folder")
+@RequestMapping( "/api/v2/folder")
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000, https://forteams.co.kr")
 public class FolderController {
