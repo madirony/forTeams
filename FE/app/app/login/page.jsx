@@ -5,13 +5,8 @@
 import React from "react";
 import styles from "styles/page/login.module.css";
 import GradientButton from "component/gradientButton";
-import Image from "next/image";
-import LoginDropdownInput from "component/loginDropdownInput";
-import { useState } from "react";
 
 export default function LoginMain() {
-  const [selectedOption, setSelectedOption] = useState({});
-
   // MS 로그인 웹으로 넘어가는 함수
   const handlePurpleButtonClick = () => {
     window.location.href = `https://forteams.co.kr/oauth2/authorization/microsoft`;
@@ -24,17 +19,6 @@ export default function LoginMain() {
         <source src="image/background.mp4" type="video/mp4" />
       </video>
       <div className={styles.content}>
-        <Image
-          src="login/icon/dropdownClose.svg"
-          alt="DropdownClose"
-          width={20}
-          height={20}
-        />
-
-        <LoginDropdownInput
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-        />
         <p className={styles.text1}>Ms Teams</p>
         <p className={styles.text2}>어디서나 간편하게</p>
         <p className={styles.text1}>사용해보세요</p>
