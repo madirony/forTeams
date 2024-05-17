@@ -28,12 +28,8 @@ export default function MypageInfo() {
       .then((response) => {
         // 변경되면 로컬에 업데이트
         LocalStorage.setItem("userDept", toApiDept);
-
-        console.log("수정 요청 성공");
       })
-      .catch(() => {
-        console.log("실행 안됨");
-      });
+      .catch(() => {});
   };
 
   return (
