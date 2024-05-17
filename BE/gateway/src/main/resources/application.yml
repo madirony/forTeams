@@ -90,7 +90,7 @@ spring:
           predicates:
             - Path=/api/ws/chatbot
           filters:
-            - JwtTokenFilter
+#            - JwtTokenFilter
 
         - id: openchat-websocket
           uri: lb://OPENCHAT
