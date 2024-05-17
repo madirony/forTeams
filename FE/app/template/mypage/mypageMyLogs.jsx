@@ -31,56 +31,6 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   //   });
   // }, []);
 
-  const datas = [
-    {
-      id: 1,
-      title: "내 계정에서 조직도 확인하기",
-      category: "영상회의",
-      updatedAt: "2024-04-25T15:36:24",
-    },
-    {
-      id: 2,
-      title: "외부 사람과 팀 회의 시작하기",
-      updatedAt: "2024-04-28T16:24:24",
-    },
-    {
-      id: 3,
-      title: "외부 사람에게 조직도 공유하기",
-      updatedAt: "2024-04-30T18:00:24",
-    },
-    {
-      id: 4,
-      title: "내 계정에서 조직도 확인하기",
-      updatedAt: "2024-04-25T15:36:24",
-    },
-    {
-      id: 5,
-      title: "외부 사람과 팀 회의 시작하기",
-      updatedAt: "2024-04-28T16:24:24",
-    },
-    {
-      id: 6,
-      title: "외부 사람에게 조직도 공유하기",
-      updatedAt: "2024-04-30T18:00:24",
-    },
-    {
-      id: 7,
-      title: "내 계정에서 조직도 확인하기",
-      updatedAt: "2024-04-25T15:36:24",
-    },
-    {
-      id: 8,
-      title: "외부 사람과 팀 회의 시작하기",
-      updatedAt: "2024-04-28T16:24:24",
-    },
-    {
-      id: 9,
-      title: "외부 사람에게 조직도 공유하기",
-      updatedAt: "2024-04-30T18:00:24",
-    },
-  ];
-  // -------------------------------------
-
   return (
     <div className={styles.wrapper}>
       {logId ? (
