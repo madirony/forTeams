@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { getFolders, getMyChatbotList } from "apis/save";
 
 export default function MypageMyLogs({ openModalShare, openModalSave }) {
-  // const router = useRouter();
-
   // 상세 페이지 이동 위한 logId
   const [logId, setLogId] = useState();
   useEffect(() => {
@@ -92,13 +90,17 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
           openModalShare={openModalShare}
           openModalSave={openModalSave}
         />
-      ) : (
+      ) : datas.length > 0 ? (
         <>
           <FolderIndex indexes={folders} />
           {datas.map((data, idx) => (
             <HistoryList key={idx} data={data} setLogId={setLogId} />
           ))}
         </>
+      ) : (
+        <div className={styles.textWrapper}>
+          <p>새로운 질문을 저장해 보세요!</p>
+        </div>
       )}
     </div>
   );
