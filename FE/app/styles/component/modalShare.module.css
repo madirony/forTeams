@@ -28,11 +28,11 @@
 .linkWrapper {
   display: flex;
   flex-direction: row;
-  gap: 2px;
+  gap: 3px;
 }
 
 .linkInput {
-  flex: 8;
+  flex: 7;
   border-radius: 10px;
   border-color: "#D3D5FB";
   border-width: 2px;
@@ -42,7 +42,7 @@
 }
 
 .buttonInput {
-  flex: 2;
+  flex: 3;
   height: 100%;
 }
 
