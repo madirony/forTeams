@@ -7,13 +7,11 @@
   background-color: rgba(239, 239, 239, 0.7);
   border-radius: 40px;
   gap: 0.5rem;
-  overflow: auto;
-  background-color: red;
+  /* overflow: auto; */
 }
 
 .hamburgerTitle {
   width: 100%;
-  background-color: aqua;
 }
 
 .text {
@@ -31,7 +29,6 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   overflow: auto;
-  background-color: yellow;
 }
 
 .button {
@@ -49,7 +46,7 @@
 /* 반응형-중간 */
 @media (max-width: 500px) {
   .wrapper {
-    /* background-color: rgba(239, 239, 239, 0); */
+    background-color: rgba(239, 239, 239, 0);
     padding: 2rem 0rem;
     border-radius: 0px;
     height: 90vh;
