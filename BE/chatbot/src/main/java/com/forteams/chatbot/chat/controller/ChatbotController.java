@@ -82,7 +82,7 @@ public class ChatbotController {
         if (userDept == null || userDept.isEmpty()) {
             return ResponseEntity.badRequest().body("Department info is missing");
         }
-        String recommendation = chatbotService.fetchRecommendation(userDept);
+        String recommendation = chatbotService.fetchRecommendation("A");
 
         return ResponseEntity.ok(recommendation);
     }
@@ -140,7 +140,7 @@ public class ChatbotController {
 
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
 
-        MessageUser user = new MessageUser(userNickname, userId, userDept);
+        MessageUser user = new MessageUser(userNickname, userId, "A");
 
         switch (chatbotDto.getType()) {
             case "recommend":
