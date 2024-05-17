@@ -92,8 +92,8 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
         console.log("새 폴더 생성 완료?");
         // 폴더 목록 다시 불러오기
         await fetchFolders();
-        // setCustomInput(""); // 입력 필드 초기화
-        setIsDropdownOpen(false); // 드롭다운 닫기
+        setCustomInput(""); // 입력 필드 초기화
+        // setIsDropdownOpen(false); // 드롭다운 닫기
       } catch (error) {
         console.error("폴더 생성 중 에러 발생", error);
       }
