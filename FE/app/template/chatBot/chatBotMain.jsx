@@ -148,7 +148,7 @@ export default function ChatBotMain() {
     userDept,
   );
 
-  const [chatbotChatUUID, setChatbotChatUUID] = useState("");
+  const [chatbotChatUUID, setChatbotChatUUID] = useState(null);
   useEffect(() => {
     getCurrentChatUUID(userId).then((response) => {
       console.log(
@@ -160,6 +160,24 @@ export default function ChatBotMain() {
 
     // }, [isInitialized]);
   }, [userId]);
+
+  // chatbotChatUUID가 null인 경우 1초 후에 chatbotChatUUID 가져오기
+  useEffect(() => {
+    if (chatbotChatUUID === null) {
+      const timer = setTimeout(() => {
+        getCurrentChatUUID(userId).then((response) => {
+          console.log(
+            "[HistoryTitle] 현재 챗봇 id 가져오기 성공!",
+            response.chatbotChatUUID,
+          );
+          setChatbotChatUUID(response.chatbotChatUUID);
+        });
+      }, 1000);
+
+      // 클린업 함수로 타이머를 정리합니다.
+      return () => clearTimeout(timer);
+    }
+  }, [chatbotChatUUID, userId]);
 
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {
@@ -231,6 +249,17 @@ export default function ChatBotMain() {
         destination: `/pub/chatbot.message.${userId}`,
         body: JSON.stringify(recommendMessage),
       });
+
+      //만약 chatbotChatUUID가 null이라면 1초정도 후에 chatbotId 가져오기(api)
+      // if (chatbotChatUUID === null) {
+      //   getCurrentChatUUID(userId).then((response) => {
+      //     console.log(
+      //       "[ChatBotMain]제발 현재 챗봇 id 가져오기 성공!",
+      //       response.chatbotChatUUID,
+      //     );
+      //     setChatbotChatUUID(response.chatbotChatUUID);
+      //   });
+      // }
     }
   };
 
