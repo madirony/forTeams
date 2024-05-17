@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   background-color: white;
+  padding: 3rem 2rem;
 }
 
 .socket {
   /* background-color: teal; */
-  margin-left: 3%;
-  margin-right: 3%;
+  /* margin-left: 3%;
+  margin-right: 3%; */
 }
