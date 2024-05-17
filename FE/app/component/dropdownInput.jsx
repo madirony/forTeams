@@ -10,7 +10,7 @@ import { getFolders, createFolder } from "apis/save";
 export default function DropdownInput({ selectedOption, setSelectedOption }) {
   // import 페이지에서 정의 : const [selectedOption, setSelectedOption] = useState({})
   console.log("selectedOption 뽑뽑", selectedOption);
-  console.log("setSelectedOption 뽑뽑", setSelectedOption);
+  // console.log("setSelectedOption 뽑뽑", setSelectedOption);
 
   // const [selectedId, setSelectedId] = useState("");
 
@@ -18,7 +18,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   const [options, setOptions] = useState([]);
   useEffect(() => {
     getFolders().then((response) => {
-      console.log("폴더 목록 출력!!", response);
+      console.log("폴더 목록 출력~!!", response);
       setOptions(response);
     });
   }, []);
@@ -28,6 +28,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
+    console.log("selectedOption이 뭐가 나옴?", selectedOption);
     // setSelectedId(option.id); // selectedId를 selectedOption.id로 설정
     setIsDropdownOpen(false); // 옵션을 선택한 후 드롭다운을 닫음
   };
