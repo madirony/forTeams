@@ -78,25 +78,25 @@ public class ChatbotController {
     }
 
     @PostMapping("/func")
-    public ResponseEntity<String> getRecommendation(@RequestHeader("dept") String userDept) {
-        if (userDept == null || userDept.isEmpty()) {
-            return ResponseEntity.badRequest().body("Department info is missing");
-        }
-        String recommendation = chatbotService.fetchRecommendation("A");
-
-        return ResponseEntity.ok(recommendation);
-    }
-//    public ResponseEntity<String> getRecommendation() {
-//        String department = "A";
-//
-//        if (department == null || department.isEmpty()) {
+//    public ResponseEntity<String> getRecommendation(@RequestHeader("dept") String userDept) {
+//        if (userDept == null || userDept.isEmpty()) {
 //            return ResponseEntity.badRequest().body("Department info is missing");
 //        }
-//
-//        String recommendation = chatbotService.fetchRecommendation(department);
+//        String recommendation = chatbotService.fetchRecommendation("A");
 //
 //        return ResponseEntity.ok(recommendation);
 //    }
+    public ResponseEntity<String> getRecommendation() {
+        String department = "A";
+
+        if (department == null || department.isEmpty()) {
+            return ResponseEntity.badRequest().body("Department info is missing");
+        }
+
+        String recommendation = chatbotService.fetchRecommendation(department);
+
+        return ResponseEntity.ok(recommendation);
+    }
 
     @PostMapping("/stop-stream/{chatbotUUID}")
     public ResponseEntity<String> stopStream(@PathVariable String chatbotUUID) {
@@ -134,40 +134,40 @@ public class ChatbotController {
 
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
-    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID,
-                            @Header("msUuid") String userId, @Header("nickname") String userNickname,
-                            @Header("dept") String userDept) {
-
-        chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
-
-        MessageUser user = new MessageUser(userNickname, userId, "A");
-
-        switch (chatbotDto.getType()) {
-            case "recommend":
-                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID, user);
-                break;
-            case "ask":
-                rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
-                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder(), user);
-                break;
-        }
-    }
-//    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
+//    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID,
+//                            @Header("msUuid") String userId, @Header("nickname") String userNickname,
+//                            @Header("dept") String userDept) {
 //
 //        chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
+//
+//        MessageUser user = new MessageUser(userNickname, userId, "A");
+//
 //        switch (chatbotDto.getType()) {
 //            case "recommend":
-//                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID);
+//                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID, user);
 //                break;
 //            case "ask":
 //                rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
-//                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder());
+//                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder(), user);
 //                break;
 //        }
 //    }
+    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID) {
 
-//    private void recommendResponse(String chatUUID, String chatbotUUID) {
-    private void recommendResponse(String chatUUID, String chatbotUUID, MessageUser user) {
+        chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
+        switch (chatbotDto.getType()) {
+            case "recommend":
+                recommendResponse(chatbotDto.getChatUUID(), chatbotUUID);
+                break;
+            case "ask":
+                rabbitTemplate.convertAndSend("chatbot.exchange", "chatbot." + chatbotUUID, chatbotDto);
+                streamData(chatbotDto.getChatUUID(), chatbotUUID, new StringBuilder());
+                break;
+        }
+    }
+
+    private void recommendResponse(String chatUUID, String chatbotUUID) {
+//    private void recommendResponse(String chatUUID, String chatbotUUID, MessageUser user) {
         List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
 
         if (validMessages.isEmpty()) {
@@ -175,7 +175,7 @@ public class ChatbotController {
             return;
         }
 
-//        MessageUser user = new MessageUser("손준성", "123", "A");
+        MessageUser user = new MessageUser("손준성", "123", "A");
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
@@ -199,8 +199,8 @@ public class ChatbotController {
                 );
     }
 
-//    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb) {
-    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb, MessageUser user) {
+    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb) {
+//    private void streamData(String chatUUID, String chatbotUUID, StringBuilder sb, MessageUser user) {
         List<Message> validMessages = chatbotService.validateMessageRequest(chatbotService.fetchRecentMessages(chatbotUUID));
 
         if (validMessages.isEmpty()) {
@@ -208,7 +208,7 @@ public class ChatbotController {
             return;
         }
 
-//        MessageUser user = new MessageUser("손준성", "123", "A");
+        MessageUser user = new MessageUser("손준성", "123", "A");
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
         AtomicInteger sequence = new AtomicInteger(0);
