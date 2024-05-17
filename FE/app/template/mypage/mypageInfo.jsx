@@ -37,8 +37,8 @@ export default function MypageInfo() {
       <Input title={"닉네임"} message={userNickname} readonly />
       <Input title={"부서"} message={userDept} readonly />
       {/* 수정 버튼은 일단 삭제 */}
-      수정할 부서를 선택하고 완료 버튼을 눌러주세요 {selectedOption.name}
-      <LoginDropdownInput
+      {/* 수정할 부서를 선택하고 완료 버튼을 눌러주세요 {selectedOption.name} */}
+      {/* <LoginDropdownInput
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
@@ -48,7 +48,7 @@ export default function MypageInfo() {
           purpleButtonText={"완료"}
           onPurpleButtonClick={onClickButton}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
