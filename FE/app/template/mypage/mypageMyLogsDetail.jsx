@@ -35,7 +35,6 @@ export default function MypageMyLogsDetail({
         logId={logId}
         openModalShare={openModalShare}
         chatbotChatUUID={chatbotChatUUID}
-        trashAtMy
       />
       {/* ========================================================== */}
       <div className={styles.socket}>

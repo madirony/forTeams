@@ -12,9 +12,7 @@ export default function HistoryTitle({
   setLogId,
   logId,
   trashAtAll,
-  trashAtMy,
   openModalShare,
-  // openModalSave,
   chatbotChatUUID,
 }) {
   // datetime 객체 변환하기
@@ -71,19 +69,17 @@ export default function HistoryTitle({
         />
       </div>
 
-      {openModalSave ? (
+      {trashAtAll ? (
         <ThreedotDropdown
-          trash
+          trashAtAll
           share
-          // save
           openModalShare={openModalShare}
-          // openModalSave={openModalSave}
           logId={logId}
           setLogId={setLogId}
         />
       ) : (
         <ThreedotDropdown
-          trash
+          trashAtMy
           share
           openModalShare={openModalShare}
           logId={logId}

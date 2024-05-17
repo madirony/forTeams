@@ -11,7 +11,6 @@ export default function MypageAllLogsDetail({
   logId,
   setLogId,
   openModalShare,
-  openModalSave,
 }) {
   // 챗봇 로그 상세 조회 API
   const [title, setTitle] = useState("");
@@ -39,7 +38,6 @@ export default function MypageAllLogsDetail({
         updatedAt={updatedAt}
         setLogId={setLogId}
         logId={logId}
-        openModalSave={openModalSave}
         openModalShare={openModalShare}
         chatbotChatUUID={chatbotChatUUID}
         trashAtAll
