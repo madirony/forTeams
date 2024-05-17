@@ -170,7 +170,27 @@ public class ChatbotService {
     }
 
     public Optional<SavedChatLogSet> getChatLogByUUID(String chatbotChatUUID) {
-        return savedChatLogSetRepository.findById(chatbotChatUUID);
+        Optional<SavedChatLogSet> savedChatLogSet = savedChatLogSetRepository.findById(chatbotChatUUID);
+        if (savedChatLogSet.isPresent()) {
+            return savedChatLogSet;
+        } else {
+            return chatbotLogSetRepository.findByChatbotChatUUID(chatbotChatUUID)
+                    .map(this::convertToSavedChatLogSet);
+        }
+    }
+
+    private SavedChatLogSet convertToSavedChatLogSet(ChatbotLogSet chatbotLogSet) {
+        SavedChatLogSet savedChatLogSet = new SavedChatLogSet();
+        savedChatLogSet.setUserUUID(chatbotLogSet.getUserUUID());
+        savedChatLogSet.setChatbotChatUUID(chatbotLogSet.getChatbotChatUUID());
+        if (!chatbotLogSet.getChatLogs().isEmpty()) {
+            ChatbotDto tmpDto = chatbotLogSet.getChatLogs().get(0);
+            savedChatLogSet.setChatTitle(tmpDto.getMsg());
+            savedChatLogSet.setCreatedAt(tmpDto.getCreatedAt());
+        }
+        savedChatLogSet.setChatLogs(chatbotLogSet.getChatLogs());
+        savedChatLogSet.setShareFlag("false");  // 기본값으로 설정
+        return savedChatLogSet;
     }
 
     public Optional<ChatbotLogSet> getChatLogsByUUID(String chatbotChatUUID) {
