@@ -17,16 +17,20 @@ export default function MypageInfo() {
 
   // 완료 버튼 눌렀을 때 실행될 함수
   const onClickButton = () => {
-    updateDept(userId, selectedOption.name).then((response) => {
-      console.log("수정 요청 성공");
-    });
+    updateDept(userId, selectedOption.name)
+      .then((response) => {
+        console.log("수정 요청 성공");
+      })
+      .catch(() => {
+        console.log("실행 안됨");
+      });
   };
 
   return (
     <div className={styles.wrapper}>
       <Input title={"닉네임"} message={userNickname} readonly />
       <Input title={"부서"} message={userDept} readonly />
-      수정할 부서를 선택하고 완료 버튼을 눌러주세요
+      수정할 부서를 선택하고 완료 버튼을 눌러주세요 {selectedOption.name}
       <LoginDropdownInput
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
