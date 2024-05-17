@@ -36,10 +36,12 @@ public class JwtProvider {
     }
 
     public String generateAccessToken(String msUuid) {
-        long validity = 10800000; // 3 hours
+//        long validity = 10800000; // 3 hours
+        long validity = 604800000; // 1 week
+
         UserEntity user = userRepository.findByMsUserEntity_MsUuid(msUuid);
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)); // 키 생성
-        log.info("><><><><><"+key.getAlgorithm());
+//        log.info("><><><><><"+key.getAlgorithm());
 
         return Jwts.builder()
                 .setSubject(msUuid)
@@ -55,7 +57,7 @@ public class JwtProvider {
     public String generateRefreshToken(String msUuid) {
         long validity = 1209600000; // 14 days
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)); // 키 생성
-        log.info("><><><><><"+key.getAlgorithm());
+//        log.info("><><><><><"+key.getAlgorithm());
         return Jwts.builder()
                 .setSubject(msUuid)
                 .setId(UUID.randomUUID().toString()) // Unique identifier for the token
