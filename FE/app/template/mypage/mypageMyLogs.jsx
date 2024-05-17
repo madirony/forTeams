@@ -8,9 +8,9 @@ import { getFolders, getMyChatbotList } from "apis/save";
 
 export default function MypageMyLogs({ openModalShare, openModalSave }) {
   // 상세 페이지 이동 위한 logId
-  const [logId, setLogId] = useState();
+  const [logId, setLogId] = useState("");
   useEffect(() => {
-    setLogId();
+    setLogId("");
   }, []);
 
   // 폴더 목록 조회 API
@@ -86,9 +86,13 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
             onFolderSelect={handleFolderSelect}
             selectedFolder={selectedFolder}
           />
-          {/* {datas.map((data, idx) => (
-            <HistoryList key={idx} data={data} setLogId={setLogId} />
-          ))} */}
+          {datas.map((data, idx) => (
+            <HistoryList
+              key={idx}
+              data={data}
+              setLogId={() => setLogId(data.chatbotChatUUID)}
+            />
+          ))}
         </>
       )}
     </div>

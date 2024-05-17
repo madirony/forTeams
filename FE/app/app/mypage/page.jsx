@@ -69,7 +69,10 @@ export default function Mypage() {
             />
           )}
           {showModalSave && (
-            <ModalSave chatbotid={123456} openModalSave={openModalSave} />
+            <ModalSave
+              chatbotid={selectedChatbotId}
+              openModalSave={openModalSave}
+            />
           )}
 
           {/* 햄버거 메뉴 선택하는 부분 */}
