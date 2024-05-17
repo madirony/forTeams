@@ -8,6 +8,7 @@ import ThreeTrash from "icon/threeTrash.svg";
 import ThreeShare from "icon/threeShare.svg";
 import ThreeSave from "icon/threeSave.svg";
 import LocalStorage from "util/localStorage";
+import { useRouter } from "next/navigation";
 
 import {
   Dropdown,
@@ -31,6 +32,8 @@ export default function ThreedotDropdown({
   logId,
   setLogId,
 }) {
+  const router = useRouter();
+
   // ★Local에서 사용자 정보를 조회 =================================
   const userId = LocalStorage.getItem("userId");
   const userNickname = LocalStorage.getItem("userNickname");
@@ -53,7 +56,8 @@ export default function ThreedotDropdown({
       const response = await saveChatbot(userId, chatUUID);
       console.log("초기화 중 저장 성공:", response);
       // 화면 새로고침
-      window.location.reload();
+      // window.location.reload();
+      router.back();
     } catch (error) {
       console.error("초기화 중 저장 실패:", error);
     }
@@ -64,7 +68,8 @@ export default function ThreedotDropdown({
     try {
       const response = await deleteChatLog(logId);
       console.log("전체 페이지에서 삭제 성공:", response);
-      window.location.reload();
+      router.back();
+      // window.location.reload();
     } catch (error) {
       console.error("전체 페이지에서 삭제 실패:", error);
     }
