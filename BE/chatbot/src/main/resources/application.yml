@@ -12,6 +12,9 @@ spring:
   application:
     name: chatbot
 
+  jackson:
+    time-zone: Asia/Seoul
+
   data:
     mongodb:
       uri: ENC(P5G3E6YLr2b2l83lNHJRcNll3EJVVHeO21nsjn4SNPBm6oM/L5nPixP4ORvpnzWOLC44oi3KfieZ2LF2t/UaN1KvBpCZVZ4yvCM3yG4YwIlD3x81fDw3uQ==)
