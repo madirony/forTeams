@@ -32,19 +32,19 @@
 }
 
 .linkInput {
-  flex: 7;
+  flex: 8.5;
+  min-height: 40px;
   border-radius: 10px;
   border-color: "#D3D5FB";
   border-width: 2px;
   padding: 0.5rem 0.7rem;
   text-align: start;
   font-size: 16px;
-  background-color: yellow;
 }
 
 .buttonInput {
-  flex: 3;
-  background-color: red;
+  flex: 2.5;
+  min-height: 40px;
 }
 
 /* 반응형 모달창-모바일 */
