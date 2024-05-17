@@ -14,7 +14,6 @@ import LocalStorage from "util/localStorage";
 import { getToken } from "util/getToken";
 
 import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
-import { headers } from "next/headers";
 
 export default function ChatBotMain() {
   // 로컬 스토리지에서 access token을 받아오는 함수
