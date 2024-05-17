@@ -32,7 +32,7 @@ export default function ModalSave({ chatbotid, openModalSave }) {
 
   // 마이 챗봇 내역 저장 API 호출 함수
   const handleSave = () => {
-    // console.log("챗봇아이디뽑", chatbotid);
+    console.log("챗봇아이디뽑", chatbotid);
     saveMyChatbot(folderId, chatbotid, title)
       .then((response) => {
         console.log("저장 성공:", response);
