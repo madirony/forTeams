@@ -36,6 +36,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
     if (selectedFolder !== null) {
+      console.log("selectedFolder?나와?", selectedFolder);
       getMyChatbotList(selectedFolder).then((response) => {
         console.log("폴더 저장 마이 로그 리스트 출력!", response);
         setDatas(response);
