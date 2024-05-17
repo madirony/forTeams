@@ -215,7 +215,6 @@ public class ChatbotService {
         String url = "http://forteams.co.kr:8085/recommend/function";
         WebClient webClient = WebClient.create(url);
 
-        log.info(">>> 여기에요! 3");
         return webClient.post()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(BodyInserters.fromPublisher(
