@@ -10,15 +10,12 @@ export default function MypageMyLogsDetail({
   setLogId,
   openModalShare,
 }) {
-  // 챗봇 로그 상세 조회 API
-  // 아래 예시는 API 호출 후 삭제
-  // const title = "내 계정에서 조직도 확인하기";
-  // const updatedAt = "2024-04-25T15:36:24";
   const [title, setTitle] = useState("");
   // const [updatedAt, setUpdatedAt] = useState("");
   const [messages, setMessages] = useState([]);
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
 
+  // 챗봇 로그 상세 조회 API
   useEffect(() => {
     getChatLogDetail(logId).then((response) => {
       console.log("mypagemyLogs!!", response);
