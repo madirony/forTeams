@@ -82,6 +82,8 @@ export default function LoginDropdownInput({
           ></Image>
         )}
       </div>
+      {/* https://forteams.co.kr/icon/dropdown.svg */}
+      {/* https://forteams.co.kr/icon/dropdownClose.svg */}
 
       {isDropdownOpen && ( // 드롭다운이 열려 있을 때만 목록 표시
         <ul className={styles.dropdownMenu}>
