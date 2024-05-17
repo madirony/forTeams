@@ -3,7 +3,6 @@
 import Image from "next/image";
 import styles from "styles/component/menuBar.module.css";
 import { useRouter } from "next/navigation";
-import LocalStorage from "util/localStorage";
 
 // 로그아웃 API
 import { logout } from "apis/login";
