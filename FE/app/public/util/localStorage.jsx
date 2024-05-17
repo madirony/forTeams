@@ -2,6 +2,7 @@ class LocalStorage {
   static setItem(key, item) {
     if (typeof window !== "undefined") {
       localStorage.setItem(key, item);
+      console.log("[LocalStorage] setItem 성공");
     }
   }
 
