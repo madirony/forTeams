@@ -16,6 +16,12 @@ class LocalStorage {
       localStorage.removeItem(key);
     }
   }
+
+  static clear() {
+    if (typeof window !== "undefined") {
+      localStorage.clear();
+    }
+  }
 }
 
 export default LocalStorage;
