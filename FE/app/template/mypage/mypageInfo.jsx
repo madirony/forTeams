@@ -1,5 +1,6 @@
 import styles from "styles/template/mypageInfo.module.css";
 import LocalStorage from "util/localStorage";
+import { useState } from "react";
 import Input from "component/input";
 import GradientButton from "component/gradientButton";
 import LoginDropdownInput from "component/loginDropdownInput";
