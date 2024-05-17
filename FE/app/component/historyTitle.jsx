@@ -59,7 +59,7 @@ export default function HistoryTitle({
       </div>
       <p className={`${styles.date} ${styles.hiddenAtMiddle}`}>{updateDate}</p>
 
-      <div style={{ cursor: pointer }}>
+      <div style={{ cursor: "pointer" }}>
         <Image
           src="icon/rewrite.svg"
           alt="rewrite"
