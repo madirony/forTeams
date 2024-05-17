@@ -20,7 +20,7 @@ export default function MainSwiper() {
         modules={[Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={50}
         slidesPerView={1}
-        // pagination={{ clickable: true }}
+        pagination={{ clickable: true }}
         initialSlide={1}
         // autoHeight={true}
         // navigation
