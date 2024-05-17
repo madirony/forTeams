@@ -139,7 +139,7 @@ public class ChatbotController {
                             @Header("dept") String userDept) {
 
         chatbotDto = chatbotService.processReceivedMessage(chatbotDto, chatbotUUID);
-
+        log.info("**************        - msUuid:"+userId+", - nickname:"+userNickname);
         MessageUser user = new MessageUser(userNickname, userId, "A");
 
         switch (chatbotDto.getType()) {
