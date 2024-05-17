@@ -33,6 +33,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   useEffect(() => {
     getMyChatbotList("3").then((response) => {
       console.log("폴더 저장 마이 로그 리스트 출력!", response);
+      // setDatas(response)
     });
   }, []);
 
@@ -67,9 +68,9 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
       ) : (
         <>
           <FolderIndex indexes={folders} />
-          {datas.map((data, idx) => (
+          {/* {datas.map((data, idx) => (
             <HistoryList key={idx} data={data} setLogId={setLogId} />
-          ))}
+          ))} */}
         </>
       )}
     </div>
