@@ -64,7 +64,7 @@ export default function ThreedotDropdown({
     try {
       const response = await deleteChatLog(logId);
       console.log("전체 페이지에서 삭제 성공:", response);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("전체 페이지에서 삭제 실패:", error);
     }
@@ -75,7 +75,7 @@ export default function ThreedotDropdown({
     try {
       const response = await deleteFolderData(logId);
       console.log("내 페이지에서 삭제 성공:", response);
-      window.location.reload();
+      // window.location.reload();
     } catch (error) {
       console.error("내 페이지에서 삭제 실패:", error);
     }
