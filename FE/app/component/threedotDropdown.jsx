@@ -29,8 +29,6 @@ export default function ThreedotDropdown({
   logId,
   setLogId,
 }) {
-  // console.log("??threedot에서???", logId);
-
   // ★Local에서 사용자 정보를 조회 =================================
   const userId = LocalStorage.getItem("userId");
   const userNickname = LocalStorage.getItem("userNickname");
@@ -91,7 +89,7 @@ export default function ThreedotDropdown({
             startContent={<ThreeReset />}
             onClick={() => handleRefresh()}
           >
-            화면초기화
+            채팅기록 저장하기
           </DropdownItem>
         )}
         {trash && (
@@ -122,7 +120,7 @@ export default function ThreedotDropdown({
             startContent={<ThreeSave width="13px" height="13px" />}
             onClick={openModalSave}
           >
-            저장하기
+            내 문서함에 저장하기
           </DropdownItem>
         )}
       </DropdownMenu>

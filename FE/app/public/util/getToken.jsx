@@ -35,8 +35,8 @@ const getToken = () => {
 //   return accessToken;
 // };
 
-// jwt 라이브러리로 읽어온 ACCESS TOKEN을 파싱하는 함수
-const decodeToken = () => {
+// jwt 라이브러리로 읽어온 ACCESS TOKEN을 파싱해서 로컬에 저장하는 함수
+const saveToken = () => {
   const accessToken = getToken();
   if (!accessToken) {
     console.log("[decodeToken] accessToken이 없습니다");
@@ -70,4 +70,4 @@ const decodeToken = () => {
   }
 };
 
-export { getCookies, getToken, decodeToken };
+export { getCookies, getToken, saveToken };
