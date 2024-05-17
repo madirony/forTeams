@@ -16,11 +16,24 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
 
   // 폴더 목록 조회 API
   const [options, setOptions] = useState([]);
-  useEffect(() => {
-    getFolders().then((response) => {
+  // useEffect(() => {
+  //   getFolders().then((response) => {
+  //     console.log("폴더 목록 출력~!!", response);
+  //     setOptions(response);
+  //   });
+  // }, []);
+  const fetchFolders = async () => {
+    try {
+      const response = await getFolders();
       console.log("폴더 목록 출력~!!", response);
       setOptions(response);
-    });
+    } catch (error) {
+      console.error("폴더 목록 조회 중 에러 발생", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchFolders();
   }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -52,16 +65,33 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   //     createFolder(customInput);
   //   }
   // };
+
+  // const onCustomInputChange = async () => {
+  //   if (customInput.trim() !== "") {
+  //     // 폴더 생성 API 보내기
+  //     try {
+  //       const newFolder = await createFolder(customInput);
+  //       console.log("새 폴더 생성 됌?", newFolder);
+  //       const newOption = { id: newFolder.id, name: newFolder.name };
+  //       setOptions((prevOptions) => [...prevOptions, newOption]);
+  //       console.log("newOptions//", newOption);
+  //       // setSelectedOption(newOption);
+  //       // setCustomInput(""); // 입력 필드 초기화
+  //       setIsDropdownOpen(false); // 드롭다운 닫기
+  //     } catch (error) {
+  //       console.error("폴더 생성 중 에러 발생", error);
+  //     }
+  //   }
+  // };
+
   const onCustomInputChange = async () => {
     if (customInput.trim() !== "") {
-      // 폴더 생성 API 보내기
       try {
-        const newFolder = await createFolder(customInput);
-        console.log("새 폴더 생성 됌?", newFolder);
-        const newOption = { id: newFolder.id, name: newFolder.name };
-        setOptions((prevOptions) => [...prevOptions, newOption]);
-        console.log("newOptions//", newOption);
-        // setSelectedOption(newOption);
+        // 폴더 생성 API 보내기
+        await createFolder(customInput);
+        console.log("새 폴더 생성 완료?");
+        // 폴더 목록 다시 불러오기
+        await fetchFolders();
         // setCustomInput(""); // 입력 필드 초기화
         setIsDropdownOpen(false); // 드롭다운 닫기
       } catch (error) {
