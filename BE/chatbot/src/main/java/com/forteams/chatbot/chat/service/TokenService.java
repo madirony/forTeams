@@ -15,10 +15,12 @@ import java.security.Key;
 @Slf4j
 public class TokenService {
 
-    @Value("${app.secret-key}")
-    private String SECRET_KEY;
-    private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
+    private Key key;
 
+    @Value("${app.secret-key}")
+    public void setSecretKey(String secretKey) {
+        this.key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
+    }
     public String validateTokenAndGetMsUuid(String jwt) {
         try {
             Claims claims = Jwts.parserBuilder()
