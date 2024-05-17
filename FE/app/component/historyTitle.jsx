@@ -54,6 +54,7 @@ export default function HistoryTitle({
         <div className={styles.title}>{title}</div>
       </div>
       <p className={`${styles.date} ${styles.hiddenAtMiddle}`}>{updateDate}</p>
+      <p>{updatedAt}</p>
 
       <div style={{ cursor: "pointer" }}>
         <Image
