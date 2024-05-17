@@ -41,15 +41,31 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
     setCustomInput(e.target.value); // 사용자가 입력한 값을 상태에 업데이트
   };
 
-  const onCustomInputChange = () => {
-    if (customInput.trim() !== "") {
-      // 입력값이 비어있지 않으면 새로운 옵션으로 추가
-      const newOption = { id: options.length + 1, name: customInput };
-      setSelectedOption(newOption);
-      setIsDropdownOpen(false);
+  // const onCustomInputChange = () => {
+  //   if (customInput.trim() !== "") {
+  //     // 입력값이 비어있지 않으면 새로운 옵션으로 추가
+  //     const newOption = { id: options.length + 1, name: customInput };
+  //     setSelectedOption(newOption);
+  //     setIsDropdownOpen(false);
 
+  //     // 폴더 생성 API 보내기
+  //     createFolder(customInput);
+  //   }
+  // };
+  const onCustomInputChange = async () => {
+    if (customInput.trim() !== "") {
       // 폴더 생성 API 보내기
-      createFolder(customInput);
+      try {
+        const newFolder = await createFolder(customInput);
+        console.log("새 폴더 생성", newFolder);
+        const newOption = { id: newFolder.id, name: newFolder.name };
+        setOptions((prevOptions) => [...prevOptions, newOption]);
+        setSelectedOption(newOption);
+        setCustomInput(""); // 입력 필드 초기화
+        setIsDropdownOpen(false); // 드롭다운 닫기
+      } catch (error) {
+        console.error("폴더 생성 중 에러 발생", error);
+      }
     }
   };
 
