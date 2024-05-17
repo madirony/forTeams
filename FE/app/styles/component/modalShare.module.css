@@ -32,7 +32,7 @@
 }
 
 .linkInput {
-  flex: 7;
+  flex: 8;
   border-radius: 10px;
   border-color: "#D3D5FB";
   border-width: 2px;
@@ -42,7 +42,7 @@
 }
 
 .buttonInput {
-  flex: 3;
+  flex: 2;
   height: 100%;
 }
 
