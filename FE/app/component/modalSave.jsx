@@ -9,7 +9,7 @@ import { saveMyChatbot } from "apis/save";
 import { getFolders } from "apis/save";
 
 export default function ModalSave({ chatbotid, openModalSave }) {
-  // console.log("========이거야========", chatbotid);
+  console.log("========이거야========", chatbotid);
 
   // 제목과 폴더 정보 추적하기
   const [title, setTitle] = useState("");
