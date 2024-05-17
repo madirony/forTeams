@@ -25,7 +25,6 @@ export default function LoginMain() {
           alt="DropdownClose"
           width={20}
           height={20}
-          onClick={toggleDropdown}
         />
         <p className={styles.text1}>Ms Teams</p>
         <p className={styles.text2}>어디서나 간편하게</p>
