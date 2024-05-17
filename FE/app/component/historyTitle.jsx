@@ -58,13 +58,16 @@ export default function HistoryTitle({
         <div className={styles.title}>{title}</div>
       </div>
       <p className={`${styles.date} ${styles.hiddenAtMiddle}`}>{updateDate}</p>
-      <Image
-        src="icon/rewrite.svg"
-        alt="rewrite"
-        width={20}
-        height={20}
-        onClick={rewrite}
-      />
+
+      <div style={{ cursor: pointer }}>
+        <Image
+          src="icon/rewrite.svg"
+          alt="rewrite"
+          width={20}
+          height={20}
+          onClick={rewrite}
+        />
+      </div>
 
       {openModalSave ? (
         <ThreedotDropdown
