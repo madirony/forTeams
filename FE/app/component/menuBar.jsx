@@ -3,6 +3,7 @@
 import Image from "next/image";
 import styles from "styles/component/menuBar.module.css";
 import { useRouter } from "next/navigation";
+import LocalStorage from "util/localStorage";
 
 // 로그아웃 API
 import { logout } from "apis/login";
@@ -22,6 +23,8 @@ export default function MenuBar({ userNickname, userDept, userId }) {
 
   // 로그아웃 버튼 클릭 이벤트
   const logtoutOnClick = () => {
+    localStorage.clear();
+    console.log("[Logout] All items removed");
     logout()
       .then((response) => {
         router.push("/");
