@@ -14,14 +14,11 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
 
   // const [selectedId, setSelectedId] = useState("");
 
-  // 유저 uuid 조회
-  // const userId = "12345";
-
   // 폴더 목록 조회 API
   const [options, setOptions] = useState([]);
   useEffect(() => {
     getFolders().then((response) => {
-      // console.log("폴더 목록 출력!!", response);
+      console.log("폴더 목록 출력!!", response);
       setOptions(response);
     });
   }, []);
