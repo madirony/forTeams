@@ -31,45 +31,43 @@ export default function MypageMyLogsDetail({
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <HistoryTitle
-        title={title}
-        updatedAt={updatedAt}
-        setLogId={setLogId}
-        openModalShare={openModalShare}
-      />
-
-      <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
-    </div>
-
-    // =================2번==============
     // <div className={styles.wrapper}>
     //   <HistoryTitle
     //     title={title}
     //     setLogId={setLogId}
-    //     logId={logId}
     //     openModalShare={openModalShare}
-    //     // openModalSave={openModalSave}
-    //     chatbotChatUUID={chatbotChatUUID}
     //   />
-    //   {/* ========================================================== */}
-    //   <div className={styles.socket}>
-    //     {messages.map((msg, index) => (
-    //       <ChatBotBubble
-    //         key={index}
-    //         mode={
-    //           msg.sender === "USER"
-    //             ? "USER"
-    //             : msg.sender === "BOT"
-    //             ? "BOT"
-    //             : "INDEX"
-    //         }
-    //         indexes={msg.msg}
-    //         message={msg.msg}
-    //       />
-    //     ))}
-    //   </div>
-    //   {/* =============================================================== */}
+
+    //   <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
     // </div>
+
+    // =================2번==============
+    <div className={styles.wrapper}>
+      <HistoryTitle
+        title={title}
+        setLogId={setLogId}
+        logId={logId}
+        openModalShare={openModalShare}
+        chatbotChatUUID={chatbotChatUUID}
+      />
+      {/* ========================================================== */}
+      <div className={styles.socket}>
+        {messages.map((msg, index) => (
+          <ChatBotBubble
+            key={index}
+            mode={
+              msg.sender === "USER"
+                ? "USER"
+                : msg.sender === "BOT"
+                ? "BOT"
+                : "INDEX"
+            }
+            indexes={msg.msg}
+            message={msg.msg}
+          />
+        ))}
+      </div>
+      {/* =============================================================== */}
+    </div>
   );
 }
