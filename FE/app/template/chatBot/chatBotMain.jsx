@@ -150,15 +150,14 @@ export default function ChatBotMain() {
 
   const [chatbotChatUUID, setChatbotChatUUID] = useState("");
   useEffect(() => {
-    if (userId) {
-      getCurrentChatUUID(userId).then((response) => {
-        console.log(
-          "[ChatBotMain] 2. 현재 챗봇 id 가져오기 성공!",
-          response.chatbotChatUUID,
-        );
-        setChatbotChatUUID(response.chatbotChatUUID);
-      });
-    }
+    getCurrentChatUUID(userId).then((response) => {
+      console.log(
+        "[ChatBotMain] 2. 현재 챗봇 id 가져오기 성공!",
+        response.chatbotChatUUID,
+      );
+      setChatbotChatUUID(response.chatbotChatUUID);
+    });
+
     // }, [isInitialized]);
   }, []);
 
