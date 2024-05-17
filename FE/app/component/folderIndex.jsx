@@ -7,10 +7,16 @@ export default function FolderIndex({ indexes }) {
   // const toggleSelct = () => {
   //   setIsSelected(!isSelected);
   // };
+  console.log("indexes 뽑아볼게욤", indexes);
 
   return (
     <div className={styles.container}>
-      {indexes.map((folder, idx) => (
+      {indexes.map((folder) => {
+        {
+          folder;
+        }
+      })}
+      {/* {indexes.map((folder, idx) => (
         <div
           key={idx}
           className={isSelected ? styles.selectedBubble : styles.bubble}
@@ -18,7 +24,7 @@ export default function FolderIndex({ indexes }) {
         >
           {folder}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 }
