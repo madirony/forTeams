@@ -53,28 +53,28 @@ spring:
         - id : user-auth
           uri : lb://AUTH
           predicates:
-            - Path=/api/v1/user/**
+            - Path=/api/v2/user/**
           filters:
             - JwtTokenFilter
 
         - id: chatbot-http
-          uri: lb://CHATBOT
+          uri: lb://CHATBOT-TEST
           predicates:
-            - Path=/api/v1/chatbot/**
+            - Path=/api/v2/chatbot/**
           filters:
             - JwtTokenFilter
 
         - id: folder-http
-          uri: lb://CHATBOT
+          uri: lb://CHATBOT-TEST
           predicates:
-            - Path=/api/v1/folder/**
+            - Path=/api/v2/folder/**
           filters:
             - JwtTokenFilter
 
         - id: token-test-http
-          uri: lb://CHATBOT
+          uri: lb://CHATBOT-TEST
           predicates:
-            - Path=/api/v1/token-test/**
+            - Path=/api/v2/token-test/**
           filters:
             - JwtTokenFilter
 
@@ -86,11 +86,11 @@ spring:
 #            - JwtTokenFilter
 
         - id: chatbot-websocket
-          uri: lb://CHATBOT
+          uri: lb://CHATBOT-TEST
           predicates:
-            - Path=/api/ws/chatbot
+            - Path=/api/v2/ws/chatbot
           filters:
-#            - JwtTokenFilter
+            - JwtTokenFilter
 
         - id: openchat-websocket
           uri: lb://OPENCHAT
@@ -101,4 +101,4 @@ spring:
 #      default-filters:
 #        - DedupeResponseHeader=Access-Control-Allow-Origin
   application:
-    name: gateway
+    name: gateway-test
