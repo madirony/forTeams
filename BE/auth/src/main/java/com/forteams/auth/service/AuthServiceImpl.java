@@ -82,4 +82,22 @@ public class AuthServiceImpl implements AuthService {
             session.invalidate();
         }
     }
+
+    /**
+     * 회원 정보 변경
+     *
+     * @param msUuid
+     * @param userDept
+     * @return
+     */
+    @Override
+    public UserEntity changeDept(String msUuid, String userDept) {
+        UserEntity userEntity = userRepository.findByMsUserEntity_MsUuid(msUuid);
+        if (userEntity != null) {
+            userEntity.setUserDept(userDept);
+            userRepository.save(userEntity); // 변경된 userDept를 데이터베이스에 저장
+            return userEntity; // 업데이트된 userEntity 반환
+        }
+        return null; // userEntity가 null이면 null 반환
+    }
 }

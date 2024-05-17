@@ -1,6 +1,7 @@
 package com.forteams.auth.controller;
 
 import com.forteams.auth.entity.MsUserEntity;
+import com.forteams.auth.entity.UserEntity;
 import com.forteams.auth.service.*;
 import com.forteams.auth.service.token.CustomTokenService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -95,5 +96,22 @@ public class AuthController {
         authService.logout(request, response);
         // 3. 로그아웃 성공 메시지 반환
         return ResponseEntity.ok("로그아웃 완료!!!");
+    }
+
+    /**
+     * 정보 변경하기
+     *      *  = 부서 이동 시, 마이페이지에서 사용
+     *
+     * @param msUuid
+     * @param userDept
+     * @return
+     */
+    @PostMapping("/changeInfo/{msUuid}/{userDept}")
+    public ResponseEntity<String> changeInfo(@PathVariable String msUuid, @PathVariable String userDept) {
+        UserEntity userEntity = authService.changeDept(msUuid, userDept);
+
+        if(userEntity == null) return new ResponseEntity<>("정보 변경 실패 - 찾을 수 없는 사용자!", HttpStatus.UNAUTHORIZED);
+
+        return ResponseEntity.ok("부서 변경 완료!!!");
     }
 }
