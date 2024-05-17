@@ -7,9 +7,9 @@ import GradientButton from "component/gradientButton";
 import LoginDropdownInput from "component/loginDropdownInput";
 
 // API import
-import { addLoginInfo } from "../../../apis/login";
+import { addLoginInfo } from "apis.login";
 
-export default function LoginInfo() {
+export default function TestLoginInfo() {
   const router = useRouter();
 
   // 드롭다운 정의 ===========================================================
