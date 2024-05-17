@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server";
+import LocalStorage from "util/localStorage";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
   // 쿠키를 확인하여 로그인 여부를 판단하고 로그인되지 않은 사용자를 로그인 페이지로 리다이렉트
   const { cookies } = request;
   const authToken = cookies.get("ACCESS_TOKEN");
+
+  // ACCESS_TOKEN을 로컬에 저장
+  LocalStorage.setItem("token", authToken);
   console.log("미들웨어에서 authToken 확인", authToken);
 
   //   인증 토큰이 없으면 로그인 페이지로 리다이렉트
