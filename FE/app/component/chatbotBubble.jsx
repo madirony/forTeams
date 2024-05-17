@@ -42,7 +42,6 @@ export default function ChatBotBubble({
       <div className={styles.wrapper}>
         <div className={styles.nicknameBox}>
           <Smile alt="smile icon" width={24} height={24} />
-          <Image src="icon/smile.svg" alt="smile icon" width={24} height={24} />
           <p>Point Chat Bot</p>
         </div>
         <div className={styles.bubbleBox}>
