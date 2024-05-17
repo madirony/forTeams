@@ -50,6 +50,7 @@ export default function ModalShare({ chatbotid, openModalShare }) {
           <div className={styles.linkInput}>{link}</div>
           <GradientButton
             w={"100px"}
+            h={"100%"}
             mode={"ONE_BUTTON"}
             purpleButtonText={"링크복사"}
             onPurpleButtonClick={handleCopyLink}
