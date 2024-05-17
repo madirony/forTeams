@@ -1,5 +1,6 @@
 package com.forteams.chatbot.folder.service;
 
+import com.forteams.chatbot.chat.dto.UserAllChatListDto;
 import com.forteams.chatbot.folder.dto.*;
 import com.forteams.chatbot.folder.entity.CategorizedChatbot;
 import com.forteams.chatbot.folder.entity.Folder;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -67,8 +69,18 @@ public class FolderService {
         categorizedChatbotRepository.save(cate);
     }
 
-    public List<CategorizedChatbotResponseDto> getCategorizedChatbotsByFolderId(Long folderId) {
-        return categorizedChatbotRepository.findAllByFolderId(folderId);
-//        return folderRepository.findAll();
+
+    public List<UserAllChatListDto> getCategorizedChatbotsByFolderId(Long folderId) {
+        List<CategorizedChatbotResponseDto> categorizedChatbots = categorizedChatbotRepository.findAllByFolderId(folderId);
+        return categorizedChatbots.stream()
+                .map(chatbot -> new UserAllChatListDto(
+                        chatbot.getChatbotUuid(),
+                        chatbot.getChatbotTitle(),
+                        ""))
+                .collect(Collectors.toList());
     }
+//    public List<CategorizedChatbotResponseDto> getCategorizedChatbotsByFolderId(Long folderId) {
+//        return categorizedChatbotRepository.findAllByFolderId(folderId);
+////        return folderRepository.findAll();
+//    }
 }

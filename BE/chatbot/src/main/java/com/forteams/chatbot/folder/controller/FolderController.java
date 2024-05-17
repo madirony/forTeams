@@ -1,5 +1,6 @@
 package com.forteams.chatbot.folder.controller;
 
+import com.forteams.chatbot.chat.dto.UserAllChatListDto;
 import com.forteams.chatbot.folder.dto.CategorizedChatbotRegisterDto;
 import com.forteams.chatbot.folder.dto.CategorizedChatbotResponseDto;
 import com.forteams.chatbot.folder.dto.FolderResponseDto;
@@ -48,7 +49,7 @@ public class FolderController {
     @DeleteMapping("/{folderId}")
     public ResponseEntity<Void> deleteFolder(@PathVariable Long folderId, @RequestHeader("msUuid") String msUuid){
         try{
-//            String msUuid = "1d0e5fae-f3de-4f5d-93f5-2f5d6e5da1b7";
+//            String msUuid = "1.d0e5fae-f3de-4f5d-93f5-2f5d6e5da1b7";
             folderService.removeFolder(folderId,msUuid);
             return ResponseEntity.ok(null);
         }catch (Exception e){
@@ -81,9 +82,9 @@ public class FolderController {
     }
 
     @GetMapping("/categorized-chatbot")
-    public ResponseEntity<List<CategorizedChatbotResponseDto>> getCategorizedChatbotsByFolderId(@RequestParam Long folderId){
+    public ResponseEntity<List<UserAllChatListDto>> getCategorizedChatbotsByFolderId(@RequestParam Long folderId){
         try{
-            List<CategorizedChatbotResponseDto> list = folderService.getCategorizedChatbotsByFolderId(folderId);
+            List<UserAllChatListDto> list = folderService.getCategorizedChatbotsByFolderId(folderId);
             return ResponseEntity.ok(list);
         }catch (Exception e){
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
