@@ -43,10 +43,9 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
 
   useEffect(() => {
     if (selectedFolder !== null) {
-      // console.log("??????", selectedFolder);
       getMyChatbotList(selectedFolder).then((response) => {
         console.log("폴더 저장 마이 로그 리스트 출력!", response);
-        // setDatas(response);
+        setDatas(response);
       });
     }
   }, [selectedFolder]);
