@@ -20,7 +20,7 @@ public class FolderService {
     private final FolderRepository folderRepository;
     private final CategorizedChatbotRepository categorizedChatbotRepository;
 
-    public void createFolder(String msUuid, String folderName){
+    public void createFolder(String msUuid, String folderName) {
         Folder folder = Folder.builder()
                 .name(folderName)
                 .msUuid(msUuid)
@@ -28,25 +28,20 @@ public class FolderService {
         folderRepository.save(folder);
     }
 
-
     public List<FolderResponseDto> getFolders(String msUuid) {
         return folderRepository.findAllByUserId(msUuid);
-//        return folderRepository.findAll();
     }
 
     public void removeFolder(Long folderId, String msUuid) {
-        Folder folder = getFolderAndValidate(folderId,msUuid);
-
+        Folder folder = getFolderAndValidate(folderId, msUuid);
         folderRepository.delete(folder);
     }
 
     public void updateFolder(FolderUpdateDto folderUpdateDto, String msUuid) {
-        Folder folder = getFolderAndValidate(folderUpdateDto.getFolderId(),msUuid);
-
+        Folder folder = getFolderAndValidate(folderUpdateDto.getFolderId(), msUuid);
         folder.setName(folderUpdateDto.getFolderName());
         folderRepository.save(folder);
     }
-
 
     private Folder getFolderAndValidate(Long folderId, String msUuid) {
         Folder folder = folderRepository.findById(folderId)
@@ -59,7 +54,7 @@ public class FolderService {
         return folder;
     }
 
-    public void createCategorizedChatbot(CategorizedChatbotRegisterDto registerDto){
+    public void createCategorizedChatbot(CategorizedChatbotRegisterDto registerDto) {
         Folder folder = folderRepository.findById(registerDto.getFolderId()).orElseThrow();
         CategorizedChatbot cate = CategorizedChatbot.builder()
                 .chatbotUuid(registerDto.getChatbotUuid())
@@ -68,7 +63,6 @@ public class FolderService {
                 .build();
         categorizedChatbotRepository.save(cate);
     }
-
 
     public List<UserAllChatListDto> getCategorizedChatbotsByFolderId(Long folderId) {
         List<CategorizedChatbotResponseDto> categorizedChatbots = categorizedChatbotRepository.findAllByFolderId(folderId);
@@ -79,8 +73,11 @@ public class FolderService {
                         ""))
                 .collect(Collectors.toList());
     }
-//    public List<CategorizedChatbotResponseDto> getCategorizedChatbotsByFolderId(Long folderId) {
-//        return categorizedChatbotRepository.findAllByFolderId(folderId);
-////        return folderRepository.findAll();
-//    }
+
+    public void removeCategorizedChatbot(String chatbotUuid) {
+        CategorizedChatbot chatbot = (CategorizedChatbot) categorizedChatbotRepository.findByChatbotUuid(chatbotUuid)
+                .orElseThrow(() -> new EntityNotFoundException("Chatbot not found with UUID: " + chatbotUuid));
+
+        categorizedChatbotRepository.delete(chatbot);
+    }
 }
