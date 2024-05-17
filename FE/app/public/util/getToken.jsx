@@ -47,7 +47,7 @@ const saveToken = () => {
 
   try {
     const accessToken = getToken();
-    const decodedToken = jwtDecode(accessToken);
+    // const decodedToken = jwtDecode(accessToken);
     const userID = decodedToken.sub;
     const userNickname = decodedToken.nickname;
     const userDept = decodedToken.dept;
@@ -56,14 +56,14 @@ const saveToken = () => {
     console.log(
       "사용자 정보를 로컬에 저장했습니다.",
       accessToken,
-      decodedToken,
+      // decodedToken,
       userID,
       userNickname,
       userDept,
     );
 
     LocalStorage.setItem("accessToken", accessToken);
-    LocalStorage.setItem("decodedToken", decodedToken);
+    // LocalStorage.setItem("decodedToken", decodedToken);
     LocalStorage.setItem("userId", userID);
     LocalStorage.setItem("userNickname", userNickname);
     LocalStorage.setItem("userDept", userDept);

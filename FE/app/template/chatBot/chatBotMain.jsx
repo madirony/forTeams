@@ -14,11 +14,11 @@ import LocalStorage from "util/localStorage";
 import { getToken } from "util/getToken";
 
 import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
+import { headers } from "next/headers";
 
 export default function ChatBotMain() {
-  // 페이지가 로딩될 때 토큰을 받아오는 함수
-  // const token = getToken();
-  // console.log("ddddddddddddddddddddddd", token);
+  // 로컬 스토리지에서 access token을 받아오는 함수
+  const accessToken = LocalStorage.getItem("accessToken");
 
   // 모달 오픈 여부를 저장할 변수 ================================
   const [showModalShare, setShowModalShare] = useState(false);
@@ -94,6 +94,9 @@ export default function ChatBotMain() {
   useEffect(() => {
     const stompClient = new Client({
       brokerURL: "wss://forteams.co.kr/api/ws/chatbot",
+      connectHeaders: {
+        Authorization: `Bearer ${accessToken}`,
+      },
       // brokerURL: "ws://localhost:8080/api/ws/chatbot",
       onConnect: () => {
         console.log("Connected to the WebSocket");
@@ -223,6 +226,11 @@ export default function ChatBotMain() {
       client.publish({
         destination: `/pub/chatbot.message.${userId}`,
         body: JSON.stringify(message),
+        headers: {
+          msUuid: userId,
+          nickname: userNickname,
+          dept: userDept,
+        },
       });
     }
   };
@@ -245,6 +253,11 @@ export default function ChatBotMain() {
       client.publish({
         destination: `/pub/chatbot.message.${userId}`,
         body: JSON.stringify(message),
+        headers: {
+          msUuid: userId,
+          nickname: userNickname,
+          dept: userDept,
+        },
       });
 
       // 추천 메시지 전송
@@ -256,6 +269,11 @@ export default function ChatBotMain() {
       client.publish({
         destination: `/pub/chatbot.message.${userId}`,
         body: JSON.stringify(recommendMessage),
+        headers: {
+          msUuid: userId,
+          nickname: userNickname,
+          dept: userDept,
+        },
       });
     }
   };
