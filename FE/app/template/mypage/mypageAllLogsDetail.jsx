@@ -39,6 +39,7 @@ export default function MypageAllLogsDetail({
         updatedAt={updatedAt}
         setLogId={setLogId}
         logId={logId}
+        openModalSave={openModalSave}
         openModalShare={openModalShare}
         chatbotChatUUID={chatbotChatUUID}
         trashAtAll
