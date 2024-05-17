@@ -148,18 +148,39 @@ export default function ChatBotMain() {
     userDept,
   );
 
-  const [chatbotChatUUID, setChatbotChatUUID] = useState("");
-  useEffect(() => {
-    getCurrentChatUUID(userId).then((response) => {
-      console.log(
-        "[ChatBotMain] 2. 현재 챗봇 id 가져오기 성공!",
-        response.chatbotChatUUID,
-      );
-      setChatbotChatUUID(response.chatbotChatUUID);
-    });
+  const [chatbotChatUUID, setChatbotChatUUID] = useState(null);
+  // useEffect(() => {
+  //   getCurrentChatUUID(userId).then((response) => {
+  //     console.log(
+  //       "[ChatBotMain] 2. 현재 챗봇 id 가져오기 성공!",
+  //       response.chatbotChatUUID,
+  //     );
+  //     setChatbotChatUUID(response.chatbotChatUUID);
+  //   });
 
-    // }, [isInitialized]);
-  }, [userId]);
+  //   // }, [isInitialized]);
+  // }, [userId]);
+
+  useEffect(() => {
+    // 챗봇 UUID를 주기적으로 체크하는 함수
+    const checkChatbotUUID = () => {
+      if (chatbotChatUUID === null) {
+        getCurrentChatUUID(userId).then((response) => {
+          console.log(
+            "[ChatBotMain] 제발 현재 챗봇 id 가져오기 성공!",
+            response.chatbotChatUUID,
+          );
+          setChatbotChatUUID(response.chatbotChatUUID);
+        });
+      }
+    };
+
+    // 1초마다 checkChatbotUUID 함수를 호출
+    const intervalId = setInterval(checkChatbotUUID, 1000);
+
+    // 컴포넌트가 언마운트 될 때 interval을 정리
+    return () => clearInterval(intervalId);
+  }, [chatbotChatUUID, userId]);
 
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {

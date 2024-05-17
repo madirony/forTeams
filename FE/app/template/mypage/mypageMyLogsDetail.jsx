@@ -31,17 +31,6 @@ export default function MypageMyLogsDetail({
   }, []);
 
   return (
-    // <div className={styles.wrapper}>
-    //   <HistoryTitle
-    //     title={title}
-    //     setLogId={setLogId}
-    //     openModalShare={openModalShare}
-    //   />
-
-    //   <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
-    // </div>
-
-    // =================2번==============
     <div className={styles.wrapper}>
       <HistoryTitle
         title={title}

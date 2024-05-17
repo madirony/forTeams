@@ -6,12 +6,6 @@ export default function FolderIndex({
   onFolderSelect,
   selectedFolder,
 }) {
-  // // 클릭하면 색상 변경하는 state 변수
-  // const [isSelected, setIsSelected] = useState(false);
-  // const toggleSelect = () => {
-  //   setIsSelected(!isSelected);
-  // };
-
   // console.log("indexes 뽑아볼게욤", indexes);
 
   return (
