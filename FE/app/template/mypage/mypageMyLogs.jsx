@@ -22,7 +22,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
       //   { id: 3, name: "사용자 설정" },
       //   { id: 4, name: "외부사용자" },
       // ];
-      // const folderNames = response.map((item) => item.name);
+
       setFolders(response);
     });
   }, []);
@@ -36,7 +36,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   const [datas, setDatas] = useState([]);
   useEffect(() => {
     if (selectedFolder !== null) {
-      console.log("selectedFolder?나와?", selectedFolder);
+      // console.log("selectedFolder?나와?", selectedFolder);
       getMyChatbotList(selectedFolder).then((response) => {
         console.log("폴더 저장 마이 로그 리스트 출력!", response);
         setDatas(response);
@@ -74,32 +74,6 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
           <p>새로운 질문을 저장해 보세요!</p>
         </div>
       )}
-
-      {/* ================================= */}
-      {/* {logId ? (
-        <MypageMyLogsDetail
-          logId={logId}
-          setLogId={setLogId}
-          openModalShare={openModalShare}
-          openModalSave={openModalSave}
-        />
-      ) : (
-        <>
-          <FolderIndex
-            indexes={folders}
-            onFolderSelect={handleFolderSelect}
-            selectedFolder={selectedFolder}
-          />
-          {datas.map((data, idx) => (
-            <HistoryList
-              key={idx}
-              data={data}
-              setLogId={() => setLogId(data.chatbotChatUUID)}
-            />
-          ))}
-        </>
-      )} */}
-      {/* =================================== */}
     </div>
   );
 }

@@ -10,7 +10,6 @@ import { getFolders, createFolder } from "apis/save";
 export default function DropdownInput({ selectedOption, setSelectedOption }) {
   // import 페이지에서 정의 : const [selectedOption, setSelectedOption] = useState({})
   console.log("selectedOption 뽑뽑", selectedOption);
-  // console.log("setSelectedOption 뽑뽑", setSelectedOption);
 
   // const [selectedId, setSelectedId] = useState("");
 
@@ -25,7 +24,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   const fetchFolders = async () => {
     try {
       const response = await getFolders();
-      console.log("폴더 목록 출력~!!", response);
+      // console.log("폴더 목록 출력~!!", response);
       setOptions(response);
     } catch (error) {
       console.error("폴더 목록 조회 중 에러 발생", error);
@@ -41,8 +40,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
-    console.log("selectedOption이 뭐가 나옴?", selectedOption);
-    // setSelectedId(option.id); // selectedId를 selectedOption.id로 설정
+    // console.log("selectedOption이 뭐가 나옴?", selectedOption);
     setIsDropdownOpen(false); // 옵션을 선택한 후 드롭다운을 닫음
   };
 
@@ -53,36 +51,6 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
   const customInputChange = (e) => {
     setCustomInput(e.target.value); // 사용자가 입력한 값을 상태에 업데이트
   };
-
-  // const onCustomInputChange = () => {
-  //   if (customInput.trim() !== "") {
-  //     // 입력값이 비어있지 않으면 새로운 옵션으로 추가
-  //     const newOption = { id: options.length + 1, name: customInput };
-  //     setSelectedOption(newOption);
-  //     setIsDropdownOpen(false);
-
-  //     // 폴더 생성 API 보내기
-  //     createFolder(customInput);
-  //   }
-  // };
-
-  // const onCustomInputChange = async () => {
-  //   if (customInput.trim() !== "") {
-  //     // 폴더 생성 API 보내기
-  //     try {
-  //       const newFolder = await createFolder(customInput);
-  //       console.log("새 폴더 생성 됌?", newFolder);
-  //       const newOption = { id: newFolder.id, name: newFolder.name };
-  //       setOptions((prevOptions) => [...prevOptions, newOption]);
-  //       console.log("newOptions//", newOption);
-  //       // setSelectedOption(newOption);
-  //       // setCustomInput(""); // 입력 필드 초기화
-  //       setIsDropdownOpen(false); // 드롭다운 닫기
-  //     } catch (error) {
-  //       console.error("폴더 생성 중 에러 발생", error);
-  //     }
-  //   }
-  // };
 
   const onCustomInputChange = async () => {
     if (customInput.trim() !== "") {

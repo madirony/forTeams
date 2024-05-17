@@ -23,9 +23,6 @@ export default function ModalSave({ chatbotid, openModalSave }) {
 
   // 마이 챗봇 내역 저장 API 호출 함수
   const handleSave = () => {
-    console.log("챗봇아이디뽑", chatbotid);
-    console.log("folderId", folderId);
-    console.log("title", title);
     // if (chatbotid) {
     saveMyChatbot(folderId, chatbotid, title).then((response) => {
       console.log("저장 성공:", response);
@@ -37,9 +34,9 @@ export default function ModalSave({ chatbotid, openModalSave }) {
   return (
     <div className={styles.modalBackground} onClick={openModalSave}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {`현재 제목은: ${title}`}
+        {/* {`현재 제목은: ${title}`}
         {` 현재 폴더는: ${folder}`}
-        {` 현재 폴더 id: ${folderId}`}
+        {` 현재 폴더 id: ${folderId}`} */}
         <p className={styles.modalTitle}>답변 저장하기</p>
         <Input
           title={"제목"}
@@ -65,7 +62,6 @@ export default function ModalSave({ chatbotid, openModalSave }) {
           onGrayButtonClick={openModalSave}
           onPurpleButtonClick={() => {
             handleSave();
-            // console.log("클릭..!");
           }}
         />
       </div>
