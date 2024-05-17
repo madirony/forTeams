@@ -43,7 +43,7 @@ export default function LoginInfo() {
         <input
           className={styles.input}
           type="text"
-          placeholder={"닉네임을 입력하세요"}
+          placeholder={"닉네임은 랜덤으로 생성됩니다"}
           readonly
         />
       </div>
