@@ -104,6 +104,20 @@ const getMyChatbotList = async (folderId) => {
   }
 };
 
+// 폴더 저장 데이터 지우기
+const deleteFolderData = async (chatbotChatUUID) => {
+  try {
+    const response = await axios({
+      method: "delete",
+      url: `api/v1/folder/categorized-chatbot/${chatbotChatUUID}`,
+    });
+    console.log("폴더 저장 데이터 지우기 api요청", response.data);
+    return response.data;
+  } catch (error) {
+    console.log("폴더 저장 데이터 지우기 중 에러 발생", error);
+  }
+};
+
 export {
   getFolders,
   createFolder,
@@ -111,4 +125,5 @@ export {
   deleteFolder,
   saveMyChatbot,
   getMyChatbotList,
+  deleteFolderData,
 };
