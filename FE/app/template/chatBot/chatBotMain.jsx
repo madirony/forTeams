@@ -166,10 +166,10 @@ export default function ChatBotMain() {
     const checkChatbotUUID = () => {
       if (chatbotChatUUID === null) {
         getCurrentChatUUID(userId).then((response) => {
-          console.log(
-            "[ChatBotMain] 제발 현재 챗봇 id 가져오기 성공!",
-            response.chatbotChatUUID,
-          );
+          // console.log(
+          //   "[ChatBotMain] 제발 현재 챗봇 id 가져오기 성공!",
+          //   response.chatbotChatUUID,
+          // );
           setChatbotChatUUID(response.chatbotChatUUID);
         });
       }
