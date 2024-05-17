@@ -24,7 +24,7 @@ export default function MypageInfo() {
 
   // 완료 버튼 눌렀을 때 실행될 함수
   const onClickButton = () => {
-    updateDept(userId, toApi)
+    updateDept(userId, toApiDept)
       .then((response) => {
         // 변경되면 로컬에 업데이트
         LocalStorage.setItem("userDept", toApiDept);
