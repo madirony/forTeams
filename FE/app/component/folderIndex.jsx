@@ -19,6 +19,9 @@ export default function FolderIndex({
       {indexes.map((folder) => (
         <div
           key={folder.id}
+          className={
+            folder.id === selectedFolder ? styles.selectedBubble : styles.bubble
+          }
           // className={isSelected ? styles.selectedBubble : styles.bubble}
           onClick={() => onFolderSelect(folder.id)}
         >
