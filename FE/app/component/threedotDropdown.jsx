@@ -56,8 +56,7 @@ export default function ThreedotDropdown({
       const response = await saveChatbot(userId, chatUUID);
       console.log("초기화 중 저장 성공:", response);
       // 화면 새로고침
-      // window.location.reload();
-      router.back();
+      window.location.reload();
     } catch (error) {
       console.error("초기화 중 저장 실패:", error);
     }
@@ -68,8 +67,8 @@ export default function ThreedotDropdown({
     try {
       const response = await deleteChatLog(logId);
       console.log("전체 페이지에서 삭제 성공:", response);
-      router.back();
-      // window.location.reload();
+      // 화면 새로고침
+      window.location.reload();
     } catch (error) {
       console.error("전체 페이지에서 삭제 실패:", error);
     }
