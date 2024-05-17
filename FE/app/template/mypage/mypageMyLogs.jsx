@@ -13,6 +13,8 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
     setLogId();
   }, []);
 
+  const [selectedFolder, setSelectedFolder] = useState(null);
+
   // 폴더 목록 조회 API
   const [folders, setFolders] = useState([]);
   useEffect(() => {

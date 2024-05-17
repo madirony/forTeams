@@ -266,7 +266,7 @@ export default function ChatBotMain() {
       <div className={styles.threeDot}>
         <ThreedotDropdown
           reset
-          // share
+          share
           save
           openModalShare={openModalShare}
           openModalSave={openModalSave}
