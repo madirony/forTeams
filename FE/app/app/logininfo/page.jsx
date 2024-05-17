@@ -9,7 +9,7 @@ import LoginDropdownInput from "component/loginDropdownInput";
 // API import
 import { addLoginInfo } from "apis/login";
 
-export default function TestLoginInfo() {
+export default function LoginInfo() {
   const router = useRouter();
 
   // 드롭다운 정의 ===========================================================
@@ -40,12 +40,7 @@ export default function TestLoginInfo() {
       <p className={styles.modalTitle}>사용자 정보</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
-        <input
-          className={styles.input}
-          type="text"
-          value={"무지무지"}
-          readonly
-        />
+        <input className={styles.input} type="text" value={"닉네임"} readonly />
       </div>
 
       <div className={styles.inputContainer}>
