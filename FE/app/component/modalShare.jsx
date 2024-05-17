@@ -48,13 +48,15 @@ export default function ModalShare({ chatbotid, openModalShare }) {
         <p>답변 공유하기</p>
         <div className={styles.linkWrapper}>
           <div className={styles.linkInput}>{link}</div>
-          <GradientButton
-            w={"100%"}
-            h={"100%"}
-            mode={"ONE_BUTTON"}
-            purpleButtonText={"링크복사"}
-            onPurpleButtonClick={handleCopyLink}
-          />
+          <div className={styles.buttonInput}>
+            <GradientButton
+              w={"100%"}
+              h={"100%"}
+              mode={"ONE_BUTTON"}
+              purpleButtonText={"링크복사"}
+              onPurpleButtonClick={handleCopyLink}
+            />
+          </div>
         </div>
       </div>
     </div>
