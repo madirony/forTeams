@@ -18,8 +18,13 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   useEffect(() => {
     getFolders().then((response) => {
       console.log("폴더 목록 출력 아자아자!", response);
+      // response 형식
+      // [
+      //   { id: 3, name: "사용자 설정" },
+      //   { id: 4, name: "외부사용자" },
+      // ];
       const folderNames = response.map((item) => item.name);
-      setFolders(folderNames);
+      // setFolders(response);
     });
   }, []);
 
