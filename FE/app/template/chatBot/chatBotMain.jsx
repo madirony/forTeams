@@ -257,10 +257,13 @@ export default function ChatBotMain() {
     <div className={styles.wrapper}>
       {/* >> 모달 띄우는 부분 */}
       {showModalShare && (
-        <ModalShare chatbotid={999999} openModalShare={openModalShare} />
+        <ModalShare
+          chatbotid={chatbotChatUUID}
+          openModalShare={openModalShare}
+        />
       )}
       {showModalSave && (
-        <ModalSave chatbotid={123456} openModalSave={openModalSave} />
+        <ModalSave chatbotid={chatbotChatUUID} openModalSave={openModalSave} />
       )}
       {/* >> 상단 메뉴 띄우는 부분 */}
       <div className={styles.threeDot}>
