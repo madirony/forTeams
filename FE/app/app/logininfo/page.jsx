@@ -40,7 +40,12 @@ export default function LoginInfo() {
       <p className={styles.modalTitle}>사용자 정보</p>
       <div className={styles.inputContainer}>
         <p className={styles.inputTitle}>닉네임</p>
-        <input className={styles.input} type="text" value={"닉네임"} readonly />
+        <input
+          className={styles.input}
+          type="text"
+          placeholder={"닉네임을 입력하세요"}
+          readonly
+        />
       </div>
 
       <div className={styles.inputContainer}>
