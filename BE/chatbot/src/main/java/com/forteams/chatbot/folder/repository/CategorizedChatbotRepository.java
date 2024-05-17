@@ -17,5 +17,5 @@ public interface CategorizedChatbotRepository extends JpaRepository<CategorizedC
             "where cc.folder.id = :folderId")
     List<CategorizedChatbotResponseDto> findAllByFolderId(@Param("folderId") Long folderId);
 
-    Optional<Object> findByChatbotUuid(String chatbotUuid);
+    Optional<CategorizedChatbot> findByChatbotUuid(String chatbotUuid);
 }

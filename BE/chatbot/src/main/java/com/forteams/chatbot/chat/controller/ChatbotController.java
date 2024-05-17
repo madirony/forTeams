@@ -5,6 +5,7 @@ import com.forteams.chatbot.chat.entity.ChatbotLogSet;
 import com.forteams.chatbot.chat.entity.SavedChatLogSet;
 import com.forteams.chatbot.chat.service.ChatbotService;
 import com.forteams.chatbot.chat.service.StreamStatusService;
+import com.forteams.chatbot.folder.service.FolderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -36,6 +37,7 @@ public class ChatbotController {
     private final RabbitTemplate rabbitTemplate;
     private final ChatbotService chatbotService;
     private final StreamStatusService streamStatusService;
+    private final FolderService folderService;
 
     @PostMapping("/share/{chatbotChatUUID}")
     public ResponseEntity<String> shareChat(@PathVariable String chatbotChatUUID) {
@@ -118,12 +120,18 @@ public class ChatbotController {
     @DeleteMapping("/delete-chat/{chatbotChatUUID}")
     public ResponseEntity<String> deleteChatLog(@PathVariable String chatbotChatUUID) {
         try {
+            // Chat log 삭제
             chatbotService.deleteChatLog(chatbotChatUUID);
+
+            // CategorizedChatbot 삭제
+            folderService.removeCategorizedChatbotIfExists(chatbotChatUUID);
+
             return ResponseEntity.ok("Deleted chat log with UUID: " + chatbotChatUUID);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
     }
+
 
     @MessageMapping("chatbot.message.{chatbotUUID}")
 //    public void sendMessage(@Payload ChatbotDto chatbotDto, @DestinationVariable String chatbotUUID,

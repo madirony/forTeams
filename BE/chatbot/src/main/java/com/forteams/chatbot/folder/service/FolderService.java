@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,9 +76,14 @@ public class FolderService {
     }
 
     public void removeCategorizedChatbot(String chatbotUuid) {
-        CategorizedChatbot chatbot = (CategorizedChatbot) categorizedChatbotRepository.findByChatbotUuid(chatbotUuid)
+        CategorizedChatbot chatbot = categorizedChatbotRepository.findByChatbotUuid(chatbotUuid)
                 .orElseThrow(() -> new EntityNotFoundException("Chatbot not found with UUID: " + chatbotUuid));
 
         categorizedChatbotRepository.delete(chatbot);
+    }
+
+    public void removeCategorizedChatbotIfExists(String chatbotUuid) {
+        Optional<CategorizedChatbot> chatbot = categorizedChatbotRepository.findByChatbotUuid(chatbotUuid);
+        chatbot.ifPresent(categorizedChatbotRepository::delete);
     }
 }
