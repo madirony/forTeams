@@ -66,7 +66,7 @@ export default function LoginDropdownInput({
 
         {isDropdownOpen ? (
           <Image
-            src="../public/icon/dropdownClose.svg"
+            src="icon/dropdownClose.svg"
             alt="DropdownClose"
             width={20}
             height={20}
