@@ -13,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping( "/api/v1/token-test")
+@RequestMapping( "/api/v2/token-test")
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:3000, https://forteams.co.kr")
 public class TokenTestController {
