@@ -14,11 +14,11 @@ export default function MypageInfo() {
 
   // 드롭다운 정의 ===========================================================
   const [selectedOption, setSelectedOption] = useState({});
-  const [toApi, setToApi] = useState("");
+  const [toApiDept, setToApiDept] = useState("");
 
   useEffect(() => {
     if (selectedOption.name) {
-      setToApi(selectedOption.name);
+      setToApiDept(selectedOption.name);
     }
   }, [selectedOption]);
 
@@ -26,6 +26,9 @@ export default function MypageInfo() {
   const onClickButton = () => {
     updateDept(userId, toApi)
       .then((response) => {
+        // 변경되면 로컬에 업데이트
+        LocalStorage.setItem("userDept", toApiDept);
+
         console.log("수정 요청 성공");
       })
       .catch(() => {
