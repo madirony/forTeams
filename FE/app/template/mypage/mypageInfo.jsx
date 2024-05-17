@@ -17,13 +17,12 @@ export default function MypageInfo() {
   return (
     <div className={styles.wrapper}>
       <Input title={"닉네임"} message={userNickname} readonly />
-
       <Input title={"부서"} message={userDept} readonly />
       <LoginDropdownInput
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
-
+      선택된 부서 {selectedOption}
       {/* 수정 버튼은 일단 삭제 */}
       <div className={styles.button}>
         <GradientButton mode={"ONE_BUTTON"} purpleButtonText={"완료"} />
