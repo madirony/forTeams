@@ -57,11 +57,12 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
       // 폴더 생성 API 보내기
       try {
         const newFolder = await createFolder(customInput);
-        console.log("새 폴더 생성", newFolder);
+        console.log("새 폴더 생성 됌?", newFolder);
         const newOption = { id: newFolder.id, name: newFolder.name };
         setOptions((prevOptions) => [...prevOptions, newOption]);
-        setSelectedOption(newOption);
-        setCustomInput(""); // 입력 필드 초기화
+        console.log("newOptions//", newOption);
+        // setSelectedOption(newOption);
+        // setCustomInput(""); // 입력 필드 초기화
         setIsDropdownOpen(false); // 드롭다운 닫기
       } catch (error) {
         console.error("폴더 생성 중 에러 발생", error);
