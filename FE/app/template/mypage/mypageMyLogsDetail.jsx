@@ -46,8 +46,8 @@ export default function MypageMyLogsDetail({
         title={title}
         setLogId={setLogId}
         logId={logId}
-        openModalShare={openModalShare}
-        openModalSave={openModalSave}
+        // openModalShare={openModalShare}
+        // openModalSave={openModalSave}
         chatbotChatUUID={chatbotChatUUID}
       />
       {/* ========================================================== */}
