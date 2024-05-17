@@ -1,6 +1,9 @@
 import styles from "styles/template/mypageMyLogsDetail.module.css";
 import HistoryTitle from "component/historyTitle";
+import ChatBotBubble from "component/chatbotBubble";
 import ThreedotDropdown from "component/threedotDropdown";
+import { useEffect, useState } from "react";
+import { getChatLogDetail } from "apis/allLog";
 
 export default function MypageMyLogsDetail({
   logId,
