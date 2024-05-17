@@ -1,6 +1,6 @@
 import styles from "styles/template/mypageInfo.module.css";
 import LocalStorage from "util/localStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "component/input";
 import GradientButton from "component/gradientButton";
 import LoginDropdownInput from "component/loginDropdownInput";
@@ -14,10 +14,17 @@ export default function MypageInfo() {
 
   // 드롭다운 정의 ===========================================================
   const [selectedOption, setSelectedOption] = useState({});
+  const [toApi, setToApi] = useState("");
+
+  useEffect(() => {
+    if (selectedOption.name) {
+      setToApi(selectedOption.name);
+    }
+  }, [selectedOption]);
 
   // 완료 버튼 눌렀을 때 실행될 함수
   const onClickButton = () => {
-    updateDept(userId, selectedOption.name)
+    updateDept(userId, toApi)
       .then((response) => {
         console.log("수정 요청 성공");
       })
