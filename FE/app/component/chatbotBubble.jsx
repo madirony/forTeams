@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import styles from "styles/component/chatBotBubble.module.css";
 import SmallIndex from "./smallIndex";
+import Smile from "../public/icon/smile.svg";
 
 function cleanMarkdown(markdownText) {
   if (
@@ -40,6 +41,7 @@ export default function ChatBotBubble({
     return (
       <div className={styles.wrapper}>
         <div className={styles.nicknameBox}>
+          <Smile alt="smile icon" width={24} height={24} />
           <Image src="icon/smile.svg" alt="smile icon" width={24} height={24} />
           <p>Point Chat Bot</p>
         </div>
