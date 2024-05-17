@@ -23,8 +23,8 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
       //   { id: 3, name: "사용자 설정" },
       //   { id: 4, name: "외부사용자" },
       // ];
-      const folderNames = response.map((item) => item.name);
-      // setFolders(response);
+      // const folderNames = response.map((item) => item.name);
+      setFolders(response);
     });
   }, []);
 
