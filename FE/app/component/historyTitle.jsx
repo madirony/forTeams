@@ -5,7 +5,6 @@ import BackArrow from "icon/backArrow.svg";
 import ThreedotDropdown from "./threedotDropdown";
 import Image from "next/image";
 import { chatReload, loadChatLogs } from "apis/chatbot";
-import { useState, useEffect } from "react";
 
 export default function HistoryTitle({
   title,
@@ -25,26 +24,23 @@ export default function HistoryTitle({
   // 뒤로 가기 버튼
   const goBack = () => {
     setLogId();
-    // router.back();
   };
-  // console.log("??ddddd?", logId);c
-  // console.log("----------", chatbotChatUUID);
 
   // chatReload 호출
   const rewrite = () => {
     if (chatbotChatUUID) {
       chatReload(chatbotChatUUID)
         .then((response) => {
-          console.log("채팅 다시쓰기", response);
+          console.log("[HistoryTitle] 채팅 다시쓰기", response);
           // 메인페이지로 이동
           router.push("/main");
           //
         })
         .catch((error) => {
-          console.error("Chat Reload Error", error);
+          console.error("[HistoryTitle] Chat Reload Error", error);
         });
     } else {
-      console.log("Invalid chatUUID, cannot reload chat.");
+      console.log("[HistoryTitle] Invalid chatUUID, cannot reload chat.");
     }
   };
 

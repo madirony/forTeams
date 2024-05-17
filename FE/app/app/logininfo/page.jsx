@@ -9,7 +9,7 @@ import LoginDropdownInput from "component/loginDropdownInput";
 // API import
 import { addLoginInfo } from "apis/login";
 
-export default function TestLoginInfo() {
+export default function LoginInfo() {
   const router = useRouter();
 
   // 드롭다운 정의 ===========================================================
