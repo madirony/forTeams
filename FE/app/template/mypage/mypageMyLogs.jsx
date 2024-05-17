@@ -29,7 +29,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   }, []);
 
   // 마이 로그 전체 조회 API
-  // const [datas, setDatas] = useState([]);
+  const [datas, setDatas] = useState([]);
   // useEffect(() => {
   //   getMyChatbotList().then((response) => {
   //     console.log("폴더 저장 마이 로그 리스트 출력!", response);
