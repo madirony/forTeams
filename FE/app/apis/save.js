@@ -94,8 +94,6 @@ const getMyChatbotList = async (folderId) => {
       params: {
         folderId: folderId,
       },
-      // body: folderId,
-      // headers: { "Content-Type": "text/plain" },
     });
     console.log("폴더 기준으로 챗봇목록 조회 api요청", response.data);
     return response.data;
