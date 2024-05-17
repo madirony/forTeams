@@ -8,10 +8,12 @@
   border-radius: 40px;
   gap: 0.5rem;
   overflow: auto;
+  background-color: red;
 }
 
 .hamburgerTitle {
   width: 100%;
+  background-color: aqua;
 }
 
 .text {
@@ -29,6 +31,7 @@
   flex-wrap: wrap;
   gap: 0.4rem;
   overflow: auto;
+  background-color: yellow;
 }
 
 .button {
