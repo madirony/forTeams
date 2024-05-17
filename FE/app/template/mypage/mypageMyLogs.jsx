@@ -17,7 +17,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   const [folders, setFolders] = useState([]);
   useEffect(() => {
     getFolders().then((response) => {
-      console.log("폴더 목록 출력 아자아자!", response);
+      // console.log("폴더 목록 출력 아자아자!", response);
       // response 형식
       // [
       //   { id: 3, name: "사용자 설정" },
@@ -30,15 +30,16 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
 
   // 마이 로그 전체 조회 API
   const [datas, setDatas] = useState([]);
-  // useEffect(() => {
-  //   getMyChatbotList().then((response) => {
-  //     console.log("폴더 저장 마이 로그 리스트 출력!", response);
-  //   });
-  // }, []);
+  useEffect(() => {
+    getMyChatbotList("3").then((response) => {
+      console.log("폴더 저장 마이 로그 리스트 출력!", response);
+      // setDatas(response)
+    });
+  }, []);
 
   return (
     <div className={styles.wrapper}>
-      {logId ? (
+      {/* {logId ? (
         <MypageMyLogsDetail
           logId={logId}
           setLogId={setLogId}
@@ -56,6 +57,21 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
         <div className={styles.textWrapper}>
           <p>새로운 질문을 저장해 보세요!</p>
         </div>
+      )} */}
+      {logId ? (
+        <MypageMyLogsDetail
+          logId={logId}
+          setLogId={setLogId}
+          openModalShare={openModalShare}
+          openModalSave={openModalSave}
+        />
+      ) : (
+        <>
+          <FolderIndex indexes={folders} />
+          {/* {datas.map((data, idx) => (
+            <HistoryList key={idx} data={data} setLogId={setLogId} />
+          ))} */}
+        </>
       )}
     </div>
   );
