@@ -5,6 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -14,7 +15,8 @@ import java.security.Key;
 @Slf4j
 public class TokenService {
 
-    private static final String SECRET_KEY = "12341324154321646543432474vccc38xg4bfjagbf3g2r123wdascgry5465fegfjteyrrg";
+    @Value("${app.secret-key}")
+    private String SECRET_KEY;
     private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));
 
     public String validateTokenAndGetMsUuid(String jwt) {
