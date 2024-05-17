@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CategorizedChatbotRepository extends JpaRepository<CategorizedChatbot,String> {
 
@@ -16,4 +17,5 @@ public interface CategorizedChatbotRepository extends JpaRepository<CategorizedC
             "where cc.folder.id = :folderId")
     List<CategorizedChatbotResponseDto> findAllByFolderId(@Param("folderId") Long folderId);
 
+    Optional<Object> findByChatbotUuid(String chatbotUuid);
 }
