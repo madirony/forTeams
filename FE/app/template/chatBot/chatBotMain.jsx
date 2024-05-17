@@ -149,35 +149,38 @@ export default function ChatBotMain() {
   );
 
   const [chatbotChatUUID, setChatbotChatUUID] = useState(null);
-  useEffect(() => {
-    getCurrentChatUUID(userId).then((response) => {
-      console.log(
-        "[ChatBotMain] 2. 현재 챗봇 id 가져오기 성공!",
-        response.chatbotChatUUID,
-      );
-      setChatbotChatUUID(response.chatbotChatUUID);
-    });
-
-    // }, [isInitialized]);
-  }, [userId]);
-
-  // // chatbotChatUUID가 null인 경우 1초 후에 chatbotChatUUID 가져오기
   // useEffect(() => {
-  //   if (chatbotChatUUID === null) {
-  //     const timer = setTimeout(() => {
-  //       getCurrentChatUUID(userId).then((response) => {
-  //         console.log(
-  //           "아놔 제발 현재 챗봇 id 가져오기 성공!",
-  //           response.chatbotChatUUID,
-  //         );
-  //         setChatbotChatUUID(response.chatbotChatUUID);
-  //       });
-  //     }, 1000);
+  //   getCurrentChatUUID(userId).then((response) => {
+  //     console.log(
+  //       "[ChatBotMain] 2. 현재 챗봇 id 가져오기 성공!",
+  //       response.chatbotChatUUID,
+  //     );
+  //     setChatbotChatUUID(response.chatbotChatUUID);
+  //   });
 
-  //     // 클린업 함수로 타이머를 정리합니다.
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [chatbotChatUUID, userId]);
+  //   // }, [isInitialized]);
+  // }, [userId]);
+
+  useEffect(() => {
+    // 챗봇 UUID를 주기적으로 체크하는 함수
+    const checkChatbotUUID = () => {
+      if (chatbotChatUUID === null) {
+        getCurrentChatUUID(userId).then((response) => {
+          console.log(
+            "[ChatBotMain] 제발 현재 챗봇 id 가져오기 성공!",
+            response.chatbotChatUUID,
+          );
+          setChatbotChatUUID(response.chatbotChatUUID);
+        });
+      }
+    };
+
+    // 1초마다 checkChatbotUUID 함수를 호출
+    const intervalId = setInterval(checkChatbotUUID, 1000);
+
+    // 컴포넌트가 언마운트 될 때 interval을 정리
+    return () => clearInterval(intervalId);
+  }, [chatbotChatUUID, userId]);
 
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {
