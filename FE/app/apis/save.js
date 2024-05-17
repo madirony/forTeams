@@ -91,8 +91,8 @@ const getMyChatbotList = async (folderId) => {
     const response = await axios({
       method: "get",
       url: "api/v1/folder/categorized-chatbot",
-      data: folderId,
-      headers: { "Content-Type": "text/plain" },
+      params: { folderId: folderId },
+      // headers: { "Content-Type": "text/plain" },
     });
     console.log("폴더 기준으로 챗봇목록 조회 api요청", response.data);
     return response.data;
