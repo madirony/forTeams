@@ -16,7 +16,7 @@ export default function HistoryTitle({
   chatbotChatUUID,
 }) {
   // datetime 객체 변환하기
-  const updateDate = getDate(updatedAt);
+  const updateDate = updatedAt ? getDate(updatedAt) : null;
 
   // 라우터
   const router = useRouter();
@@ -53,8 +53,12 @@ export default function HistoryTitle({
         </div>
         <div className={styles.title}>{title}</div>
       </div>
-      <p className={`${styles.date} ${styles.hiddenAtMiddle}`}>{updateDate}</p>
-
+      {/* <p className={`${styles.date} ${styles.hiddenAtMiddle}`}>{updateDate}</p> */}
+      {updateDate && (
+        <p className={`${styles.date} ${styles.hiddenAtMiddle}`}>
+          {updateDate}
+        </p>
+      )}
       <div style={{ cursor: "pointer" }}>
         <Image
           src="icon/rewrite.svg"
