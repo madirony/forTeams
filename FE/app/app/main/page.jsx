@@ -9,8 +9,14 @@ import RecoFunctionMain from "template/recoFunction/recoFunctionMain";
 import ChatBotMain from "template/chatBot/chatBotMain";
 import LocalStorage from "util/localStorage";
 import { useEffect, useState } from "react";
+import { saveToken } from "util/getToken";
 
 export default function Main() {
+  // 페이지가 로드될 때마다 사용자 정보를 로컬에 저장하는 함수
+  useEffect(() => {
+    saveToken();
+  }, []);
+
   // ★Local에서 사용자 정보를 조회 =================================
   const userId = LocalStorage.getItem("userId");
   const userNickname = LocalStorage.getItem("userNickname");
