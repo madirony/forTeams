@@ -81,7 +81,7 @@ public class FolderController {
     }
 
     @GetMapping("/categorized-chatbot")
-    public ResponseEntity<List<CategorizedChatbotResponseDto>> getCategorizedChatbotsByFolderId(@RequestBody Long folderId){
+    public ResponseEntity<List<CategorizedChatbotResponseDto>> getCategorizedChatbotsByFolderId(@RequestParam Long folderId){
         try{
             List<CategorizedChatbotResponseDto> list = folderService.getCategorizedChatbotsByFolderId(folderId);
             return ResponseEntity.ok(list);
