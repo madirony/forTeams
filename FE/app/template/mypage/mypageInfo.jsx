@@ -22,7 +22,7 @@ export default function MypageInfo() {
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       />
-      선택된 부서 {selectedOption}
+      선택된 부서 {selectedOption.name}
       {/* 수정 버튼은 일단 삭제 */}
       <div className={styles.button}>
         <GradientButton mode={"ONE_BUTTON"} purpleButtonText={"완료"} />
