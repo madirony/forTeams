@@ -11,8 +11,10 @@ export default function HistoryTitle({
   updatedAt,
   setLogId,
   logId,
+  trashAtAll,
+  trashAtMy,
   openModalShare,
-  openModalSave,
+  // openModalSave,
   chatbotChatUUID,
 }) {
   // datetime 객체 변환하기

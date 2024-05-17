@@ -40,8 +40,8 @@ export default function MypageAllLogsDetail({
         setLogId={setLogId}
         logId={logId}
         openModalShare={openModalShare}
-        openModalSave={openModalSave}
         chatbotChatUUID={chatbotChatUUID}
+        trashAtAll
       />
       {/* ========================================================== */}
       <div className={styles.socket}>

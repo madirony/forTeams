@@ -18,10 +18,12 @@ import {
 
 import { deleteChatLog } from "apis/allLog";
 import { getCurrentChatUUID, saveChatbot } from "apis/chatbot";
+import { deleteFolderData } from "apis/save";
 
 export default function ThreedotDropdown({
   reset,
-  trash,
+  trashAtAll,
+  trashAtMy,
   share,
   save,
   openModalShare,
@@ -57,16 +59,25 @@ export default function ThreedotDropdown({
     }
   };
 
-  // 삭제하기
-  const handleDelete = async () => {
+  // 전체 페이지에서 삭제하기
+  const handleDeleteAtAll = async () => {
     try {
       const response = await deleteChatLog(logId);
-      console.log("삭제 성공:", response);
-      // 전 페이지로 보내기
-      // setLogId("");
+      console.log("전체 페이지에서 삭제 성공:", response);
       window.location.reload();
     } catch (error) {
-      console.error("삭제 실패:", error);
+      console.error("전체 페이지에서 삭제 실패:", error);
+    }
+  };
+
+  // 내 페이지에서 삭제하기
+  const handleDeleteAtMy = async () => {
+    try {
+      const response = await deleteFolderData(logId);
+      console.log("내 페이지에서 삭제 성공:", response);
+      window.location.reload();
+    } catch (error) {
+      console.error("내 페이지에서 삭제 실패:", error);
     }
   };
 
@@ -92,12 +103,22 @@ export default function ThreedotDropdown({
             채팅기록 저장하기
           </DropdownItem>
         )}
-        {trash && (
+        {trashAtAll && (
           <DropdownItem
             className={styles.dropdownItem}
-            key="trash"
+            key="trashAtAll"
             startContent={<ThreeTrash />}
-            onClick={() => handleDelete()}
+            onClick={() => handleDeleteAtAll()}
+          >
+            삭제하기
+          </DropdownItem>
+        )}
+        {trashAtMy && (
+          <DropdownItem
+            className={styles.dropdownItem}
+            key="trashAtMy"
+            startContent={<ThreeTrash />}
+            onClick={() => handleDeleteAtMy()}
           >
             삭제하기
           </DropdownItem>
