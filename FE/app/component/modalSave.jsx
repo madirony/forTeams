@@ -21,15 +21,6 @@ export default function ModalSave({ chatbotid, openModalSave }) {
     setTitle(event.target.value);
   };
 
-  // // 폴더 목록 조회 API
-  // const [options, setOptions] = useState([]);
-  // useEffect(() => {
-  //   getFolders().then((response) => {
-  //     // console.log("폴더 목록 출력!!", response);
-  //     setOptions(response);
-  //   });
-  // }, []);
-
   // 마이 챗봇 내역 저장 API 호출 함수
   const handleSave = () => {
     console.log("챗봇아이디뽑", chatbotid);

@@ -36,7 +36,7 @@ export default function MypageMyLogsDetail({
     //     title={title}
     //     updatedAt={updatedAt}
     //     setLogId={setLogId}
-    //     openModalShare={openModalShare}
+    // openModalShare={openModalShare}
     //   />
 
     //   <div className={styles.logDetail}>{logId}번 챗봇 로그 상세 내용</div>
@@ -46,7 +46,7 @@ export default function MypageMyLogsDetail({
         title={title}
         setLogId={setLogId}
         logId={logId}
-        // openModalShare={openModalShare}
+        openModalShare={openModalShare}
         // openModalSave={openModalSave}
         chatbotChatUUID={chatbotChatUUID}
       />
