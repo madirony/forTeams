@@ -28,16 +28,22 @@
 .linkWrapper {
   display: flex;
   flex-direction: row;
+  gap: 2px;
 }
 
 .linkInput {
-  width: 80%;
+  flex: 8;
   border-radius: 10px;
   border-color: "#D3D5FB";
   border-width: 2px;
   padding: 0.5rem 0.7rem;
   text-align: start;
   font-size: 16px;
+}
+
+.buttonInput {
+  flex: 2;
+  height: 100%;
 }
 
 /* 반응형 모달창-모바일 */
