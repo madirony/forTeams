@@ -44,7 +44,6 @@ export default function MypageMyLogsDetail({
     <div className={styles.wrapper}>
       <HistoryTitle
         title={title}
-        updatedAt={updatedAt}
         setLogId={setLogId}
         logId={logId}
         openModalShare={openModalShare}
