@@ -13,8 +13,6 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
     setLogId();
   }, []);
 
-  const [selectedFolder, setSelectedFolder] = useState(null);
-
   // 폴더 목록 조회 API
   const [folders, setFolders] = useState([]);
   useEffect(() => {
@@ -37,7 +35,17 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
   //     // setDatas(response)
   //   });
   // }, []);
+  console.log("??????", selectedFolder);
+  useEffect(() => {
+    if (selectedFolder !== null) {
+      getMyChatbotList(selectedFolder).then((response) => {
+        console.log("폴더 저장 마이 로그 리스트 출력!", response);
+        setDatas(response);
+      });
+    }
+  }, [selectedFolder]);
 
+  const [selectedFolder, setSelectedFolder] = useState(null);
   const handleFolderSelect = (folderId) => {
     setSelectedFolder(folderId);
   };
