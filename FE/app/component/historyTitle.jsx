@@ -73,9 +73,9 @@ export default function HistoryTitle({
         <ThreedotDropdown
           trash
           share
-          save
+          // save
           openModalShare={openModalShare}
-          openModalSave={openModalSave}
+          // openModalSave={openModalSave}
           logId={logId}
           setLogId={setLogId}
         />

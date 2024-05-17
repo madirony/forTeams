@@ -49,9 +49,9 @@ export default function ModalSave({ chatbotid, openModalSave }) {
         <div className={styles.dropdownContainer}>
           <div className={styles.dropdownTitle}>
             <span>폴더</span>
-            <span style={{ fontFamily: "font2", fontSize: "12px" }}>
+            {/* <span style={{ fontFamily: "font2", fontSize: "12px" }}>
               폴더는 5개까지만 생성 가능해요
-            </span>
+            </span> */}
           </div>
           <DropdownInput
             selectedOption={selectedOption}
