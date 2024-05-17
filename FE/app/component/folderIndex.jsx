@@ -11,11 +11,15 @@ export default function FolderIndex({ indexes }) {
 
   return (
     <div className={styles.container}>
-      {indexes.map((folder) => {
-        {
-          folder;
-        }
-      })}
+      {indexes.map((folder, idx) => (
+        <div
+          key={idx}
+          // className={isSelected ? styles.selectedBubble : styles.bubble}
+          // onClick={() => onFolderSelect(folder.id)}
+        >
+          {folder.name}
+        </div>
+      ))}
       {/* {indexes.map((folder, idx) => (
         <div
           key={idx}
