@@ -54,11 +54,13 @@ const saveToken = () => {
     // 로컬에 userId, userName, userDept를 저장
     console.log(
       "사용자 정보를 로컬에 저장했습니다.",
+      decodedToken,
       userID,
       userNickname,
       userDept,
     );
 
+    LocalStorage.setItem("token", decodedToken);
     LocalStorage.setItem("userId", userID);
     LocalStorage.setItem("userNickname", userNickname);
     LocalStorage.setItem("userDept", userDept);

@@ -17,8 +17,8 @@ import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
 
 export default function ChatBotMain() {
   // 페이지가 로딩될 때 토큰을 받아오는 함수
-  const token = getToken();
-  console.log("ddddddddddddddddddddddd", token);
+  // const token = getToken();
+  // console.log("ddddddddddddddddddddddd", token);
 
   // 모달 오픈 여부를 저장할 변수 ================================
   const [showModalShare, setShowModalShare] = useState(false);
