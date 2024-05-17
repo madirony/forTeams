@@ -11,10 +11,15 @@ import ModalShare from "component/modalShare";
 import ModalSave from "component/modalSave";
 import RecoQuestions from "component/recoQuestions";
 import LocalStorage from "util/localStorage";
+import { getToken } from "util/getToken";
 
 import { getCurrentChatUUID, loadChatLogs } from "apis/chatbot";
 
 export default function ChatBotMain() {
+  // 페이지가 로딩될 때 토큰을 받아오는 함수
+  const token = getToken();
+  console.log("ddddddddddddddddddddddd", token);
+
   // 모달 오픈 여부를 저장할 변수 ================================
   const [showModalShare, setShowModalShare] = useState(false);
   const [showModalSave, setShowModalSave] = useState(false);
