@@ -45,6 +45,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
 
   return (
     <div className={styles.wrapper}>
+      {/* ============================== */}
       {logId ? (
         <MypageMyLogsDetail
           logId={logId}
@@ -52,7 +53,7 @@ export default function MypageMyLogs({ openModalShare, openModalSave }) {
           openModalShare={openModalShare}
           openModalSave={openModalSave}
         />
-      ) : datas.length > 0 ? (
+      ) : folders.length > 0 ? (
         <>
           <FolderIndex
             indexes={folders}
