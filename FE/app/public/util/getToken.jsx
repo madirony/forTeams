@@ -47,7 +47,7 @@ const saveToken = () => {
 
   try {
     const accessToken = getToken();
-    // const decodedToken = jwtDecode(accessToken);
+    const decodedToken = jwtDecode(accessToken);
     const userID = decodedToken.sub;
     const userNickname = decodedToken.nickname;
     const userDept = decodedToken.dept;
