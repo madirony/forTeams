@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,9 @@ public class ChatbotService {
     private final StreamStatusService streamStatusService;
 
     public ChatbotDto processReceivedMessage(ChatbotDto dto, String chatbotUUID) {
-        LocalDateTime now = LocalDateTime.now();
+        ZoneId seoulZoneId = ZoneId.of("Asia/Seoul");
+        LocalDateTime now = LocalDateTime.now(seoulZoneId);
+        log.info(String.valueOf(now));
         dto.setCreatedAt(String.valueOf(now));
         dto.setUpdatedAt(String.valueOf(now));
         String messageUUID = UUID.randomUUID().toString();
@@ -47,7 +50,9 @@ public class ChatbotService {
         assistant.setSender("BOT");
         assistant.setMsg(String.valueOf(sb));
 
-        LocalDateTime now = LocalDateTime.now();
+        ZoneId seoulZoneId = ZoneId.of("Asia/Seoul");
+        LocalDateTime now = LocalDateTime.now(seoulZoneId);
+        log.info(String.valueOf(now));
         assistant.setCreatedAt(String.valueOf(now));
         assistant.setUpdatedAt(String.valueOf(now));
 
