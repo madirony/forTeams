@@ -7,7 +7,7 @@ from sklearn.cluster import KMeans
 import teams_functions
 
 # OpenAI API 키 설정
-api_key = "sk-proj-NYJv3zchGmkTyIjMv7eHT3BlbkFJb0qrN0yn8oRjR5f7KmCM"
+api_key = "####"
 embeddings_model = OpenAIEmbeddings(api_key=api_key)
 
 # 문장들의 리스트
