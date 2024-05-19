@@ -15,7 +15,7 @@ export default function ShareMain() {
 
   useEffect(() => {
     getChatLogDetail(id).then((response) => {
-      console.log("sharepage에서 response뽑", response);
+      // console.log("sharepage에서 response뽑", response);
       setMessages(response.chatLogs);
     });
   }, []);

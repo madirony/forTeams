@@ -19,13 +19,13 @@ export default function LoginInfo() {
   // 버튼 핸들러 =============================================================
   const handlePurpleButtonClick = () => {
     const userDept = selectedOption.name;
-    console.log("[LoginInfo] 1. 유저가 선택한 부서 이름 알기", userDept);
+    // console.log("[LoginInfo] 1. 유저가 선택한 부서 이름 알기", userDept);
     // 로그인 추가 정보 입력 API 요청 보내기
     addLoginInfo(userDept).then((response) => {
-      console.log("[LoginInfo] 2. 부서 이름 보내서 토큰 생성", response);
+      // console.log("[LoginInfo] 2. 부서 이름 보내서 토큰 생성", response);
 
       // 메인 페이지로 리다이렉트
-      console.log("[LoginInfo] 3. 메인 페이지로 리다이렉트");
+      // console.log("[LoginInfo] 3. 메인 페이지로 리다이렉트");
       router.push("/");
     });
   };

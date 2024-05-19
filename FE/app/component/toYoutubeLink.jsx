@@ -3,7 +3,7 @@ import Youtube from "icon/youtube.svg";
 
 export default function ToYoutubeLink() {
   const onClick = () => {
-    console.log("To Youtube 클릭!");
+    // console.log("To Youtube 클릭!");
   };
 
   return (

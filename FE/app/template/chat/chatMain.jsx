@@ -35,14 +35,14 @@ export default function ChatMain() {
       // brokerURL: "ws://localhost:8080/api/ws/openchat",
       reconnectDelay: 5000,
       onConnect: () => {
-        console.log("openchat WebSocket에 연결되었습니다.");
+        // console.log("openchat WebSocket에 연결되었습니다.");
         stompClient.subscribe("/exchange/openchat.exchange/chat", (message) => {
           const newMessage = JSON.parse(message.body);
           setMessages((prev) => [...prev, newMessage]);
         });
       },
       onStompError: (error) => {
-        console.error("WebSocket 오류:", error);
+        // console.error("WebSocket 오류:", error);
       },
     });
 
@@ -66,26 +66,26 @@ export default function ChatMain() {
       .catch((error) => console.error("메시지 로드 실패:", error));
   }, []);
 
-    // ★Local에서 사용자 정보를 조회 =================================
-    const [isInitialized, setIsInitialized] = useState(false);
-    const [userId, setUserId] = useState("");
-    const [userNickname, setUserNickname] = useState("사용자");
-    // const [userDept, setUserDept] = useState("");
-  
-    useEffect(() => {
-      const tempUserId = LocalStorage.getItem("userId");
-      const tempUserNickname = LocalStorage.getItem("userNickname");
-      // const tempUserDept = LocalStorage.getItem("userDept");
-  
-      tempUserId && setUserId(tempUserId);
-      tempUserNickname && setUserNickname(tempUserNickname);
-      // tempUserDept && setUserDept(tempUserDept);
-  
-      setIsInitialized(true);
-    }, []);
+  // ★Local에서 사용자 정보를 조회 =================================
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [userId, setUserId] = useState("");
+  const [userNickname, setUserNickname] = useState("사용자");
+  // const [userDept, setUserDept] = useState("");
 
   useEffect(() => {
-    console.log(`Updated replyMsgUUID: ${replyMsgUUID}, replyTo: ${replyTo}`);
+    const tempUserId = LocalStorage.getItem("userId");
+    const tempUserNickname = LocalStorage.getItem("userNickname");
+    // const tempUserDept = LocalStorage.getItem("userDept");
+
+    tempUserId && setUserId(tempUserId);
+    tempUserNickname && setUserNickname(tempUserNickname);
+    // tempUserDept && setUserDept(tempUserDept);
+
+    setIsInitialized(true);
+  }, []);
+
+  useEffect(() => {
+    // console.log(`Updated replyMsgUUID: ${replyMsgUUID}, replyTo: ${replyTo}`);
   }, [replyMsgUUID, replyTo]);
 
   const handleReply = (messageUUID, senderName) => {

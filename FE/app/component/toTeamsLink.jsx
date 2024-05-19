@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function ToTeamsLink() {
   const onClick = () => {
-    console.log("ToTeamsLink 클릭!");
+    // console.log("ToTeamsLink 클릭!");
     // ★ ToTemasLink 클릭 시 로직 작성
   };
 

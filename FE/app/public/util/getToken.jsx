@@ -39,7 +39,7 @@ const getToken = () => {
 const saveToken = () => {
   const accessToken = getToken();
   if (!accessToken) {
-    console.log("[decodeToken] accessToken이 없습니다");
+    // console.log("[decodeToken] accessToken이 없습니다");
     return null;
   }
   console.log("[decodeToken] 성공");
@@ -54,7 +54,7 @@ const saveToken = () => {
 
     // 로컬에 userId, userName, userDept를 저장
     console.log(
-      "사용자 정보를 로컬에 저장했습니다.",
+      // "사용자 정보를 로컬에 저장했습니다.",
       accessToken,
       // decodedToken,
       userID,
@@ -70,7 +70,7 @@ const saveToken = () => {
 
     return { userID, userNickname, userDept };
   } catch (error) {
-    console.log("[decodeToken] 토큰 가져오기 실패 :", error);
+    // console.log("[decodeToken] 토큰 가져오기 실패 :", error);
     return null;
   }
 };

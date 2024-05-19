@@ -7,10 +7,10 @@ const getFolders = async () => {
       method: "get",
       url: "api/v1/folder",
     });
-    console.log("폴더 목록 불러오기 api요청", response.data);
+    // console.log("폴더 목록 불러오기 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더 목록 불러오기 중 에러 발생", error);
+    // console.log("폴더 목록 불러오기 중 에러 발생", error);
   }
 };
 
@@ -23,10 +23,10 @@ const createFolder = async (folderName) => {
       data: folderName,
       headers: { "Content-Type": "text/plain" },
     });
-    console.log("폴더생성 api요청", response.data);
+    // console.log("폴더생성 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더 생성 중 에러 발생", error);
+    // console.log("폴더 생성 중 에러 발생", error);
   }
 };
 
@@ -41,10 +41,10 @@ const changeFolderName = async (folderName, folderId) => {
         folderId: folderId,
       },
     });
-    console.log("폴더명 변경 api요청", response.data);
+    // console.log("폴더명 변경 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더명 변경 중 에러 발생", error);
+    // console.log("폴더명 변경 중 에러 발생", error);
   }
 };
 
@@ -55,10 +55,10 @@ const deleteFolder = async (folderId) => {
       method: "delete",
       url: `/api/chatbot/folder/${folderId}`,
     });
-    console.log("폴더 삭제 api요청", response.data);
+    // console.log("폴더 삭제 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더 삭제 중 에러 발생", error);
+    // console.log("폴더 삭제 중 에러 발생", error);
   }
 };
 
@@ -78,10 +78,10 @@ const saveMyChatbot = async (folderId, chatbotUuid, chatbotTitle) => {
         chatbotTitle: chatbotTitle,
       },
     });
-    console.log("폴더에 내 챗봇 내역 생성 api요청", response.data);
+    // console.log("폴더에 내 챗봇 내역 생성 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더에 내 챗봇 내역 생성 중 에러 발생", error);
+    // console.log("폴더에 내 챗봇 내역 생성 중 에러 발생", error);
   }
 };
 
@@ -95,10 +95,10 @@ const getMyChatbotList = async (folderId) => {
         folderId: folderId,
       },
     });
-    console.log("폴더 기준으로 챗봇목록 조회 api요청", response.data);
+    // console.log("폴더 기준으로 챗봇목록 조회 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더 기준으로 챗봇목록 조회 중 에러 발생", error);
+    // console.log("폴더 기준으로 챗봇목록 조회 중 에러 발생", error);
   }
 };
 
@@ -109,10 +109,10 @@ const deleteFolderData = async (chatbotChatUUID) => {
       method: "delete",
       url: `api/v1/folder/categorized-chatbot/${chatbotChatUUID}`,
     });
-    console.log("폴더 저장 데이터 지우기 api요청", response.data);
+    // console.log("폴더 저장 데이터 지우기 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("폴더 저장 데이터 지우기 중 에러 발생", error);
+    // console.log("폴더 저장 데이터 지우기 중 에러 발생", error);
   }
 };
 

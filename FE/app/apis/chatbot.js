@@ -8,10 +8,10 @@ const getCurrentChatUUID = async (chatbotUUID) => {
       method: "get",
       url: `api/v1/chatbot/chattingUUID/${chatbotUUID}`,
     });
-    console.log("getCurrentChatUUID 요청 성공", response.data);
+    // console.log("getCurrentChatUUID 요청 성공", response.data);
     return response.data;
   } catch (error) {
-    console.log("getCurrentChatUUID 에러 발생", error);
+    // console.log("getCurrentChatUUID 에러 발생", error);
   }
 };
 
@@ -26,10 +26,10 @@ const saveChatbot = async (userUUID, chatUUID) => {
         chatUUID: chatUUID,
       },
     });
-    console.log("챗봇 세션 내역 저장 api요청", response.data);
+    // console.log("챗봇 세션 내역 저장 api요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("챗봇 세션 내역 저장 중 에러 발생", error);
+    // console.log("챗봇 세션 내역 저장 중 에러 발생", error);
   }
 };
 
@@ -40,10 +40,10 @@ const pauseChatbot = async (userUUID) => {
       method: "post",
       url: `api/v1/chatbot/stop-stream/${userUUID}`,
     });
-    console.log("챗봇 대화 중단 api 요청", response.data);
+    // console.log("챗봇 대화 중단 api 요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("챗봇 대화 중단 요청 중 에러 발생", error);
+    // console.log("챗봇 대화 중단 요청 중 에러 발생", error);
   }
 };
 
@@ -54,10 +54,10 @@ const chatReload = async (chatbotChatUUID) => {
       method: "post",
       url: `api/v1/chatbot/load-chat/${chatbotChatUUID}`,
     });
-    console.log("챗봇 이어쓰기를 위한 채팅 로딩 api 요청", response.data);
+    // console.log("챗봇 이어쓰기를 위한 채팅 로딩 api 요청", response.data);
     return response.data;
   } catch (error) {
-    console.log("챗봇 이어쓰기를 위한 채팅 로딩 중 에러 발생", error);
+    // console.log("챗봇 이어쓰기를 위한 채팅 로딩 중 에러 발생", error);
   }
 };
 
@@ -68,10 +68,10 @@ const loadChatLogs = async (chatbotChatUUID) => {
       method: "get",
       url: `api/v1/chatbot/load-chatlogs/${chatbotChatUUID}`,
     });
-    console.log("loadChatLogs 요청 성공", response.data);
+    // console.log("loadChatLogs 요청 성공", response.data);
     return response.data;
   } catch (error) {
-    console.log("loadChatLogs 에러 발생", error);
+    // console.log("loadChatLogs 에러 발생", error);
   }
 };
 
