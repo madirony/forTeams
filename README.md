@@ -174,11 +174,16 @@ https://forteams.co.kr/
 # 시스템 아키텍처
 
 # Figma
+![figma.png](asset/figma.png)
+<br /><br />
 
 # ERD
 
 # 디렉토리 구조
 ## Front
 ## Back
+## AI
 
 ## Webhook 활용 알림
+![webhook.PNG](asset/webhook.PNG)
+<br /><br />
