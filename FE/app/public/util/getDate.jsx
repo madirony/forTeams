@@ -1,3 +1,4 @@
+"use client";
 export default function getDate(updatedAt) {
   // 현재 날짜 구하기
   const today = new Date();
