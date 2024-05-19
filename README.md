@@ -121,8 +121,52 @@ https://forteams.co.kr/
 
 # 기능 및 시연
 ## 기능
-### 대략적인 메뉴 설명들 어쩌구
-### 저쩌구 gif 포함
+### 1. Markdown이 적용된 Chatbot
+![chatbot1.gif](asset/chatbot1.gif)
+<br /><br />
+
+### 2. 채팅 맥락 파악 후, 연관 질문 추천
+![chatbot2.gif](asset/chatbot2.gif)
+<br /><br />
+
+### 3. Chatbot 응답 중지 기능
+![chatbot3.gif](asset/chatbot3.gif)
+<br /><br />
+
+### 4. 채팅 새로쓰기 (화면 초기화)
+#### 4-1. 분기별 질문 가이드
+#### 4-2. 가이드 gif 이미지 추가
+![chatbot4.gif](asset/chatbot4.gif)
+<br /><br />
+
+### 5. 채팅 분류별 저장 기능
+![chatbot5.gif](asset/chatbot5.gif)
+<br /><br />
+
+### 6. 저장 내역 확인
+![chatbot6.gif](asset/chatbot6.gif)
+<br /><br />
+
+### 7. 기존 채팅 이어쓰기
+![chatbot7.gif](asset/chatbot7.gif)
+<br /><br />
+
+### 8. 채팅 내역 외부 공유
+![chatbot8.gif](asset/chatbot8.gif)
+<br /><br />
+
+### 9. 유용한 플러그인 추천
+![chatbot9.PNG](asset/chatbot9.PNG)
+<br /><br />
+
+### 10. 로그 기반 부서별 많이 찾은 기능
+![chatbot9.PNG](asset/chatbot9.PNG)
+<br /><br />
+
+### 11. 익명 오픈 채팅 (유저 간 자유 질문 + 대나무숲)
+![openchat.gif](asset/openchat.gif)
+<br /><br />
+
 ## 기술 상세
 ### 랭체인 같은거 어쩌구 저쩌구
 ### 차별점 어쩌구 저쩌구
