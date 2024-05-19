@@ -1,0 +1,402 @@
+[{
+  "_id": {
+    "$oid": "6646ee842f40cb253f687100"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "채팅 DB 다날림",
+  "messageUUID": "00cde818-8b2c-4008-939b-52942f63aafa",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T14:43:32.278787799",
+  "updatedAt": "2024-05-17T14:43:32.278787799",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6646eec42f40cb253f687101"
+  },
+  "senderUUID": "ac5490a1-313e-4417-85ca-09fc900f11fe",
+  "message": "d",
+  "messageUUID": "a1e52538-7b45-45d0-9358-ccf22ab870b3",
+  "nickname": "undefined",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T14:44:35.843611020",
+  "updatedAt": "2024-05-17T14:44:35.843611020",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6646f0d32f40cb253f687102"
+  },
+  "senderUUID": "2b86660e-3457-4930-b17a-46e7d952d711",
+  "message": "ddd",
+  "messageUUID": "7948c9d0-f78d-4295-965d-ae42970e6014",
+  "nickname": "반짝이는 꿩",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T14:53:23.696396866",
+  "updatedAt": "2024-05-17T14:53:23.696396866",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6646f2de2f40cb253f687103"
+  },
+  "senderUUID": "47e3c8f2-74cc-4ae2-a1cc-c3b3bc40419c",
+  "message": "dd",
+  "messageUUID": "0f1b1735-2ddf-4b8b-b2db-57e9becaa001",
+  "nickname": "매력적인 매",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T15:02:06.383476978",
+  "updatedAt": "2024-05-17T15:02:06.383476978",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6646f4082f40cb253f687104"
+  },
+  "senderUUID": "1badad70-1a8e-4e7c-aa2b-450898d6bae2",
+  "message": "ff",
+  "messageUUID": "a1b88553-08bc-4f35-b00a-99c53c17a73a",
+  "nickname": "용감한 황새",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T15:07:04.108929846",
+  "updatedAt": "2024-05-17T15:07:04.108929846",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6646f9392f40cb253f687105"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "ㅇ?",
+  "messageUUID": "3c193041-793b-48da-b65c-6950cfccd257",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T15:29:12.881108445",
+  "updatedAt": "2024-05-17T15:29:12.881108445",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6646fd2c2f40cb253f687106"
+  },
+  "senderUUID": "661434ac-a022-4b8e-b51b-a001a9854ccf",
+  "message": "ㄹ",
+  "messageUUID": "92ec98ca-53a8-48d3-aa8a-972a765ecbbc",
+  "nickname": "부지런한 새매",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T15:46:04.605916158",
+  "updatedAt": "2024-05-17T15:46:04.605916158",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6647001f2f40cb253f687107"
+  },
+  "senderUUID": "661434ac-a022-4b8e-b51b-a001a9854ccf",
+  "message": "Ss",
+  "messageUUID": "28a0e508-380f-4ce9-9f01-b8ddf6ce15d2",
+  "nickname": "부지런한 새매",
+  "replyMsgUUID": "7948c9d0-f78d-4295-965d-ae42970e6014",
+  "replyTo": "반짝이는 꿩",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T15:58:39.213386880",
+  "updatedAt": "2024-05-17T15:58:39.213386880",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6647156a2f40cb253f687108"
+  },
+  "senderUUID": "f1c2505e-3844-4984-ad16-495370d272ea",
+  "message": "ㅎㅎ",
+  "messageUUID": "b50be05c-7d07-43b4-b4d8-73325cfcc285",
+  "nickname": "차가운 물수리",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T17:29:30.508198654",
+  "updatedAt": "2024-05-17T17:29:30.508198654",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6647156f2f40cb253f687109"
+  },
+  "senderUUID": "f1c2505e-3844-4984-ad16-495370d272ea",
+  "message": "ㅎㅎ",
+  "messageUUID": "2466933f-d9be-4c3d-9dbc-cf9396c4ebe8",
+  "nickname": "차가운 물수리",
+  "replyMsgUUID": "28a0e508-380f-4ce9-9f01-b8ddf6ce15d2",
+  "replyTo": "부지런한 새매",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T17:29:35.421065593",
+  "updatedAt": "2024-05-17T17:29:35.421065593",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "664715762f40cb253f68710a"
+  },
+  "senderUUID": "f1c2505e-3844-4984-ad16-495370d272ea",
+  "message": "ㅎ헤ㅔㅔ",
+  "messageUUID": "7f2aa4e1-e72d-4107-b9d4-e9dcd44bf2d9",
+  "nickname": "차가운 물수리",
+  "replyMsgUUID": "92ec98ca-53a8-48d3-aa8a-972a765ecbbc",
+  "replyTo": "부지런한 새매",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T17:29:42.129113572",
+  "updatedAt": "2024-05-17T17:29:42.129113572",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6647157b2f40cb253f68710b"
+  },
+  "senderUUID": "f1c2505e-3844-4984-ad16-495370d272ea",
+  "message": "ㅌㅋㅌ",
+  "messageUUID": "3843bac2-3ab4-4fea-a741-b8bde036d466",
+  "nickname": "차가운 물수리",
+  "replyMsgUUID": "a1e52538-7b45-45d0-9358-ccf22ab870b3",
+  "replyTo": "undefined",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T17:29:47.039419469",
+  "updatedAt": "2024-05-17T17:29:47.039419469",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66471c142f40cb253f68710c"
+  },
+  "senderUUID": "3426cbd9-d595-4fb6-8f85-998a35eff1ac",
+  "message": "까다로운 쇠제비",
+  "messageUUID": "76077959-21ff-441a-8b79-e706d599be84",
+  "nickname": "까다로운 쇠제비",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T17:57:55.782908685",
+  "updatedAt": "2024-05-17T17:57:55.782908685",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "664748d42f40cb253f68710d"
+  },
+  "senderUUID": "2b86660e-3457-4930-b17a-46e7d952d711",
+  "message": "안녕하세요",
+  "messageUUID": "840ce1f6-92c0-4fae-9600-d88fba4c671e",
+  "nickname": "반짝이는 꿩",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T21:08:52.131314582",
+  "updatedAt": "2024-05-17T21:08:52.131314582",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66474aa22f40cb253f68710e"
+  },
+  "senderUUID": "2b86660e-3457-4930-b17a-46e7d952d711",
+  "message": "쇠제비님 하이",
+  "messageUUID": "cd919e42-ab36-4e45-83e4-94a685380dc1",
+  "nickname": "반짝이는 꿩",
+  "replyMsgUUID": "76077959-21ff-441a-8b79-e706d599be84",
+  "replyTo": "까다로운 쇠제비",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T21:16:34.327588183",
+  "updatedAt": "2024-05-17T21:16:34.327588183",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66474ab62f40cb253f68710f"
+  },
+  "senderUUID": "3426cbd9-d595-4fb6-8f85-998a35eff1ac",
+  "message": "칵!",
+  "messageUUID": "74daefb7-53de-46e5-af7c-20c974125d1d",
+  "nickname": "까다로운 쇠제비",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T21:16:53.970341568",
+  "updatedAt": "2024-05-17T21:16:53.970341568",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6647541a2f40cb253f687110"
+  },
+  "senderUUID": "5be74b86-6d30-4369-80b1-3fd80f828096",
+  "message": "히히",
+  "messageUUID": "12bed5eb-4616-4c34-841f-9119f7514906",
+  "nickname": "무서운 쇠제비",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T21:56:58.584681246",
+  "updatedAt": "2024-05-17T21:56:58.584681246",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6647541f2f40cb253f687111"
+  },
+  "senderUUID": "5be74b86-6d30-4369-80b1-3fd80f828096",
+  "message": "무서어운 쇠제비",
+  "messageUUID": "1364aa20-e56a-48e6-a52c-4808b757f168",
+  "nickname": "무서운 쇠제비",
+  "removeCheck": "false",
+  "createdAt": "2024-05-17T21:57:02.895889738",
+  "updatedAt": "2024-05-17T21:57:02.895889738",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66477b722f40cb253f687112"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "야호 신난다",
+  "messageUUID": "8d620c0e-8590-4ea6-95b2-d23d697e6815",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-18T00:44:49.978981621",
+  "updatedAt": "2024-05-18T00:44:49.978981621",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66478a302f40cb253f687113"
+  },
+  "senderUUID": "5be74b86-6d30-4369-80b1-3fd80f828096",
+  "message": "나도 신난다",
+  "messageUUID": "1c6b941f-99f5-4cfa-affd-4d3248408c6c",
+  "nickname": "무서운 쇠제비",
+  "removeCheck": "false",
+  "createdAt": "2024-05-18T01:47:44.305517545",
+  "updatedAt": "2024-05-18T01:47:44.305517545",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6648383c2f40cb253f687114"
+  },
+  "senderUUID": "",
+  "message": "엇",
+  "messageUUID": "6d8a1771-2cbf-472c-af47-333169b9dbe8",
+  "nickname": "사용자",
+  "removeCheck": "false",
+  "createdAt": "2024-05-18T14:10:20.593545873",
+  "updatedAt": "2024-05-18T14:10:20.593545873",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "664838732f40cb253f687115"
+  },
+  "senderUUID": "",
+  "message": "저 왜 닉네임 날아감",
+  "messageUUID": "0319421b-84b7-4050-b88d-e0ef10538ec3",
+  "nickname": "사용자",
+  "removeCheck": "false",
+  "createdAt": "2024-05-18T14:11:15.425571718",
+  "updatedAt": "2024-05-18T14:11:15.425571718",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "664842732f40cb253f687116"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "ㅋㅋ",
+  "messageUUID": "8a4ac00e-28bc-4e52-a04b-068d7270077c",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-18T14:53:54.995798138",
+  "updatedAt": "2024-05-18T14:53:54.995798138",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "664842742f40cb253f687117"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "됐당",
+  "messageUUID": "1f4e2b07-f596-40e2-ba6a-99e9595b50b4",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-18T14:53:55.883740264",
+  "updatedAt": "2024-05-18T14:53:55.883740264",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66496b962f40cb253f687118"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "나는 삑삑이다",
+  "messageUUID": "0d7cd001-eb09-47c8-8c45-bd67c05aad6b",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-19T12:01:42.412012826",
+  "updatedAt": "2024-05-19T12:01:42.412012826",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66496bb62f40cb253f687119"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "이제 막 입사한 MZ 사원을 통해 그들이 사용하는 MS Teams 사용법을 배우고 싶은 임원이지. MS팀즈를 쓰면 나도, MZ가 되는건가?? 푸핫! 으핫핫!",
+  "messageUUID": "9140dda3-a662-4349-842d-b386c574e31b",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-19T12:02:13.870263223",
+  "updatedAt": "2024-05-19T12:02:13.870263223",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "66496be42f40cb253f68711a"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "근데, 채찍피티?? 그게 뭐지?? 팀스?도 모르겠는데 채찍피티는 도대체 어떻게 쓰는거야!",
+  "messageUUID": "72603ad0-1d27-42bf-9d36-f7e2a7b6ca03",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-19T12:02:59.974273496",
+  "updatedAt": "2024-05-19T12:02:59.974273496",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6649aacc2f40cb253f68711b"
+  },
+  "senderUUID": "f1c2505e-3844-4984-ad16-495370d272ea",
+  "message": "회의 중 설문조사 기능 어떻게 써요?",
+  "messageUUID": "1a21b545-f52e-46f8-951b-a49fb15d63f7",
+  "nickname": "차가운 물수리",
+  "removeCheck": "false",
+  "createdAt": "2024-05-19T16:31:24.120268448",
+  "updatedAt": "2024-05-19T16:31:24.120268448",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6649e5dc2f40cb253f68711c"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "forTeams에서 물어보세요!",
+  "messageUUID": "2faf13d0-a726-42a5-9062-6cf7b6af253c",
+  "nickname": "까다로운 삑삑이",
+  "replyMsgUUID": "1a21b545-f52e-46f8-951b-a49fb15d63f7",
+  "replyTo": "차가운 물수리",
+  "removeCheck": "false",
+  "createdAt": "2024-05-19T20:43:24.494331886",
+  "updatedAt": "2024-05-19T20:43:24.494331886",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+},
+{
+  "_id": {
+    "$oid": "6649e5de2f40cb253f68711d"
+  },
+  "senderUUID": "17e5ece2-422e-4699-b76b-1e7d87415eaf",
+  "message": "으하하",
+  "messageUUID": "e7732d0e-b30d-4900-9ec9-fe9aae60c97b",
+  "nickname": "까다로운 삑삑이",
+  "removeCheck": "false",
+  "createdAt": "2024-05-19T20:43:26.327569675",
+  "updatedAt": "2024-05-19T20:43:26.327569675",
+  "_class": "com.forteams.openchat.chat.entity.OpenChat"
+}]
