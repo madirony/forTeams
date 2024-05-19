@@ -148,12 +148,12 @@ export default function ChatBotMain() {
   const userNickname = LocalStorage.getItem("userNickname");
   const userDept = LocalStorage.getItem("userDept");
 
-  console.log(
-    "[ChatBotMain] 1. 로컬에서 정보 가져오기:",
-    userId,
-    userNickname,
-    userDept,
-  );
+  // console.log(
+  //   "[ChatBotMain] 1. 로컬에서 정보 가져오기:",
+  //   userId,
+  //   userNickname,
+  //   userDept,
+  // );
 
   const [chatbotChatUUID, setChatbotChatUUID] = useState(null);
   // useEffect(() => {
