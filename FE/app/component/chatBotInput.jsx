@@ -49,7 +49,7 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
         textareaRef.current.style.height = "1.5rem";
       }
     } else {
-      console.error("sendMessage is not a function");
+      // console.error("sendMessage is not a function");
     }
   };
 

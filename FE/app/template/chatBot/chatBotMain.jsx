@@ -199,7 +199,7 @@ export default function ChatBotMain() {
           setMessages(response.chatLogs);
         })
         .catch((error) => {
-          console.error("채팅 로그를 불러오는 중 오류 발생:", error); // 에러 로그 추가
+          // console.error("채팅 로그를 불러오는 중 오류 발생:", error); // 에러 로그 추가
         });
     } else {
       // console.log("chatbotChatUUID is not set yet.");
