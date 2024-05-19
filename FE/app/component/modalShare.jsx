@@ -6,13 +6,13 @@ import { shareLink } from "apis/share";
 
 export default function ModalShare({ chatbotid, openModalShare }) {
   const [link, setLink] = useState("");
-  console.log("모달쉐어에서 prop받은 chatbotid 가져오기", chatbotid);
+  // console.log("모달쉐어에서 prop받은 chatbotid 가져오기", chatbotid);
 
   useEffect(() => {
     // 동적 URL 생성
     // const dynamicLink = `http://localhost:3000/share/${chatbotid}`;
     if (chatbotid) {
-      console.log(chatbotid, "나와?");
+      // console.log(chatbotid, "나와?");
       const dynamicLink = `https://forteams.co.kr/share/${chatbotid}`;
       setLink(dynamicLink);
     }
@@ -24,7 +24,7 @@ export default function ModalShare({ chatbotid, openModalShare }) {
         alert("링크가 클립보드에 복사되었습니다.");
       },
       (err) => {
-        console.error("클립보드 복사 실패:", err);
+        // console.error("클립보드 복사 실패:", err);
       },
     );
   };

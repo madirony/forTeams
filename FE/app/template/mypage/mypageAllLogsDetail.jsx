@@ -20,7 +20,7 @@ export default function MypageAllLogsDetail({
 
   useEffect(() => {
     getChatLogDetail(logId).then((response) => {
-      console.log("mypageallLogs", response);
+      // console.log("mypageallLogs", response);
       setTitle(response.chatTitle);
       // console.log(response.chatLogs[0].createdAt);
       setUpdatedAt(response.createdAt);

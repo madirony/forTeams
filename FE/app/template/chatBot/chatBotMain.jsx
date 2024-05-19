@@ -98,7 +98,7 @@ export default function ChatBotMain() {
       },
       // brokerURL: "ws://localhost:8080/api/ws/chatbot",
       onConnect: () => {
-        console.log("Connected to the WebSocket");
+        // console.log("Connected to the WebSocket");
 
         stompClient.subscribe(
           `/exchange/chatbot.exchange/chatbot.${userId}`,
@@ -119,11 +119,11 @@ export default function ChatBotMain() {
             } else if (receivedMsg.type === "recommendRes") {
               // 질문 파싱
               const recommendationsArray = JSON.parse(receivedMsg.msg);
-              console.log("Formatted recommendations:", recommendationsArray);
+              // console.log("Formatted recommendations:", recommendationsArray);
               setRecommendations(recommendationsArray);
               setInputMode("DEFAULT");
             } else if (receivedMsg.type === "recommendFin") {
-              console.log(receivedMsg);
+              // console.log(receivedMsg);
               setRecommendationsReady(true);
               setInputMode("DEFAULT");
             }
@@ -131,7 +131,7 @@ export default function ChatBotMain() {
         );
       },
       onStompError: (error) => {
-        console.error("STOMP Error:", error);
+        // console.error("STOMP Error:", error);
       },
     });
 
@@ -192,17 +192,17 @@ export default function ChatBotMain() {
   // 현재 채팅 세션의 채팅 데이터 불러오기 API 조회====================
   useEffect(() => {
     if (chatbotChatUUID) {
-      console.log("[ChatBotMain] chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
+      // console.log("[ChatBotMain] chatbotChatUUID is set:", chatbotChatUUID); // 추가된 로그
       loadChatLogs(chatbotChatUUID)
         .then((response) => {
-          console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
+          // console.log("현재 채팅 세션의 채팅 데이터:", response.chatLogs);
           setMessages(response.chatLogs);
         })
         .catch((error) => {
           console.error("채팅 로그를 불러오는 중 오류 발생:", error); // 에러 로그 추가
         });
     } else {
-      console.log("chatbotChatUUID is not set yet.");
+      // console.log("chatbotChatUUID is not set yet.");
     }
   }, [chatbotChatUUID]);
   // console.log("-----------", messages);

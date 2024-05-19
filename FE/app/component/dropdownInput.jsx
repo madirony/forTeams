@@ -57,7 +57,7 @@ export default function DropdownInput({ selectedOption, setSelectedOption }) {
       try {
         // 폴더 생성 API 보내기
         await createFolder(customInput);
-        console.log("새 폴더 생성 완료?");
+        // console.log("새 폴더 생성 완료?");
         // 폴더 목록 다시 불러오기
         await fetchFolders();
         setCustomInput(""); // 입력 필드 초기화

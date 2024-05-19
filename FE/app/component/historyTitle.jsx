@@ -31,7 +31,7 @@ export default function HistoryTitle({
     if (chatbotChatUUID) {
       chatReload(chatbotChatUUID)
         .then((response) => {
-          console.log("[HistoryTitle] 채팅 다시쓰기", response);
+          // console.log("[HistoryTitle] 채팅 다시쓰기", response);
           // 메인페이지로 이동
           router.push("/main");
           //
@@ -40,7 +40,7 @@ export default function HistoryTitle({
           console.error("[HistoryTitle] Chat Reload Error", error);
         });
     } else {
-      console.log("[HistoryTitle] Invalid chatUUID, cannot reload chat.");
+      // console.log("[HistoryTitle] Invalid chatUUID, cannot reload chat.");
     }
   };
 

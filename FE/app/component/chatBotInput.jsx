@@ -43,7 +43,7 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
         return;
       }
       sendMessage(message);
-      console.log("전송된 메시지:", message);
+      // console.log("전송된 메시지:", message);
       setMessage("");
       if (textareaRef.current) {
         textareaRef.current.style.height = "1.5rem";
@@ -63,8 +63,8 @@ export default function ChatBotInput({ mode, placeholder, sendMessage }) {
 
   // 중단 버튼 클릭시 실행
   const onClickStop = (userId) => {
-    console.log("스트림 중단 요청 API");
-    console.log("내가 uuid를 뽑아볼게 하나둘셋", userId);
+    // console.log("스트림 중단 요청 API");
+    // console.log("내가 uuid를 뽑아볼게 하나둘셋", userId);
     pauseChatbot(userId);
   };
 

@@ -4,7 +4,7 @@ import styles from "styles/component/recoQuestions.module.css";
 export default function RecoQuestions({ content, sendMessage }) {
   const onClick = () => {
     // 기능 추천 클릭 시 발생 로직 작성
-    console.log("기능 추천 클릭!");
+    // console.log("기능 추천 클릭!");
     sendMessage(content); // 추천 질문을 메시지로 전송
   };
   return (

@@ -18,7 +18,7 @@ export default function MypageMyLogsDetail({
   // 챗봇 로그 상세 조회 API
   useEffect(() => {
     getChatLogDetail(logId).then((response) => {
-      console.log("mypagemyLogs!!", response);
+      // console.log("mypagemyLogs!!", response);
       setTitle(response.chatTitle);
       // console.log(response.chatLogs[0].createdAt);
       // setUpdatedAt(response.createdAt);

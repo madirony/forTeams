@@ -9,10 +9,10 @@ const addLoginInfo = async (userDept) => {
       url: `/api/v1/auth/info?dept=${userDept}`,
       // url: `http://localhost:8443/api/v1/auth/info?dept=${userDept}`,
     });
-    console.log("로그인 추가 정보 입력 성공:", response.data);
+    // console.log("로그인 추가 정보 입력 성공:", response.data);
     return response.data;
   } catch (error) {
-    console.log("로그인 추가 정보 입력 에러: ", error);
+    // console.log("로그인 추가 정보 입력 에러: ", error);
   }
 };
 
@@ -23,10 +23,10 @@ const logout = async () => {
       method: "post",
       url: `/api/v1/auth/logout`,
     });
-    console.log("로그아웃 요청 성공:", response.data);
+    // console.log("로그아웃 요청 성공:", response.data);
     return response.data;
   } catch (error) {
-    console.log("로그아웃 요청 에러:", error);
+    // console.log("로그아웃 요청 에러:", error);
   }
 };
 
@@ -37,10 +37,10 @@ const updateDept = async (msUuid, userDept) => {
       method: "post",
       url: `/api/v1/auth/changeInfo/${msUuid}/${userDept}`,
     });
-    console.log("유저 정보 수정 요청 성공", response.data);
+    // console.log("유저 정보 수정 요청 성공", response.data);
     return response.data;
   } catch (error) {
-    console.log("유저 정보 수정 에러", error);
+    // console.log("유저 정보 수정 에러", error);
   }
 };
 export { addLoginInfo, logout, updateDept };

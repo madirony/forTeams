@@ -23,7 +23,7 @@ export default function MenuBar({ userNickname, userDept, userId }) {
   // 로그아웃 버튼 클릭 이벤트
   const logtoutOnClick = () => {
     localStorage.clear();
-    console.log("[Logout] All items removed");
+    // console.log("[Logout] All items removed");
     logout()
       .then((response) => {
         router.push("/");
