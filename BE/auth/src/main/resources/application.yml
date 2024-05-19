@@ -1,0 +1,118 @@
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://discovery:8761/eureka/
+
+spring:
+  jackson:
+    time-zone: UTC
+  application:
+    name: auth
+  datasource:
+    url: ENC(tgzNifqtasaZcLast4uFiPg5rr23+IN1s8G1qNnf0xUtNmrjg/Vn/jEeG/VhaY9Eunkq6TsdGeo=)
+    username: ENC(CqqrsYzCwlydVzWxKK6Aourfkt+XW0Fe)
+    password: ENC(xOlACC2Pto4t7hmf2kHl5w==)
+    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        jdbc:
+#          batch_size: 500
+#        order_inserts: true
+#        order_updates: true
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+  data:
+    redis:
+#      host: ENC(ZyIJ/5sXbWYyv9WBVXWIsqy3LjydEA/iaHCM8qKWbQ4=) # Redis 서버 호스트 주소
+      host: ENC(VmIkEjO7ohBSVdry3rWb0Y4Pfh6HHIqu)
+      port: 6379      # Redis 서버 포트
+      database: 0
+  security:
+    oauth2:
+      client:
+        registration:
+          microsoft:
+            clientId: ENC(wk6h64Rllz1p50JB31IKbojBicKqCSJZe7Nt6GGHQaqKSW7ybI8DGyygDYcibW9l)
+            clientSecret: ENC(dq9nD7nFuPVzy12dYF3PYuQzTZUdprJycQFDS46wp5bpGytf22eE3vSmxsJA1MUF/DvV6G35OAg=)
+            authorizationGrantType: authorization_code
+            redirectUri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
+              - profile
+              - User.Read
+              - email
+              - offline_access
+        provider:
+          microsoft:
+            authorizationUri: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+            tokenUri: https://login.microsoftonline.com/common/oauth2/v2.0/token
+            userInfoUri: https://graph.microsoft.com/oidc/userinfo
+            userNameAttribute: name
+            jwk-set-uri: https://login.microsoftonline.com/common/discovery/v2.0/keys
+
+
+project:
+  API-URL: http://localhost:8080
+
+#b2c:
+#  tenant: fabrikamb2c.onmicrosoft.com
+#  host: fabrikamb2c.b2clogin.com
+#  authority:
+#    base: https://${b2c.host}/tfp/${b2c.tenant}/
+#  clientId:
+#  secret:
+#  redirectUri: https://localhost:8443/msal4jsample/secure/aad
+#  api: https://fabrikamb2chello.azurewebsites.net/hello
+#  api-scope: https://fabrikamb2c.onmicrosoft.com/helloapi/demo.read
+#  policy:
+#    sign-up-sign-in: b2c_1_susi
+#    edit-profile: b2c_1_edit_profile
+#    reset-password: b2c_1_reset
+#  sign-up-sign-in-authority: ${b2c.authority.base}${policy.sign-up-sign-in}/
+#  edit-profile-authority: ${b2c.authority.base}${policy.edit-profile}/
+#  reset-password-authority: ${b2c.authority.base}${policy.reset-password}/
+#
+
+server:
+  port: 8443
+  ssl:
+    enabled: false
+#    enabled: true
+#    key-store: classpath:keystore.jks
+#    key-store-password: changeit
+#    key-password: changeit
+#    key-alias: myalias
+  servlet:
+    session:
+      cookie:
+        secure: true
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: ${SSL_KEY_STORE_PASSWORD}
+#    key-store-type: PKCS12
+#    key-alias: testCert
+
+#eureka:
+#  instance:
+#    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://discovery:8761/eureka/
+
+# JWT Secret Key
+app:
+#  secret-key: ENC(NqAJbCF2cJjys/fltEU6Xqn7RAQ+IyUkai+h4N69TICiqaAkELN0gJlG6EMH8Ejop2OIY8UK2iU=)
+  secret-key: 12341324154321646543432474vccc38xg4bfjagbf3g2r123wdascgry5465fegfjteyrrg
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG

@@ -1,0 +1,104 @@
+
+jwt:
+#  secret: ENC(NqAJbCF2cJjys/fltEU6Xqn7RAQ+IyUkai+h4N69TICiqaAkELN0gJlG6EMH8Ejop2OIY8UK2iU=)
+  secret: 12341324154321646543432474vccc38xg4bfjagbf3g2r123wdascgry5465fegfjteyrrg
+server:
+  port: 8000
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://discovery:8761/eureka
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: DEBUG
+        reactive:
+          DispatcherHandler: TRACE
+        client:
+          RestTemplate: DEBUG
+    reactor:
+      netty:
+        http:
+          server: DEBUG
+    springframework:
+      web:
+        reactive:
+          function:
+            client:
+              WebClient: DEBUG
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id : ms-auth
+          uri : lb://AUTH
+          predicates:
+            - Path=/api/v1/auth/**
+        - id : ms-login
+          uri : lb://AUTH
+          predicates:
+            - Path=/oauth2/authorization/microsoft/**
+
+        - id : ms-login2
+          uri : lb://AUTH
+          predicates:
+            - Path=/login/oauth2/code/**
+
+        - id : user-auth
+          uri : lb://AUTH
+          predicates:
+            - Path=/api/v1/user/**
+          filters:
+            - JwtTokenFilter
+
+        - id: chatbot-http
+          uri: lb://CHATBOT
+          predicates:
+            - Path=/api/v1/chatbot/**
+          filters:
+            - JwtTokenFilter
+
+        - id: folder-http
+          uri: lb://CHATBOT
+          predicates:
+            - Path=/api/v1/folder/**
+          filters:
+            - JwtTokenFilter
+
+        - id: token-test-http
+          uri: lb://CHATBOT
+          predicates:
+            - Path=/api/v1/token-test/**
+          filters:
+            - JwtTokenFilter
+
+        - id: openchat-http
+          uri: lb://OPENCHAT
+          predicates:
+            - Path=/api/v1/openchat/**
+          filters:
+#            - JwtTokenFilter
+
+        - id: chatbot-websocket
+          uri: lb://CHATBOT
+          predicates:
+            - Path=/api/ws/chatbot
+          filters:
+#            - JwtTokenFilter
+
+        - id: openchat-websocket
+          uri: lb://OPENCHAT
+          predicates:
+            - Path=/api/ws/openchat
+          filters:
+#            - JwtTokenFilter
+#      default-filters:
+#        - DedupeResponseHeader=Access-Control-Allow-Origin
+  application:
+    name: gateway
