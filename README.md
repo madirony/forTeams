@@ -20,9 +20,9 @@
             <a href="https://github.com/madirony">♠️연정흠</a>
         </td>
         <td align="center" width="150px">
-            <a href="https://github.com/"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
+            <a href="https://github.com/seroh00"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139421118?v=4"/></a>
             <br />
-            <a href="https://github.com/">노성은</a>
+            <a href="https://github.com/seroh00">노성은</a>
         </td>
         <td align="center" width="150px">
             <a href="https://github.com/madirony"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
@@ -35,33 +35,33 @@
             <a href="https://github.com/qhdrnak">김봉균</a>
         </td>
         <td align="center" width="130px">
-            <a href="https://github.com/madirony"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
+            <a href="https://github.com/soyoungSoyoung"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139930597?v=4"/></a>
             <br />
-            <a href="https://github.com/madirony">박소영</a>
+            <a href="https://github.com/soyoungSoyoung">박소영</a>
         </td>
         <td align="center" width="150px">
-            <a href="https://github.com/madirony"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
+            <a href="https://github.com/fwccjs"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
             <br />
-            <a href="https://github.com/madirony">손준성</a>
+            <a href="https://github.com/fwccjs">손준성</a>
         </td>
       <tr height="50px">
         <td align="center">
-          <p>[Embedded]</p>
-        </td>
-        <td align="center">
-          <p>[Embedded]</p>
-        </td>
-        <td align="center">
-          <p>[Embedded]</p>
+          <p>[BE]</p>
         </td>
         <td align="center">
           <p>[FE]</p>
         </td>
         <td align="center">
-          <p>[BE] [Infra]</p>
+          <p>[FE]</p>
         </td>
         <td align="center">
-          <p>[BE] [Infra]</p>
+          <p>[BE]</p>
+        </td>
+        <td align="center">
+          <p>[Infra]</p>
+        </td>
+        <td align="center">
+          <p>[AI]</p>
         </td>
     </tr>
     </tr>
