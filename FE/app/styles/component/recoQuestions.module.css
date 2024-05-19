@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.title {
+  cursor: pointer;
+  font-family: "font2";
+  color: #0063d8;
+}

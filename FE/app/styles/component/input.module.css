@@ -1,0 +1,24 @@
+.wrapper {
+  width: var(--inputWidth, 100%);
+}
+
+.title {
+  font-family: "font4";
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.input {
+  border-radius: 10px;
+  border-width: 2px;
+  border-color: #d3d5fb;
+  padding-left: 0.7rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  width: 100%;
+}
+
+.input::placeholder {
+  color: #bcbdbb;
+}

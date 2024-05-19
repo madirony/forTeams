@@ -1,0 +1,51 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 1.5rem;
+}
+
+.threeDot {
+  cursor: pointer;
+  position: absolute;
+  z-index: 999;
+  right: 3rem;
+}
+
+.topNav {
+  flex: 1;
+  padding-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.socket {
+  flex: 8;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.input {
+  flex: 0.8;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 90vh;
+}
+
+/* 반응형-중간 */
+@media (max-width: 500px) {
+  .wrapper {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    height: 90vh;
+  }
+  .threeDot {
+    top: 1.5rem;
+    right: 1rem;
+  }
+}

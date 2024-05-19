@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
+
+:root {
+  --font-rgb: 0, 0, 0;
+  --background-basic-rgb: 184, 216, 255;
+}
+
+/* 반응형-모바일 */
+@media (max-width: 360px) {
+  html {
+    font-size: 12px;
+  }
+  body {
+    /* padding: 20px; */
+  }
+}
+
+/* 반응형-데스크탑 */
+@media (min-width: 361px) {
+  html {
+    font-size: 16px;
+  }
+  body {
+    /* padding: 40px; */
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  color: rgb(var(--font-rgb));
+  font-family: "font2";
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-image: url("../public/image/mainImage.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@font-face {
+  font-family: "font1";
+  src: url("../public/font/NanumSquareL.ttf");
+}
+
+@font-face {
+  font-family: "font2";
+  src: url("../public/font/NanumSquareR.ttf");
+}
+
+@font-face {
+  font-family: "font3";
+  src: url("../public/font/NanumSquareB.ttf");
+}
+
+@font-face {
+  font-family: "font4";
+  src: url("../public/font/NanumSquareEB.ttf");
+}

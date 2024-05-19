@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "app/*": ["app/*"],
+      "apis/*": ["apis/*"],
+      "styles/*": ["styles/*"],
+      "template/*": ["template/*"],
+      "component/*": ["component/*"],
+      "font/*": ["public/font/*"],
+      // "login/icon/*": ["public/icon/login/*"],
+      "icon/*": ["public/icon/*"],
+      "image/*": ["public/image/*"],
+      "util/*": ["public/util/*"]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+.listContainer {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  border-width: 2px;
+  border-color: #d3d5fb;
+  border-radius: 25px;
+  background-color: white;
+}
+
+.title {
+  margin: 0.3rem 0;
+  font-family: "font3";
+}
+
+.date {
+  font-family: "font2";
+  color: #bcbdbb;
+}

@@ -1,0 +1,65 @@
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(208, 208, 208, 0.5);
+}
+
+.modal {
+  background-color: #ffffff;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem;
+}
+
+.modal p {
+  font-family: "font4";
+  text-align: center;
+}
+
+.linkWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+
+.linkInput {
+  flex: 8.5;
+  min-height: 40px;
+  border-radius: 10px;
+  border-color: "#D3D5FB";
+  border-width: 2px;
+  padding: 0.5rem 0.7rem;
+  text-align: start;
+  font-size: 16px;
+}
+
+.buttonInput {
+  flex: 2.5;
+  min-height: 40px;
+}
+
+/* 반응형 모달창-모바일 */
+@media (max-width: 360px) {
+  .modal {
+    width: 100vw;
+    height: 20vh;
+    padding: 3rem 1.5rem;
+  }
+}
+
+/* 반응형 모달창-데스크탑 */
+@media (min-width: 361px) {
+  .modal {
+    width: 50vw;
+    height: 30vh;
+  }
+}
