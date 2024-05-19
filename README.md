@@ -25,9 +25,9 @@
             <a href="https://github.com/seroh00">노성은</a>
         </td>
         <td align="center" width="150px">
-            <a href="https://github.com/madirony"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
+            <a href="https://github.com/waterlee6"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139421211?v=4"/></a>
             <br />
-            <a href="https://github.com/madirony">이수민</a>
+            <a href="https://github.com/waterlee6">이수민</a>
         </td>
         <td align="center" width="150px">
             <a href="https://github.com/qhdrnak"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/64765972?v=4"/></a>
@@ -40,9 +40,9 @@
             <a href="https://github.com/soyoungSoyoung">박소영</a>
         </td>
         <td align="center" width="150px">
-            <a href="https://github.com/fwccjs"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
+            <a href="https://github.com/devjun20"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/72375302?v=4"/></a>
             <br />
-            <a href="https://github.com/fwccjs">손준성</a>
+            <a href="https://github.com/devjun20">손준성</a>
         </td>
       <tr height="50px">
         <td align="center">
@@ -81,10 +81,11 @@ https://forteams.co.kr/
 
 <br />
 
-# 개발 환경 / 기술 스택 (임시)
+# 개발 환경 / 기술 스택
 
 ### COMMON
-<img src="https://img.shields.io/badge/postgre-4479A1?style=for-the-badge&logo=postgre&logoColor=white">
+<img src="https://img.shields.io/badge/postgresql-4169E1?style=for-the-badge&logo=postgresql&logoColor=white">
+<img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white">
 <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=redis&logoColor=white">
 <img src="https://img.shields.io/badge/amazons3-569A31?style=for-the-badge&logo=amazons3&logoColor=white">
 <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white">
@@ -96,9 +97,9 @@ https://forteams.co.kr/
 <img src="https://img.shields.io/badge/Stomp_WebSocket-010101?style=for-the-badge&logo=Stomp&logoColor=white">
 
 ### FRONT
-<img src="https://img.shields.io/badge/flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white">
-<img src="https://img.shields.io/badge/dart-0175C2?style=for-the-badge&logo=dart&logoColor=white">
-<img src="https://img.shields.io/badge/flutterDevTools-02569B?style=for-the-badge&logo=flutter&logoColor=white">
+<img src="https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
 
 ### BACK
 <img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
@@ -109,14 +110,14 @@ https://forteams.co.kr/
 
 ### AI
 <img src="https://img.shields.io/badge/python-3776AB?style=for-the-badge&logo=python&logoColor=white">
-<img src="https://img.shields.io/badge/CUDA-F46A54?style=for-the-badge&logo=CUDA&logoColor=white">
-<img src="https://img.shields.io/badge/cuDNN-CC0000?style=for-the-badge&logo=cuDNN&logoColor=white">
-<img src="https://img.shields.io/badge/pytorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white">
+<img src="https://img.shields.io/badge/GPT_API-47A248?style=for-the-badge&logo=CUDA&logoColor=white">
 
 ### DEV TOOL & etc
 <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
 <img src="https://img.shields.io/badge/intellijidea-000000?style=for-the-badge&logo=intellijidea&logoColor=white">
 <img src="https://img.shields.io/badge/pycharm-F37626?style=for-the-badge&logo=pycharm&logoColor=white">
+<img src="https://img.shields.io/badge/microsoftteams-6264A7?style=for-the-badge&logo=microsoftteams&logoColor=white">
+<img src="https://img.shields.io/badge/mattermost-0058CC?style=for-the-badge&logo=mattermost&logoColor=white">
 
 # 기능 및 시연
 ## 기능
