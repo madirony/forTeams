@@ -160,7 +160,7 @@ https://forteams.co.kr/
 <br /><br />
 
 ### 10. 로그 기반 부서별 많이 찾은 기능
-![chatbot9.PNG](asset/chatbot9.PNG)
+![func.PNG](asset/func.PNG)
 <br /><br />
 
 ### 11. 익명 오픈 채팅 (유저 간 자유 질문 + 대나무숲)
