@@ -68,7 +68,7 @@
 </table>
 
 ## Youtube
-[![thumb.png](asset/thumb.png)](https://www.youtube.com/watch?v=9MnvOsJy6fM)
+[![thumb.png](asset/thumb.png)](https://www.youtube.com/watch?v=11lbwiMKRPs)
 
 ## 링크
 https://forteams.co.kr/
