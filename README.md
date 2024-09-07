@@ -17,32 +17,32 @@
         <td align="center" width="150px">
             <a href="https://github.com/madirony"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/48685874?v=4"/></a>
             <br />
-            <a href="https://github.com/madirony">♠️연정흠</a>
+            <a href="https://github.com/madirony">♠️madirony</a>
         </td>
         <td align="center" width="150px">
             <a href="https://github.com/seroh00"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139421118?v=4"/></a>
             <br />
-            <a href="https://github.com/seroh00">노성은</a>
+            <a href="https://github.com/seroh00">seroh00</a>
         </td>
         <td align="center" width="150px">
             <a href="https://github.com/waterlee6"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139421211?v=4"/></a>
             <br />
-            <a href="https://github.com/waterlee6">이수민</a>
+            <a href="https://github.com/waterlee6">waterlee6</a>
         </td>
         <td align="center" width="150px">
             <a href="https://github.com/qhdrnak"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/64765972?v=4"/></a>
             <br />
-            <a href="https://github.com/qhdrnak">김봉균</a>
+            <a href="https://github.com/qhdrnak">qhdrnak</a>
         </td>
         <td align="center" width="130px">
             <a href="https://github.com/soyoungSoyoung"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/139930597?v=4"/></a>
             <br />
-            <a href="https://github.com/soyoungSoyoung">박소영</a>
+            <a href="https://github.com/soyoungSoyoung">soyoungSoyoung</a>
         </td>
         <td align="center" width="150px">
             <a href="https://github.com/devjun20"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/72375302?v=4"/></a>
             <br />
-            <a href="https://github.com/devjun20">손준성</a>
+            <a href="https://github.com/devjun20">devjun20</a>
         </td>
       <tr height="50px">
         <td align="center">
