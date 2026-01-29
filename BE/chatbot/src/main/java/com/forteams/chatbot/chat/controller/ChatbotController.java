@@ -16,6 +16,7 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.BodyInserters;
 
@@ -38,6 +39,9 @@ public class ChatbotController {
     private final ChatbotService chatbotService;
     private final StreamStatusService streamStatusService;
     private final FolderService folderService;
+
+    @Value("${ai.server.url}")
+    private String aiServerUrl;
 
     @PostMapping("/share/{chatbotChatUUID}")
     public ResponseEntity<String> shareChat(@PathVariable String chatbotChatUUID) {
@@ -178,7 +182,7 @@ public class ChatbotController {
 //        MessageUser user = new MessageUser("손준성", "123", "A");
         MessageRequest messageRequest = new MessageRequest(user, validMessages.toArray(new Message[0]));
 
-        WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
+        WebClient webClient = WebClient.create(aiServerUrl);
         webClient.post()
                 .uri("/recommendation")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -214,7 +218,7 @@ public class ChatbotController {
         AtomicInteger sequence = new AtomicInteger(0);
         streamStatusService.startStream(chatbotUUID);
 
-        WebClient webClient = WebClient.create("http://forteams.co.kr:8085");
+        WebClient webClient = WebClient.create(aiServerUrl);
         Disposable disposable = webClient.post()
                 .uri("/ask")
                 .contentType(MediaType.APPLICATION_JSON)
