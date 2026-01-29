@@ -46,3 +46,7 @@ spring:
 # JWT Secret Key
 app:
   secret-key: 12341324154321646543432474vccc38xg4bfjagbf3g2r123wdascgry5465fegfjteyrrg
+
+ai:
+  server:
+    url: http://forteams.co.kr:8085
